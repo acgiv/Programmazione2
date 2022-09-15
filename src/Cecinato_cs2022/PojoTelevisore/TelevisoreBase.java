@@ -7,9 +7,9 @@ import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
 public class TelevisoreBase extends AbstractTelevisore {
 	private String Seriale;
 	private MarcheTelevisori marche;
-	private float altezza;
-	private float larghezza;
-	private float diagonale;
+	private double altezza;
+	private double larghezza;
+	private double diagonale;
 	private ConstantGlobal.RISOLUZIONE_TV risoluzione;
 	private ConstantGlobal.TIPOLOGIA_SCHERMO tipoSchermo;
 	private ConstantGlobal.TIPOLOGIA_TV tipo;
@@ -49,27 +49,27 @@ public class TelevisoreBase extends AbstractTelevisore {
 		this.marche = marche;
 	}
 
-	public float getAltezza() {
+	public double getAltezza() {
 		return altezza;
 	}
 
-	public void setAltezza(float altezza) {
+	public void setAltezza(double altezza) {
 		this.altezza = altezza;
 	}
 
-	public float getLarghezza() {
+	public double getLarghezza() {
 		return larghezza;
 	}
 
-	public void setLarghezza(float larghezza) {
+	public void setLarghezza(double larghezza) {
 		this.larghezza = larghezza;
 	}
 
-	public float getDiagonale() {
+	public double getDiagonale() {
 		return diagonale;
 	}
 
-	public void setDiagonale(float diagonale) {
+	public void setDiagonale(double diagonale) {
 		this.diagonale = diagonale;
 	}
 
