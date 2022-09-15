@@ -1,16 +1,27 @@
 package Cecinato_cs2022.TelevisoreService;
 
+import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
+import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
+
 public interface ModificaTv {
 
-	boolean modificaSerlial();
+	public boolean modificaSeriale(Televisore tv, String Seriale);
 
-	boolean modificaTipologiaTv();
+	public boolean modificaMarcaTv(Televisore tv, MarcheTelevisori marca);
 
-	boolean modificaHdmi();
+	public boolean modificaAltezzaTv(Televisore tv, double Altezza);
 
-	boolean modificaUsb();
+	public boolean modificaLarghezzaTv(Televisore tv, double Larghezza);
 
-	boolean modificaSmartTV();
+	public boolean modificaNumberHdmiTv(Televisore tv, int NumeroHdmi);
 
-	boolean modificaTv();
+	public boolean modificaNumberUsbTv(Televisore tv, int NumeroUsb);
+
+	public boolean modificaDiagonaleTv(Televisore tv, double Diagonale);
+	
+	public boolean modificaNumberSmartTv(Televisore tv, int numeroSmartTv);
+	
+	public boolean modificaRisoluzioneTv(Televisore tv, ConstantGlobal.RISOLUZIONE_TV risoluzione); 
+	
+	public boolean modificaTiposchermoTv(Televisore tv, ConstantGlobal.TIPOLOGIA_SCHERMO tipoSchermo);
 }
