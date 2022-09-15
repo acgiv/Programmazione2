@@ -2,15 +2,21 @@ package Cecinato_cs2022.TelevisoreService;
 
 public interface EliminaTelevisore {
 
-	boolean eliminaSerlial();
+	public boolean modificaMarcaTv(Televisore tv);
 
-	boolean eliminaTipologiaTv();
+	public boolean modificaAltezzaTv(Televisore tv);
 
-	boolean eliminaHdmi();
+	public boolean modificaLarghezzaTv(Televisore tv);
 
-	boolean eliminaUsb();
+	public boolean modificaNumberHdmiTv(Televisore tv);
 
-	boolean eliminaSmartTV();
+	public boolean modificaNumberUsbTv(Televisore tv);
 
-	boolean eliminaTv();
+	public boolean modificaDiagonaleTv(Televisore tv);
+	
+	public boolean modificaNumberSmartTv(Televisore tv);
+	
+	public boolean modificaRisoluzioneTv(Televisore tv); 
+	
+	public boolean modificaTiposchermoTv(Televisore tv);
 }

@@ -409,5 +409,184 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 	
+	
+	public boolean eliminaMarcaTv(Televisore tv) {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			((TelevisoreBase) tv).setMarche(null);
+			result = true;
+			break;
+
+		case MEDIO:
+			((TelevisoreMedio) tv).setMarche(null);
+			result = true;
+			break;
+		case AVANZATO:
+			((TelevisoreAvanzato) tv).setMarche(null);
+			result = true;
+			break;
+		}
+		return result;
+
+	}
+
+	public boolean eliminaAltezzaTv(Televisore tv) {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			((TelevisoreBase) tv).setAltezza(0);
+			result = true;
+			break;
+
+		case MEDIO:
+			((TelevisoreMedio) tv).setAltezza(0);
+			result = true;
+			break;
+		case AVANZATO:
+			((TelevisoreAvanzato) tv).setAltezza(0);
+			result = true;
+			break;
+		}
+		return result;
+
+	}
+
+	public boolean eliminaLarghezzaTv(Televisore tv) {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			((TelevisoreBase) tv).setLarghezza(0);
+			result = true;
+			break;
+
+		case MEDIO:
+			((TelevisoreMedio) tv).setLarghezza(0);
+			result = true;
+			break;
+		case AVANZATO:
+			((TelevisoreAvanzato) tv).setLarghezza(0);
+			result = true;
+			break;
+		}
+		return result;
+	}
+
+	public boolean eliminaNumberHdmiTv(Televisore tv) {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			// aggiungere eccezione
+			break;
+
+		case MEDIO:
+			((TelevisoreMedio) tv).setNumber_hdmi(0);
+			result = true;
+			break;
+		case AVANZATO:
+			((TelevisoreAvanzato) tv).setNumber_hdmi(0);
+			result = true;
+			break;
+		}
+		return result;
+	}
+
+	public boolean eliminaNumberUsbTv(Televisore tv) {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			// aggiungere eccezione
+			break;
+
+		case MEDIO:
+			((TelevisoreMedio) tv).setNumber_usb(0);
+			result = true;
+			break;
+		case AVANZATO:
+			((TelevisoreAvanzato) tv).setNumber_usb(0);
+			result = true;
+			break;
+		}
+		return result;
+	}
+
+	public boolean eliminaDiagonaleTv(Televisore tv) {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			((TelevisoreBase) tv).setDiagonale(0);
+			result = true;
+			break;
+
+		case MEDIO:
+			((TelevisoreMedio) tv).setDiagonale(0);
+			result = true;
+			break;
+		case AVANZATO:
+			((TelevisoreAvanzato) tv).setDiagonale(0);
+			result = true;
+			break;
+		}
+		return result;
+	}
+
+	public boolean eliminaNumberSmartTv(Televisore tv) {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			// aggiungere eccezione;
+			break;
+
+		case MEDIO:
+			// aggiungere eccezione;
+			break;
+		case AVANZATO:
+			((TelevisoreAvanzato) tv).setNumber_smartTv(0);
+			result = true;
+			break;
+		}
+		return result;
+	}
+
+	public boolean eliminaRisoluzioneTv(Televisore tv) {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			((TelevisoreBase) tv).setRisoluzione(null);
+			result = true;
+			break;
+
+		case MEDIO:
+			((TelevisoreMedio) tv).setRisoluzione(null);
+			result = true;
+			break;
+		case AVANZATO:
+			((TelevisoreAvanzato) tv).setRisoluzione(null);
+			result = true;
+			break;
+		}
+		return result;
+	}
+
+	public boolean eliminaTiposchermoTv(Televisore tv) {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			((TelevisoreBase) tv).setTipoSchermo(null);
+			result = true;
+			break;
+
+		case MEDIO:
+			((TelevisoreMedio) tv).setTipoSchermo(null);
+			result = true;
+			break;
+		case AVANZATO:
+			((TelevisoreAvanzato) tv).setTipoSchermo(null);
+			result = true;
+			break;
+		}
+		return result;
+	}
+	
 
 }
