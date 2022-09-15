@@ -50,8 +50,21 @@ abstract class AbstractTelevisore implements Televisore {
 
 		boolean result = false;
 		for (MarcheTelevisori item : MarcheTelevisori.values()) {
-			if (String.valueOf(item).equals(marca))
+			if (String.valueOf(item).equals(marca)) {
 				result = true;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	private boolean controlloRisoluzione(ConstantGlobal.RISOLUZIONE_TV risoluzione) {
+		boolean result = false;
+		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
+			if (String.valueOf(item).equals(risoluzione)) {
+				result = true;
+				break;
+			}
 		}
 		return result;
 	}
@@ -269,22 +282,78 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean addRisoluzioneTv(Televisore tv, ConstantGlobal.RISOLUZIONE_TV risoluzione) {
+	public boolean addRisoluzioneTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setRisoluzione(risoluzione);
-			result = true;
-			break;
+		try {
+			switch (scannerTvInstanziata(tv)) {
+			case BASE:
+				if (((TelevisoreBase) tv).getRisoluzione() == null) {
+					System.out.println("Inserisci la Risoluzione dello schermo della tv, scrivendola");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le risoluzioni degli schermi esistenti prima di inserire la risoluzione");
+					System.out.println(
+							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la Risoluzione");
+					if (sc.nextLine().equals("1"))
+						stampa_Risoluzione_schermi_tv();
+					String risoluzione = sc.nextLine().toUpperCase();
+					if (risoluzione == null) {
+						throw new NullPointerException();
+					} else if (controlloRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_"))) == true) {
+						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione));
+					}
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
 
-		case MEDIO:
-			((TelevisoreMedio) tv).setRisoluzione(risoluzione);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setRisoluzione(risoluzione);
-			result = true;
-			break;
+			case MEDIO:
+				if (((TelevisoreMedio) tv).getRisoluzione() == null) {
+					System.out.println("Inserisci la Risoluzione dello schermo della tv, scrivendola");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le risoluzioni degli schermi esistenti prima di inserire la risoluzione");
+					System.out.println(
+							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la Risoluzione");
+					if (sc.nextLine().equals("1"))
+						stampa_Risoluzione_schermi_tv();
+					String risoluzione = sc.nextLine().toUpperCase();
+					if (risoluzione == null) {
+						throw new NullPointerException();
+					} else if (controlloRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_"))) == true) {
+						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione));
+					}
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			case AVANZATO:
+				if (((TelevisoreAvanzato) tv).getRisoluzione() == null) {
+					System.out.println("Inserisci la Risoluzione dello schermo della tv, scrivendola");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le risoluzioni degli schermi esistenti prima di inserire la risoluzione");
+					System.out.println(
+							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la Risoluzione");
+					if (sc.nextLine().equals("1"))
+						stampa_Risoluzione_schermi_tv();
+					String risoluzione = sc.nextLine().toUpperCase();
+					if (risoluzione == null) {
+						throw new NullPointerException();
+					} else if (controlloRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_"))) == true) {
+						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione));
+					}
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			}
+
+		} catch (TelevisoreException e) {
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
+		} catch (NullPointerException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println("| è stato inserito un valore nullo |");
 		}
 		return result;
 	}

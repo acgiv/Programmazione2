@@ -20,7 +20,7 @@ public interface AcquisizioneTv {
 	
 	public boolean addNumberSmartTv(Televisore tv, int numeroSmartTv);
 	
-	public boolean addRisoluzioneTv(Televisore tv, ConstantGlobal.RISOLUZIONE_TV risoluzione); 
+	public boolean addRisoluzioneTv(Televisore tv); 
 	
 	public boolean addTiposchermoTv(Televisore tv, ConstantGlobal.TIPOLOGIA_SCHERMO tipoSchermo);
 	
