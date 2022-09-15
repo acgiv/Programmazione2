@@ -1,13 +1,12 @@
 package Cecinato_cs2022.TelevisoreService;
 
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
-import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
 
 public interface AcquisizioneTv {
 	
 	public boolean addSeriale(Televisore tv, String Seriale);
 
-	public boolean addMarcaTv(Televisore tv, MarcheTelevisori marca);
+	public boolean addMarcaTv(Televisore tv);
 
 	public boolean addAltezzaTv(Televisore tv, double Altezza);
 

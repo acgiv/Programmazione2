@@ -15,5 +15,7 @@ public class TelevisoreException extends Exception {
 		super("\n" + "|--------------------ERRORE-------------------|\n");
 	}
 
-	
+	public String messErrorAddElement(String message) {
+		return getMessage() + " | " + message + " è stata gia popolata, non può essere aggiunta |\n";
+	}
 }

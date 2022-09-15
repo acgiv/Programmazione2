@@ -1,16 +1,59 @@
 package Cecinato_cs2022.PojoTelevisore;
 
+import java.util.Scanner;
+
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
+import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
 abstract class AbstractTelevisore implements Televisore {
 
-	public ConstantGlobal.TIPOLOGIA_TV scannerTvInstanziata(Televisore tv) {
+	private Scanner sc = new Scanner(System.in);
+
+	private ConstantGlobal.TIPOLOGIA_TV scannerTvInstanziata(Televisore tv) {
 		String tipologiaInstanziata = String.valueOf(tv.getClass());
 		tipologiaInstanziata = tipologiaInstanziata.replace("class Cecinato_cs2022.PojoTelevisore.Televisore", "");
 		tipologiaInstanziata = tipologiaInstanziata.toUpperCase();
 		return ConstantGlobal.TIPOLOGIA_TV.valueOf(tipologiaInstanziata);
+	}
+
+	private final void stampa_marche_tv() {
+		int i = 1;
+		System.out.println("Le marche esistenti di tv sono:");
+		for (MarcheTelevisori item : MarcheTelevisori.values()) {
+			System.out.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
+			i += 1;
+		}
+	}
+
+	private final void stampa_tipologia_schermo_tv() {
+		int i = 1;
+		System.out.println("Le tipologie di schermo esistenti sono:");
+		for (ConstantGlobal.TIPOLOGIA_SCHERMO item : ConstantGlobal.TIPOLOGIA_SCHERMO.values()) {
+			System.out.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
+			i += 1;
+		}
+	}
+
+	private final void stampa_Risoluzione_schermi_tv() {
+		int i = 1;
+		System.out.println("Le risoluzioni degli schermi esistenti sono:");
+		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
+			System.out.println(
+					String.valueOf(i).concat(") ").concat(String.valueOf(item).replace("_", " ")).toLowerCase());
+			i += 1;
+		}
+	}
+
+	private boolean controlloMarca(MarcheTelevisori marca) {
+
+		boolean result = false;
+		for (MarcheTelevisori item : MarcheTelevisori.values()) {
+			if (String.valueOf(item).equals(marca))
+				result = true;
+		}
+		return result;
 	}
 
 	public boolean addSeriale(Televisore tv, String Seriale) {
@@ -33,25 +76,80 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean addMarcaTv(Televisore tv, MarcheTelevisori marca) {
+	public boolean addMarcaTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setMarche(marca);
-			result = true;
-			break;
+		try {
+			switch (scannerTvInstanziata(tv)) {
+			case BASE:
+				if (((TelevisoreBase) tv).getMarche() == null) {
+					System.out.println("Inserisci la marca della della tv, scrivendola.");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
+					System.out.println(
+							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
+					if (sc.nextLine().equals("1"))
+						stampa_marche_tv();
+					String marca = sc.nextLine().toUpperCase().replace(" ", "");
+					if (marca == null) {
+						throw new NullPointerException();
+					} else if (controlloMarca(MarcheTelevisori.valueOf(marca)) == true) {
+						((TelevisoreBase) tv).setMarche(MarcheTelevisori.valueOf(marca));
+					}
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
 
-		case MEDIO:
-			((TelevisoreMedio) tv).setMarche(marca);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setMarche(marca);
-			result = true;
-			break;
+			case MEDIO:
+				if (((TelevisoreMedio) tv).getMarche() == null) {
+					System.out.println("Inserisci la marca della della tv, scrivendola.");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
+					System.out.println(
+							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
+					if (sc.nextLine().equals("1"))
+						stampa_marche_tv();
+					String marca = sc.nextLine().toUpperCase().replace(" ", "");
+					if (marca == null) {
+						throw new NullPointerException();
+					} else if (controlloMarca(MarcheTelevisori.valueOf(marca)) == true) {
+						((TelevisoreMedio) tv).setMarche(MarcheTelevisori.valueOf(marca));
+					}
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			case AVANZATO:
+				if (((TelevisoreAvanzato) tv).getMarche() == null) {
+					System.out.println("Inserisci la marca della della tv, scrivendola.");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
+					System.out.println(
+							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
+					if (sc.nextLine().equals("1"))
+						stampa_marche_tv();
+					String marca = sc.nextLine().toUpperCase().replace(" ", "");
+					if (marca == null) {
+						throw new NullPointerException();
+					} else if (controlloMarca(MarcheTelevisori.valueOf(marca)) == true) {
+						((TelevisoreAvanzato) tv).setMarche(MarcheTelevisori.valueOf(marca));
+					}
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			}
+
+		} catch (TelevisoreException e) {
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
+		} catch (NullPointerException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println("| è stato inserito un valore nullo |");
 		}
 		return result;
-
 	}
 
 	public boolean addAltezzaTv(Televisore tv, double Altezza) {
@@ -210,7 +308,7 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 		return result;
 	}
-	
+
 	public boolean modificaSeriale(Televisore tv, String Seriale) {
 		Boolean result = false;
 		switch (scannerTvInstanziata(tv)) {
@@ -408,8 +506,7 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 		return result;
 	}
-	
-	
+
 	public boolean eliminaMarcaTv(Televisore tv) {
 		Boolean result = false;
 		switch (scannerTvInstanziata(tv)) {
@@ -587,6 +684,5 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 		return result;
 	}
-	
 
 }
