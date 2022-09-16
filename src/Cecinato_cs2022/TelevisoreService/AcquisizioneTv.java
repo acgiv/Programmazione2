@@ -1,7 +1,5 @@
 package Cecinato_cs2022.TelevisoreService;
 
-import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
-
 public interface AcquisizioneTv {
 	
 	public boolean addSeriale(Televisore tv, String Seriale);
@@ -22,6 +20,6 @@ public interface AcquisizioneTv {
 	
 	public boolean addRisoluzioneTv(Televisore tv); 
 	
-	public boolean addTiposchermoTv(Televisore tv, ConstantGlobal.TIPOLOGIA_SCHERMO tipoSchermo);
+	public boolean addTiposchermoTv(Televisore tv);
 	
 }

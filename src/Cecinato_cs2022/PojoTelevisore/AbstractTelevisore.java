@@ -50,7 +50,7 @@ abstract class AbstractTelevisore implements Televisore {
 
 		boolean result = false;
 		for (MarcheTelevisori item : MarcheTelevisori.values()) {
-			if (String.valueOf(item).equals(marca)) {
+			if (String.valueOf(item).equals(String.valueOf(marca))) {
 				result = true;
 				break;
 			}
@@ -61,12 +61,23 @@ abstract class AbstractTelevisore implements Televisore {
 	private boolean controlloRisoluzione(ConstantGlobal.RISOLUZIONE_TV risoluzione) {
 		boolean result = false;
 		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
-			if (String.valueOf(item).equals(risoluzione)) {
+			if (String.valueOf(item).equals(String.valueOf(risoluzione))) {
 				result = true;
 				break;
 			}
 		}
 		return result;
+	}
+	
+	private boolean controlloTipologiaSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO tipoSchermo) {
+		boolean result = false;
+		for (ConstantGlobal.TIPOLOGIA_SCHERMO item : ConstantGlobal.TIPOLOGIA_SCHERMO.values()) {
+			if (String.valueOf(item).equals(String.valueOf(tipoSchermo))) {
+				result = true;
+				break;
+			}
+		}
+			return result;
 	}
 
 	public boolean addSeriale(Televisore tv, String Seriale) {
@@ -358,22 +369,78 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean addTiposchermoTv(Televisore tv, ConstantGlobal.TIPOLOGIA_SCHERMO tipoSchermo) {
+	public boolean addTiposchermoTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setTipoSchermo(tipoSchermo);
-			result = true;
-			break;
+		try {
+			switch (scannerTvInstanziata(tv)) {
+			case BASE:
+				if (((TelevisoreBase) tv).getTipoSchermo() == null) {
+					System.out.println("Inserisci la tipologia dello schermo della tv, scrivendola");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le tipologie degli schermi esistenti prima di inserire la tipologia");
+					System.out.println(
+							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la tipologia");
+					if (sc.nextLine().equals("1"))
+						stampa_tipologia_schermo_tv();
+					String tiposchermo = sc.nextLine().toUpperCase();
+					if (tiposchermo == null) {
+						throw new NullPointerException();
+					} else if (controlloTipologiaSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo.replace(" ", "_"))) == true) {
+						((TelevisoreBase) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+					}
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
 
-		case MEDIO:
-			((TelevisoreMedio) tv).setTipoSchermo(tipoSchermo);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setTipoSchermo(tipoSchermo);
-			result = true;
-			break;
+			case MEDIO:
+				if (((TelevisoreMedio) tv).getTipoSchermo() == null) {
+					System.out.println("Inserisci la tipologia dello schermo della tv, scrivendola");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le tipologie degli schermi esistenti prima di inserire la tipologia");
+					System.out.println(
+							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la tipologia");
+					if (sc.nextLine().equals("1"))
+						stampa_tipologia_schermo_tv();
+					String tiposchermo = sc.nextLine().toUpperCase();
+					if (tiposchermo == null) {
+						throw new NullPointerException();
+					} else if (controlloTipologiaSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo.replace(" ", "_"))) == true) {
+						((TelevisoreMedio) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+					}
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			case AVANZATO:
+				if (((TelevisoreAvanzato) tv).getTipoSchermo() == null) {
+					System.out.println("Inserisci la tipologia dello schermo della tv, scrivendola");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le tipologie degli schermi esistenti prima di inserire la tipologia");
+					System.out.println(
+							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la tipologia");
+					if (sc.nextLine().equals("1"))
+						stampa_tipologia_schermo_tv();
+					String tiposchermo = sc.nextLine().toUpperCase();
+					if (tiposchermo == null) {
+						throw new NullPointerException();
+					} else if (controlloTipologiaSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo.replace(" ", "_"))) == true) {
+						((TelevisoreAvanzato) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+					}
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			}
+
+		} catch (TelevisoreException e) {
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
+		} catch (NullPointerException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println("| è stato inserito un valore nullo |");
 		}
 		return result;
 	}
