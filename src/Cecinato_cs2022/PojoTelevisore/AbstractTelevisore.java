@@ -230,7 +230,7 @@ abstract class AbstractTelevisore implements Televisore {
 			} else {
 				throw new TelevisoreException();
 			}
-			
+
 		} catch (MinValueException e) {
 			System.out.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMinAltezza());
@@ -240,7 +240,7 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (MaxValueException e) {
 			System.out.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMaxAltezza());
-		
+
 		}
 		return result;
 
@@ -280,7 +280,7 @@ abstract class AbstractTelevisore implements Televisore {
 			} else {
 				throw new TelevisoreException();
 			}
-			
+
 		} catch (MinValueException e) {
 			System.out.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMinLarghezza());
@@ -290,7 +290,7 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (MaxValueException e) {
 			System.out.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMaxLarghezza());
-		
+
 		}
 		return result;
 
@@ -334,23 +334,53 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean addDiagonaleTv(Televisore tv, double Diagonale) {
+	public boolean addDiagonaleTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setDiagonale(Diagonale);
-			result = true;
-			break;
+		String diagonale;
+		try {
+			if (((TelevisoreBase) tv).getDiagonale() == 0) {
+				System.out.println("Inserisci la diagonale della televisione");
+				diagonale = sc.nextLine();
+				if (controlloParamentriNumericiTv(diagonale) == true) {
+					if (Double.valueOf(diagonale) <= ConstantGlobal.DIAGONALE_MASSIMA_TV
+							&& Double.valueOf(diagonale) >= ConstantGlobal.DIAGONALE_MINIMA_TV) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							((TelevisoreBase) tv).setDiagonale(Double.valueOf(diagonale));
+							result = true;
+							break;
 
-		case MEDIO:
-			((TelevisoreMedio) tv).setDiagonale(Diagonale);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setDiagonale(Diagonale);
-			result = true;
-			break;
+						case MEDIO:
+							((TelevisoreMedio) tv).setDiagonale(Double.valueOf(diagonale));
+							result = true;
+							break;
+						case AVANZATO:
+							((TelevisoreAvanzato) tv).setDiagonale(Double.valueOf(diagonale));
+							result = true;
+							break;
+						}
+					} else if (Double.valueOf(diagonale) < ConstantGlobal.DIAGONALE_MINIMA_TV) {
+						throw new MinValueException();
+					} else {
+						throw new MaxValueException();
+					}
+				}
+			} else {
+				throw new TelevisoreException();
+			}
+
+		} catch (MinValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMinDiagonale());
+		} catch (TelevisoreException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.DIAGONALE)));
+		} catch (MaxValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMaxDiagonale());
+
 		}
+
 		return result;
 	}
 

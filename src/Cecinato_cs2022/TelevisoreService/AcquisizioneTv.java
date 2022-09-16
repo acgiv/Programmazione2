@@ -14,7 +14,7 @@ public interface AcquisizioneTv {
 
 	public boolean addNumberUsbTv(Televisore tv, int NumeroUsb);
 
-	public boolean addDiagonaleTv(Televisore tv, double Diagonale);
+	public boolean addDiagonaleTv(Televisore tv);
 	
 	public boolean addNumberSmartTv(Televisore tv, int numeroSmartTv);
 	

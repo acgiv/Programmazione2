@@ -20,4 +20,8 @@ public class MaxValueException extends Exception {
 	public String ErrorMaxLarghezza() {
 		return getMessage() + "| Hai inserito la lunghezza della tv superiore al valore limite di: " + ConstantGlobal.LARGHEZZA_MASSIMA_TV + " |\n";
 	}
+	
+	public String ErrorMaxDiagonale() {
+		return getMessage() + "| Hai inserito la lunghezza della diagonale superiore al valore limite di: " + ConstantGlobal.DIAGONALE_MASSIMA_TV + " |\n" ;
+	}
 }

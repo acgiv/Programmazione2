@@ -25,5 +25,10 @@ public class MinValueException extends Exception {
 		return getMessage() + "| Hai inserito la lunghezza inferiore al valore limite " + ConstantGlobal.LARGHEZZA_MINIMA_TV + "|\n";
 	}
 	
+	public String ErrorMinDiagonale() {
+		return getMessage() + "| Hai inserito la lunghezza della diagonale inferirore al valore limite: " + ConstantGlobal.DIAGONALE_MINIMA_TV + " |\n";
+	}
+
+	
 
 }
