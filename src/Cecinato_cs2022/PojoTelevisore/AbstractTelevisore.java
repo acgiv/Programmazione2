@@ -46,7 +46,7 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 	}
 
-	private boolean controlloMarca(MarcheTelevisori marca) {
+	private boolean controlloMarca(String marca) {
 
 		boolean result = false;
 		for (MarcheTelevisori item : MarcheTelevisori.values()) {
@@ -116,10 +116,10 @@ abstract class AbstractTelevisore implements Televisore {
 					String marca = sc.nextLine().toUpperCase().replace(" ", "");
 					if (marca == null) {
 						throw new NullPointerException();
-					} else if (controlloMarca(MarcheTelevisori.valueOf(marca)) == true) {
+					} else if (controlloMarca(marca) == true) {
 						((TelevisoreBase) tv).setMarche(MarcheTelevisori.valueOf(marca));
+						result = true;
 					}
-					result = true;
 				} else {
 					throw new TelevisoreException();
 				}
@@ -137,10 +137,10 @@ abstract class AbstractTelevisore implements Televisore {
 					String marca = sc.nextLine().toUpperCase().replace(" ", "");
 					if (marca == null) {
 						throw new NullPointerException();
-					} else if (controlloMarca(MarcheTelevisori.valueOf(marca)) == true) {
+					} else if (controlloMarca(marca) == true) {
 						((TelevisoreMedio) tv).setMarche(MarcheTelevisori.valueOf(marca));
+						result = true;
 					}
-					result = true;
 				} else {
 					throw new TelevisoreException();
 				}
@@ -157,10 +157,11 @@ abstract class AbstractTelevisore implements Televisore {
 					String marca = sc.nextLine().toUpperCase().replace(" ", "");
 					if (marca == null) {
 						throw new NullPointerException();
-					} else if (controlloMarca(MarcheTelevisori.valueOf(marca)) == true) {
+					} else if (controlloMarca(marca) == true) {
 						((TelevisoreAvanzato) tv).setMarche(MarcheTelevisori.valueOf(marca));
+						result = true;
 					}
-					result = true;
+					
 				} else {
 					throw new TelevisoreException();
 				}
