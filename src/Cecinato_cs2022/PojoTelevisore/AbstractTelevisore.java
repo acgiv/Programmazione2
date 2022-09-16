@@ -50,7 +50,7 @@ abstract class AbstractTelevisore implements Televisore {
 
 		boolean result = false;
 		for (MarcheTelevisori item : MarcheTelevisori.values()) {
-			if (String.valueOf(item).equals(String.valueOf(marca))) {
+			if (String.valueOf(item).equals(marca)) {
 				result = true;
 				break;
 			}
@@ -58,10 +58,10 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 	
-	private boolean controlloRisoluzione(ConstantGlobal.RISOLUZIONE_TV risoluzione) {
+	private boolean controlloRisoluzione(String risoluzione) {
 		boolean result = false;
 		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
-			if (String.valueOf(item).equals(String.valueOf(risoluzione))) {
+			if (String.valueOf(item).equals(risoluzione)) {
 				result = true;
 				break;
 			}
@@ -69,10 +69,11 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 	
-	private boolean controlloTipologiaSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO tipoSchermo) {
+	private boolean controlloTipologiaSchermo(String tipoSchermo) {
 		boolean result = false;
+		System.out.println(tipoSchermo);
 		for (ConstantGlobal.TIPOLOGIA_SCHERMO item : ConstantGlobal.TIPOLOGIA_SCHERMO.values()) {
-			if (String.valueOf(item).equals(String.valueOf(tipoSchermo))) {
+			if (String.valueOf(item).equals(tipoSchermo)) {
 				result = true;
 				break;
 			}
@@ -310,10 +311,11 @@ abstract class AbstractTelevisore implements Televisore {
 					String risoluzione = sc.nextLine().toUpperCase();
 					if (risoluzione == null) {
 						throw new NullPointerException();
-					} else if (controlloRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_"))) == true) {
-						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione));
+					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
+						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+						result = true;
 					}
-					result = true;
+					
 				} else {
 					throw new TelevisoreException();
 				}
@@ -331,10 +333,11 @@ abstract class AbstractTelevisore implements Televisore {
 					String risoluzione = sc.nextLine().toUpperCase();
 					if (risoluzione == null) {
 						throw new NullPointerException();
-					} else if (controlloRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_"))) == true) {
-						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione));
+					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
+						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+						result = true;
 					}
-					result = true;
+					
 				} else {
 					throw new TelevisoreException();
 				}
@@ -351,10 +354,11 @@ abstract class AbstractTelevisore implements Televisore {
 					String risoluzione = sc.nextLine().toUpperCase();
 					if (risoluzione == null) {
 						throw new NullPointerException();
-					} else if (controlloRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_"))) == true) {
-						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione));
+					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
+						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+						result = true;
 					}
-					result = true;
+					
 				} else {
 					throw new TelevisoreException();
 				}
@@ -362,7 +366,7 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (TelevisoreException e) {
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.RISOLUZIONE)));
 		} catch (NullPointerException e) {
 			System.out.println("| Errore nell'inserimento |");
 			System.out.println("| è stato inserito un valore nullo |");
@@ -386,10 +390,11 @@ abstract class AbstractTelevisore implements Televisore {
 					String tiposchermo = sc.nextLine().toUpperCase();
 					if (tiposchermo == null) {
 						throw new NullPointerException();
-					} else if (controlloTipologiaSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo.replace(" ", "_"))) == true) {
+					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
 						((TelevisoreBase) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+						result = true;
 					}
-					result = true;
+					
 				} else {
 					throw new TelevisoreException();
 				}
@@ -407,10 +412,11 @@ abstract class AbstractTelevisore implements Televisore {
 					String tiposchermo = sc.nextLine().toUpperCase();
 					if (tiposchermo == null) {
 						throw new NullPointerException();
-					} else if (controlloTipologiaSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo.replace(" ", "_"))) == true) {
+					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
 						((TelevisoreMedio) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+						result = true;
 					}
-					result = true;
+					
 				} else {
 					throw new TelevisoreException();
 				}
@@ -427,10 +433,11 @@ abstract class AbstractTelevisore implements Televisore {
 					String tiposchermo = sc.nextLine().toUpperCase();
 					if (tiposchermo == null) {
 						throw new NullPointerException();
-					} else if (controlloTipologiaSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo.replace(" ", "_"))) == true) {
+					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
 						((TelevisoreAvanzato) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+						result= true;
 					}
-					result = true;
+					
 				} else {
 					throw new TelevisoreException();
 				}
@@ -438,7 +445,7 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (TelevisoreException e) {
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.TIPO_SCHERMO)));
 		} catch (NullPointerException e) {
 			System.out.println("| Errore nell'inserimento |");
 			System.out.println("| è stato inserito un valore nullo |");
