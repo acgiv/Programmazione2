@@ -20,4 +20,10 @@ public class MinValueException extends Exception {
 	public String ErrorMinAltezza() {
 		return getMessage() + "| Hai inserito l'altezza  inferirore al valore limite di: " + ConstantGlobal.ALTEZZA_MINIMA_TV + " |\n";
 	}
+	
+	public String ErrorMinLarghezza() {
+		return getMessage() + "| Hai inserito la lunghezza inferiore al valore limite " + ConstantGlobal.LARGHEZZA_MINIMA_TV + "|\n";
+	}
+	
+
 }

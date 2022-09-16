@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import Cecinato_cs2022.PojoTelevisore.*;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
-class TestTelevisore {
+class TestAcquisizioneTelevisore {
 
 	@Test
 	public void test1MarcaTelevisoreBase() {
@@ -530,6 +530,8 @@ class TestTelevisore {
 		Televisore tv = new TelevisoreBase();
 		assertFalse(tv.addAltezzaTv(tv));
 	}
+	
+	
 
 	@Test
 	public void test1AltezzaTelevisoreMedio() {
@@ -673,5 +675,216 @@ class TestTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore superiore al valore massimo di = 124.05 ");
 		Televisore tv = new TelevisoreAvanzato();
 		assertFalse(tv.addAltezzaTv( tv));
+	}
+	@Test
+	public void test1LarghezzaTelevisioreBase() {
+		System.out.println("Test doppio inserimento della Larghezza");
+		Televisore tv = new TelevisoreBase();
+		assertTrue(tv.addLarghezzaTv(tv));
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test2LarghezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento della Larghezza che deve essere maggiore di  44.03");
+		Televisore tv = new TelevisoreBase();
+		assertTrue(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test3LarghezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento della Larghezza che deve essere minore di  44.03");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test4LarghezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento della Larghezza con valore = 45.09a");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test5LarghezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento della Larghezza con valore = = -45.09");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test6LarghezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento della Larghezza con valore = +45.10");
+		Televisore tv = new TelevisoreBase();
+		assertTrue(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test7LarghezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento della Larghezza con valore = +45&.10");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test8LarghezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test9LarghezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento della Larghezza con valore = 45,10 ");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test10LarghezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento della Larghezza con valore superiore al valore massimo di = 221.35 ");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+	@Test
+	public void test1LarghezzaTelevisoreMedio() {
+		System.out.println("Test doppio inserimento della Larghezza");
+		Televisore tv = new TelevisoreMedio();
+		assertTrue(tv.addLarghezzaTv(tv));
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test2LarghezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Larghezza che deve essere maggiore di  44.03");
+		Televisore tv = new TelevisoreMedio();
+		assertTrue(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test3LarghezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Larghezza che deve essere minore di  44.03");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test4LarghezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Larghezza con valore = 45.09a");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test5LarghezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Larghezza con valore = = -45.09");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test6LarghezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Larghezza con valore = +45.10");
+		Televisore tv = new TelevisoreMedio();
+		assertTrue(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test7LarghezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Larghezza con valore = +45&.10");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test8LarghezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test9LarghezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Larghezza con valore = 45,10 ");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test10LarghezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Larghezza con valore superiore al valore massimo di = 221.35 ");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+	
+	@Test
+	public void test1LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test doppio inserimento della Larghezza");
+		Televisore tv = new TelevisoreAvanzato();
+		assertTrue(tv.addLarghezzaTv(tv));
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test2LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Larghezza che deve essere maggiore di  44.03");
+		Televisore tv = new TelevisoreAvanzato();
+		assertTrue(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test3LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Larghezza che deve essere minore di  44.03");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test4LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Larghezza con valore = 45.09a");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test5LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Larghezza con valore = = -45.09");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test6LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Larghezza con valore = +45.10");
+		Televisore tv = new TelevisoreAvanzato();
+		assertTrue(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test7LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Larghezza con valore = +45&.10");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test8LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test9LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Larghezza con valore = 45,10 ");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addLarghezzaTv(tv));
+	}
+
+	@Test
+	public void test10LarghezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Larghezza con valore superiore al valore massimo di = 221.35 ");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addLarghezzaTv(tv));
 	}
 }

@@ -16,4 +16,8 @@ public class MaxValueException extends Exception {
 	public String ErrorMaxAltezza() {
 		return getMessage() + "| Hai inserito l'altezza superiore al valore limite di: " + ConstantGlobal.ALTEZZA_MASSIMA_TV +" |\n";
 	}
+	
+	public String ErrorMaxLarghezza() {
+		return getMessage() + "| Hai inserito la lunghezza della tv superiore al valore limite di: " + ConstantGlobal.LARGHEZZA_MASSIMA_TV + " |\n";
+	}
 }

@@ -204,8 +204,8 @@ abstract class AbstractTelevisore implements Televisore {
 				System.out.println("Inserisci l'altezza della televisione");
 				altezza = sc.nextLine();
 				if (controlloParamentriNumericiTv(altezza) == true) {
-					if (Float.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
-							&& Float.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
+					if (Double.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
+							&& Double.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
 						switch (scannerTvInstanziata(tv)) {
 						case BASE:
 							((TelevisoreBase) tv).setAltezza(Double.valueOf(altezza));
@@ -246,24 +246,54 @@ abstract class AbstractTelevisore implements Televisore {
 
 	}
 
-	public boolean addLarghezzaTv(Televisore tv, double Larghezza) {
+	public boolean addLarghezzaTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setLarghezza(Larghezza);
-			result = true;
-			break;
+		String larghezza;
+		try {
+			if (((TelevisoreBase) tv).getLarghezza() == 0) {
+				System.out.println("Inserisci la larghezza della televisione");
+				larghezza = sc.nextLine();
+				if (controlloParamentriNumericiTv(larghezza) == true) {
+					if (Double.valueOf(larghezza) <= ConstantGlobal.LARGHEZZA_MASSIMA_TV
+							&& Double.valueOf(larghezza) >= ConstantGlobal.LARGHEZZA_MINIMA_TV) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							((TelevisoreBase) tv).setLarghezza(Double.valueOf(larghezza));
+							result = true;
+							break;
 
-		case MEDIO:
-			((TelevisoreMedio) tv).setLarghezza(Larghezza);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setLarghezza(Larghezza);
-			result = true;
-			break;
+						case MEDIO:
+							((TelevisoreMedio) tv).setLarghezza(Double.valueOf(larghezza));
+							result = true;
+							break;
+						case AVANZATO:
+							((TelevisoreAvanzato) tv).setLarghezza(Double.valueOf(larghezza));
+							result = true;
+							break;
+						}
+					} else if (Double.valueOf(larghezza) < ConstantGlobal.LARGHEZZA_MINIMA_TV) {
+						throw new MinValueException();
+					} else {
+						throw new MaxValueException();
+					}
+				}
+			} else {
+				throw new TelevisoreException();
+			}
+			
+		} catch (MinValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMinLarghezza());
+		} catch (TelevisoreException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.LARGHEZZA)));
+		} catch (MaxValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMaxLarghezza());
+		
 		}
 		return result;
+
 	}
 
 	public boolean addNumberHdmiTv(Televisore tv, int NumeroHdmi) {
