@@ -6,7 +6,7 @@ import Cecinato_cs2022.TelevisoreService.Televisore;
 public class Main {
 	public static void main(String[] args) {
 		Televisore tv = new TelevisoreBase();
-		tv.addAltezzaTv(tv, 12.44);
+		tv.addAltezzaTv(tv);
 	}
 
 }

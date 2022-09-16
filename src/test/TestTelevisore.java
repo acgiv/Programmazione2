@@ -198,7 +198,7 @@ class TestTelevisore {
 	public void test6RisoluzioneTelevisoreBase() {
 		System.out.println("Test Aggiunta Risoluzione = h d ");
 		Televisore tv = new TelevisoreBase();
-		assertFalse (tv.addRisoluzioneTv(tv));
+		assertFalse(tv.addRisoluzioneTv(tv));
 	}
 
 	@Test
@@ -459,4 +459,219 @@ class TestTelevisore {
 		assertFalse(tv.addTiposchermoTv(tv));
 	}
 
+	@Test
+	public void test1AltezzaTelevisioreBase() {
+		System.out.println("Test doppio inserimento dell' altezza");
+		Televisore tv = new TelevisoreBase();
+		assertTrue(tv.addAltezzaTv(tv));
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test2AltezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento dell'altezza che deve essere maggiore di > 24.09");
+		Televisore tv = new TelevisoreBase();
+		assertTrue(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test3AltezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento dell'altezza che deve essere minore di 24.09");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test4AltezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento dell'altezza con valore = 24.09a");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test5AltezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento dell'altezza con valore = = -24.09");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test6AltezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento dell'altezza con valore = +24.10");
+		Televisore tv = new TelevisoreBase();
+		assertTrue(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test7AltezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento dell'altezza con valore = +28&.10");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test8AltezzaTelevisioreBase() {
+		System.out.println(
+				"\"Test di'inserimento dell' altezza con uno spazio sia all' inizio che alla fine del numero =' 28.10 '");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test9AltezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento dell'altezza con valore = 28,10 ");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test10AltezzaTelevisioreBase() {
+		System.out.println("Test di'inserimento dell'altezza con valore superiore al valore massimo di = 124.05 ");
+		Televisore tv = new TelevisoreBase();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test1AltezzaTelevisoreMedio() {
+		System.out.println("Test doppio inserimento dell' altezza");
+		Televisore tv = new TelevisoreMedio();
+		assertTrue(tv.addAltezzaTv(tv));
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test2AltezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento dell'altezza che deve essere maggiore di > 24.09");
+		Televisore tv = new TelevisoreMedio();
+		assertTrue(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test3AltezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento dell'altezza che deve essere minore di 24.09");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test4AltezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento dell'altezza con valore = 24.09a");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test5AltezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento dell'altezza con valore = = -24.09");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test6AltezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento dell'altezza con valore = +24.10");
+		Televisore tv = new TelevisoreMedio();
+		assertTrue(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test7AltezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento dell'altezza con valore = +28&.10");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test8AltezzaTelevisoreMedio() {
+		System.out.println(
+				"\"Test di'inserimento dell' altezza con uno spazio sia all' inizio che alla fine del numero =' 28.10 '");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test9AltezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento dell'altezza con valore = 28,10 ");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test10AltezzaTelevisoreMedio() {
+		System.out.println("Test di'inserimento dell'altezza con valore superiore al valore massimo di = 124.05 ");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test1AltezzaTelevisoreAvanzato() {
+		System.out.println("Test doppio inserimento dell' altezza");
+		Televisore tv = new TelevisoreAvanzato();
+		assertTrue(tv.addAltezzaTv( tv));
+		assertFalse(tv.addAltezzaTv( tv));
+	}
+
+	@Test
+	public void test2AltezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento dell'altezza che deve essere maggiore di > 24.09");
+		Televisore tv = new TelevisoreAvanzato();
+		assertTrue(tv.addAltezzaTv( tv));
+	}
+
+	@Test
+	public void test3AltezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento dell'altezza che deve essere minore di 24.09");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addAltezzaTv( tv));
+	}
+
+	@Test
+	public void test4AltezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento dell'altezza con valore = 24.09a");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addAltezzaTv( tv));
+	}
+
+	@Test
+	public void test5AltezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento dell'altezza con valore = = -24.09");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addAltezzaTv( tv));
+	}
+
+	@Test
+	public void test6AltezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento dell'altezza con valore = +24.10");
+		Televisore tv = new TelevisoreAvanzato();
+		assertTrue(tv.addAltezzaTv( tv));
+	}
+
+	@Test
+	public void test7AltezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento dell'altezza con valore = +28&.10");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addAltezzaTv( tv));
+	}
+
+	@Test
+	public void test8AltezzaTelevisoreAvanzato() {
+		System.out.println(
+				"\"Test di'inserimento dell' altezza con uno spazio sia all' inizio che alla fine del numero =' 28.10 '");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addAltezzaTv(tv));
+	}
+
+	@Test
+	public void test9AltezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento dell'altezza con valore = 28,10 ");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addAltezzaTv( tv));
+	}
+
+	@Test
+	public void test10AltezzaTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento dell'altezza con valore superiore al valore massimo di = 124.05 ");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addAltezzaTv( tv));
+	}
 }

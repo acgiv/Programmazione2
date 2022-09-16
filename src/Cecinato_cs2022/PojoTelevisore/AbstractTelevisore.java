@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
+import Cecinato_cs2022.EcceptionTelevisore.MaxValueException;
+import Cecinato_cs2022.EcceptionTelevisore.MinValueException;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
@@ -57,7 +59,7 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 		return result;
 	}
-	
+
 	private boolean controlloRisoluzione(String risoluzione) {
 		boolean result = false;
 		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
@@ -68,7 +70,7 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 		return result;
 	}
-	
+
 	private boolean controlloTipologiaSchermo(String tipoSchermo) {
 		boolean result = false;
 		System.out.println(tipoSchermo);
@@ -78,7 +80,23 @@ abstract class AbstractTelevisore implements Televisore {
 				break;
 			}
 		}
-			return result;
+		return result;
+	}
+
+	private boolean controlloParamentriNumericiTv(String parametri) {
+		boolean result = false;
+		try {
+			parametri = parametri.replace(" ", "_");
+			if (parametri.matches("^[+,-]?(\\d+(\\.\\d*)?)|((\\.\\d+))?$")) {
+				result = true;
+			} else {
+				throw new NumberFormatException();
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println("| Non hai inserito dei valori numerici |\n");
+		}
+		return result;
 	}
 
 	public boolean addSeriale(Televisore tv, String Seriale) {
@@ -162,7 +180,7 @@ abstract class AbstractTelevisore implements Televisore {
 						((TelevisoreAvanzato) tv).setMarche(MarcheTelevisori.valueOf(marca));
 						result = true;
 					}
-					
+
 				} else {
 					throw new TelevisoreException();
 				}
@@ -178,22 +196,51 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean addAltezzaTv(Televisore tv, double Altezza) {
+	public boolean addAltezzaTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setAltezza(Altezza);
-			result = true;
-			break;
+		String altezza;
+		try {
+			if (((TelevisoreBase) tv).getAltezza() == 0) {
+				System.out.println("Inserisci l'altezza della televisione");
+				altezza = sc.nextLine();
+				if (controlloParamentriNumericiTv(altezza) == true) {
+					if (Float.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
+							&& Float.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							((TelevisoreBase) tv).setAltezza(Double.valueOf(altezza));
+							result = true;
+							break;
 
-		case MEDIO:
-			((TelevisoreMedio) tv).setAltezza(Altezza);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setAltezza(Altezza);
-			result = true;
-			break;
+						case MEDIO:
+							((TelevisoreMedio) tv).setAltezza(Double.valueOf(altezza));
+							result = true;
+							break;
+						case AVANZATO:
+							((TelevisoreAvanzato) tv).setAltezza(Double.valueOf(altezza));
+							result = true;
+							break;
+						}
+					} else if (Double.valueOf(altezza) < ConstantGlobal.ALTEZZA_MINIMA_TV) {
+						throw new MinValueException();
+					} else {
+						throw new MaxValueException();
+					}
+				}
+			} else {
+				throw new TelevisoreException();
+			}
+			
+		} catch (MinValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMinAltezza());
+		} catch (TelevisoreException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
+		} catch (MaxValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMaxAltezza());
+		
 		}
 		return result;
 
@@ -312,10 +359,11 @@ abstract class AbstractTelevisore implements Televisore {
 					if (risoluzione == null) {
 						throw new NullPointerException();
 					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
-						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+						((TelevisoreBase) tv)
+								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
 						result = true;
 					}
-					
+
 				} else {
 					throw new TelevisoreException();
 				}
@@ -334,10 +382,11 @@ abstract class AbstractTelevisore implements Televisore {
 					if (risoluzione == null) {
 						throw new NullPointerException();
 					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
-						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+						((TelevisoreBase) tv)
+								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
 						result = true;
 					}
-					
+
 				} else {
 					throw new TelevisoreException();
 				}
@@ -355,10 +404,11 @@ abstract class AbstractTelevisore implements Televisore {
 					if (risoluzione == null) {
 						throw new NullPointerException();
 					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
-						((TelevisoreBase) tv).setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+						((TelevisoreBase) tv)
+								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
 						result = true;
 					}
-					
+
 				} else {
 					throw new TelevisoreException();
 				}
@@ -394,7 +444,7 @@ abstract class AbstractTelevisore implements Televisore {
 						((TelevisoreBase) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
 						result = true;
 					}
-					
+
 				} else {
 					throw new TelevisoreException();
 				}
@@ -416,7 +466,7 @@ abstract class AbstractTelevisore implements Televisore {
 						((TelevisoreMedio) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
 						result = true;
 					}
-					
+
 				} else {
 					throw new TelevisoreException();
 				}
@@ -435,9 +485,9 @@ abstract class AbstractTelevisore implements Televisore {
 						throw new NullPointerException();
 					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
 						((TelevisoreAvanzato) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
-						result= true;
+						result = true;
 					}
-					
+
 				} else {
 					throw new TelevisoreException();
 				}

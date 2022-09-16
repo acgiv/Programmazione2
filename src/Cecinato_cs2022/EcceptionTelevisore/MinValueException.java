@@ -1,5 +1,6 @@
 package Cecinato_cs2022.EcceptionTelevisore;
 
+import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 
 public class MinValueException extends Exception {
 
@@ -16,5 +17,7 @@ public class MinValueException extends Exception {
 		super("\n" + "|--------------------ERRORE-------------------|\n");
 	}
 
-	
+	public String ErrorMinAltezza() {
+		return getMessage() + "| Hai inserito l'altezza  inferirore al valore limite di: " + ConstantGlobal.ALTEZZA_MINIMA_TV + " |\n";
+	}
 }

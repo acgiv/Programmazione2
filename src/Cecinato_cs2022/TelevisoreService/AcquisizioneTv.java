@@ -6,7 +6,7 @@ public interface AcquisizioneTv {
 
 	public boolean addMarcaTv(Televisore tv);
 
-	public boolean addAltezzaTv(Televisore tv, double Altezza);
+	public boolean addAltezzaTv(Televisore tv);
 
 	public boolean addLarghezzaTv(Televisore tv, double Larghezza);
 
