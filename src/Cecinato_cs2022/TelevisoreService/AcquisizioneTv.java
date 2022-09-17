@@ -10,7 +10,7 @@ public interface AcquisizioneTv {
 
 	public boolean addLarghezzaTv(Televisore tv);
 
-	public boolean addNumberHdmiTv(Televisore tv, int NumeroHdmi);
+	public boolean addNumberHdmiTv(Televisore tv);
 
 	public boolean addNumberUsbTv(Televisore tv, int NumeroUsb);
 

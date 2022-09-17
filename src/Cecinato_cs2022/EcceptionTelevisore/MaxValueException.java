@@ -24,4 +24,8 @@ public class MaxValueException extends Exception {
 	public String ErrorMaxDiagonale() {
 		return getMessage() + "| Hai inserito la lunghezza della diagonale superiore al valore limite di: " + ConstantGlobal.DIAGONALE_MASSIMA_TV + " |\n" ;
 	}
+	
+	public String ErrorMaxNumeroHdmi() {
+		return getMessage() + "| Hai inserito un numero di hdmI superiore al valore limite  |\n";	
+	}
 }

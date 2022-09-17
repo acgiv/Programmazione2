@@ -29,6 +29,8 @@ public class MinValueException extends Exception {
 		return getMessage() + "| Hai inserito la lunghezza della diagonale inferirore al valore limite: " + ConstantGlobal.DIAGONALE_MINIMA_TV + " |\n";
 	}
 
-	
+	public String ErrorMinNumeroHdmi() {
+		return getMessage() + "| Hai inserito un numero inferiore di hdmi rispetto al valore limite di : " + ConstantGlobal.NUMERO_MINIMO_HDMI + "|\n";
+	}
 
 }
