@@ -7,6 +7,7 @@ import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
 import Cecinato_cs2022.EcceptionTelevisore.MaxValueException;
 import Cecinato_cs2022.EcceptionTelevisore.MinValueException;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
+import Cecinato_cs2022.EcceptionTelevisore.TipologiaException;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
 abstract class AbstractTelevisore implements Televisore {
@@ -323,12 +324,10 @@ abstract class AbstractTelevisore implements Televisore {
 				if (controlloParamentriNumericiTv(numeroHdmi)) {
 					switch (scannerTvInstanziata(tv)) {
 					case BASE:
-						// aggiungere eccezione
-						break;
+						throw new TipologiaException();
 
 					case MEDIO:
-						 //// aggiungere eccezione
-						break;
+						throw new TipologiaException();
 					case AVANZATO:
 						if (isInteger(numeroHdmi)) {
 							if (Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
@@ -357,6 +356,9 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (MinValueException e) {
 			System.out.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMinNumeroHdmi());
+		}catch (TipologiaException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println(e.ErrorTipologiaTelevisoreException());
 		}
 		return result;
 
@@ -370,8 +372,7 @@ abstract class AbstractTelevisore implements Televisore {
 				if (controlloParamentriNumericiTv(numeroUsb)) {
 					switch (scannerTvInstanziata(tv)) {
 					case BASE:
-						// aggiungere eccezione
-						break;
+						throw new TipologiaException();
 
 					case MEDIO:
 						if (isInteger(numeroUsb)) {
@@ -415,6 +416,9 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (MinValueException e) {
 			System.out.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMinNumeroMinUsb());
+		}catch (TipologiaException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println(e.ErrorTipologiaTelevisoreException());
 		}
 		return result;
 	}
@@ -477,12 +481,10 @@ abstract class AbstractTelevisore implements Televisore {
 				if (controlloParamentriNumericiTv(numeroSmartTv)) {
 					switch (scannerTvInstanziata(tv)) {
 					case BASE:
-						// aggiungere eccezione;
-						break;
+						throw new TipologiaException();
 
 					case MEDIO:
-						// aggiungere eccezione;
-						break;
+						throw new TipologiaException();
 					case AVANZATO:
 						if (isInteger(numeroSmartTv)) {
 							if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
@@ -514,6 +516,9 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (MaxValueException e) {
 			System.out.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMaxNumeroSmartTv());
+		}catch (TipologiaException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println(e.ErrorTipologiaTelevisoreException());
 		}
 		return result;
 	}
