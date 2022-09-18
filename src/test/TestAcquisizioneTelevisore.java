@@ -531,8 +531,6 @@ class TestAcquisizioneTelevisore {
 		Televisore tv = new TelevisoreBase();
 		assertFalse(tv.addAltezzaTv(tv));
 	}
-	
-	
 
 	@Test
 	public void test1AltezzaTelevisoreMedio() {
@@ -610,50 +608,50 @@ class TestAcquisizioneTelevisore {
 	public void test1AltezzaTelevisoreAvanzato() {
 		System.out.println("Test doppio inserimento dell' altezza");
 		Televisore tv = new TelevisoreAvanzato();
-		assertTrue(tv.addAltezzaTv( tv));
-		assertFalse(tv.addAltezzaTv( tv));
+		assertTrue(tv.addAltezzaTv(tv));
+		assertFalse(tv.addAltezzaTv(tv));
 	}
 
 	@Test
 	public void test2AltezzaTelevisoreAvanzato() {
 		System.out.println("Test di'inserimento dell'altezza che deve essere maggiore di > 24.09");
 		Televisore tv = new TelevisoreAvanzato();
-		assertTrue(tv.addAltezzaTv( tv));
+		assertTrue(tv.addAltezzaTv(tv));
 	}
 
 	@Test
 	public void test3AltezzaTelevisoreAvanzato() {
 		System.out.println("Test di'inserimento dell'altezza che deve essere minore di 24.09");
 		Televisore tv = new TelevisoreAvanzato();
-		assertFalse(tv.addAltezzaTv( tv));
+		assertFalse(tv.addAltezzaTv(tv));
 	}
 
 	@Test
 	public void test4AltezzaTelevisoreAvanzato() {
 		System.out.println("Test di'inserimento dell'altezza con valore = 24.09a");
 		Televisore tv = new TelevisoreAvanzato();
-		assertFalse(tv.addAltezzaTv( tv));
+		assertFalse(tv.addAltezzaTv(tv));
 	}
 
 	@Test
 	public void test5AltezzaTelevisoreAvanzato() {
 		System.out.println("Test di'inserimento dell'altezza con valore = = -24.09");
 		Televisore tv = new TelevisoreAvanzato();
-		assertFalse(tv.addAltezzaTv( tv));
+		assertFalse(tv.addAltezzaTv(tv));
 	}
 
 	@Test
 	public void test6AltezzaTelevisoreAvanzato() {
 		System.out.println("Test di'inserimento dell'altezza con valore = +24.10");
 		Televisore tv = new TelevisoreAvanzato();
-		assertTrue(tv.addAltezzaTv( tv));
+		assertTrue(tv.addAltezzaTv(tv));
 	}
 
 	@Test
 	public void test7AltezzaTelevisoreAvanzato() {
 		System.out.println("Test di'inserimento dell'altezza con valore = +28&.10");
 		Televisore tv = new TelevisoreAvanzato();
-		assertFalse(tv.addAltezzaTv( tv));
+		assertFalse(tv.addAltezzaTv(tv));
 	}
 
 	@Test
@@ -668,15 +666,16 @@ class TestAcquisizioneTelevisore {
 	public void test9AltezzaTelevisoreAvanzato() {
 		System.out.println("Test di'inserimento dell'altezza con valore = 28,10 ");
 		Televisore tv = new TelevisoreAvanzato();
-		assertFalse(tv.addAltezzaTv( tv));
+		assertFalse(tv.addAltezzaTv(tv));
 	}
 
 	@Test
 	public void test10AltezzaTelevisoreAvanzato() {
 		System.out.println("Test di'inserimento dell'altezza con valore superiore al valore massimo di = 124.05 ");
 		Televisore tv = new TelevisoreAvanzato();
-		assertFalse(tv.addAltezzaTv( tv));
+		assertFalse(tv.addAltezzaTv(tv));
 	}
+
 	@Test
 	public void test1LarghezzaTelevisioreBase() {
 		System.out.println("Test doppio inserimento della Larghezza");
@@ -729,7 +728,8 @@ class TestAcquisizioneTelevisore {
 
 	@Test
 	public void test8LarghezzaTelevisioreBase() {
-		System.out.println("Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
+		System.out.println(
+				"Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
 		Televisore tv = new TelevisoreBase();
 		assertFalse(tv.addLarghezzaTv(tv));
 	}
@@ -747,6 +747,7 @@ class TestAcquisizioneTelevisore {
 		Televisore tv = new TelevisoreBase();
 		assertFalse(tv.addLarghezzaTv(tv));
 	}
+
 	@Test
 	public void test1LarghezzaTelevisoreMedio() {
 		System.out.println("Test doppio inserimento della Larghezza");
@@ -799,7 +800,8 @@ class TestAcquisizioneTelevisore {
 
 	@Test
 	public void test8LarghezzaTelevisoreMedio() {
-		System.out.println("Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
+		System.out.println(
+				"Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
 		Televisore tv = new TelevisoreMedio();
 		assertFalse(tv.addLarghezzaTv(tv));
 	}
@@ -817,7 +819,7 @@ class TestAcquisizioneTelevisore {
 		Televisore tv = new TelevisoreMedio();
 		assertFalse(tv.addLarghezzaTv(tv));
 	}
-	
+
 	@Test
 	public void test1LarghezzaTelevisoreAvanzato() {
 		System.out.println("Test doppio inserimento della Larghezza");
@@ -870,7 +872,8 @@ class TestAcquisizioneTelevisore {
 
 	@Test
 	public void test8LarghezzaTelevisoreAvanzato() {
-		System.out.println("Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
+		System.out.println(
+				"Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
 		Televisore tv = new TelevisoreAvanzato();
 		assertFalse(tv.addLarghezzaTv(tv));
 	}
@@ -888,7 +891,7 @@ class TestAcquisizioneTelevisore {
 		Televisore tv = new TelevisoreAvanzato();
 		assertFalse(tv.addLarghezzaTv(tv));
 	}
-	
+
 	@Test
 	public void test1DiagonaleTelevisioreBase() {
 		System.out.println("Test doppio inserimento della Diagonale");
@@ -960,7 +963,7 @@ class TestAcquisizioneTelevisore {
 		Televisore tv = new TelevisoreBase();
 		assertFalse(tv.addDiagonaleTv(tv));
 	}
-	
+
 	@Test
 	public void test1DiagonaleTelevisoreMedio() {
 		System.out.println("Test doppio inserimento della Diagonale");
@@ -1033,7 +1036,6 @@ class TestAcquisizioneTelevisore {
 		assertFalse(tv.addDiagonaleTv(tv));
 	}
 
-
 	@Test
 	public void test1DiagonaleTelevisoreAvanzato() {
 		System.out.println("Test doppio inserimento della Diagonale");
@@ -1104,79 +1106,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore superiore al valore massimo di = 254.0 ");
 		Televisore tv = new TelevisoreAvanzato();
 		assertFalse(tv.addDiagonaleTv(tv));
-	
-	}@Test
-	public void test1NumberHdmiTelevisoreMedio() {
-		System.out.println("Test doppio inserimento del numero hdmi");
-		Televisore tv = new TelevisoreMedio();
-		assertTrue(tv.addNumberHdmiTv(tv));
-		assertFalse(tv.addNumberHdmiTv(tv));
-	}
 
-	@Test
-	public void test2NumberHdmiTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero hdmi che deve essere maggiore di "+ConstantGlobal.NUM_MINIMO_HDMI);
-		Televisore tv = new TelevisoreMedio();
-		assertTrue(tv.addNumberHdmiTv(tv));
 	}
-
-	@Test
-	public void test3NumberHdmiTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero hdmi che deve essere minore di "+ConstantGlobal.NUM_MINIMO_HDMI);
-		Televisore tv = new TelevisoreMedio();
-		assertFalse(tv.addNumberHdmiTv(tv));
-	}
-
-	@Test
-	public void test4NumberHdmiTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero hdmi con valore = 1a");
-		Televisore tv = new TelevisoreMedio();
-		assertFalse(tv.addNumberHdmiTv(tv));
-	}
-
-	@Test
-	public void test5NumberHdmiTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero hdmi con valore = = -23");
-		Televisore tv = new TelevisoreMedio();
-		assertFalse(tv.addNumberHdmiTv(tv));
-	}
-
-	@Test
-	public void test6NumberHdmiTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero hdmi con valore = +1");
-		Televisore tv = new TelevisoreMedio();
-		assertTrue(tv.addNumberHdmiTv(tv));
-	}
-
-	@Test
-	public void test7NumberHdmiTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero hdmi con valore = +1&");
-		Televisore tv = new TelevisoreMedio();
-		assertFalse(tv.addNumberHdmiTv(tv));
-	}
-
-	@Test
-	public void test8NumberHdmiTelevisoreMedio() {
-		System.out.println(
-				"\"Test di'inserimento del numero hdmi con uno spazio sia all' inizio che alla fine del numero =' 1 '");
-		Televisore tv = new TelevisoreMedio();
-		assertFalse(tv.addNumberHdmiTv(tv));
-	}
-
-	@Test
-	public void test9NumberHdmiTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero hdmi con valore = 1,5 ");
-		Televisore tv = new TelevisoreMedio();
-		assertFalse(tv.addNumberHdmiTv(tv));
-	}
-
-	@Test
-	public void test10NumberHdmiTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero hdmi con valore superiore al valore massimo di = "+ ConstantGlobal.NUM_HDMI_TV_MEDIO);
-		Televisore tv = new TelevisoreMedio();
-		assertFalse(tv.addNumberHdmiTv(tv));
-	}
-
 
 	@Test
 	public void test1NumberHdmiTelevisoreAvanzato() {
@@ -1188,14 +1119,15 @@ class TestAcquisizioneTelevisore {
 
 	@Test
 	public void test2NumberHdmiTelevisoreAvanzato() {
-		System.out.println("Test di'inserimento del numero hdmi che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_HDMI);
+		System.out.println(
+				"Test di'inserimento del numero hdmi che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_HDMI);
 		Televisore tv = new TelevisoreAvanzato();
 		assertTrue(tv.addNumberHdmiTv(tv));
 	}
 
 	@Test
 	public void test3NumberHdmiTelevisoreAvanzato() {
-		System.out.println("Test di'inserimento del numero hdmi che deve essere minore di  1.5");
+		System.out.println("Test di'inserimento del numero hdmi che deve essere uguale a = 0.5");
 		Televisore tv = new TelevisoreAvanzato();
 		assertFalse(tv.addNumberHdmiTv(tv));
 	}
@@ -1209,7 +1141,7 @@ class TestAcquisizioneTelevisore {
 
 	@Test
 	public void test5NumberHdmiTelevisoreAvanzato() {
-		System.out.println("Test di'inserimento del numero hdmi con valore = = -1");
+		System.out.println("Test di'inserimento del numero hdmi con valore = -1");
 		Televisore tv = new TelevisoreAvanzato();
 		assertFalse(tv.addNumberHdmiTv(tv));
 	}
@@ -1245,9 +1177,160 @@ class TestAcquisizioneTelevisore {
 
 	@Test
 	public void test10NumberHdmiTelevisoreAvanzato() {
-		System.out.println("Test di'inserimento del numero hdmi con valore superiore al valore massimo di = "+ ConstantGlobal.NUM_HDMI_TV_AVANZATO);
+		System.out.println("Test di'inserimento del numero hdmi con valore superiore al valore massimo di = "
+				+ ConstantGlobal.NUM_HDMI_TV_AVANZATO);
 		Televisore tv = new TelevisoreAvanzato();
 		assertFalse(tv.addNumberHdmiTv(tv));
 	}
+
+	@Test
+	public void test1NumberUsbTelevisoreMedio() {
+		System.out.println("Test doppio inserimento del numero hdmi");
+		Televisore tv = new TelevisoreMedio();
+		assertTrue(tv.addNumberUsbTv(tv));
+		assertFalse(tv.addNumberUsbTv(tv));
+	}
+
+	@Test
+	public void test2NumberUsbTelevisoreMedio() {
+		System.out.println(
+				"Test di'inserimento del numero usb che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_USB);
+		Televisore tv = new TelevisoreMedio();
+		assertTrue(tv.addNumberUsbTv(tv));
+	}
+
+	@Test
+	public void test3NumberUsbTelevisoreMedio() {
+		System.out.println(
+				"Test di'inserimento del numero usb che deve essere minore di " + ConstantGlobal.NUM_MINIMO_USB);
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addNumberUsbTv(tv));
+	}
+
+	@Test
+	public void test4NumberUsbTelevisoreMedio() {
+		System.out.println("Test di'inserimento del numero usb con valore = 1a");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addNumberUsbTv(tv));
+	}
+
+	@Test
+	public void test5NumberUsbTelevisoreMedio() {
+		System.out.println("Test di'inserimento del numero usb con valore = = -2");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addNumberUsbTv(tv));
+	}
+
+	@Test
+	public void test6NumberUsbTelevisoreMedio() {
+		System.out.println("Test di'inserimento del numero usb con valore = +1");
+		Televisore tv = new TelevisoreMedio();
+		assertTrue(tv.addNumberUsbTv(tv));
+	}
+
+	@Test
+	public void test7NumberUsbTelevisoreMedio() {
+		System.out.println("Test di'inserimento del numero usb con valore = +1&");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addNumberUsbTv(tv));
+	}
+
+	@Test
+	public void test8NumberUsbTelevisoreMedio() {
+		System.out.println(
+				"\"Test di'inserimento del numero usb con uno spazio sia all' inizio che alla fine del numero =' 1 '");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addNumberUsbTv(tv));
+	}
+
+	@Test
+	public void test9NumberUsbTelevisoreMedio() {
+		System.out.println("Test di'inserimento del numero usb con valore = 1,5 ");
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addNumberUsbTv(tv));
+	}
+
+	@Test
+	public void test10NumberUsbTelevisoreMedio() {
+		System.out.println("Test di'inserimento del numero usb con valore superiore al valore massimo di = "
+				+ ConstantGlobal.NUM_USB_TV_MEDIO);
+		Televisore tv = new TelevisoreMedio();
+		assertFalse(tv.addNumberUsbTv(tv));
+	}
 	
+	@Test
+	public void test1NumberSmartTvTelevisoreAvanzato() {
+		System.out.println("Test doppio inserimento del numero smart tv");
+		Televisore tv = new TelevisoreAvanzato();
+		assertTrue(tv.addNumberSmartTv(tv));
+		assertFalse(tv.addNumberSmartTv(tv));
+	}
+
+	@Test
+	public void test2NumberSmartTvTelevisoreAvanzato() {
+		System.out.println(
+				"Test di'inserimento del  numero smart tv che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_SMART_TV);
+		Televisore tv = new TelevisoreAvanzato();
+		assertTrue(tv.addNumberSmartTv(tv));
+	}
+
+	@Test
+	public void test3NumberSmartTvTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento del  numero smart tv che deve essere minore di  0.5");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addNumberSmartTv(tv));
+	}
+
+	@Test
+	public void test4NumberSmartTvTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento del  numero smart tv con valore = 1a");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addNumberSmartTv(tv));
+	}
+
+	@Test
+	public void test5NumberSmartTvTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento del  numero smart tv con valore = -1");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addNumberSmartTv(tv));
+	}
+
+	@Test
+	public void test6NumberSmartTvTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento del  numero smart tv con valore = +1");
+		Televisore tv = new TelevisoreAvanzato();
+		assertTrue(tv.addNumberSmartTv(tv));
+	}
+
+	@Test
+	public void test7NumberSmartTvTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento del  numero smart tv con valore = +1&");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addNumberSmartTv(tv));
+	}
+
+	@Test
+	public void test8NumberSmartTvTelevisoreAvanzato() {
+		System.out.println(
+				"\"Test di'inserimento del  numero smart tv con uno spazio sia all' inizio che alla fine del numero =' 1 '");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addNumberSmartTv(tv));
+	}
+
+	@Test
+	public void test9NumberSmartTvTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento del  numero smart tv con valore = 1,10 ");
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addNumberSmartTv(tv));
+	}
+
+	@Test
+	public void test10NumberSmartTvTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento del  numero smart tv con valore superiore al valore massimo di = "
+				+ ConstantGlobal.NUM_SMART_TV_AVANZATO);
+		Televisore tv = new TelevisoreAvanzato();
+		assertFalse(tv.addNumberSmartTv(tv));
+	}
+
+
 }

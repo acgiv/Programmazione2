@@ -32,5 +32,13 @@ public class MinValueException extends Exception {
 	public String ErrorMinNumeroHdmi() {
 		return getMessage() + "| Hai inserito un numero inferiore di hdmi rispetto al valore limite di : " + ConstantGlobal.NUMERO_MINIMO_HDMI + "|\n";
 	}
+	
+	public String ErrorMinNumeroMinUsb() {
+		return getMessage() + "| Hai inserito un numero inferiore di usb rispetto al valore limite di : " + ConstantGlobal.NUMERO_MINIMO_USB + "|\n";
+	}
+	
+	public String ErrorMinNumeroMinSmartTv() {
+		return getMessage() + "| Hai inserito un numero inferiore di smart tv rispetto al valore limite di : " + ConstantGlobal.NUMERO_MINIMO_SMART_TV + "|\n";
+	}
 
 }

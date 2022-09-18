@@ -12,11 +12,11 @@ public interface AcquisizioneTv {
 
 	public boolean addNumberHdmiTv(Televisore tv);
 
-	public boolean addNumberUsbTv(Televisore tv, int NumeroUsb);
+	public boolean addNumberUsbTv(Televisore tv);
 
 	public boolean addDiagonaleTv(Televisore tv);
 	
-	public boolean addNumberSmartTv(Televisore tv, int numeroSmartTv);
+	public boolean addNumberSmartTv(Televisore tv);
 	
 	public boolean addRisoluzioneTv(Televisore tv); 
 	

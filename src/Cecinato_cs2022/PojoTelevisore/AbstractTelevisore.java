@@ -13,8 +13,8 @@ abstract class AbstractTelevisore implements Televisore {
 
 	private Scanner sc = new Scanner(System.in);
 	private int inserthdmi = 0;
-	// private int insertusb = 0;
-	// private int insertSmartTV = 0;
+	private int insertusb = 0;
+	private int insertSmartTV = 0;
 
 	private ConstantGlobal.TIPOLOGIA_TV scannerTvInstanziata(Televisore tv) {
 		String tipologiaInstanziata = String.valueOf(tv.getClass());
@@ -106,6 +106,8 @@ abstract class AbstractTelevisore implements Televisore {
 		try {
 			Integer.parseInt(s);
 		} catch (NumberFormatException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println("| Non hai inserito dei valori interi |\n");
 			return false;
 		} catch (NullPointerException e) {
 			return false;
@@ -325,23 +327,12 @@ abstract class AbstractTelevisore implements Televisore {
 						break;
 
 					case MEDIO:
-						if (isInteger(numeroHdmi)) {
-							if (Integer.valueOf(numeroHdmi) <= ConstantGlobal.NUM_HDMI_TV_MEDIO
-									&& Integer.valueOf(numeroHdmi) >= ConstantGlobal.NUM_MINIMO_HDMI) {
-								((TelevisoreMedio) tv).setNumber_hdmi(Integer.valueOf(numeroHdmi));
-								inserthdmi += 1;
-								result = true;
-							} else if (Integer.valueOf(numeroHdmi) < 0) {
-								throw new MinValueException();
-							} else {
-								throw new MaxValueException();
-							}
-						}
+						 //// aggiungere eccezione
 						break;
 					case AVANZATO:
 						if (isInteger(numeroHdmi)) {
-							if (Integer.valueOf(numeroHdmi) <= ConstantGlobal.NUM_HDMI_TV_AVANZATO
-									&& Integer.valueOf(numeroHdmi) >= ConstantGlobal.NUM_MINIMO_HDMI) {
+							if (Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
+									|| Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_MINIMO_HDMI) {
 								((TelevisoreAvanzato) tv).setNumber_hdmi(Integer.valueOf(numeroHdmi));
 								inserthdmi += 1;
 								result = true;
@@ -354,7 +345,6 @@ abstract class AbstractTelevisore implements Televisore {
 						break;
 					}
 				}
-
 			} else {
 				throw new TelevisoreException();
 			}
@@ -372,21 +362,59 @@ abstract class AbstractTelevisore implements Televisore {
 
 	}
 
-	public boolean addNumberUsbTv(Televisore tv, int NumeroUsb) {
+	public boolean addNumberUsbTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			// aggiungere eccezione
-			break;
+		try {
+			if (insertusb == 0) {
+				String numeroUsb = sc.nextLine();
+				if (controlloParamentriNumericiTv(numeroUsb)) {
+					switch (scannerTvInstanziata(tv)) {
+					case BASE:
+						// aggiungere eccezione
+						break;
 
-		case MEDIO:
-			((TelevisoreMedio) tv).setNumber_usb(NumeroUsb);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setNumber_usb(NumeroUsb);
-			result = true;
-			break;
+					case MEDIO:
+						if (isInteger(numeroUsb)) {
+							if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_USB_TV_MEDIO
+									|| Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_MINIMO_USB) {
+								((TelevisoreMedio) tv).setNumber_usb(Integer.valueOf(numeroUsb));
+								insertusb += 1;
+								result = true;
+							} else if (Integer.valueOf(numeroUsb) < 0) {
+								throw new MinValueException();
+							} else {
+								throw new MaxValueException();
+							}
+						}
+						break;
+						case AVANZATO:
+							if (isInteger(numeroUsb)) {
+								if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUMERO_USB_TV_AVANZATO
+										|| Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_MINIMO_USB) {
+									((TelevisoreAvanzato) tv).setNumber_usb(Integer.valueOf(numeroUsb));
+									insertusb += 1;
+									result = true;
+								} else if (Integer.valueOf(numeroUsb) < 0) {
+									throw new MinValueException();
+								} else {
+									throw new MaxValueException();
+								}
+							}
+						break;
+					}
+				}
+			} else {
+				throw new TelevisoreException();
+			}
+		} catch (TelevisoreException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_USB)));
+		} catch (MaxValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMaxNumeroUsb());
+		} catch (MinValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMinNumeroMinUsb());
 		}
 		return result;
 	}
@@ -441,20 +469,51 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean addNumberSmartTv(Televisore tv, int numeroSmartTv) {
+	public boolean addNumberSmartTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			// aggiungere eccezione;
-			break;
+		try {
+			if (insertSmartTV == 0) {
+				String numeroSmartTv = sc.nextLine();
+				if (controlloParamentriNumericiTv(numeroSmartTv)) {
+					switch (scannerTvInstanziata(tv)) {
+					case BASE:
+						// aggiungere eccezione;
+						break;
 
-		case MEDIO:
-			// aggiungere eccezione;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setNumber_smartTv(numeroSmartTv);
-			result = true;
-			break;
+					case MEDIO:
+						// aggiungere eccezione;
+						break;
+					case AVANZATO:
+						if (isInteger(numeroSmartTv)) {
+							if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
+									|| Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_MINIMO_SMART_TV) {
+								((TelevisoreAvanzato) tv).setNumber_smartTv(Integer.valueOf(numeroSmartTv));
+								insertSmartTV += 1;
+								result = true;
+							} else if (Integer.valueOf(numeroSmartTv) < 0) {
+								throw new MinValueException();
+							} else {
+								throw new MaxValueException();
+							}
+							result = true;
+						}
+						break;
+					}
+				}
+			} else {
+				throw new TelevisoreException();
+			}
+
+		} catch (MinValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMinNumeroMinSmartTv());
+		} catch (TelevisoreException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println(
+					e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_SMART_TV)));
+		} catch (MaxValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMaxNumeroSmartTv());
 		}
 		return result;
 	}
@@ -480,7 +539,6 @@ abstract class AbstractTelevisore implements Televisore {
 								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
 						result = true;
 					}
-
 				} else {
 					throw new TelevisoreException();
 				}
@@ -710,8 +768,7 @@ abstract class AbstractTelevisore implements Televisore {
 			break;
 
 		case MEDIO:
-			((TelevisoreMedio) tv).setNumber_hdmi(NumeroHdmi);
-			result = true;
+			// aggiungere eccezione
 			break;
 		case AVANZATO:
 			((TelevisoreAvanzato) tv).setNumber_hdmi(NumeroHdmi);
@@ -888,8 +945,7 @@ abstract class AbstractTelevisore implements Televisore {
 			break;
 
 		case MEDIO:
-			((TelevisoreMedio) tv).setNumber_hdmi(0);
-			result = true;
+			// aggiungere eccezione
 			break;
 		case AVANZATO:
 			((TelevisoreAvanzato) tv).setNumber_hdmi(0);

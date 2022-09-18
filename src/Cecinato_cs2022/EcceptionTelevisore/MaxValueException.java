@@ -28,4 +28,12 @@ public class MaxValueException extends Exception {
 	public String ErrorMaxNumeroHdmi() {
 		return getMessage() + "| Hai inserito un numero di hdmI superiore al valore limite  |\n";	
 	}
+	
+	public String ErrorMaxNumeroUsb() {
+		return getMessage() + "| Hai inserito un numero di usb superiore al valore limite  |\n";	
+	}
+	
+	public String ErrorMaxNumeroSmartTv() {
+		return getMessage() + "| Hai inserito un numero di smart tv superiore al valore limite  |\n";	
+	}
 }

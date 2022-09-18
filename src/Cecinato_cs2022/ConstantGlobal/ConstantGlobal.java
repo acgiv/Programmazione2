@@ -6,8 +6,6 @@ public interface ConstantGlobal {
 
 	int NUM_MINIMO_USB = 0;
 
-	int NUM_HDMI_TV_MEDIO = 1;
-
 	int NUM_HDMI_TV_AVANZATO = 1;
 
 	int NUM_MINIMO_HDMI = 0;

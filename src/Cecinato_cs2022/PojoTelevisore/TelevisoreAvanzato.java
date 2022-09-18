@@ -5,10 +5,10 @@ import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 public class TelevisoreAvanzato extends TelevisoreMedio {
 
 	private int number_smartTv;
-	
+	private int number_hdmi ;
 	
 	public TelevisoreAvanzato(String seriale) {
-		super(seriale, ConstantGlobal.NUM_HDMI_TV_AVANZATO, ConstantGlobal.NUMERO_USB_TV_AVANZATO);
+		super(seriale, ConstantGlobal.NUMERO_USB_TV_AVANZATO);
 		setTipo(ConstantGlobal.TIPOLOGIA_TV.AVANZATO);
 		this.number_smartTv =ConstantGlobal.NUM_SMART_TV_AVANZATO;
 	}
@@ -21,7 +21,8 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 	}
 
 	public TelevisoreAvanzato(String seriale, int number_hdmi, int number_usb, int number_smartTv) {
-		super( seriale,  number_hdmi, number_usb);
+		super( seriale, number_usb);
+		this.number_hdmi = number_hdmi;
 		setTipo(ConstantGlobal.TIPOLOGIA_TV.AVANZATO);
 		this.number_smartTv= number_smartTv;
 
@@ -35,12 +36,30 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 		this.number_smartTv = number_smartTv;
 	}
 
+
+
+	public int getNumber_hdmi() {
+		return number_hdmi;
+	}
+
+
+
+	public void setNumber_hdmi(int number_hdmi) {
+		this.number_hdmi = number_hdmi;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "TelevisoreAvanzato [number_smartTv=" + number_smartTv + ", Number_hdmi=" + getNumber_hdmi()
-				+ ", Number_usb=" + getNumber_usb() + ", Seriale=" + getSeriale() + ", Tipo=" + getTipo()
+		return "TelevisoreAvanzato [number_smartTv=" + number_smartTv + ", number_hdmi=" + number_hdmi
+				+ ", Seriale=" + getSeriale() + ", Tipo=" + getTipo() + ", Marche=" + getMarche()
+				+ ", Altezza()=" + getAltezza() + ", Larghezza=" + getLarghezza() + ", Diagonale="
+				+ getDiagonale() + ", Risoluzione=" + getRisoluzione() + ", TipoSchermo=" + getTipoSchermo()
 				+ "]";
 	}
+	
+	
 
 
 	
