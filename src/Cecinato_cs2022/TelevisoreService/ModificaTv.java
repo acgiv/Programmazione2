@@ -9,7 +9,7 @@ public interface ModificaTv {
 
 	public boolean modificaMarcaTv(Televisore tv);
 
-	public boolean modificaAltezzaTv(Televisore tv, double Altezza);
+	public boolean modificaAltezzaTv(Televisore tv);
 
 	public boolean modificaLarghezzaTv(Televisore tv, double Larghezza);
 

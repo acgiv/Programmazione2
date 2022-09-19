@@ -781,22 +781,51 @@ abstract class AbstractTelevisore implements Televisore {
 
 	}
 
-	public boolean modificaAltezzaTv(Televisore tv, double Altezza) {
+	public boolean modificaAltezzaTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setAltezza(Altezza);
-			result = true;
-			break;
+		String altezza;
+		try {
+			if (((TelevisoreBase) tv).getAltezza() != 0) {
+				System.out.println("Inserisci l'altezza della televisione");
+				altezza = sc.nextLine();
+				if (controlloParamentriNumericiTv(altezza)) {
+					if (Double.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
+							&& Double.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							((TelevisoreBase) tv).setAltezza(Double.valueOf(altezza));
+							result = true;
+							break;
 
-		case MEDIO:
-			((TelevisoreMedio) tv).setAltezza(Altezza);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setAltezza(Altezza);
-			result = true;
-			break;
+						case MEDIO:
+							((TelevisoreMedio) tv).setAltezza(Double.valueOf(altezza));
+							result = true;
+							break;
+						case AVANZATO:
+							((TelevisoreAvanzato) tv).setAltezza(Double.valueOf(altezza));
+							result = true;
+							break;
+						}
+					} else if (Double.valueOf(altezza) < ConstantGlobal.ALTEZZA_MINIMA_TV) {
+						throw new MinValueException();
+					} else {
+						throw new MaxValueException();
+					}
+				}
+			} else {
+				throw new TelevisoreException();
+			}
+
+		} catch (MinValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMinAltezza());
+		} catch (TelevisoreException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
+		} catch (MaxValueException e) {
+			System.out.println("| Errore nell'inserimento |\n");
+			System.out.println(e.ErrorMaxAltezza());
+
 		}
 		return result;
 
