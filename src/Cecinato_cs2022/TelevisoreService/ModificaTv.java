@@ -1,7 +1,5 @@
 package Cecinato_cs2022.TelevisoreService;
 
-import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
-import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
 
 public interface ModificaTv {
 
@@ -11,17 +9,17 @@ public interface ModificaTv {
 
 	public boolean modificaAltezzaTv(Televisore tv);
 
-	public boolean modificaLarghezzaTv(Televisore tv, double Larghezza);
+	public boolean modificaLarghezzaTv(Televisore tv);
 
-	public boolean modificaNumberHdmiTv(Televisore tv, int NumeroHdmi);
+	public boolean modificaNumberHdmiTv(Televisore tv);
 
-	public boolean modificaNumberUsbTv(Televisore tv, int NumeroUsb);
+	public boolean modificaNumberUsbTv(Televisore tv);
 
-	public boolean modificaDiagonaleTv(Televisore tv, double Diagonale);
+	public boolean modificaDiagonaleTv(Televisore tv);
 	
-	public boolean modificaNumberSmartTv(Televisore tv, int numeroSmartTv);
+	public boolean modificaNumberSmartTv(Televisore tv);
 	
-	public boolean modificaRisoluzioneTv(Televisore tv, ConstantGlobal.RISOLUZIONE_TV risoluzione); 
+	public boolean modificaRisoluzioneTv(Televisore tv); 
 	
-	public boolean modificaTiposchermoTv(Televisore tv, ConstantGlobal.TIPOLOGIA_SCHERMO tipoSchermo);
+	public boolean modificaTiposchermoTv(Televisore tv);
 }

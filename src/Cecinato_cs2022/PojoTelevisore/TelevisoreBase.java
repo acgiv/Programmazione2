@@ -1,7 +1,6 @@
 package Cecinato_cs2022.PojoTelevisore;
 
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
-
 import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
 
 public class TelevisoreBase extends AbstractTelevisore {
@@ -17,14 +16,13 @@ public class TelevisoreBase extends AbstractTelevisore {
 	public TelevisoreBase(String seriale) {
 		super();
 		Seriale = seriale;
-		this.tipo =  ConstantGlobal.TIPOLOGIA_TV.BASE;
-	}
-
-
-	public  TelevisoreBase() {
 		this.tipo = ConstantGlobal.TIPOLOGIA_TV.BASE;
 	}
-	
+
+	public TelevisoreBase() {
+		this.tipo = ConstantGlobal.TIPOLOGIA_TV.BASE;
+	}
+
 	public String getSeriale() {
 		return Seriale;
 	}
@@ -92,8 +90,8 @@ public class TelevisoreBase extends AbstractTelevisore {
 	@Override
 	public String toString() {
 		return "TelevisoreBase [Seriale=" + Seriale + ", marche=" + marche + ", altezza=" + altezza + ", larghezza="
-				+ larghezza + ", diagonale=" + diagonale + ", risoluzione=" + risoluzione + ", tipoSchermo=" + tipoSchermo
-				+ ", tipo=" + tipo + "]";
+				+ larghezza + ", diagonale=" + diagonale + ", risoluzione=" + risoluzione + ", tipoSchermo="
+				+ tipoSchermo + ", tipo=" + tipo + "]";
 	}
 
 }
