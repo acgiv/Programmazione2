@@ -7,7 +7,7 @@ public interface ModificaTv {
 
 	public boolean modificaSeriale(Televisore tv, String Seriale);
 
-	public boolean modificaMarcaTv(Televisore tv, MarcheTelevisori marca);
+	public boolean modificaMarcaTv(Televisore tv);
 
 	public boolean modificaAltezzaTv(Televisore tv, double Altezza);
 

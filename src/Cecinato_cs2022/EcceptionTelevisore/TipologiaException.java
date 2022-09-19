@@ -1,6 +1,6 @@
 package Cecinato_cs2022.EcceptionTelevisore;
 
-import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
+
 
 public class TipologiaException extends Exception{
 

@@ -703,22 +703,79 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean modificaMarcaTv(Televisore tv, MarcheTelevisori marca) {
+	public boolean modificaMarcaTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setMarche(marca);
-			result = true;
-			break;
+		try {
+			switch (scannerTvInstanziata(tv)) {
+			case BASE:
+				if (((TelevisoreBase) tv).getMarche() != null) {
+					System.out.println("Inserisci la marca della della tv, scrivendola.");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
+					System.out.println(
+							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
+					if (sc.nextLine().equals("1"))
+						stampa_marche_tv();
+					String marca = sc.nextLine().toUpperCase().replace(" ", "");
+					if (marca == null) {
+						throw new NullPointerException();
+					} else if (controlloMarca(marca)) {
+						((TelevisoreBase) tv).setMarche(MarcheTelevisori.valueOf(marca));
+						result = true;
+					}
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
 
-		case MEDIO:
-			((TelevisoreMedio) tv).setMarche(marca);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setMarche(marca);
-			result = true;
-			break;
+			case MEDIO:
+				if (((TelevisoreMedio) tv).getMarche() != null) {
+					System.out.println("Inserisci la marca della della tv, scrivendola.");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
+					System.out.println(
+							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
+					if (sc.nextLine().equals("1"))
+						stampa_marche_tv();
+					String marca = sc.nextLine().toUpperCase().replace(" ", "");
+					if (marca == null) {
+						throw new NullPointerException();
+					} else if (controlloMarca(marca)) {
+						((TelevisoreMedio) tv).setMarche(MarcheTelevisori.valueOf(marca));
+						result = true;
+					}
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			case AVANZATO:
+				if (((TelevisoreAvanzato) tv).getMarche() != null) {
+					System.out.println("Inserisci la marca della della tv, scrivendola.");
+					System.out.println(
+							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
+					System.out.println(
+							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
+					if (sc.nextLine().equals("1"))
+						stampa_marche_tv();
+					String marca = sc.nextLine().toUpperCase().replace(" ", "");
+					if (marca == null) {
+						throw new NullPointerException();
+					} else if (controlloMarca(marca)) {
+						((TelevisoreAvanzato) tv).setMarche(MarcheTelevisori.valueOf(marca));
+						result = true;
+					}
+
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			}
+
+		} catch (TelevisoreException e) {
+			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
+		} catch (NullPointerException e) {
+			System.out.println("| Errore nell'inserimento |");
+			System.out.println("| è stato inserito un valore nullo |");
 		}
 		return result;
 
