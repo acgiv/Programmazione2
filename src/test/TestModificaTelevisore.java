@@ -34,6 +34,9 @@ class TestModificaTelevisore {
 		assertTrue(tvAvanzato.addNumberHdmiTv(tvAvanzato));
 		assertTrue(tvMedio.addNumberUsbTv(tvMedio));
 		assertTrue(tvAvanzato.addNumberUsbTv(tvAvanzato));
+		assertTrue(tvBase.addDiagonaleTv(tvBase));
+		assertTrue(tvMedio.addDiagonaleTv(tvMedio));
+		assertTrue(tvAvanzato.addDiagonaleTv(tvAvanzato));
 	}
 
 	@Test
@@ -605,7 +608,7 @@ class TestModificaTelevisore {
 
 	@Test
 	public void test1NumberUsbTelevisoreMedio() {
-		System.out.println("Test modifica volore senza aver inserimento il numero Usb");
+		System.out.println("Test modifica volore senza aver inserimento il numero Usb  uguale a "+ConstantGlobal.NUM_USB_TV_MEDIO);
 		Televisore tvMedio2 = new TelevisoreMedio();
 		assertFalse(tvMedio2.modificaNumberHdmiTv(tvMedio2));
 	}
@@ -613,7 +616,7 @@ class TestModificaTelevisore {
 	@Test
 	public void test2NumberUsbTelevisoreMedio() {
 		System.out.println(
-				"Test di'inserimento del numero usb che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_USB);
+				"Test di'inserimento del numero usb che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_USB+"uguale a "+ConstantGlobal.NUM_USB_TV_MEDIO);
 		assertTrue(tvMedio.modificaNumberUsbTv(tvMedio));
 	}
 
@@ -626,7 +629,7 @@ class TestModificaTelevisore {
 
 	@Test
 	public void test4NumberUsbTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero usb con valore = 1a");
+		System.out.println("Test di'inserimento del numero usb con valore = 2a");
 		assertFalse(tvMedio.modificaNumberUsbTv(tvMedio));
 	}
 
@@ -638,26 +641,26 @@ class TestModificaTelevisore {
 
 	@Test
 	public void test6NumberUsbTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero usb con valore = +1");
+		System.out.println("Test di'inserimento del numero usb con valore = +2");
 		assertTrue(tvMedio.modificaNumberUsbTv(tvMedio));
 	}
 
 	@Test
 	public void test7NumberUsbTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero usb con valore = +1&");
+		System.out.println("Test di'inserimento del numero usb con valore = +2&");
 		assertFalse(tvMedio.modificaNumberUsbTv(tvMedio));
 	}
 
 	@Test
 	public void test8NumberUsbTelevisoreMedio() {
 		System.out.println(
-				"\"Test di'inserimento del numero usb con uno spazio sia all' inizio che alla fine del numero =' 1 '");
+				"\"Test di'inserimento del numero usb con uno spazio sia all' inizio che alla fine del numero =' 2 '");
 		assertFalse(tvMedio.modificaNumberUsbTv(tvMedio));
 	}
 
 	@Test
 	public void test9NumberUsbTelevisoreMedio() {
-		System.out.println("Test di'inserimento del numero usb con valore = 1,5 ");
+		System.out.println("Test di'inserimento del numero usb con valore = 2,5 ");
 		assertFalse(tvMedio.modificaNumberUsbTv(tvMedio));
 	}
 
@@ -679,7 +682,8 @@ class TestModificaTelevisore {
 	@Test
 	public void test2NumberUsbTelevisoreAvanzato() {
 		System.out.println(
-				"Test di'inserimento del numero usb che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_USB);
+				"Test di'inserimento del numero usb che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_USB +
+				" e uguale a "+ConstantGlobal.NUMERO_USB_TV_AVANZATO);
 
 		assertTrue(tvAvanzato.modificaNumberUsbTv(tvAvanzato));
 	}
@@ -742,5 +746,193 @@ class TestModificaTelevisore {
 
 		assertFalse(tvAvanzato.modificaNumberUsbTv(tvAvanzato));
 	}
+	@Test
+	public void test1DiagonaleTelevisioreBase() {
+		System.out.println("Test doppio inserimento della Diagonale");
+		Televisore tvBase2 = new TelevisoreBase();
+		assertFalse( tvBase2.addDiagonaleTv(tvBase2));
+	}
+
+	@Test
+	public void test2DiagonaleTelevisioreBase() {
+		System.out.println("Test di'inserimento della Diagonale che deve essere maggiore di  51.09");
+		assertTrue(tvBase.modificaDiagonaleTv(tvBase));
+	}
+
+	@Test
+	public void test3DiagonaleTelevisioreBase() {
+		System.out.println("Test di'inserimento della Diagonale che deve essere minore di  51.09");
+		assertFalse(tvBase.modificaDiagonaleTv(tvBase));
+	}
+
+	@Test
+	public void test4DiagonaleTelevisioreBase() {
+		System.out.println("Test di'inserimento della Diagonale con valore = 51.09a");	
+		assertFalse(tvBase.modificaDiagonaleTv(tvBase));
+	}
+
+	@Test
+	public void test5DiagonaleTelevisioreBase() {
+		System.out.println("Test di'inserimento della Diagonale con valore = = -51.09");
+		assertFalse(tvBase.modificaDiagonaleTv(tvBase));
+	}
+
+	@Test
+	public void test6DiagonaleTelevisioreBase() {
+		System.out.println("Test di'inserimento della Diagonale con valore = +51.10");	
+		assertTrue(tvBase.modificaDiagonaleTv(tvBase));
+	}
+
+	@Test
+	public void test7DiagonaleTelevisioreBase() {
+		System.out.println("Test di'inserimento della Diagonale con valore = +51&.10");	
+		assertFalse(tvBase.modificaDiagonaleTv(tvBase));
+	}
+
+	@Test
+	public void test8DiagonaleTelevisioreBase() {
+		System.out.println(
+				"\"Test di'inserimento della Diagonale con uno spazio sia all' inizio che alla fine del numero =' 51.10 '");	
+		assertFalse(tvBase.modificaDiagonaleTv(tvBase));
+	}
+
+	@Test
+	public void test9DiagonaleTelevisioreBase() {
+		System.out.println("Test di'inserimento della Diagonale con valore = 51,10 ");	
+		assertFalse(tvBase.modificaDiagonaleTv(tvBase));
+	}
+
+	@Test
+	public void test10DiagonaleTelevisioreBase() {
+		System.out.println("Test di'inserimento della Diagonale con valore superiore al valore massimo di = 254.0 ");
+		assertFalse(tvBase.modificaDiagonaleTv(tvBase));
+	}
+	
+	@Test
+	public void test1DiagonaleTelevisoreMedio() {
+		System.out.println("Test moedificca della Diagonale, senza inserirla inizialmente");
+		Televisore tvMedio2 = new TelevisoreMedio();
+		assertFalse(tvMedio2.modificaDiagonaleTv(tvMedio2));
+	}
+
+	@Test
+	public void test2DiagonaleTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Diagonale che deve essere maggiore di  51.09");
+		assertTrue(tvMedio.modificaDiagonaleTv(tvMedio));
+	}
+
+	@Test
+	public void test3DiagonaleTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Diagonale che deve essere minore di  51.09");
+		assertFalse(tvMedio.modificaDiagonaleTv(tvMedio));
+	}
+
+	@Test
+	public void test4DiagonaleTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Diagonale con valore = 51.09a");
+		assertFalse(tvMedio.modificaDiagonaleTv(tvMedio));
+	}
+
+	@Test
+	public void test5DiagonaleTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Diagonale con valore = = -51.09");
+		assertFalse(tvMedio.modificaDiagonaleTv(tvMedio));
+	}
+
+	@Test
+	public void test6DiagonaleTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Diagonale con valore = +51.10");	
+		assertTrue(tvMedio.modificaDiagonaleTv(tvMedio));
+	}
+
+	@Test
+	public void test7DiagonaleTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Diagonale con valore = +51&.10");		
+		assertFalse(tvMedio.modificaDiagonaleTv(tvMedio));
+	}
+
+	@Test
+	public void test8DiagonaleTelevisoreMedio() {
+		System.out.println(
+				"\"Test di'inserimento della Diagonale con uno spazio sia all' inizio che alla fine del numero =' 51.10 '");
+		assertFalse(tvMedio.modificaDiagonaleTv(tvMedio));
+	}
+
+	@Test
+	public void test9DiagonaleTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Diagonale con valore = 51,10 ");
+		assertFalse(tvMedio.modificaDiagonaleTv(tvMedio));
+	}
+
+	@Test
+	public void test10DiagonaleTelevisoreMedio() {
+		System.out.println("Test di'inserimento della Diagonale con valore superiore al valore massimo di = 254.0 ");
+		assertFalse(tvMedio.modificaDiagonaleTv(tvMedio));
+	}
+	
+
+	@Test
+	public void test1DiagonaleTelevisoreAvanzato() {
+		System.out.println("Test doppio inserimento della Diagonale");
+		Televisore tvAvanzato2 = new TelevisoreAvanzato();
+		assertFalse( tvAvanzato2.addDiagonaleTv(tvAvanzato2));
+	}
+
+	@Test
+	public void test2DiagonaleTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Diagonale che deve essere maggiore di  51.09");
+		assertTrue(tvAvanzato.modificaDiagonaleTv(tvAvanzato));
+	}
+
+	@Test
+	public void test3DiagonaleTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Diagonale che deve essere minore di  51.09");
+		assertFalse(tvAvanzato.modificaDiagonaleTv(tvAvanzato));
+	}
+
+	@Test
+	public void test4DiagonaleTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Diagonale con valore = 51.09a");
+		assertFalse(tvAvanzato.modificaDiagonaleTv(tvAvanzato));
+	}
+
+	@Test
+	public void test5DiagonaleTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Diagonale con valore = = -51.09");
+		assertFalse(tvAvanzato.modificaDiagonaleTv(tvAvanzato));
+	}
+
+	@Test
+	public void test6DiagonaleTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Diagonale con valore = +51.10");
+		assertTrue(tvAvanzato.modificaDiagonaleTv(tvAvanzato));
+	}
+
+	@Test
+	public void test7DiagonaleTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Diagonale con valore = +51&.10");
+		assertFalse(tvAvanzato.modificaDiagonaleTv(tvAvanzato));
+	}
+
+	@Test
+	public void test8DiagonaleTelevisoreAvanzato() {
+		System.out.println(
+				"\"Test di'inserimento della Diagonale con uno spazio sia all' inizio che alla fine del numero =' 51.10 '");
+		assertFalse(tvAvanzato.modificaDiagonaleTv(tvAvanzato));
+	}
+
+	@Test
+	public void test9DiagonaleTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Diagonale con valore = 51,10 ");
+		assertFalse(tvAvanzato.modificaDiagonaleTv(tvAvanzato));
+	}
+
+	@Test
+	public void test10DiagonaleTelevisoreAvanzato() {
+		System.out.println("Test di'inserimento della Diagonale con valore superiore al valore massimo di = 254.0 ");
+		assertFalse(tvAvanzato.modificaDiagonaleTv(tvAvanzato));
+
+	}
+
 
 }

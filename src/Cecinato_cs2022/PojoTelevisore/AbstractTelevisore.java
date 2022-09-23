@@ -117,26 +117,6 @@ abstract class AbstractTelevisore implements Televisore {
 		return true;
 	}
 
-	public boolean addSeriale(Televisore tv, String Seriale) {
-		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setSeriale(Seriale);
-			result = true;
-			break;
-
-		case MEDIO:
-			((TelevisoreMedio) tv).setSeriale(Seriale);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setSeriale(Seriale);
-			result = true;
-			break;
-		}
-		return result;
-	}
-
 	public boolean addMarcaTv(Televisore tv) {
 		Boolean result = false;
 		try {
@@ -250,14 +230,14 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinAltezza());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinAltezza());
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
+			System.err.println("| Errore nell'inserimento |");
 			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxAltezza());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxAltezza());
 
 		}
 		return result;
@@ -300,14 +280,14 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinLarghezza());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinLarghezza());
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.LARGHEZZA)));
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.LARGHEZZA)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxLarghezza());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxLarghezza());
 
 		}
 		return result;
@@ -347,17 +327,17 @@ abstract class AbstractTelevisore implements Televisore {
 				throw new TelevisoreException();
 			}
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
+			System.err.println("| Errore nell'inserimento |");
 			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_HDMI)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxNumeroHdmi());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxNumeroHdmi());
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
+			System.err.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMinNumeroHdmi());
 		}catch (TipologiaException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.ErrorTipologiaTelevisoreException());
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.ErrorTipologiaTelevisoreException());
 		}
 		return result;
 
@@ -408,17 +388,17 @@ abstract class AbstractTelevisore implements Televisore {
 				throw new TelevisoreException();
 			}
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_USB)));
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_USB)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
+			System.err.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMaxNumeroUsb());
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinNumeroMinUsb());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinNumeroMinUsb());
 		}catch (TipologiaException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.ErrorTipologiaTelevisoreException());
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.ErrorTipologiaTelevisoreException());
 		}
 		return result;
 	}
@@ -459,14 +439,14 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinDiagonale());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinDiagonale());
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.DIAGONALE)));
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.DIAGONALE)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxDiagonale());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxDiagonale());
 
 		}
 
@@ -508,18 +488,18 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinNumeroMinSmartTv());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinNumeroMinSmartTv());
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(
 					e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_SMART_TV)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxNumeroSmartTv());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxNumeroSmartTv());
 		}catch (TipologiaException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.ErrorTipologiaTelevisoreException());
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.ErrorTipologiaTelevisoreException());
 		}
 		return result;
 	}
@@ -597,10 +577,10 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (TelevisoreException e) {
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.RISOLUZIONE)));
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.RISOLUZIONE)));
 		} catch (NullPointerException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println("| è stato inserito un valore nullo |");
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println("| è stato inserito un valore nullo |");
 		}
 		return result;
 	}
@@ -676,10 +656,10 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (TelevisoreException e) {
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.TIPO_SCHERMO)));
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.TIPO_SCHERMO)));
 		} catch (NullPointerException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println("| è stato inserito un valore nullo |");
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println("| è stato inserito un valore nullo |");
 		}
 		return result;
 	}
@@ -773,10 +753,10 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (TelevisoreException e) {
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
 		} catch (NullPointerException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println("| è stato inserito un valore nullo |");
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println("| è stato inserito un valore nullo |");
 		}
 		return result;
 
@@ -818,14 +798,14 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinAltezza());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinAltezza());
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxAltezza());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxAltezza());
 
 		}
 		return result;
@@ -868,14 +848,14 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinLarghezza());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinLarghezza());
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.LARGHEZZA)));
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.LARGHEZZA)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxLarghezza());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxLarghezza());
 
 		}
 		return result;
@@ -915,17 +895,17 @@ abstract class AbstractTelevisore implements Televisore {
 				throw new TelevisoreException();
 			}
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_HDMI)));
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_HDMI)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxNumeroHdmi());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxNumeroHdmi());
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinNumeroHdmi());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinNumeroHdmi());
 		}catch (TipologiaException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.ErrorTipologiaTelevisoreException());
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.ErrorTipologiaTelevisoreException());
 		}
 		return result;
 
@@ -976,17 +956,17 @@ abstract class AbstractTelevisore implements Televisore {
 				throw new TelevisoreException();
 			}
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_USB)));
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_USB)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxNumeroUsb());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxNumeroUsb());
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinNumeroMinUsb());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinNumeroMinUsb());
 		}catch (TipologiaException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.ErrorTipologiaTelevisoreException());
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.ErrorTipologiaTelevisoreException());
 		}
 		return result;
 	}
@@ -1027,14 +1007,14 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinDiagonale());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinDiagonale());
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.DIAGONALE)));
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.DIAGONALE)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxDiagonale());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxDiagonale());
 
 		}
 
@@ -1076,18 +1056,18 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (MinValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinNumeroMinSmartTv());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMinNumeroMinSmartTv());
 		} catch (TelevisoreException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(
 					e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_SMART_TV)));
 		} catch (MaxValueException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxNumeroSmartTv());
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println(e.ErrorMaxNumeroSmartTv());
 		}catch (TipologiaException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println(e.ErrorTipologiaTelevisoreException());
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.ErrorTipologiaTelevisoreException());
 		}
 		return result;
 	}
@@ -1165,10 +1145,10 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (TelevisoreException e) {
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.RISOLUZIONE)));
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.RISOLUZIONE)));
 		} catch (NullPointerException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println("| è stato inserito un valore nullo |");
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println("| è stato inserito un valore nullo |");
 		}
 		return result;
 	}
