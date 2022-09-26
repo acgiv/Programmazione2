@@ -52,5 +52,7 @@ public interface ConstantGlobal {
 	int NUMERO_MINIMO_USB = 0;
 
 	int NUMERO_MINIMO_SMART_TV = 0;
+	
+	String REGEX_CONTROLLO_SERIALE = "^[0-9]{12}$";
 
 }

@@ -1,6 +1,10 @@
 package Cecinato_cs2022.PojoTelevisore;
 
-import java.util.Scanner;
+
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
@@ -12,19 +16,20 @@ import Cecinato_cs2022.TelevisoreService.Televisore;
 
 abstract class AbstractTelevisore implements Televisore {
 
-	private Scanner sc = new Scanner(System.in);
-	private int inserthdmi = 0;
-	private int insertusb = 0;
-	private int insertSmartTV = 0;
+	private boolean inserthdmi = false;
+	private boolean insertusb = false;
+	private boolean insertSmartTV = false;
+	private final static Set<String> elencoSerialeTv = new TreeSet<String>();
 
 	private ConstantGlobal.TIPOLOGIA_TV scannerTvInstanziata(Televisore tv) {
 		String tipologiaInstanziata = String.valueOf(tv.getClass());
 		tipologiaInstanziata = tipologiaInstanziata.replace("class Cecinato_cs2022.PojoTelevisore.Televisore", "");
 		tipologiaInstanziata = tipologiaInstanziata.toUpperCase();
 		return ConstantGlobal.TIPOLOGIA_TV.valueOf(tipologiaInstanziata);
+
 	}
 
-	private final void stampa_marche_tv() {
+	public final void stampaMarcheTv() {
 		int i = 1;
 		System.out.println("Le marche esistenti di tv sono:");
 		for (MarcheTelevisori item : MarcheTelevisori.values()) {
@@ -33,7 +38,7 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 	}
 
-	private final void stampa_tipologia_schermo_tv() {
+	public final void stampaTipologiaSchermoTv() {
 		int i = 1;
 		System.out.println("Le tipologie di schermo esistenti sono:");
 		for (ConstantGlobal.TIPOLOGIA_SCHERMO item : ConstantGlobal.TIPOLOGIA_SCHERMO.values()) {
@@ -42,7 +47,7 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 	}
 
-	private final void stampa_Risoluzione_schermi_tv() {
+	public final void stampaRisoluzioneSchermiTv() {
 		int i = 1;
 		System.out.println("Le risoluzioni degli schermi esistenti sono:");
 		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
@@ -87,6 +92,26 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
+	final boolean controlloSeriale (String seriale){
+		boolean result = true;
+		if(!elencoSerialeTv.isEmpty() && seriale.matches(ConstantGlobal.REGEX_CONTROLLO_SERIALE)) {
+			 Iterator<String> element = elencoSerialeTv.iterator();
+		       while (element.hasNext()) {
+		            if(element.next().equals(seriale))
+		            	result = false;
+		       }
+		       if(result) {
+		    	   elencoSerialeTv.add(seriale);
+		       }
+		       
+		}else if(elencoSerialeTv.isEmpty() && seriale.matches(ConstantGlobal.REGEX_CONTROLLO_SERIALE)) {
+			elencoSerialeTv.add(seriale);
+		}else {
+			result = false;
+		}
+		return result;
+	}
+	
 	private boolean controlloParamentriNumericiTv(String parametri) {
 		boolean result = false;
 		try {
@@ -117,24 +142,16 @@ abstract class AbstractTelevisore implements Televisore {
 		return true;
 	}
 
-	public boolean addMarcaTv(Televisore tv) {
+	public boolean addMarcaTv(Televisore tv, String marca) {
 		Boolean result = false;
 		try {
 			switch (scannerTvInstanziata(tv)) {
 			case BASE:
 				if (((TelevisoreBase) tv).getMarche() == null) {
-					System.out.println("Inserisci la marca della della tv, scrivendola.");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
-					System.out.println(
-							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
-					if (sc.nextLine().equals("1"))
-						stampa_marche_tv();
-					String marca = sc.nextLine().toUpperCase().replace(" ", "");
-					if (marca == null) {
+					if (marca.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloMarca(marca)) {
-						((TelevisoreBase) tv).setMarche(MarcheTelevisori.valueOf(marca));
+					} else if (controlloMarca(marca.toUpperCase())) {
+						((TelevisoreBase) tv).setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
 						result = true;
 					}
 				} else {
@@ -144,18 +161,10 @@ abstract class AbstractTelevisore implements Televisore {
 
 			case MEDIO:
 				if (((TelevisoreMedio) tv).getMarche() == null) {
-					System.out.println("Inserisci la marca della della tv, scrivendola.");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
-					System.out.println(
-							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
-					if (sc.nextLine().equals("1"))
-						stampa_marche_tv();
-					String marca = sc.nextLine().toUpperCase().replace(" ", "");
-					if (marca == null) {
+					if (marca.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloMarca(marca)) {
-						((TelevisoreMedio) tv).setMarche(MarcheTelevisori.valueOf(marca));
+					} else if (controlloMarca(marca.toUpperCase())) {
+						((TelevisoreMedio) tv).setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
 						result = true;
 					}
 				} else {
@@ -164,18 +173,10 @@ abstract class AbstractTelevisore implements Televisore {
 				break;
 			case AVANZATO:
 				if (((TelevisoreAvanzato) tv).getMarche() == null) {
-					System.out.println("Inserisci la marca della della tv, scrivendola.");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
-					System.out.println(
-							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
-					if (sc.nextLine().equals("1"))
-						stampa_marche_tv();
-					String marca = sc.nextLine().toUpperCase().replace(" ", "");
-					if (marca == null) {
+					if (marca.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloMarca(marca)) {
-						((TelevisoreAvanzato) tv).setMarche(MarcheTelevisori.valueOf(marca));
+					} else if (controlloMarca(marca.toUpperCase())) {
+						((TelevisoreAvanzato) tv).setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
 						result = true;
 					}
 
@@ -184,46 +185,46 @@ abstract class AbstractTelevisore implements Televisore {
 				}
 				break;
 			}
-
 		} catch (TelevisoreException e) {
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
 		} catch (NullPointerException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println("| è stato inserito un valore nullo |");
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println("| è stato inserito un valore nullo |");
 		}
 		return result;
 	}
 
-	public boolean addAltezzaTv(Televisore tv) {
+	public boolean addAltezzaTv(Televisore tv, String altezza) {
 		Boolean result = false;
-		String altezza;
 		try {
 			if (((TelevisoreBase) tv).getAltezza() == 0) {
-				System.out.println("Inserisci l'altezza della televisione");
-				altezza = sc.nextLine();
-				if (controlloParamentriNumericiTv(altezza)) {
-					if (Double.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
-							&& Double.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
-						switch (scannerTvInstanziata(tv)) {
-						case BASE:
-							((TelevisoreBase) tv).setAltezza(Double.valueOf(altezza));
-							result = true;
-							break;
+				if (!altezza.isEmpty()) {
+					if (controlloParamentriNumericiTv(altezza)) {
+						if (Double.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
+								&& Double.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
+							switch (scannerTvInstanziata(tv)) {
+							case BASE:
+								((TelevisoreBase) tv).setAltezza(Double.valueOf(altezza));
+								result = true;
+								break;
 
-						case MEDIO:
-							((TelevisoreMedio) tv).setAltezza(Double.valueOf(altezza));
-							result = true;
-							break;
-						case AVANZATO:
-							((TelevisoreAvanzato) tv).setAltezza(Double.valueOf(altezza));
-							result = true;
-							break;
+							case MEDIO:
+								((TelevisoreMedio) tv).setAltezza(Double.valueOf(altezza));
+								result = true;
+								break;
+							case AVANZATO:
+								((TelevisoreAvanzato) tv).setAltezza(Double.valueOf(altezza));
+								result = true;
+								break;
+							}
+						} else if (Double.valueOf(altezza) < ConstantGlobal.ALTEZZA_MINIMA_TV) {
+							throw new MinValueException();
+						} else {
+							throw new MaxValueException();
 						}
-					} else if (Double.valueOf(altezza) < ConstantGlobal.ALTEZZA_MINIMA_TV) {
-						throw new MinValueException();
-					} else {
-						throw new MaxValueException();
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
@@ -239,41 +240,46 @@ abstract class AbstractTelevisore implements Televisore {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxAltezza());
 
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
+
 		}
 		return result;
 
 	}
 
-	public boolean addLarghezzaTv(Televisore tv) {
+	public boolean addLarghezzaTv(Televisore tv, String larghezza) {
 		Boolean result = false;
-		String larghezza;
 		try {
 			if (((TelevisoreBase) tv).getLarghezza() == 0) {
-				System.out.println("Inserisci la larghezza della televisione");
-				larghezza = sc.nextLine();
-				if (controlloParamentriNumericiTv(larghezza)) {
-					if (Double.valueOf(larghezza) <= ConstantGlobal.LARGHEZZA_MASSIMA_TV
-							&& Double.valueOf(larghezza) >= ConstantGlobal.LARGHEZZA_MINIMA_TV) {
-						switch (scannerTvInstanziata(tv)) {
-						case BASE:
-							((TelevisoreBase) tv).setLarghezza(Double.valueOf(larghezza));
-							result = true;
-							break;
+				if (!larghezza.isEmpty()) {
+					if (controlloParamentriNumericiTv(larghezza)) {
+						if (Double.valueOf(larghezza) <= ConstantGlobal.LARGHEZZA_MASSIMA_TV
+								&& Double.valueOf(larghezza) >= ConstantGlobal.LARGHEZZA_MINIMA_TV) {
+							switch (scannerTvInstanziata(tv)) {
+							case BASE:
+								((TelevisoreBase) tv).setLarghezza(Double.valueOf(larghezza));
+								result = true;
+								break;
 
-						case MEDIO:
-							((TelevisoreMedio) tv).setLarghezza(Double.valueOf(larghezza));
-							result = true;
-							break;
-						case AVANZATO:
-							((TelevisoreAvanzato) tv).setLarghezza(Double.valueOf(larghezza));
-							result = true;
-							break;
+							case MEDIO:
+								((TelevisoreMedio) tv).setLarghezza(Double.valueOf(larghezza));
+								result = true;
+								break;
+							case AVANZATO:
+								((TelevisoreAvanzato) tv).setLarghezza(Double.valueOf(larghezza));
+								result = true;
+								break;
+							}
+						} else if (Double.valueOf(larghezza) < ConstantGlobal.LARGHEZZA_MINIMA_TV) {
+							throw new MinValueException();
+						} else {
+							throw new MaxValueException();
 						}
-					} else if (Double.valueOf(larghezza) < ConstantGlobal.LARGHEZZA_MINIMA_TV) {
-						throw new MinValueException();
-					} else {
-						throw new MaxValueException();
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
@@ -289,39 +295,44 @@ abstract class AbstractTelevisore implements Televisore {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxLarghezza());
 
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
+
 		}
 		return result;
 
 	}
 
-	public boolean addNumberHdmiTv(Televisore tv) {
+	public boolean addNumberHdmiTv(Televisore tv, String numeroHdmi) {
 		Boolean result = false;
 		try {
-			if (inserthdmi == 0) {
-				System.out.println("Inserisci il numero degli hdmi della tv");
-				String numeroHdmi = sc.nextLine();
-				if (controlloParamentriNumericiTv(numeroHdmi)) {
-					switch (scannerTvInstanziata(tv)) {
-					case BASE:
-						throw new TipologiaException();
-
-					case MEDIO:
-						throw new TipologiaException();
-					case AVANZATO:
-						if (isInteger(numeroHdmi)) {
-							if (Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
-									|| Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_MINIMO_HDMI) {
-								((TelevisoreAvanzato) tv).setNumber_hdmi(Integer.valueOf(numeroHdmi));
-								inserthdmi += 1;
-								result = true;
-							} else if (Integer.valueOf(numeroHdmi) < 0) {
-								throw new MinValueException();
-							} else {
-								throw new MaxValueException();
+			if (!inserthdmi ) {
+				if (!numeroHdmi.isEmpty()) {
+					if (controlloParamentriNumericiTv(numeroHdmi)) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							throw new TipologiaException();
+						case MEDIO:
+							throw new TipologiaException();
+						case AVANZATO:
+							if (isInteger(numeroHdmi)) {
+								if (Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
+										|| Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_MINIMO_HDMI) {
+									((TelevisoreAvanzato) tv).setNumber_hdmi(Integer.valueOf(numeroHdmi));
+									inserthdmi = true;
+									result = true;
+								} else if (Integer.valueOf(numeroHdmi) < 0) {
+									throw new MinValueException();
+								} else {
+									throw new MaxValueException();
+								}
 							}
+							break;
 						}
-						break;
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
@@ -335,45 +346,33 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (MinValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.out.println(e.ErrorMinNumeroHdmi());
-		}catch (TipologiaException e) {
+		} catch (TipologiaException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println(e.ErrorTipologiaTelevisoreException());
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
+
 		}
 		return result;
 
 	}
 
-	public boolean addNumberUsbTv(Televisore tv) {
+	public boolean addNumberUsbTv(Televisore tv, String numeroUsb) {
 		Boolean result = false;
 		try {
-			if (insertusb == 0) {
-				System.out.println("Inserisci il numero degli usb della tv");
-				String numeroUsb = sc.nextLine();
-				if (controlloParamentriNumericiTv(numeroUsb)) {
-					switch (scannerTvInstanziata(tv)) {
-					case BASE:
-						throw new TipologiaException();
-
-					case MEDIO:
-						if (isInteger(numeroUsb)) {
-							if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_USB_TV_MEDIO
-									|| Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_MINIMO_USB) {
-								((TelevisoreMedio) tv).setNumber_usb(Integer.valueOf(numeroUsb));
-								insertusb += 1;
-								result = true;
-							} else if (Integer.valueOf(numeroUsb) < 0) {
-								throw new MinValueException();
-							} else {
-								throw new MaxValueException();
-							}
-						}
-						break;
-						case AVANZATO:
+			if (!insertusb) {
+				if (!numeroUsb.isEmpty()) {
+					if (controlloParamentriNumericiTv(numeroUsb)) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							throw new TipologiaException();
+						case MEDIO:
 							if (isInteger(numeroUsb)) {
-								if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUMERO_USB_TV_AVANZATO
+								if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_USB_TV_MEDIO
 										|| Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_MINIMO_USB) {
-									((TelevisoreAvanzato) tv).setNumber_usb(Integer.valueOf(numeroUsb));
-									insertusb += 1;
+									((TelevisoreMedio) tv).setNumber_usb(Integer.valueOf(numeroUsb));
+									insertusb = true;
 									result = true;
 								} else if (Integer.valueOf(numeroUsb) < 0) {
 									throw new MinValueException();
@@ -381,8 +380,25 @@ abstract class AbstractTelevisore implements Televisore {
 									throw new MaxValueException();
 								}
 							}
-						break;
+							break;
+						case AVANZATO:
+							if (isInteger(numeroUsb)) {
+								if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUMERO_USB_TV_AVANZATO
+										|| Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_MINIMO_USB) {
+									((TelevisoreAvanzato) tv).setNumber_usb(Integer.valueOf(numeroUsb));
+									insertusb = true;
+									result = true;
+								} else if (Integer.valueOf(numeroUsb) < 0) {
+									throw new MinValueException();
+								} else {
+									throw new MaxValueException();
+								}
+							}
+							break;
+						}
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
@@ -396,44 +412,49 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (MinValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMinNumeroMinUsb());
-		}catch (TipologiaException e) {
+		} catch (TipologiaException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println(e.ErrorTipologiaTelevisoreException());
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
 		}
 		return result;
 	}
 
-	public boolean addDiagonaleTv(Televisore tv) {
+	public boolean addDiagonaleTv(Televisore tv, String diagonale) {
 		Boolean result = false;
-		String diagonale;
 		try {
 			if (((TelevisoreBase) tv).getDiagonale() == 0) {
-				System.out.println("Inserisci la diagonale della televisione");
-				diagonale = sc.nextLine();
-				if (controlloParamentriNumericiTv(diagonale) == true) {
-					if (Double.valueOf(diagonale) <= ConstantGlobal.DIAGONALE_MASSIMA_TV
-							&& Double.valueOf(diagonale) >= ConstantGlobal.DIAGONALE_MINIMA_TV) {
-						switch (scannerTvInstanziata(tv)) {
-						case BASE:
-							((TelevisoreBase) tv).setDiagonale(Double.valueOf(diagonale));
-							result = true;
-							break;
+				if (!diagonale.isEmpty()) {
+					if (controlloParamentriNumericiTv(diagonale)) {
+						if (Double.valueOf(diagonale) <= ConstantGlobal.DIAGONALE_MASSIMA_TV
+								&& Double.valueOf(diagonale) >= ConstantGlobal.DIAGONALE_MINIMA_TV) {
+							switch (scannerTvInstanziata(tv)) {
+							case BASE:
+								((TelevisoreBase) tv).setDiagonale(Double.valueOf(diagonale));
+								result = true;
+								break;
 
-						case MEDIO:
-							((TelevisoreMedio) tv).setDiagonale(Double.valueOf(diagonale));
-							result = true;
-							break;
-						case AVANZATO:
-							((TelevisoreAvanzato) tv).setDiagonale(Double.valueOf(diagonale));
-							result = true;
-							break;
+							case MEDIO:
+								((TelevisoreMedio) tv).setDiagonale(Double.valueOf(diagonale));
+								result = true;
+								break;
+							case AVANZATO:
+								((TelevisoreAvanzato) tv).setDiagonale(Double.valueOf(diagonale));
+								result = true;
+								break;
+							}
+						} else if (Double.valueOf(diagonale) < ConstantGlobal.DIAGONALE_MINIMA_TV) {
+							throw new MinValueException();
+						} else {
+							throw new MaxValueException();
 						}
-					} else if (Double.valueOf(diagonale) < ConstantGlobal.DIAGONALE_MINIMA_TV) {
-						throw new MinValueException();
-					} else {
-						throw new MaxValueException();
 					}
+				} else {
+					throw new NullPointerException();
 				}
+
 			} else {
 				throw new TelevisoreException();
 			}
@@ -447,41 +468,45 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxDiagonale());
-
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
 		}
 
 		return result;
 	}
 
-	public boolean addNumberSmartTv(Televisore tv) {
+	public boolean addNumberSmartTv(Televisore tv, String numeroSmartTv) {
 		Boolean result = false;
 		try {
-			if (insertSmartTV == 0) {
-				System.out.println("Inserisci il numero degli Smart tv della tv");
-				String numeroSmartTv = sc.nextLine();
-				if (controlloParamentriNumericiTv(numeroSmartTv)) {
-					switch (scannerTvInstanziata(tv)) {
-					case BASE:
-						throw new TipologiaException();
+			if (!insertSmartTV) {
+				if (!numeroSmartTv.isEmpty()) {
+					if (controlloParamentriNumericiTv(numeroSmartTv)) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							throw new TipologiaException();
 
-					case MEDIO:
-						throw new TipologiaException();
-					case AVANZATO:
-						if (isInteger(numeroSmartTv)) {
-							if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
-									|| Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_MINIMO_SMART_TV) {
-								((TelevisoreAvanzato) tv).setNumber_smartTv(Integer.valueOf(numeroSmartTv));
-								insertSmartTV += 1;
+						case MEDIO:
+							throw new TipologiaException();
+						case AVANZATO:
+							if (isInteger(numeroSmartTv)) {
+								if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
+										|| Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_MINIMO_SMART_TV) {
+									((TelevisoreAvanzato) tv).setNumber_smartTv(Integer.valueOf(numeroSmartTv));
+									insertSmartTV = true;
+									result = true;
+								} else if (Integer.valueOf(numeroSmartTv) < 0) {
+									throw new MinValueException();
+								} else {
+									throw new MaxValueException();
+								}
 								result = true;
-							} else if (Integer.valueOf(numeroSmartTv) < 0) {
-								throw new MinValueException();
-							} else {
-								throw new MaxValueException();
 							}
-							result = true;
+							break;
 						}
-						break;
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
@@ -497,32 +522,27 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxNumeroSmartTv());
-		}catch (TipologiaException e) {
+		} catch (TipologiaException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println(e.ErrorTipologiaTelevisoreException());
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
 		}
 		return result;
 	}
 
-	public boolean addRisoluzioneTv(Televisore tv) {
+	public boolean addRisoluzioneTv(Televisore tv, String risoluzione) {
 		Boolean result = false;
 		try {
 			switch (scannerTvInstanziata(tv)) {
 			case BASE:
 				if (((TelevisoreBase) tv).getRisoluzione() == null) {
-					System.out.println("Inserisci la Risoluzione dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le risoluzioni degli schermi esistenti prima di inserire la risoluzione");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la Risoluzione");
-					if (sc.nextLine().equals("1"))
-						stampa_Risoluzione_schermi_tv();
-					String risoluzione = sc.nextLine().toUpperCase();
-					if (risoluzione == null) {
+					if (risoluzione.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
+					} else if (controlloRisoluzione(risoluzione.replace(" ", "_").toUpperCase())) {
 						((TelevisoreBase) tv)
-								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
 						result = true;
 					}
 				} else {
@@ -532,19 +552,11 @@ abstract class AbstractTelevisore implements Televisore {
 
 			case MEDIO:
 				if (((TelevisoreMedio) tv).getRisoluzione() == null) {
-					System.out.println("Inserisci la Risoluzione dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le risoluzioni degli schermi esistenti prima di inserire la risoluzione");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la Risoluzione");
-					if (sc.nextLine().equals("1"))
-						stampa_Risoluzione_schermi_tv();
-					String risoluzione = sc.nextLine().toUpperCase();
-					if (risoluzione == null) {
+					if (risoluzione.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
+					} else if (controlloRisoluzione(risoluzione.replace(" ", "_").toUpperCase())) {
 						((TelevisoreBase) tv)
-								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
 						result = true;
 					}
 
@@ -554,19 +566,11 @@ abstract class AbstractTelevisore implements Televisore {
 				break;
 			case AVANZATO:
 				if (((TelevisoreAvanzato) tv).getRisoluzione() == null) {
-					System.out.println("Inserisci la Risoluzione dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le risoluzioni degli schermi esistenti prima di inserire la risoluzione");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la Risoluzione");
-					if (sc.nextLine().equals("1"))
-						stampa_Risoluzione_schermi_tv();
-					String risoluzione = sc.nextLine().toUpperCase();
-					if (risoluzione == null) {
+					if (risoluzione.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
+					} else if (controlloRisoluzione(risoluzione.replace(" ", "_").toUpperCase())) {
 						((TelevisoreBase) tv)
-								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
 						result = true;
 					}
 
@@ -585,24 +589,16 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean addTiposchermoTv(Televisore tv) {
+	public boolean addTiposchermoTv(Televisore tv, String tipoSchermo) {
 		Boolean result = false;
 		try {
 			switch (scannerTvInstanziata(tv)) {
 			case BASE:
 				if (((TelevisoreBase) tv).getTipoSchermo() == null) {
-					System.out.println("Inserisci la tipologia dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le tipologie degli schermi esistenti prima di inserire la tipologia");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la tipologia");
-					if (sc.nextLine().equals("1"))
-						stampa_tipologia_schermo_tv();
-					String tiposchermo = sc.nextLine().toUpperCase();
-					if (tiposchermo == null) {
+					if (tipoSchermo.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
-						((TelevisoreBase) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+					} else if (controlloTipologiaSchermo(tipoSchermo.toUpperCase())) {
+						((TelevisoreBase) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
 						result = true;
 					}
 
@@ -613,42 +609,26 @@ abstract class AbstractTelevisore implements Televisore {
 
 			case MEDIO:
 				if (((TelevisoreMedio) tv).getTipoSchermo() == null) {
-					System.out.println("Inserisci la tipologia dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le tipologie degli schermi esistenti prima di inserire la tipologia");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la tipologia");
-					if (sc.nextLine().equals("1"))
-						stampa_tipologia_schermo_tv();
-					String tiposchermo = sc.nextLine().toUpperCase();
-					if (tiposchermo == null) {
+					if (tipoSchermo.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
-						((TelevisoreMedio) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+					} else if (controlloTipologiaSchermo(tipoSchermo.toUpperCase())) {
+						((TelevisoreMedio) tv)
+								.setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
 						result = true;
 					}
-
 				} else {
 					throw new TelevisoreException();
 				}
 				break;
 			case AVANZATO:
 				if (((TelevisoreAvanzato) tv).getTipoSchermo() == null) {
-					System.out.println("Inserisci la tipologia dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le tipologie degli schermi esistenti prima di inserire la tipologia");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la tipologia");
-					if (sc.nextLine().equals("1"))
-						stampa_tipologia_schermo_tv();
-					String tiposchermo = sc.nextLine().toUpperCase();
-					if (tiposchermo == null) {
+					if (tipoSchermo.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
-						((TelevisoreAvanzato) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+					} else if (controlloTipologiaSchermo(tipoSchermo.toUpperCase())) {
+						((TelevisoreAvanzato) tv)
+								.setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
 						result = true;
 					}
-
 				} else {
 					throw new TelevisoreException();
 				}
@@ -664,44 +644,72 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean modificaSeriale(Televisore tv, String Seriale) {
+	public void addTelevisoreBase(Televisore tv, String marca, String altezza, String larghezza, String diagonale,
+			String risoluzione, String tipoSchermo) {
+		tv.addMarcaTv(tv, marca);
+		tv.addAltezzaTv(tv, altezza);
+		tv.addLarghezzaTv(tv, larghezza);
+		tv.addDiagonaleTv(tv, diagonale);
+		tv.addRisoluzioneTv(tv, risoluzione);
+		tv.addTiposchermoTv(tv, tipoSchermo);
+
+	}
+
+	public void addTelevisoreMedio(Televisore tv, String marca, String altezza, String larghezza, String diagonale,
+			String risoluzione, String tipoSchermo, String numeroUsb) {
+
+		tv.addMarcaTv(tv, marca);
+		tv.addAltezzaTv(tv, altezza);
+		tv.addLarghezzaTv(tv, larghezza);
+		tv.addDiagonaleTv(tv, diagonale);
+		tv.addRisoluzioneTv(tv, risoluzione);
+		tv.addTiposchermoTv(tv, tipoSchermo);
+		tv.addNumberUsbTv(tv, numeroUsb);
+	}
+
+	public void addTelevisoreAvanzato(Televisore tv, String marca, String altezza, String larghezza, String diagonale,
+			String risoluzione, String tipoSchermo, String numeroUsb, String numeroHdmi, String numeroSmartTv) {
+		tv.addMarcaTv(tv, marca);
+		tv.addAltezzaTv(tv, altezza);
+		tv.addLarghezzaTv(tv, larghezza);
+		tv.addDiagonaleTv(tv, diagonale);
+		tv.addRisoluzioneTv(tv, risoluzione);
+		tv.addTiposchermoTv(tv, tipoSchermo);
+		tv.addNumberUsbTv(tv, numeroUsb);
+		tv.addNumberHdmiTv(tv, numeroHdmi);
+		tv.addNumberSmartTv(tv, numeroSmartTv);
+	}
+
+	public boolean modificaSeriale(Televisore tv, String seriale) {
 		Boolean result = false;
 		switch (scannerTvInstanziata(tv)) {
 		case BASE:
-			((TelevisoreBase) tv).setSeriale(Seriale);
+			((TelevisoreBase) tv).setSeriale(seriale);
 			result = true;
 			break;
 
 		case MEDIO:
-			((TelevisoreMedio) tv).setSeriale(Seriale);
+			((TelevisoreMedio) tv).setSeriale(seriale);
 			result = true;
 			break;
 		case AVANZATO:
-			((TelevisoreAvanzato) tv).setSeriale(Seriale);
+			((TelevisoreAvanzato) tv).setSeriale(seriale);
 			result = true;
 			break;
 		}
 		return result;
 	}
 
-	public boolean modificaMarcaTv(Televisore tv) {
+	public boolean modificaMarcaTv(Televisore tv, String marca) {
 		Boolean result = false;
 		try {
 			switch (scannerTvInstanziata(tv)) {
 			case BASE:
 				if (((TelevisoreBase) tv).getMarche() != null) {
-					System.out.println("Inserisci la marca della della tv, scrivendola.");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
-					System.out.println(
-							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
-					if (sc.nextLine().equals("1"))
-						stampa_marche_tv();
-					String marca = sc.nextLine().toUpperCase().replace(" ", "");
-					if (marca == null) {
+					if (marca.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloMarca(marca)) {
-						((TelevisoreBase) tv).setMarche(MarcheTelevisori.valueOf(marca));
+					} else if (controlloMarca(marca.toUpperCase())) {
+						((TelevisoreBase) tv).setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
 						result = true;
 					}
 				} else {
@@ -711,18 +719,10 @@ abstract class AbstractTelevisore implements Televisore {
 
 			case MEDIO:
 				if (((TelevisoreMedio) tv).getMarche() != null) {
-					System.out.println("Inserisci la marca della della tv, scrivendola.");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
-					System.out.println(
-							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
-					if (sc.nextLine().equals("1"))
-						stampa_marche_tv();
-					String marca = sc.nextLine().toUpperCase().replace(" ", "");
-					if (marca == null) {
+					if (marca.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloMarca(marca)) {
-						((TelevisoreMedio) tv).setMarche(MarcheTelevisori.valueOf(marca));
+					} else if (controlloMarca(marca.toUpperCase())) {
+						((TelevisoreMedio) tv).setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
 						result = true;
 					}
 				} else {
@@ -731,18 +731,10 @@ abstract class AbstractTelevisore implements Televisore {
 				break;
 			case AVANZATO:
 				if (((TelevisoreAvanzato) tv).getMarche() != null) {
-					System.out.println("Inserisci la marca della della tv, scrivendola.");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le marche delle televisioni esistenti prima di inserire la marca");
-					System.out.println(
-							"inserisci un qualsiasi simbolo, lettera o numero per continuare e scrivere la marca");
-					if (sc.nextLine().equals("1"))
-						stampa_marche_tv();
-					String marca = sc.nextLine().toUpperCase().replace(" ", "");
-					if (marca == null) {
+					if (marca.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloMarca(marca)) {
-						((TelevisoreAvanzato) tv).setMarche(MarcheTelevisori.valueOf(marca));
+					} else if (controlloMarca(marca.toUpperCase())) {
+						((TelevisoreAvanzato) tv).setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
 						result = true;
 					}
 
@@ -751,9 +743,8 @@ abstract class AbstractTelevisore implements Televisore {
 				}
 				break;
 			}
-
 		} catch (TelevisoreException e) {
-			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
+			System.err.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.MARCA)));
 		} catch (NullPointerException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println("| è stato inserito un valore nullo |");
@@ -762,36 +753,37 @@ abstract class AbstractTelevisore implements Televisore {
 
 	}
 
-	public boolean modificaAltezzaTv(Televisore tv) {
+	public boolean modificaAltezzaTv(Televisore tv, String altezza) {
 		Boolean result = false;
-		String altezza;
 		try {
 			if (((TelevisoreBase) tv).getAltezza() != 0) {
-				System.out.println("Inserisci l'altezza della televisione");
-				altezza = sc.nextLine();
-				if (controlloParamentriNumericiTv(altezza)) {
-					if (Double.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
-							&& Double.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
-						switch (scannerTvInstanziata(tv)) {
-						case BASE:
-							((TelevisoreBase) tv).setAltezza(Double.valueOf(altezza));
-							result = true;
-							break;
+				if (!altezza.isEmpty()) {
+					if (controlloParamentriNumericiTv(altezza)) {
+						if (Double.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
+								&& Double.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
+							switch (scannerTvInstanziata(tv)) {
+							case BASE:
+								((TelevisoreBase) tv).setAltezza(Double.valueOf(altezza));
+								result = true;
+								break;
 
-						case MEDIO:
-							((TelevisoreMedio) tv).setAltezza(Double.valueOf(altezza));
-							result = true;
-							break;
-						case AVANZATO:
-							((TelevisoreAvanzato) tv).setAltezza(Double.valueOf(altezza));
-							result = true;
-							break;
+							case MEDIO:
+								((TelevisoreMedio) tv).setAltezza(Double.valueOf(altezza));
+								result = true;
+								break;
+							case AVANZATO:
+								((TelevisoreAvanzato) tv).setAltezza(Double.valueOf(altezza));
+								result = true;
+								break;
+							}
+						} else if (Double.valueOf(altezza) < ConstantGlobal.ALTEZZA_MINIMA_TV) {
+							throw new MinValueException();
+						} else {
+							throw new MaxValueException();
 						}
-					} else if (Double.valueOf(altezza) < ConstantGlobal.ALTEZZA_MINIMA_TV) {
-						throw new MinValueException();
-					} else {
-						throw new MaxValueException();
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
@@ -802,46 +794,52 @@ abstract class AbstractTelevisore implements Televisore {
 			System.err.println(e.ErrorMinAltezza());
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
+			System.out.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxAltezza());
 
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
+
 		}
 		return result;
 
+
 	}
 
-	public boolean modificaLarghezzaTv(Televisore tv) {
+	public boolean modificaLarghezzaTv(Televisore tv, String larghezza) {
 		Boolean result = false;
-		String larghezza;
 		try {
 			if (((TelevisoreBase) tv).getLarghezza() != 0) {
-				System.out.println("Inserisci la larghezza della televisione");
-				larghezza = sc.nextLine();
-				if (controlloParamentriNumericiTv(larghezza)) {
-					if (Double.valueOf(larghezza) <= ConstantGlobal.LARGHEZZA_MASSIMA_TV
-							&& Double.valueOf(larghezza) >= ConstantGlobal.LARGHEZZA_MINIMA_TV) {
-						switch (scannerTvInstanziata(tv)) {
-						case BASE:
-							((TelevisoreBase) tv).setLarghezza(Double.valueOf(larghezza));
-							result = true;
-							break;
+				if (!larghezza.isEmpty()) {
+					if (controlloParamentriNumericiTv(larghezza)) {
+						if (Double.valueOf(larghezza) <= ConstantGlobal.LARGHEZZA_MASSIMA_TV
+								&& Double.valueOf(larghezza) >= ConstantGlobal.LARGHEZZA_MINIMA_TV) {
+							switch (scannerTvInstanziata(tv)) {
+							case BASE:
+								((TelevisoreBase) tv).setLarghezza(Double.valueOf(larghezza));
+								result = true;
+								break;
 
-						case MEDIO:
-							((TelevisoreMedio) tv).setLarghezza(Double.valueOf(larghezza));
-							result = true;
-							break;
-						case AVANZATO:
-							((TelevisoreAvanzato) tv).setLarghezza(Double.valueOf(larghezza));
-							result = true;
-							break;
+							case MEDIO:
+								((TelevisoreMedio) tv).setLarghezza(Double.valueOf(larghezza));
+								result = true;
+								break;
+							case AVANZATO:
+								((TelevisoreAvanzato) tv).setLarghezza(Double.valueOf(larghezza));
+								result = true;
+								break;
+							}
+						} else if (Double.valueOf(larghezza) < ConstantGlobal.LARGHEZZA_MINIMA_TV) {
+							throw new MinValueException();
+						} else {
+							throw new MaxValueException();
 						}
-					} else if (Double.valueOf(larghezza) < ConstantGlobal.LARGHEZZA_MINIMA_TV) {
-						throw new MinValueException();
-					} else {
-						throw new MaxValueException();
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
@@ -852,96 +850,85 @@ abstract class AbstractTelevisore implements Televisore {
 			System.err.println(e.ErrorMinLarghezza());
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.LARGHEZZA)));
+			System.err.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.LARGHEZZA)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxLarghezza());
 
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
 		}
 		return result;
-
 	}
 
-	public boolean modificaNumberHdmiTv(Televisore tv) {
+	public boolean modificaNumberHdmiTv(Televisore tv, String numeroHdmi) {
 		Boolean result = false;
 		try {
-			if (inserthdmi != 0) {
-				System.out.println("Inserisci il numero degli hdmi della tv");
-				String numeroHdmi = sc.nextLine();
-				if (controlloParamentriNumericiTv(numeroHdmi)) {
-					switch (scannerTvInstanziata(tv)) {
-					case BASE:
-						throw new TipologiaException();
-
-					case MEDIO:
-						throw new TipologiaException();
-					case AVANZATO:
-						if (isInteger(numeroHdmi)) {
-							if (Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
-									|| Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_MINIMO_HDMI) {
-								((TelevisoreAvanzato) tv).setNumber_hdmi(Integer.valueOf(numeroHdmi));
-								inserthdmi += 1;
-								result = true;
-							} else if (Integer.valueOf(numeroHdmi) < 0) {
-								throw new MinValueException();
-							} else {
-								throw new MaxValueException();
+			if (inserthdmi ) {
+				if (!numeroHdmi.isEmpty()) {
+					if (controlloParamentriNumericiTv(numeroHdmi)) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							throw new TipologiaException();
+						case MEDIO:
+							throw new TipologiaException();
+						case AVANZATO:
+							if (isInteger(numeroHdmi)) {
+								if (Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
+										|| Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_MINIMO_HDMI) {
+									((TelevisoreAvanzato) tv).setNumber_hdmi(Integer.valueOf(numeroHdmi));
+									result = true;
+								} else if (Integer.valueOf(numeroHdmi) < 0) {
+									throw new MinValueException();
+								} else {
+									throw new MaxValueException();
+								}
 							}
+							break;
 						}
-						break;
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
 			}
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_HDMI)));
+			System.out.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_HDMI)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxNumeroHdmi());
 		} catch (MinValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
-			System.err.println(e.ErrorMinNumeroHdmi());
-		}catch (TipologiaException e) {
+			System.out.println(e.ErrorMinNumeroHdmi());
+		} catch (TipologiaException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println(e.ErrorTipologiaTelevisoreException());
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
+
 		}
 		return result;
 
 	}
 
-	public boolean modificaNumberUsbTv(Televisore tv) {
+	public boolean modificaNumberUsbTv(Televisore tv, String numeroUsb) {
 		Boolean result = false;
 		try {
-			if (insertusb != 0) {
-				System.out.println("Inserisci il numero degli usb della tv");
-				String numeroUsb = sc.nextLine();
-				if (controlloParamentriNumericiTv(numeroUsb)) {
-					switch (scannerTvInstanziata(tv)) {
-					case BASE:
-						throw new TipologiaException();
-
-					case MEDIO:
-						if (isInteger(numeroUsb)) {
-							if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_USB_TV_MEDIO
-									|| Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_MINIMO_USB) {
-								((TelevisoreMedio) tv).setNumber_usb(Integer.valueOf(numeroUsb));
-								insertusb += 1;
-								result = true;
-							} else if (Integer.valueOf(numeroUsb) < 0) {
-								throw new MinValueException();
-							} else {
-								throw new MaxValueException();
-							}
-						}
-						break;
-						case AVANZATO:
+			if (insertusb) {
+				if (!numeroUsb.isEmpty()) {
+					if (controlloParamentriNumericiTv(numeroUsb)) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							throw new TipologiaException();
+						case MEDIO:
 							if (isInteger(numeroUsb)) {
-								if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUMERO_USB_TV_AVANZATO
+								if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_USB_TV_MEDIO
 										|| Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_MINIMO_USB) {
-									((TelevisoreAvanzato) tv).setNumber_usb(Integer.valueOf(numeroUsb));
-									insertusb += 1;
+									((TelevisoreMedio) tv).setNumber_usb(Integer.valueOf(numeroUsb));
 									result = true;
 								} else if (Integer.valueOf(numeroUsb) < 0) {
 									throw new MinValueException();
@@ -949,59 +936,80 @@ abstract class AbstractTelevisore implements Televisore {
 									throw new MaxValueException();
 								}
 							}
-						break;
+							break;
+						case AVANZATO:
+							if (isInteger(numeroUsb)) {
+								if (Integer.valueOf(numeroUsb) == ConstantGlobal.NUMERO_USB_TV_AVANZATO
+										|| Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_MINIMO_USB) {
+									((TelevisoreAvanzato) tv).setNumber_usb(Integer.valueOf(numeroUsb));
+									result = true;
+								} else if (Integer.valueOf(numeroUsb) < 0) {
+									throw new MinValueException();
+								} else {
+									throw new MaxValueException();
+								}
+							}
+							break;
+						}
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
 			}
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_USB)));
+			System.err.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_USB)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
-			System.err.println(e.ErrorMaxNumeroUsb());
+			System.out.println(e.ErrorMaxNumeroUsb());
 		} catch (MinValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMinNumeroMinUsb());
-		}catch (TipologiaException e) {
+		} catch (TipologiaException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println(e.ErrorTipologiaTelevisoreException());
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
 		}
 		return result;
 	}
 
-	public boolean modificaDiagonaleTv(Televisore tv) {
+	public boolean modificaDiagonaleTv(Televisore tv, String diagonale) {
 		Boolean result = false;
-		String diagonale;
 		try {
 			if (((TelevisoreBase) tv).getDiagonale() != 0) {
-				System.out.println("Inserisci la diagonale della televisione");
-				diagonale = sc.nextLine();
-				if (controlloParamentriNumericiTv(diagonale) == true) {
-					if (Double.valueOf(diagonale) <= ConstantGlobal.DIAGONALE_MASSIMA_TV
-							&& Double.valueOf(diagonale) >= ConstantGlobal.DIAGONALE_MINIMA_TV) {
-						switch (scannerTvInstanziata(tv)) {
-						case BASE:
-							((TelevisoreBase) tv).setDiagonale(Double.valueOf(diagonale));
-							result = true;
-							break;
+				if (!diagonale.isEmpty()) {
+					if (controlloParamentriNumericiTv(diagonale)) {
+						if (Double.valueOf(diagonale) <= ConstantGlobal.DIAGONALE_MASSIMA_TV
+								&& Double.valueOf(diagonale) >= ConstantGlobal.DIAGONALE_MINIMA_TV) {
+							switch (scannerTvInstanziata(tv)) {
+							case BASE:
+								((TelevisoreBase) tv).setDiagonale(Double.valueOf(diagonale));
+								result = true;
+								break;
 
-						case MEDIO:
-							((TelevisoreMedio) tv).setDiagonale(Double.valueOf(diagonale));
-							result = true;
-							break;
-						case AVANZATO:
-							((TelevisoreAvanzato) tv).setDiagonale(Double.valueOf(diagonale));
-							result = true;
-							break;
+							case MEDIO:
+								((TelevisoreMedio) tv).setDiagonale(Double.valueOf(diagonale));
+								result = true;
+								break;
+							case AVANZATO:
+								((TelevisoreAvanzato) tv).setDiagonale(Double.valueOf(diagonale));
+								result = true;
+								break;
+							}
+						} else if (Double.valueOf(diagonale) < ConstantGlobal.DIAGONALE_MINIMA_TV) {
+							throw new MinValueException();
+						} else {
+							throw new MaxValueException();
 						}
-					} else if (Double.valueOf(diagonale) < ConstantGlobal.DIAGONALE_MINIMA_TV) {
-						throw new MinValueException();
-					} else {
-						throw new MaxValueException();
 					}
+				} else {
+					throw new NullPointerException();
 				}
+
 			} else {
 				throw new TelevisoreException();
 			}
@@ -1011,45 +1019,48 @@ abstract class AbstractTelevisore implements Televisore {
 			System.err.println(e.ErrorMinDiagonale());
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.DIAGONALE)));
+			System.err.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.DIAGONALE)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxDiagonale());
-
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
 		}
 
 		return result;
 	}
 
-	public boolean modificaNumberSmartTv(Televisore tv) {
+	public boolean modificaNumberSmartTv(Televisore tv, String numeroSmartTv) {
 		Boolean result = false;
 		try {
-			if (insertSmartTV != 0) {
-				System.out.println("Inserisci il numero degli smart tv della tv");
-				String numeroSmartTv = sc.nextLine();
-				if (controlloParamentriNumericiTv(numeroSmartTv)) {
-					switch (scannerTvInstanziata(tv)) {
-					case BASE:
-						throw new TipologiaException();
+			if (insertSmartTV) {
+				if (!numeroSmartTv.isEmpty()) {
+					if (controlloParamentriNumericiTv(numeroSmartTv)) {
+						switch (scannerTvInstanziata(tv)) {
+						case BASE:
+							throw new TipologiaException();
 
-					case MEDIO:
-						throw new TipologiaException();
-					case AVANZATO:
-						if (isInteger(numeroSmartTv)) {
-							if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
-									|| Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_MINIMO_SMART_TV) {
-								((TelevisoreAvanzato) tv).setNumber_smartTv(Integer.valueOf(numeroSmartTv));
-								insertSmartTV += 1;
+						case MEDIO:
+							throw new TipologiaException();
+						case AVANZATO:
+							if (isInteger(numeroSmartTv)) {
+								if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
+										|| Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_MINIMO_SMART_TV) {
+									((TelevisoreAvanzato) tv).setNumber_smartTv(Integer.valueOf(numeroSmartTv));
+									result = true;
+								} else if (Integer.valueOf(numeroSmartTv) < 0) {
+									throw new MinValueException();
+								} else {
+									throw new MaxValueException();
+								}
 								result = true;
-							} else if (Integer.valueOf(numeroSmartTv) < 0) {
-								throw new MinValueException();
-							} else {
-								throw new MaxValueException();
 							}
-							result = true;
+							break;
 						}
-						break;
 					}
+				} else {
+					throw new NullPointerException();
 				}
 			} else {
 				throw new TelevisoreException();
@@ -1061,36 +1072,31 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println(
-					e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_SMART_TV)));
+					e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_SMART_TV)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxNumeroSmartTv());
-		}catch (TipologiaException e) {
+		} catch (TipologiaException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println(e.ErrorTipologiaTelevisoreException());
+		} catch (NullPointerException e) {
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("E' stato inserito un valore nullo");
 		}
 		return result;
 	}
 
-	public boolean modificaRisoluzioneTv(Televisore tv) {
+	public boolean modificaRisoluzioneTv(Televisore tv, String risoluzione) {
 		Boolean result = false;
 		try {
 			switch (scannerTvInstanziata(tv)) {
 			case BASE:
 				if (((TelevisoreBase) tv).getRisoluzione() != null) {
-					System.out.println("Inserisci la Risoluzione dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le risoluzioni degli schermi esistenti prima di inserire la risoluzione");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la Risoluzione");
-					if (sc.nextLine().equals("1"))
-						stampa_Risoluzione_schermi_tv();
-					String risoluzione = sc.nextLine().toUpperCase();
-					if (risoluzione == null) {
+					if (risoluzione.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
+					} else if (controlloRisoluzione(risoluzione.replace(" ", "_").toUpperCase())) {
 						((TelevisoreBase) tv)
-								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
 						result = true;
 					}
 				} else {
@@ -1100,19 +1106,11 @@ abstract class AbstractTelevisore implements Televisore {
 
 			case MEDIO:
 				if (((TelevisoreMedio) tv).getRisoluzione() != null) {
-					System.out.println("Inserisci la Risoluzione dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le risoluzioni degli schermi esistenti prima di inserire la risoluzione");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la Risoluzione");
-					if (sc.nextLine().equals("1"))
-						stampa_Risoluzione_schermi_tv();
-					String risoluzione = sc.nextLine().toUpperCase();
-					if (risoluzione == null) {
+					if (risoluzione.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
+					} else if (controlloRisoluzione(risoluzione.replace(" ", "_").toUpperCase())) {
 						((TelevisoreBase) tv)
-								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
 						result = true;
 					}
 
@@ -1122,19 +1120,11 @@ abstract class AbstractTelevisore implements Televisore {
 				break;
 			case AVANZATO:
 				if (((TelevisoreAvanzato) tv).getRisoluzione() != null) {
-					System.out.println("Inserisci la Risoluzione dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le risoluzioni degli schermi esistenti prima di inserire la risoluzione");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la Risoluzione");
-					if (sc.nextLine().equals("1"))
-						stampa_Risoluzione_schermi_tv();
-					String risoluzione = sc.nextLine().toUpperCase();
-					if (risoluzione == null) {
+					if (risoluzione.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloRisoluzione(risoluzione.replace(" ", "_")) == true) {
+					} else if (controlloRisoluzione(risoluzione.replace(" ", "_").toUpperCase())) {
 						((TelevisoreBase) tv)
-								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_")));
+								.setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
 						result = true;
 					}
 
@@ -1145,7 +1135,7 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (TelevisoreException e) {
-			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.RISOLUZIONE)));
+			System.err.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.RISOLUZIONE)));
 		} catch (NullPointerException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println("| è stato inserito un valore nullo |");
@@ -1153,24 +1143,16 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean modificaTiposchermoTv(Televisore tv) {
+	public boolean modificaTiposchermoTv(Televisore tv, String tipoSchermo) {
 		Boolean result = false;
 		try {
 			switch (scannerTvInstanziata(tv)) {
 			case BASE:
 				if (((TelevisoreBase) tv).getTipoSchermo() != null) {
-					System.out.println("Inserisci la tipologia dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le tipologie degli schermi esistenti prima di inserire la tipologia");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la tipologia");
-					if (sc.nextLine().equals("1"))
-						stampa_tipologia_schermo_tv();
-					String tiposchermo = sc.nextLine().toUpperCase();
-					if (tiposchermo == null) {
+					if (tipoSchermo.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
-						((TelevisoreBase) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+					} else if (controlloTipologiaSchermo(tipoSchermo.toUpperCase())) {
+						((TelevisoreBase) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
 						result = true;
 					}
 
@@ -1181,42 +1163,26 @@ abstract class AbstractTelevisore implements Televisore {
 
 			case MEDIO:
 				if (((TelevisoreMedio) tv).getTipoSchermo() != null) {
-					System.out.println("Inserisci la tipologia dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le tipologie degli schermi esistenti prima di inserire la tipologia");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la tipologia");
-					if (sc.nextLine().equals("1"))
-						stampa_tipologia_schermo_tv();
-					String tiposchermo = sc.nextLine().toUpperCase();
-					if (tiposchermo == null) {
+					if (tipoSchermo.isEmpty()) {
 						throw new NullPointerException();
-					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
-						((TelevisoreMedio) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+					} else if (controlloTipologiaSchermo(tipoSchermo.toUpperCase())) {
+						((TelevisoreMedio) tv)
+								.setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
 						result = true;
 					}
-
 				} else {
 					throw new TelevisoreException();
 				}
 				break;
 			case AVANZATO:
 				if (((TelevisoreAvanzato) tv).getTipoSchermo() != null) {
-					System.out.println("Inserisci la tipologia dello schermo della tv, scrivendola");
-					System.out.println(
-							"Inserisci 1 se vuoi visualizzare le tipologie degli schermi esistenti prima di inserire la tipologia");
-					System.out.println(
-							"inserisci un qualsiasi simbolo lettera o numero per continuare e scrivere la tipologia");
-					if (sc.nextLine().equals("1"))
-						stampa_tipologia_schermo_tv();
-					String tiposchermo = sc.nextLine().toUpperCase();
-					if (tiposchermo == null) {
+					if (tipoSchermo == null) {
 						throw new NullPointerException();
-					} else if (controlloTipologiaSchermo(tiposchermo) == true) {
-						((TelevisoreAvanzato) tv).setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tiposchermo));
+					} else if (controlloTipologiaSchermo(tipoSchermo.toUpperCase())) {
+						((TelevisoreAvanzato) tv)
+								.setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
 						result = true;
 					}
-
 				} else {
 					throw new TelevisoreException();
 				}
@@ -1224,10 +1190,10 @@ abstract class AbstractTelevisore implements Televisore {
 			}
 
 		} catch (TelevisoreException e) {
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.TIPO_SCHERMO)));
+			System.err.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.TIPO_SCHERMO)));
 		} catch (NullPointerException e) {
-			System.out.println("| Errore nell'inserimento |");
-			System.out.println("| è stato inserito un valore nullo |");
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println("| è stato inserito un valore nullo |");
 		}
 		return result;
 	}

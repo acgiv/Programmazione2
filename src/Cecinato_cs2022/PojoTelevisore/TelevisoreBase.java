@@ -2,9 +2,10 @@ package Cecinato_cs2022.PojoTelevisore;
 
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
+import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 
 public class TelevisoreBase extends AbstractTelevisore {
-	private String Seriale;
+	private String seriale;
 	private MarcheTelevisori marche;
 	private double altezza;
 	private double larghezza;
@@ -13,22 +14,22 @@ public class TelevisoreBase extends AbstractTelevisore {
 	private ConstantGlobal.TIPOLOGIA_SCHERMO tipoSchermo;
 	private ConstantGlobal.TIPOLOGIA_TV tipo;
 
-	public TelevisoreBase(String seriale) {
+	public TelevisoreBase(String seriale) throws TelevisoreException {
 		super();
-		Seriale = seriale;
-		this.tipo = ConstantGlobal.TIPOLOGIA_TV.BASE;
-	}
-
-	public TelevisoreBase() {
+		if (super.controlloSeriale(seriale)) {
+			this.seriale = seriale;
+		}else {
+			throw new TelevisoreException("Il seriale inserito non è corretto: ".concat(seriale));
+		}
 		this.tipo = ConstantGlobal.TIPOLOGIA_TV.BASE;
 	}
 
 	public String getSeriale() {
-		return Seriale;
+		return seriale;
 	}
 
 	public void setSeriale(String seriale) {
-		Seriale = seriale;
+		this.seriale = seriale;
 	}
 
 	public ConstantGlobal.TIPOLOGIA_TV getTipo() {
@@ -89,7 +90,7 @@ public class TelevisoreBase extends AbstractTelevisore {
 
 	@Override
 	public String toString() {
-		return "TelevisoreBase [Seriale=" + Seriale + ", marche=" + marche + ", altezza=" + altezza + ", larghezza="
+		return "TelevisoreBase [Seriale=" + seriale + ", marche=" + marche + ", altezza=" + altezza + ", larghezza="
 				+ larghezza + ", diagonale=" + diagonale + ", risoluzione=" + risoluzione + ", tipoSchermo="
 				+ tipoSchermo + ", tipo=" + tipo + "]";
 	}

@@ -1,26 +1,21 @@
 package Cecinato_cs2022.PojoTelevisore;
 
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
+import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 
 public class TelevisoreAvanzato extends TelevisoreMedio {
 
 	private int number_smartTv;
 	private int number_hdmi ;
 	
-	public TelevisoreAvanzato(String seriale) {
+	public TelevisoreAvanzato(String seriale) throws TelevisoreException {
 		super(seriale, ConstantGlobal.NUMERO_USB_TV_AVANZATO);
 		setTipo(ConstantGlobal.TIPOLOGIA_TV.AVANZATO);
 		this.number_smartTv =ConstantGlobal.NUM_SMART_TV_AVANZATO;
 	}
 
 	
-	
-	public TelevisoreAvanzato() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public TelevisoreAvanzato(String seriale, int number_hdmi, int number_usb, int number_smartTv) {
+	public TelevisoreAvanzato(String seriale, int number_hdmi, int number_usb, int number_smartTv) throws TelevisoreException {
 		super( seriale, number_usb);
 		this.number_hdmi = number_hdmi;
 		setTipo(ConstantGlobal.TIPOLOGIA_TV.AVANZATO);
