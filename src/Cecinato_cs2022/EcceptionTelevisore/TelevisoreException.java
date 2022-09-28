@@ -31,4 +31,9 @@ public class TelevisoreException extends Exception {
 	}
 	
 	
+	public String messErrorCanellazioneElement(String message) {
+		 return getMessage() + " | " + message + "|\n";
+	}
+	
+	
 }

@@ -2,6 +2,7 @@ package Cecinato_cs2022.main;
 
 import java.math.BigInteger;
 
+import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.PojoTelevisore.*;
 import Cecinato_cs2022.TelevisoreService.Televisore;
@@ -16,7 +17,7 @@ public class Main {
 		serial= serial.add( BigInteger.valueOf(1));
 		Televisore tvAvanzato = new TelevisoreAvanzato(String.valueOf(serial));
 		System.out.println("Test Aggiunta Marca = lg");
-		tvBase.addTelevisoreBase(tvBase, "lg", "42.04", "60.42", "160.34", "hd", "OLED");
+		tvBase.addTelevisoreBase(tvBase, "TELEFUNKEN", "42.04", "160.42", "160.34", "ULTRA_HD", "crt");
 		System.out.println(tvBase);
 		tvMedio.addTelevisoreMedio(tvMedio, "lg", "42.04", "60.42", "160.34", "hd", "OLED", "2");
 		System.out.println(tvMedio);
@@ -28,8 +29,7 @@ public class Main {
 		tvMedio.modificaSeriale(tvMedio, String.valueOf(serial));
 		System.out.println(tvMedio);
 		
-
-
+		
 	}
 
 	

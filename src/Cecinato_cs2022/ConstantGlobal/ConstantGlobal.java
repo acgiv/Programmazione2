@@ -54,5 +54,25 @@ public interface ConstantGlobal {
 	int NUMERO_MINIMO_SMART_TV = 0;
 	
 	String REGEX_CONTROLLO_SERIALE = "^[0-9]{12}$";
+	
+	String TITOLO_TABELLA_BASE = "TELEVISORE BASE";
+	
+	String TITOLO_TABELLA_MEDIO = "TELEVISORE MEDIO";
+	
+	String TITOLO_TABELLA_TV_AVANZATO ="TELEVISORE AVANZATO";
+	
+	String TABELLA_TV_BASE = String.format("| %11s %5s %9s %5s %7s %4s %8s %4s %8s %4s %5s %5s %7s %4s \n", "SERIALE", " | ", "MARCA", " | ",
+			"ALTEZZA", " | ", "LARGHEZZA", " | ", "DIAGONALE", " | ", "RISOLUZIONE", " | ", "TIPO SCHERMO", " | ");
 
+	String TABELLA_TV_MEDIO = String.format("| %11s %5s %9s %5s %7s %4s %8s %4s %8s %4s %5s %5s %7s %4s %6s %5s \n", "SERIALE", " | ", "MARCA", " | ",
+			"ALTEZZA", " | ", "LARGHEZZA", " | ", "DIAGONALE", " | ", "RISOLUZIONE", " | ", "TIPO SCHERMO", " | ", "NUMERO USB", " | ");
+	
+	String TABELLA_TV_AVANZATO = String.format("| %11s %5s %9s %5s %7s %4s %8s %4s %8s %4s %5s %5s %7s %4s %6s %5s %11s %6s %12s %5s \n", "SERIALE", " | ", "MARCA", " | ",
+			"ALTEZZA", " | ", "LARGHEZZA", " | ", "DIAGONALE", " | ", "RISOLUZIONE", " | ", "TIPO SCHERMO", " | ", "NUMERO USB", " | ", "NUMERO HDMI", " | ", "NUMERO SMART TV", " | ");
+	
+	int LUNGHEZZA_CONTORNO_TABELLA_BASE = TABELLA_TV_BASE.length()-4;
+	
+	int LUNGHEZZA_CONTORNO_TABELLA_MEDIA = TABELLA_TV_MEDIO.length()-4;
+	
+	int LUNGHEZZA_CONTORNO_TABELLA_AVANZATA_TV = TABELLA_TV_AVANZATO.length()-4;
 }

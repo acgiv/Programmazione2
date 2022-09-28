@@ -1,5 +1,7 @@
 package Cecinato_cs2022.PojoTelevisore;
 
+import java.util.Collections;
+
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
@@ -18,7 +20,7 @@ public class TelevisoreBase extends AbstractTelevisore {
 		super();
 		if (super.controlloSeriale(seriale)) {
 			this.seriale = seriale;
-		}else {
+		} else {
 			throw new TelevisoreException("Il seriale inserito non è corretto o già esistente: ".concat(seriale));
 		}
 		this.tipo = ConstantGlobal.TIPOLOGIA_TV.BASE;
@@ -90,9 +92,22 @@ public class TelevisoreBase extends AbstractTelevisore {
 
 	@Override
 	public String toString() {
-		return "TelevisoreBase [Seriale=" + seriale + ", marche=" + marche + ", altezza=" + altezza + ", larghezza="
-				+ larghezza + ", diagonale=" + diagonale + ", risoluzione=" + risoluzione + ", tipoSchermo="
-				+ tipoSchermo + ", tipo=" + tipo + "]";
+		String stringa = null;
+		stringa = String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_BASE, "_"))
+				.concat("\n");
+		stringa+= String.format("| %59s %52s ", ConstantGlobal.TITOLO_TABELLA_BASE,"|\n");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_BASE, "_"))
+				.concat("\n");
+		stringa += ConstantGlobal.TABELLA_TV_BASE;
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_BASE, "_"))
+				.concat("\n");
+		stringa += String.format("| %13s %2s %10s %4s %6s %5s %7s %6s %8s %5s %9s %7s %7s %9s\n", seriale, " | ",
+				marche, " | ", altezza, " | ", larghezza, " | ", diagonale, " | ", risoluzione, " | ", tipoSchermo,
+				" | ");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_BASE, "_"))
+				.concat("\n");
+
+		return stringa;
 	}
 
 }

@@ -1209,63 +1209,99 @@ abstract class AbstractTelevisore implements Televisore {
 		return result;
 	}
 
-	public boolean eliminaMarcaTv(Televisore tv) {
+	public boolean eliminaMarcaTv(Televisore tv) throws TelevisoreException {
 		Boolean result = false;
 		switch (scannerTvInstanziata(tv)) {
 		case BASE:
-			((TelevisoreBase) tv).setMarche(null);
-			result = true;
+			if (((TelevisoreBase) tv).getMarche() != null) {
+				((TelevisoreBase) tv).setMarche(null);
+				result = true;
+			} else {
+				throw new TelevisoreException("la marca non può essere cancellata essendo già nulla");
+			}
+			break;
+		case MEDIO:
+			if (((TelevisoreMedio) tv).getMarche() != null) {
+				((TelevisoreMedio) tv).setMarche(null);
+				result = true;
+			} else {
+				throw new TelevisoreException("la marca non può essere cancellata essendo già nulla");
+			}
+			break;
+		case AVANZATO:
+			if (((TelevisoreAvanzato) tv).getMarche() != null) {
+				((TelevisoreAvanzato) tv).setMarche(null);
+				result = true;
+			} else {
+				throw new TelevisoreException("la marca non può essere cancellata essendo già nulla");
+			}
+			break;
+		}
+
+		return result;
+
+	}
+
+	public boolean eliminaAltezzaTv(Televisore tv) throws TelevisoreException {
+		Boolean result = false;
+		switch (scannerTvInstanziata(tv)) {
+		case BASE:
+			if (((TelevisoreBase) tv).getAltezza() != 0) {
+				((TelevisoreBase) tv).setAltezza(0);
+				result = true;
+			} else {
+				throw new TelevisoreException("l'altezza non può essere cancellata essendo già nulla");
+			}
 			break;
 
 		case MEDIO:
-			((TelevisoreMedio) tv).setMarche(null);
-			result = true;
+			if (((TelevisoreMedio) tv).getAltezza() != 0) {
+				((TelevisoreMedio) tv).setAltezza(0);
+				result = true;
+			} else {
+				throw new TelevisoreException("l'altezza non può essere cancellata essendo già nulla");
+			}
 			break;
 		case AVANZATO:
-			((TelevisoreAvanzato) tv).setMarche(null);
-			result = true;
+			if (((TelevisoreAvanzato) tv).getAltezza() != 0) {
+				((TelevisoreAvanzato) tv).setAltezza(0);
+				result = true;
+			} else {
+				throw new TelevisoreException("l'altezza non può essere cancellata essendo già nulla");
+			}
 			break;
 		}
 		return result;
 
 	}
 
-	public boolean eliminaAltezzaTv(Televisore tv) {
+	public boolean eliminaLarghezzaTv(Televisore tv) throws TelevisoreException {
 		Boolean result = false;
 		switch (scannerTvInstanziata(tv)) {
 		case BASE:
-			((TelevisoreBase) tv).setAltezza(0);
-			result = true;
+			if (((TelevisoreBase) tv).getLarghezza() != 0) {
+				((TelevisoreBase) tv).setLarghezza(0);
+				result = true;
+			} else {
+				throw new TelevisoreException("la larghezza non può essere cancellata essendo già nulla");
+			}
 			break;
 
 		case MEDIO:
-			((TelevisoreMedio) tv).setAltezza(0);
-			result = true;
+			if (((TelevisoreMedio) tv).getLarghezza() != 0) {
+				((TelevisoreMedio) tv).setLarghezza(0);
+				result = true;
+			} else {
+				throw new TelevisoreException("la larghezza non può essere cancellata essendo già nulla");
+			}
 			break;
 		case AVANZATO:
-			((TelevisoreAvanzato) tv).setAltezza(0);
-			result = true;
-			break;
-		}
-		return result;
-
-	}
-
-	public boolean eliminaLarghezzaTv(Televisore tv) {
-		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setLarghezza(0);
-			result = true;
-			break;
-
-		case MEDIO:
-			((TelevisoreMedio) tv).setLarghezza(0);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setLarghezza(0);
-			result = true;
+			if (((TelevisoreMedio) tv).getLarghezza() != 0) {
+				((TelevisoreAvanzato) tv).setLarghezza(0);
+				result = true;
+			} else {
+				throw new TelevisoreException("la larghezza non può essere cancellata essendo già nulla");
+			}
 			break;
 		}
 		return result;
@@ -1273,56 +1309,90 @@ abstract class AbstractTelevisore implements Televisore {
 
 	public boolean eliminaNumberHdmiTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			// aggiungere eccezione
-			break;
-
-		case MEDIO:
-			// aggiungere eccezione
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setNumber_hdmi(0);
-			result = true;
-			break;
+		try {
+			switch (scannerTvInstanziata(tv)) {
+			case BASE:
+				throw new TipologiaException();
+			case MEDIO:
+				throw new TipologiaException();
+			case AVANZATO:
+				if (inserthdmi) {
+					((TelevisoreAvanzato) tv).setNumber_hdmi(0);
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			}
+		} catch (TipologiaException e) {
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.ErrorTipologiaTelevisoreException());
+		} catch (TelevisoreException e) {
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorCanellazioneElement(
+					"non è possibile cancellare, il numero di hdmi non è mai stato aggiunto"));
 		}
 		return result;
+
 	}
 
 	public boolean eliminaNumberUsbTv(Televisore tv) {
 		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			// aggiungere eccezione
-			break;
-
-		case MEDIO:
-			((TelevisoreMedio) tv).setNumber_usb(0);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setNumber_usb(0);
-			result = true;
-			break;
+		try {
+			switch (scannerTvInstanziata(tv)) {
+			case BASE:
+				throw new TipologiaException();
+			case MEDIO:
+				if (insertusb) {
+					((TelevisoreMedio) tv).setNumber_usb(0);
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			case AVANZATO:
+				((TelevisoreAvanzato) tv).setNumber_usb(0);
+				result = true;
+				break;
+			}
+		} catch (TipologiaException e) {
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.ErrorTipologiaTelevisoreException());
+		} catch (TelevisoreException e) {
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorCanellazioneElement(
+					"non è possibile cancellare , il numero di usb non è mai stato aggiunto"));
 		}
 		return result;
 	}
 
-	public boolean eliminaDiagonaleTv(Televisore tv) {
+	public boolean eliminaDiagonaleTv(Televisore tv) throws TelevisoreException {
 		Boolean result = false;
 		switch (scannerTvInstanziata(tv)) {
 		case BASE:
-			((TelevisoreBase) tv).setDiagonale(0);
-			result = true;
+			if (((TelevisoreBase) tv).getDiagonale() != 0) {
+				((TelevisoreBase) tv).setDiagonale(0);
+				result = true;
+			} else {
+				throw new TelevisoreException("la diagonale della tv non può essere cancellata essendo già nulla");
+			}
 			break;
 
 		case MEDIO:
-			((TelevisoreMedio) tv).setDiagonale(0);
-			result = true;
+			if (((TelevisoreMedio) tv).getDiagonale() != 0) {
+				((TelevisoreMedio) tv).setDiagonale(0);
+				result = true;
+			} else {
+				throw new TelevisoreException("la diagonale della tv non può essere cancellata essendo già nulla");
+			}
 			break;
 		case AVANZATO:
-			((TelevisoreAvanzato) tv).setDiagonale(0);
-			result = true;
+			if (((TelevisoreAvanzato) tv).getDiagonale() != 0) {
+				((TelevisoreAvanzato) tv).setDiagonale(0);
+				result = true;
+			} else {
+				throw new TelevisoreException("la diagonale della tv non può essere cancellata essendo già nulla");
+			}
 			break;
 		}
 		return result;
@@ -1330,57 +1400,92 @@ abstract class AbstractTelevisore implements Televisore {
 
 	public boolean eliminaNumberSmartTv(Televisore tv) {
 		Boolean result = false;
+		try {
+			switch (scannerTvInstanziata(tv)) {
+			case BASE:
+				throw new TipologiaException();
+			case MEDIO:
+				throw new TipologiaException();
+			case AVANZATO:
+				if (insertSmartTV) {
+					((TelevisoreAvanzato) tv).setNumber_smartTv(0);
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
+				break;
+			}
+		} catch (TipologiaException e) {
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.ErrorTipologiaTelevisoreException());
+		}catch(TelevisoreException e) {
+			System.err.println("| Errore nell'inserimento |");
+			System.err.println(e.messErrorCanellazioneElement("il numero dello smart  non può essere cancellata essendo già nulla "));
+		}
+		return result;
+	}
+
+	public boolean eliminaRisoluzioneTv(Televisore tv) throws TelevisoreException {
+		Boolean result = false;
 		switch (scannerTvInstanziata(tv)) {
 		case BASE:
-			// aggiungere eccezione;
+			if (((TelevisoreBase) tv).getRisoluzione() != null) {
+				((TelevisoreBase) tv).setRisoluzione(null);
+				result = true;
+			} else {
+				throw new TelevisoreException("la risoluzione non può essere cancellata essendo già nulla");
+			}
 			break;
 
 		case MEDIO:
-			// aggiungere eccezione;
+			if (((TelevisoreMedio) tv).getRisoluzione() != null) {
+				((TelevisoreMedio) tv).setRisoluzione(null);
+				result = true;
+			} else {
+				throw new TelevisoreException("la risoluzione non può essere cancellata essendo già nulla");
+			}
 			break;
 		case AVANZATO:
-			((TelevisoreAvanzato) tv).setNumber_smartTv(0);
-			result = true;
+			if (((TelevisoreAvanzato) tv).getRisoluzione() != null) {
+				((TelevisoreAvanzato) tv).setRisoluzione(null);
+				result = true;
+
+			} else {
+				throw new TelevisoreException("la risoluzione non può essere cancellata essendo già nulla");
+
+			}
 			break;
 		}
 		return result;
 	}
 
-	public boolean eliminaRisoluzioneTv(Televisore tv) {
+	public boolean eliminaTiposchermoTv(Televisore tv) throws TelevisoreException {
 		Boolean result = false;
 		switch (scannerTvInstanziata(tv)) {
 		case BASE:
-			((TelevisoreBase) tv).setRisoluzione(null);
-			result = true;
+			if (((TelevisoreBase) tv).getTipoSchermo() != null) {
+				((TelevisoreBase) tv).setTipoSchermo(null);
+				result = true;
+			} else {
+				throw new TelevisoreException("la tipologia della tv non può essere cancellata essendo già nulla");
+			}
 			break;
 
 		case MEDIO:
-			((TelevisoreMedio) tv).setRisoluzione(null);
-			result = true;
+			if (((TelevisoreMedio) tv).getTipoSchermo() != null) {
+				((TelevisoreMedio) tv).setTipoSchermo(null);
+				result = true;
+			} else {
+				throw new TelevisoreException("la tipologia della tv non può essere cancellata essendo già nulla");
+			}
 			break;
 		case AVANZATO:
-			((TelevisoreAvanzato) tv).setRisoluzione(null);
-			result = true;
-			break;
-		}
-		return result;
-	}
-
-	public boolean eliminaTiposchermoTv(Televisore tv) {
-		Boolean result = false;
-		switch (scannerTvInstanziata(tv)) {
-		case BASE:
-			((TelevisoreBase) tv).setTipoSchermo(null);
-			result = true;
-			break;
-
-		case MEDIO:
-			((TelevisoreMedio) tv).setTipoSchermo(null);
-			result = true;
-			break;
-		case AVANZATO:
-			((TelevisoreAvanzato) tv).setTipoSchermo(null);
-			result = true;
+			if (((TelevisoreAvanzato) tv).getTipoSchermo() != null) {
+				((TelevisoreAvanzato) tv).setTipoSchermo(null);
+				result = true;
+			} else {
+				throw new TelevisoreException("la tipologia della tv non può essere cancellata essendo già nulla");
+			}
 			break;
 		}
 		return result;

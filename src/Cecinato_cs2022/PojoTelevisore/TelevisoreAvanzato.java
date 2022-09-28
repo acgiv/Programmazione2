@@ -1,5 +1,7 @@
 package Cecinato_cs2022.PojoTelevisore;
 
+import java.util.Collections;
+
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 
@@ -47,11 +49,22 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 
 	@Override
 	public String toString() {
-		return "TelevisoreAvanzato [number_smartTv=" + number_smartTv + ", number_hdmi=" + number_hdmi
-				+ ", Seriale=" + getSeriale() + ", Tipo=" + getTipo() + ", Marche=" + getMarche()
-				+ ", Altezza()=" + getAltezza() + ", Larghezza=" + getLarghezza() + ", Diagonale="
-				+ getDiagonale() + ", Risoluzione=" + getRisoluzione() + ", TipoSchermo=" + getTipoSchermo()
-				+ "]";
+		String stringa;
+		stringa = String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_AVANZATA_TV, "_"))
+				.concat("\n");
+		stringa+= String.format("| %94s %75s ", ConstantGlobal.TITOLO_TABELLA_TV_AVANZATO,"|\n");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_AVANZATA_TV, "_"))
+				.concat("\n");
+		stringa += ConstantGlobal.TABELLA_TV_AVANZATO;
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_AVANZATA_TV, "_"))
+				.concat("\n");
+		stringa += String.format("| %13s %2s %10s %4s %6s %5s %7s %6s %8s %5s %9s %7s %7s %9s %6s %9s %7s %10s %10s %10s\n", super.getSeriale(), " | ",
+				super.getMarche(), " | ", super.getAltezza(), " | ", super.getLarghezza(), " | ", super.getDiagonale(), " | ", super.getRisoluzione(), " | ", super.getTipoSchermo(),
+				" | ", super.getNumber_usb(), " | ", getNumber_hdmi(), " | ", getNumber_smartTv(), " | ");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_AVANZATA_TV, "_"))
+				.concat("\n");
+
+		return stringa;
 	}
 	
 	
