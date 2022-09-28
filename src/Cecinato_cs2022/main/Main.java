@@ -8,9 +8,13 @@ import Cecinato_cs2022.TelevisoreService.Televisore;
 
 public class Main {
 	public static void main(String[] args) throws TelevisoreException {
-		Televisore tvBase = new TelevisoreBase("123456789112");
-		Televisore tvMedio = new TelevisoreMedio("111111111111");
-		Televisore tvAvanzato = new TelevisoreAvanzato("222222222221");
+		BigInteger serial = new BigInteger("100000000012");
+		serial= serial.add( BigInteger.valueOf(1));
+		Televisore tvBase = new TelevisoreBase(String.valueOf(serial));
+		serial= serial.add( BigInteger.valueOf(1));
+		Televisore tvMedio = new TelevisoreMedio(String.valueOf(serial));
+		serial= serial.add( BigInteger.valueOf(1));
+		Televisore tvAvanzato = new TelevisoreAvanzato(String.valueOf(serial));
 		System.out.println("Test Aggiunta Marca = lg");
 		tvBase.addTelevisoreBase(tvBase, "lg", "42.04", "60.42", "160.34", "hd", "OLED");
 		System.out.println(tvBase);
@@ -20,9 +24,12 @@ public class Main {
 		System.out.println(tvAvanzato);
 		tvMedio.modificaTiposchermoTv(tvMedio, null);
 		System.out.println(tvMedio);
+		serial= serial.add( BigInteger.valueOf(1));
+		tvMedio.modificaSeriale(tvMedio, String.valueOf(serial));
+		System.out.println(tvMedio);
 		
-		BigInteger serial1 = new BigInteger("100000000001");
-		System.out.println(serial1.add( BigInteger.valueOf(1)));
+
+
 	}
 
 	

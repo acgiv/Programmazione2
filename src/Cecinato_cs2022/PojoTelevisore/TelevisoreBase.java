@@ -19,7 +19,7 @@ public class TelevisoreBase extends AbstractTelevisore {
 		if (super.controlloSeriale(seriale)) {
 			this.seriale = seriale;
 		}else {
-			throw new TelevisoreException("Il seriale inserito non è corretto: ".concat(seriale));
+			throw new TelevisoreException("Il seriale inserito non è corretto o già esistente: ".concat(seriale));
 		}
 		this.tipo = ConstantGlobal.TIPOLOGIA_TV.BASE;
 	}
