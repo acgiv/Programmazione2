@@ -53,7 +53,7 @@ public interface ConstantGlobal {
 
 	int NUMERO_MINIMO_SMART_TV = 0;
 	
-	String REGEX_CONTROLLO_SERIALE = "^[0-9]{12}$";
+	String REGEX_CONTROLLO_SERIALE = "^[0-9]{"+LUNGHEZZA_SERIALE_TV+"}$";
 	
 	String TITOLO_TABELLA_BASE = "TELEVISORE BASE";
 	
@@ -75,4 +75,15 @@ public interface ConstantGlobal {
 	int LUNGHEZZA_CONTORNO_TABELLA_MEDIA = TABELLA_TV_MEDIO.length()-4;
 	
 	int LUNGHEZZA_CONTORNO_TABELLA_AVANZATA_TV = TABELLA_TV_AVANZATO.length()-4;
+	
+	int LUNGHEZZA_CODICE_FISCALE = 16;
+	
+	int LUNGHEZZA_CODICE_DIPENDETE = 10;
+	
+	String REGEX_CONTROLLO_DATA = "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$";
+	
+	String REGEX_CONTROLLO_CODICE_FISCALE = "^[a-zA-Z0-9]{16}$";
+	
+	String REGEX_CONTROLLO_CODICE_IDENTIFICATIVO = "^[a-zA-Z0-9]{10}$";
+
 }

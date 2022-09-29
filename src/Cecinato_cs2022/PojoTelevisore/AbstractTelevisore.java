@@ -27,8 +27,8 @@ abstract class AbstractTelevisore implements Televisore {
 
 	}
 
-	public final void stampaMarcheTv() {
-		int i = 1;
+	public void visualizzanomiMarcheTv() {
+		int i = 0;
 		System.out.println("Le marche esistenti di tv sono:");
 		for (MarcheTelevisori item : MarcheTelevisori.values()) {
 			System.out.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
@@ -36,7 +36,7 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 	}
 
-	public final void stampaTipologiaSchermoTv() {
+	public void visualizzaTipologieSchermoTv() {
 		int i = 1;
 		System.out.println("Le tipologie di schermo esistenti sono:");
 		for (ConstantGlobal.TIPOLOGIA_SCHERMO item : ConstantGlobal.TIPOLOGIA_SCHERMO.values()) {
@@ -45,7 +45,7 @@ abstract class AbstractTelevisore implements Televisore {
 		}
 	}
 
-	public final void stampaRisoluzioneSchermiTv() {
+	public void visualizzaRisoluzioniSchermiTv() {
 		int i = 1;
 		System.out.println("Le risoluzioni degli schermi esistenti sono:");
 		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
@@ -80,7 +80,6 @@ abstract class AbstractTelevisore implements Televisore {
 
 	private boolean controlloTipologiaSchermo(String tipoSchermo) {
 		boolean result = false;
-		System.out.println(tipoSchermo);
 		for (ConstantGlobal.TIPOLOGIA_SCHERMO item : ConstantGlobal.TIPOLOGIA_SCHERMO.values()) {
 			if (String.valueOf(item).equals(tipoSchermo)) {
 				result = true;
@@ -151,6 +150,8 @@ abstract class AbstractTelevisore implements Televisore {
 					} else if (controlloMarca(marca.toUpperCase())) {
 						((TelevisoreBase) tv).setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
 						result = true;
+					} else {
+						throw new TelevisoreException();
 					}
 				} else {
 					throw new TelevisoreException();
@@ -164,6 +165,8 @@ abstract class AbstractTelevisore implements Televisore {
 					} else if (controlloMarca(marca.toUpperCase())) {
 						((TelevisoreMedio) tv).setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
 						result = true;
+					} else {
+						throw new TelevisoreException();
 					}
 				} else {
 					throw new TelevisoreException();
@@ -176,6 +179,8 @@ abstract class AbstractTelevisore implements Televisore {
 					} else if (controlloMarca(marca.toUpperCase())) {
 						((TelevisoreAvanzato) tv).setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
 						result = true;
+					} else {
+						throw new TelevisoreException();
 					}
 
 				} else {
@@ -542,6 +547,8 @@ abstract class AbstractTelevisore implements Televisore {
 						((TelevisoreBase) tv).setRisoluzione(
 								ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
 						result = true;
+					} else {
+						throw new TelevisoreException();
 					}
 				} else {
 					throw new TelevisoreException();
@@ -556,6 +563,8 @@ abstract class AbstractTelevisore implements Televisore {
 						((TelevisoreBase) tv).setRisoluzione(
 								ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
 						result = true;
+					} else {
+						throw new TelevisoreException();
 					}
 
 				} else {
@@ -599,6 +608,8 @@ abstract class AbstractTelevisore implements Televisore {
 						((TelevisoreBase) tv)
 								.setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
 						result = true;
+					} else {
+						throw new TelevisoreException();
 					}
 
 				} else {
@@ -614,6 +625,8 @@ abstract class AbstractTelevisore implements Televisore {
 						((TelevisoreMedio) tv)
 								.setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
 						result = true;
+					}else {
+						throw new TelevisoreException();
 					}
 				} else {
 					throw new TelevisoreException();
@@ -627,6 +640,8 @@ abstract class AbstractTelevisore implements Televisore {
 						((TelevisoreAvanzato) tv)
 								.setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
 						result = true;
+					}else {
+						throw new TelevisoreException();
 					}
 				} else {
 					throw new TelevisoreException();
@@ -1218,6 +1233,7 @@ abstract class AbstractTelevisore implements Televisore {
 				result = true;
 			} else {
 				throw new TelevisoreException("la marca non può essere cancellata essendo già nulla");
+
 			}
 			break;
 		case MEDIO:
@@ -1351,8 +1367,12 @@ abstract class AbstractTelevisore implements Televisore {
 				}
 				break;
 			case AVANZATO:
-				((TelevisoreAvanzato) tv).setNumber_usb(0);
-				result = true;
+				if (insertusb) {
+					((TelevisoreAvanzato) tv).setNumber_usb(0);
+					result = true;
+				} else {
+					throw new TelevisoreException();
+				}
 				break;
 			}
 		} catch (TipologiaException e) {
@@ -1418,9 +1438,10 @@ abstract class AbstractTelevisore implements Televisore {
 		} catch (TipologiaException e) {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.println(e.ErrorTipologiaTelevisoreException());
-		}catch(TelevisoreException e) {
+		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.err.println(e.messErrorCanellazioneElement("il numero dello smart  non può essere cancellata essendo già nulla "));
+			System.err.println(e.messErrorCanellazioneElement(
+					"il numero dello smart  non può essere cancellata essendo già nulla "));
 		}
 		return result;
 	}
