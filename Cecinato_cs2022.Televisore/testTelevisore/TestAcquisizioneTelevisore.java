@@ -21,7 +21,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = AMAZON");
 		serial = serial.add( BigInteger.valueOf(1));
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "AMAZON"));
+		assertTrue(tv.addMarcaTv("AMAZON"));
 	}
 
 	@Test
@@ -29,7 +29,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = Amazon");
 		serial = serial.add( BigInteger.valueOf(1));
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "Amazon"));
+		assertTrue(tv.addMarcaTv( "Amazon"));
 	}
 
 	@Test
@@ -37,7 +37,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = amazon");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "amazon"));
+		assertTrue(tv.addMarcaTv("amazon"));
 	}
 
 	@Test
@@ -45,7 +45,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca =  ' amazon '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, " amazon "));
+		assertFalse(tv.addMarcaTv( " amazon "));
 	}
 
 	@Test
@@ -53,7 +53,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = amazon1");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, "amazon1"));
+		assertFalse(tv.addMarcaTv( "amazon1"));
 	}
 
 	@Test
@@ -61,7 +61,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = ama zon");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, "ama zon"));
+		assertFalse(tv.addMarcaTv( "ama zon"));
 	}
 
 	@Test
@@ -69,8 +69,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della marca");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "amazon"));
-		assertFalse(tv.addMarcaTv(tv, "amazon"));
+		assertTrue(tv.addMarcaTv( "amazon"));
+		assertFalse(tv.addMarcaTv( "amazon"));
 	}
 
 	@Test
@@ -78,7 +78,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test inserimento valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, null));
+		assertFalse(tv.addMarcaTv( null));
 	}
 
 	@Test
@@ -86,7 +86,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = AMAZON");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "AMAZON"));
+		assertTrue(tv.addMarcaTv( "AMAZON"));
 	}
 
 	@Test
@@ -94,7 +94,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = Amazon");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "Amazon"));
+		assertTrue(tv.addMarcaTv("Amazon"));
 	}
 
 	@Test
@@ -102,7 +102,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = amazon");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "amazon"));
+		assertTrue(tv.addMarcaTv("amazon"));
 	}
 
 	@Test
@@ -110,7 +110,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca con spazi sia prima che dopo la parola = ' amazon '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, " amazon "));
+		assertFalse(tv.addMarcaTv(" amazon "));
 	}
 
 	@Test
@@ -118,7 +118,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = amazon1 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, "amazon1"));
+		assertFalse(tv.addMarcaTv( "amazon1"));
 	}
 
 	@Test
@@ -126,7 +126,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = ama zon");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, "ama zon"));
+		assertFalse(tv.addMarcaTv( "ama zon"));
 	}
 
 	@Test
@@ -134,8 +134,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della marca");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "amazon"));
-		assertFalse(tv.addMarcaTv(tv, "amazon"));
+		assertTrue(tv.addMarcaTv("amazon"));
+		assertFalse(tv.addMarcaTv("amazon"));
 	}
 
 	@Test
@@ -143,7 +143,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test inserimento valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, null));
+		assertFalse(tv.addMarcaTv( null));
 	}
 
 	@Test
@@ -151,7 +151,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = AMAZON");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "AMAZON"));
+		assertTrue(tv.addMarcaTv( "AMAZON"));
 	}
 
 	@Test
@@ -159,7 +159,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = Amazon");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "Amazon"));
+		assertTrue(tv.addMarcaTv("Amazon"));
 	}
 
 	@Test
@@ -167,7 +167,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = amazon");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "amazon"));
+		assertTrue(tv.addMarcaTv("amazon"));
 	}
 
 	@Test
@@ -175,7 +175,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca con spazi sia prima che dopo la parola = ' amazon '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, " amazon "));
+		assertFalse(tv.addMarcaTv(" amazon "));
 	}
 
 	@Test
@@ -183,7 +183,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = amazon1 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, "amaozon1"));
+		assertFalse(tv.addMarcaTv("amaozon1"));
 	}
 
 	@Test
@@ -191,7 +191,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Marca = ama zon ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, "ama zon"));
+		assertFalse(tv.addMarcaTv("ama zon"));
 	}
 
 	@Test
@@ -199,8 +199,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della marca");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addMarcaTv(tv, "amazon"));
-		assertFalse(tv.addMarcaTv(tv, "amazon"));
+		assertTrue(tv.addMarcaTv("amazon"));
+		assertFalse(tv.addMarcaTv( "amazon"));
 	}
 
 	@Test
@@ -208,7 +208,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test inserimento valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addMarcaTv(tv, null));
+		assertFalse(tv.addMarcaTv( null));
 	}
 
 	@Test
@@ -216,7 +216,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = FULL HD");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "FULL HD"));
+		assertTrue(tv.addRisoluzioneTv( "FULL HD"));
 	}
 
 	@Test
@@ -224,7 +224,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = Full Hd");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "Full Hd"));
+		assertTrue(tv.addRisoluzioneTv( "Full Hd"));
 	}
 
 	@Test
@@ -232,7 +232,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = full hd");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "full hd"));
+		assertTrue(tv.addRisoluzioneTv( "full hd"));
 	}
 
 	@Test
@@ -240,7 +240,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione con spazi sia prima che dopo la parola = ' full hd '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, " full hd "));
+		assertFalse(tv.addRisoluzioneTv( " full hd "));
 	}
 
 	@Test
@@ -248,7 +248,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = hd1 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, "hd1"));
+		assertFalse(tv.addRisoluzioneTv( "hd1"));
 	}
 
 	@Test
@@ -256,7 +256,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = h d ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, "h d"));
+		assertFalse(tv.addRisoluzioneTv( "h d"));
 	}
 
 	@Test
@@ -264,8 +264,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Risoluzione");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "hd"));
-		assertFalse(tv.addRisoluzioneTv(tv, "hd"));
+		assertTrue(tv.addRisoluzioneTv( "hd"));
+		assertFalse(tv.addRisoluzioneTv( "hd"));
 	}
 
 	@Test
@@ -273,7 +273,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test inserimento della Risoluzione con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, null));
+		assertFalse(tv.addRisoluzioneTv( null));
 	}
 
 	@Test
@@ -281,7 +281,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = FULL HD");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "FULL HD"));
+		assertTrue(tv.addRisoluzioneTv("FULL HD"));
 	}
 
 	@Test
@@ -289,7 +289,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = Full Hd");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "Full Hd"));
+		assertTrue(tv.addRisoluzioneTv("Full Hd"));
 	}
 
 	@Test
@@ -297,7 +297,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = full hd");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "full hd"));
+		assertTrue(tv.addRisoluzioneTv("full hd"));
 	}
 
 	@Test
@@ -305,7 +305,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione con spazi sia prima che dopo la parola = ' full hd '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, " full hd "));
+		assertFalse(tv.addRisoluzioneTv(" full hd "));
 	}
 
 	@Test
@@ -313,7 +313,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = hd1 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, "hd1"));
+		assertFalse(tv.addRisoluzioneTv("hd1"));
 	}
 
 	@Test
@@ -321,7 +321,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = h d ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, "h d"));
+		assertFalse(tv.addRisoluzioneTv("h d"));
 	}
 
 	@Test
@@ -329,8 +329,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Risoluzione");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "hd"));
-		assertFalse(tv.addRisoluzioneTv(tv, "hd"));
+		assertTrue(tv.addRisoluzioneTv("hd"));
+		assertFalse(tv.addRisoluzioneTv("hd"));
 	}
 
 	@Test
@@ -338,7 +338,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test inserimento della Risoluzione con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, null));
+		assertFalse(tv.addRisoluzioneTv(null));
 	}
 
 	@Test
@@ -346,7 +346,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = FULL HD");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "FULL HD"));
+		assertTrue(tv.addRisoluzioneTv( "FULL HD"));
 	}
 
 	@Test
@@ -354,7 +354,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = Full Hd");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "Full Hd"));
+		assertTrue(tv.addRisoluzioneTv("Full Hd"));
 	}
 
 	@Test
@@ -362,7 +362,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = full hd");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "full hd"));
+		assertTrue(tv.addRisoluzioneTv("full hd"));
 	}
 
 	@Test
@@ -370,7 +370,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione con spazi sia prima che dopo la parola = ' full hd '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, " full hd "));
+		assertFalse(tv.addRisoluzioneTv(" full hd "));
 	}
 
 	@Test
@@ -378,7 +378,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = hd1 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, "hd1"));
+		assertFalse(tv.addRisoluzioneTv("hd1"));
 	}
 
 	@Test
@@ -386,7 +386,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Risoluzione = h d ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, "h d"));
+		assertFalse(tv.addRisoluzioneTv("h d"));
 	}
 
 	@Test
@@ -394,8 +394,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio della Risoluzione");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addRisoluzioneTv(tv, "hd"));
-		assertFalse(tv.addRisoluzioneTv(tv, null));
+		assertTrue(tv.addRisoluzioneTv("hd"));
+		assertFalse(tv.addRisoluzioneTv(null));
 	}
 
 	@Test
@@ -403,7 +403,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test inserimento della Risoluzione con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addRisoluzioneTv(tv, null));
+		assertFalse(tv.addRisoluzioneTv(null));
 	}
 
 	@Test
@@ -411,7 +411,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = CRT");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "CRT"));
+		assertTrue(tv.addTiposchermoTv("CRT"));
 	}
 
 	@Test
@@ -419,7 +419,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = Crt");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "Crt"));
+		assertTrue(tv.addTiposchermoTv("Crt"));
 	}
 
 	@Test
@@ -427,7 +427,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = crt");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "crt"));
+		assertTrue(tv.addTiposchermoTv("crt"));
 	}
 
 	@Test
@@ -435,7 +435,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo con spazi sia prima che dopo la parola = ' crt '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, " crt "));
+		assertFalse(tv.addTiposchermoTv(" crt "));
 	}
 
 	@Test
@@ -443,7 +443,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = crt1 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, "crt1"));
+		assertFalse(tv.addTiposchermoTv("crt1"));
 	}
 
 	@Test
@@ -451,7 +451,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = cr t ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, "cr t"));
+		assertFalse(tv.addTiposchermoTv("cr t"));
 	}
 
 	@Test
@@ -459,8 +459,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Tiposchermo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "CRT"));
-		assertFalse(tv.addTiposchermoTv(tv, "CRT"));
+		assertTrue(tv.addTiposchermoTv( "CRT"));
+		assertFalse(tv.addTiposchermoTv("CRT"));
 	}
 
 	@Test
@@ -468,7 +468,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo con valore nullo ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, null));
+		assertFalse(tv.addTiposchermoTv(null));
 	}
 
 	@Test
@@ -476,7 +476,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = CRT");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "CRT"));
+		assertTrue(tv.addTiposchermoTv("CRT"));
 	}
 
 	@Test
@@ -484,7 +484,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = Crt");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "Crt"));
+		assertTrue(tv.addTiposchermoTv("Crt"));
 	}
 
 	@Test
@@ -492,7 +492,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = crt");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "crt"));
+		assertTrue(tv.addTiposchermoTv("crt"));
 	}
 
 	@Test
@@ -500,7 +500,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo con spazi sia prima che dopo la parola = ' crt '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, " crt "));
+		assertFalse(tv.addTiposchermoTv(" crt "));
 	}
 
 	@Test
@@ -508,7 +508,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = crt1 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, "crt1"));
+		assertFalse(tv.addTiposchermoTv("crt1"));
 	}
 
 	@Test
@@ -516,7 +516,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = cr t ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, "cr t"));
+		assertFalse(tv.addTiposchermoTv("cr t"));
 	}
 
 	@Test
@@ -524,8 +524,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Tiposchermo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "crt"));
-		assertFalse(tv.addTiposchermoTv(tv, "crt"));
+		assertTrue(tv.addTiposchermoTv("crt"));
+		assertFalse(tv.addTiposchermoTv("crt"));
 	}
 
 	@Test
@@ -533,7 +533,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test inserimento della Tiposchermo con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, null));
+		assertFalse(tv.addTiposchermoTv( null));
 	}
 
 	@Test
@@ -541,7 +541,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = CRT");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "CRT"));
+		assertTrue(tv.addTiposchermoTv("CRT"));
 	}
 
 	@Test
@@ -549,7 +549,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = Crt");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "Crt"));
+		assertTrue(tv.addTiposchermoTv("Crt"));
 	}
 
 	@Test
@@ -557,7 +557,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = crt");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "crt"));
+		assertTrue(tv.addTiposchermoTv("crt"));
 	}
 
 	@Test
@@ -565,7 +565,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo con spazi sia prima che dopo la parola = ' crt '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, " crt "));
+		assertFalse(tv.addTiposchermoTv(" crt "));
 	}
 
 	@Test
@@ -573,7 +573,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = crt1 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, "crt1"));
+		assertFalse(tv.addTiposchermoTv("crt1"));
 	}
 
 	@Test
@@ -581,7 +581,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test Aggiunta Tiposchermo = cr t ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, "cr t"));
+		assertFalse(tv.addTiposchermoTv("cr t"));
 	}
 
 	@Test
@@ -589,8 +589,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Tiposchermo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addTiposchermoTv(tv, "crt"));
-		assertFalse(tv.addTiposchermoTv(tv, "crt"));
+		assertTrue(tv.addTiposchermoTv("crt"));
+		assertFalse(tv.addTiposchermoTv("crt"));
 	}
 
 	@Test
@@ -598,7 +598,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della tipologia di  schemo con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addTiposchermoTv(tv, null));
+		assertFalse(tv.addTiposchermoTv(null));
 	}
 
 	@Test
@@ -606,8 +606,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento dell' altezza");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addAltezzaTv(tv, "25.00"));
-		assertFalse(tv.addAltezzaTv(tv, "25.00"));
+		assertTrue(tv.addAltezzaTv("25.00"));
+		assertFalse(tv.addAltezzaTv("25.00"));
 	}
 
 	@Test
@@ -615,7 +615,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza che deve essere maggiore di 24.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addAltezzaTv(tv, "25.00"));
+		assertTrue(tv.addAltezzaTv("25.00"));
 	}
 
 	@Test
@@ -623,7 +623,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza che deve essere minore di 24.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "23.00"));
+		assertFalse(tv.addAltezzaTv("23.00"));
 	}
 
 	@Test
@@ -631,7 +631,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = 24.09a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "24.09a"));
+		assertFalse(tv.addAltezzaTv("24.09a"));
 	}
 
 	@Test
@@ -639,7 +639,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = = -24.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "-24.09"));
+		assertFalse(tv.addAltezzaTv("-24.09"));
 	}
 
 	@Test
@@ -647,7 +647,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = +24.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addAltezzaTv(tv, "+24.10"));
+		assertTrue(tv.addAltezzaTv("+24.10"));
 	}
 
 	@Test
@@ -655,7 +655,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = +28&.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "+28&.10"));
+		assertFalse(tv.addAltezzaTv("+28&.10"));
 	}
 
 	@Test
@@ -664,7 +664,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento dell' altezza con uno spazio sia all' inizio che alla fine del numero =' 28.10 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, " 28.10 "));
+		assertFalse(tv.addAltezzaTv(" 28.10 "));
 	}
 
 	@Test
@@ -672,7 +672,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = 28,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "28,10"));
+		assertFalse(tv.addAltezzaTv("28,10"));
 	}
 
 	@Test
@@ -680,7 +680,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore superiore al valore massimo di = 124.05 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "124.07"));
+		assertFalse(tv.addAltezzaTv("124.07"));
 	}
 
 	@Test
@@ -688,7 +688,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore nullo ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, null));
+		assertFalse(tv.addAltezzaTv(null));
 	}
 
 	@Test
@@ -696,8 +696,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento dell' altezza");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addAltezzaTv(tv, "120.0"));
-		assertFalse(tv.addAltezzaTv(tv, "120.0"));
+		assertTrue(tv.addAltezzaTv("120.0"));
+		assertFalse(tv.addAltezzaTv("120.0"));
 	}
 
 	@Test
@@ -705,7 +705,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza che deve essere maggiore di  24.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addAltezzaTv(tv, "25.0"));
+		assertTrue(tv.addAltezzaTv("25.0"));
 	}
 
 	@Test
@@ -713,7 +713,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza che deve essere minore di 24.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "23.09"));
+		assertFalse(tv.addAltezzaTv("23.09"));
 	}
 
 	@Test
@@ -721,7 +721,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = 24.09a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "24.09a"));
+		assertFalse(tv.addAltezzaTv("24.09a"));
 	}
 
 	@Test
@@ -729,7 +729,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = -24.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "-24.09"));
+		assertFalse(tv.addAltezzaTv("-24.09"));
 	}
 
 	@Test
@@ -737,7 +737,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = +24.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addAltezzaTv(tv, "+24.10"));
+		assertTrue(tv.addAltezzaTv("+24.10"));
 	}
 
 	@Test
@@ -745,7 +745,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = +28&.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "+28&.10"));
+		assertFalse(tv.addAltezzaTv("+28&.10"));
 	}
 
 	@Test
@@ -754,7 +754,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento dell' altezza con uno spazio sia all' inizio che alla fine del numero =' 28.10 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, " 28.10 "));
+		assertFalse(tv.addAltezzaTv(" 28.10 "));
 	}
 
 	@Test
@@ -762,7 +762,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = 28,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "28,10"));
+		assertFalse(tv.addAltezzaTv("28,10"));
 	}
 
 	@Test
@@ -770,7 +770,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore superiore al valore massimo di = 124.05 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "127.02"));
+		assertFalse(tv.addAltezzaTv("127.02"));
 	}
 
 	@Test
@@ -778,7 +778,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore nullo ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, null));
+		assertFalse(tv.addAltezzaTv(null));
 	}
 
 	@Test
@@ -786,8 +786,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento dell' altezza");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addAltezzaTv(tv, "40.00"));
-		assertFalse(tv.addAltezzaTv(tv, "40.00"));
+		assertTrue(tv.addAltezzaTv("40.00"));
+		assertFalse(tv.addAltezzaTv("40.00"));
 	}
 
 	@Test
@@ -795,7 +795,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza che deve essere maggiore di 24.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addAltezzaTv(tv, "40.00"));
+		assertTrue(tv.addAltezzaTv("40.00"));
 	}
 
 	@Test
@@ -803,7 +803,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza che deve essere minore di 24.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "23.00"));
+		assertFalse(tv.addAltezzaTv("23.00"));
 	}
 
 	@Test
@@ -811,7 +811,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = 24.09a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "24.09a"));
+		assertFalse(tv.addAltezzaTv("24.09a"));
 	}
 
 	@Test
@@ -819,7 +819,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = = -24.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "-24.09"));
+		assertFalse(tv.addAltezzaTv("-24.09"));
 	}
 
 	@Test
@@ -827,7 +827,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = +24.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addAltezzaTv(tv, "+24.10"));
+		assertTrue(tv.addAltezzaTv("+24.10"));
 	}
 
 	@Test
@@ -835,7 +835,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = +28&.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "+28&.10"));
+		assertFalse(tv.addAltezzaTv("+28&.10"));
 	}
 
 	@Test
@@ -844,7 +844,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento dell' altezza con uno spazio sia all' inizio che alla fine del numero =' 28.10 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, " 28.10 "));
+		assertFalse(tv.addAltezzaTv(" 28.10 "));
 	}
 
 	@Test
@@ -852,7 +852,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore = 28,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "28,10"));
+		assertFalse(tv.addAltezzaTv("28,10"));
 	}
 
 	@Test
@@ -860,7 +860,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore superiore al valore massimo di = 124.05 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, "127"));
+		assertFalse(tv.addAltezzaTv("127"));
 	}
 
 	@Test
@@ -868,7 +868,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento dell'altezza con valore nullo ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addAltezzaTv(tv, null));
+		assertFalse(tv.addAltezzaTv(null));
 	}
 
 	@Test
@@ -876,8 +876,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Larghezza");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addLarghezzaTv(tv, "45.00"));
-		assertFalse(tv.addLarghezzaTv(tv, "45.00"));
+		assertTrue(tv.addLarghezzaTv("45.00"));
+		assertFalse(tv.addLarghezzaTv("45.00"));
 	}
 
 	@Test
@@ -885,7 +885,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza che deve essere maggiore di  44.03");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addLarghezzaTv(tv, "45.00"));
+		assertTrue(tv.addLarghezzaTv("45.00"));
 	}
 
 	@Test
@@ -893,7 +893,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza che deve essere minore di  44.03");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "41.23"));
+		assertFalse(tv.addLarghezzaTv("41.23"));
 	}
 
 	@Test
@@ -901,7 +901,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = 45.09a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "45.09a"));
+		assertFalse(tv.addLarghezzaTv("45.09a"));
 	}
 
 	@Test
@@ -909,7 +909,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = = -45.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "-45.09"));
+		assertFalse(tv.addLarghezzaTv("-45.09"));
 	}
 
 	@Test
@@ -917,7 +917,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = +45.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addLarghezzaTv(tv, "+45.10"));
+		assertTrue(tv.addLarghezzaTv("+45.10"));
 	}
 
 	@Test
@@ -925,7 +925,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = +45&.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "+45&.10"));
+		assertFalse(tv.addLarghezzaTv("+45&.10"));
 	}
 
 	@Test
@@ -934,7 +934,7 @@ class TestAcquisizioneTelevisore {
 				"Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, " 45.10 "));
+		assertFalse(tv.addLarghezzaTv(" 45.10 "));
 	}
 
 	@Test
@@ -942,7 +942,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = 45,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "45,10"));
+		assertFalse(tv.addLarghezzaTv("45,10"));
 	}
 
 	@Test
@@ -950,7 +950,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore superiore al valore massimo di = 221.35 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "225.23"));
+		assertFalse(tv.addLarghezzaTv("225.23"));
 	}
 
 	@Test
@@ -958,7 +958,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, null));
+		assertFalse(tv.addLarghezzaTv(null));
 	}
 
 	@Test
@@ -966,8 +966,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Larghezza");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addLarghezzaTv(tv, "45.23"));
-		assertFalse(tv.addLarghezzaTv(tv, "45.23"));
+		assertTrue(tv.addLarghezzaTv("45.23"));
+		assertFalse(tv.addLarghezzaTv("45.23"));
 	}
 
 	@Test
@@ -975,7 +975,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza che deve essere maggiore di  44.03");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addLarghezzaTv(tv, "45.23"));
+		assertTrue(tv.addLarghezzaTv("45.23"));
 	}
 
 	@Test
@@ -983,7 +983,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza che deve essere minore di  44.03");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "41.23"));
+		assertFalse(tv.addLarghezzaTv("41.23"));
 	}
 
 	@Test
@@ -991,7 +991,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = 45.09a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "45.09a"));
+		assertFalse(tv.addLarghezzaTv("45.09a"));
 	}
 
 	@Test
@@ -999,7 +999,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = = -45.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "-45.09"));
+		assertFalse(tv.addLarghezzaTv("-45.09"));
 	}
 
 	@Test
@@ -1007,7 +1007,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = +45.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addLarghezzaTv(tv, "+45.10"));
+		assertTrue(tv.addLarghezzaTv("+45.10"));
 	}
 
 	@Test
@@ -1015,7 +1015,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = +45&.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "+45&.10"));
+		assertFalse(tv.addLarghezzaTv("+45&.10"));
 	}
 
 	@Test
@@ -1024,7 +1024,7 @@ class TestAcquisizioneTelevisore {
 				"Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, " 45.10 "));
+		assertFalse(tv.addLarghezzaTv(" 45.10 "));
 	}
 
 	@Test
@@ -1032,7 +1032,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = 45,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "45,10"));
+		assertFalse(tv.addLarghezzaTv("45,10"));
 	}
 
 	@Test
@@ -1040,7 +1040,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore superiore al valore massimo di = 221.35 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "225"));
+		assertFalse(tv.addLarghezzaTv("225"));
 	}
 
 	@Test
@@ -1048,7 +1048,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore nullo ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, null));
+		assertFalse(tv.addLarghezzaTv(null));
 	}
 
 	@Test
@@ -1056,8 +1056,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Larghezza");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addLarghezzaTv(tv, "45.24"));
-		assertFalse(tv.addLarghezzaTv(tv, "45.24"));
+		assertTrue(tv.addLarghezzaTv("45.24"));
+		assertFalse(tv.addLarghezzaTv("45.24"));
 	}
 
 	@Test
@@ -1065,7 +1065,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza che deve essere maggiore di  44.03");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addLarghezzaTv(tv, "45.03"));
+		assertTrue(tv.addLarghezzaTv("45.03"));
 	}
 
 	@Test
@@ -1073,7 +1073,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza che deve essere minore di  44.03");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "41.03"));
+		assertFalse(tv.addLarghezzaTv("41.03"));
 	}
 
 	@Test
@@ -1081,7 +1081,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = 45.09a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "45.09a"));
+		assertFalse(tv.addLarghezzaTv("45.09a"));
 	}
 
 	@Test
@@ -1089,7 +1089,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = = -45.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "-45.09"));
+		assertFalse(tv.addLarghezzaTv("-45.09"));
 	}
 
 	@Test
@@ -1097,7 +1097,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = +45.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addLarghezzaTv(tv, "+45.10"));
+		assertTrue(tv.addLarghezzaTv("+45.10"));
 	}
 
 	@Test
@@ -1105,7 +1105,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = +45&.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "+45&.10"));
+		assertFalse(tv.addLarghezzaTv("+45&.10"));
 	}
 
 	@Test
@@ -1114,7 +1114,7 @@ class TestAcquisizioneTelevisore {
 				"Test di'inserimento della Larghezza con uno spazio sia all' inizio che alla fine del numero =' 45.10 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, " 45.10 "));
+		assertFalse(tv.addLarghezzaTv(" 45.10 "));
 	}
 
 	@Test
@@ -1122,7 +1122,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore = 45,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "45,10"));
+		assertFalse(tv.addLarghezzaTv("45,10"));
 	}
 
 	@Test
@@ -1130,7 +1130,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore superiore al valore massimo di = 221.35 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, "225.02"));
+		assertFalse(tv.addLarghezzaTv("225.02"));
 	}
 
 	@Test
@@ -1138,7 +1138,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Larghezza con valore  nullo ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addLarghezzaTv(tv, null));
+		assertFalse(tv.addLarghezzaTv(null));
 	}
 
 	@Test
@@ -1146,8 +1146,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Diagonale");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addDiagonaleTv(tv, "52.00"));
-		assertFalse(tv.addDiagonaleTv(tv, "52.00"));
+		assertTrue(tv.addDiagonaleTv("52.00"));
+		assertFalse(tv.addDiagonaleTv("52.00"));
 	}
 
 	@Test
@@ -1155,7 +1155,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale che deve essere maggiore di  51.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addDiagonaleTv(tv, "52.00"));
+		assertTrue(tv.addDiagonaleTv("52.00"));
 	}
 
 	@Test
@@ -1163,7 +1163,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale che deve essere minore di  51.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "30.00"));
+		assertFalse(tv.addDiagonaleTv("30.00"));
 	}
 
 	@Test
@@ -1171,7 +1171,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = 51.09a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "51.09a"));
+		assertFalse(tv.addDiagonaleTv("51.09a"));
 	}
 
 	@Test
@@ -1179,7 +1179,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = = -51.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "-51.09"));
+		assertFalse(tv.addDiagonaleTv("-51.09"));
 	}
 
 	@Test
@@ -1187,7 +1187,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = +51.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertTrue(tv.addDiagonaleTv(tv, "+51.10"));
+		assertTrue(tv.addDiagonaleTv("+51.10"));
 	}
 
 	@Test
@@ -1195,7 +1195,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = +51&.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "+51&.10"));
+		assertFalse(tv.addDiagonaleTv("+51&.10"));
 	}
 
 	@Test
@@ -1204,7 +1204,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento della Diagonale con uno spazio sia all' inizio che alla fine del numero =' 51.10 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, " 51.10 "));
+		assertFalse(tv.addDiagonaleTv(" 51.10 "));
 	}
 
 	@Test
@@ -1212,7 +1212,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = 51,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "51,10"));
+		assertFalse(tv.addDiagonaleTv("51,10"));
 	}
 
 	@Test
@@ -1220,7 +1220,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore superiore al valore massimo di = 254.0 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "255.0"));
+		assertFalse(tv.addDiagonaleTv("255.0"));
 	}
 
 	@Test
@@ -1228,7 +1228,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, null));
+		assertFalse(tv.addDiagonaleTv(null));
 	}
 
 	@Test
@@ -1236,8 +1236,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Diagonale");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addDiagonaleTv(tv, "251.0"));
-		assertFalse(tv.addDiagonaleTv(tv, "251.0"));
+		assertTrue(tv.addDiagonaleTv("251.0"));
+		assertFalse(tv.addDiagonaleTv("251.0"));
 	}
 
 	@Test
@@ -1245,7 +1245,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale che deve essere maggiore di  51.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addDiagonaleTv(tv, "52.00"));
+		assertTrue(tv.addDiagonaleTv("52.00"));
 	}
 
 	@Test
@@ -1253,7 +1253,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale che deve essere minore di  51.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "50.00"));
+		assertFalse(tv.addDiagonaleTv("50.00"));
 	}
 
 	@Test
@@ -1261,7 +1261,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = 51.09a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "51.09a"));
+		assertFalse(tv.addDiagonaleTv("51.09a"));
 	}
 
 	@Test
@@ -1269,7 +1269,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = = -51.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "-51.09"));
+		assertFalse(tv.addDiagonaleTv("-51.09"));
 	}
 
 	@Test
@@ -1277,7 +1277,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = +51.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addDiagonaleTv(tv, "+51.10"));
+		assertTrue(tv.addDiagonaleTv("+51.10"));
 	}
 
 	@Test
@@ -1285,7 +1285,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = +51&.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "+51&.10"));
+		assertFalse(tv.addDiagonaleTv("+51&.10"));
 	}
 
 	@Test
@@ -1294,7 +1294,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento della Diagonale con uno spazio sia all' inizio che alla fine del numero =' 51.10 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, " 51.10 "));
+		assertFalse(tv.addDiagonaleTv(" 51.10 "));
 	}
 
 	@Test
@@ -1302,7 +1302,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = 51,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "51,10"));
+		assertFalse(tv.addDiagonaleTv("51,10"));
 	}
 
 	@Test
@@ -1310,7 +1310,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore superiore al valore massimo di = 254.0 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "255.00"));
+		assertFalse(tv.addDiagonaleTv("255.00"));
 	}
 
 	@Test
@@ -1318,7 +1318,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore nullo ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, null));
+		assertFalse(tv.addDiagonaleTv(null));
 	}
 
 	@Test
@@ -1326,8 +1326,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento della Diagonale");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addDiagonaleTv(tv, "60.00"));
-		assertFalse(tv.addDiagonaleTv(tv, "60.00"));
+		assertTrue(tv.addDiagonaleTv("60.00"));
+		assertFalse(tv.addDiagonaleTv("60.00"));
 	}
 
 	@Test
@@ -1335,7 +1335,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale che deve essere maggiore di  51.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addDiagonaleTv(tv, "52.00"));
+		assertTrue(tv.addDiagonaleTv("52.00"));
 	}
 
 	@Test
@@ -1343,7 +1343,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale che deve essere minore di  51.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "50.00"));
+		assertFalse(tv.addDiagonaleTv("50.00"));
 	}
 
 	@Test
@@ -1351,7 +1351,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = 51.09a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "51.09a"));
+		assertFalse(tv.addDiagonaleTv("51.09a"));
 	}
 
 	@Test
@@ -1359,7 +1359,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = = -51.09");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "-51.09"));
+		assertFalse(tv.addDiagonaleTv("-51.09"));
 	}
 
 	@Test
@@ -1367,7 +1367,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = +51.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addDiagonaleTv(tv, "+51.10"));
+		assertTrue(tv.addDiagonaleTv("+51.10"));
 	}
 
 	@Test
@@ -1375,7 +1375,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = +51&.10");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "+51&.10"));
+		assertFalse(tv.addDiagonaleTv("+51&.10"));
 	}
 
 	@Test
@@ -1384,7 +1384,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento della Diagonale con uno spazio sia all' inizio che alla fine del numero =' 51.10 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, " 51.10 "));
+		assertFalse(tv.addDiagonaleTv(" 51.10 "));
 	}
 
 	@Test
@@ -1392,7 +1392,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore = 51,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "51,10"));
+		assertFalse(tv.addDiagonaleTv("51,10"));
 	}
 
 	@Test
@@ -1400,7 +1400,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore superiore al valore massimo di = 254.0 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, "255.00"));
+		assertFalse(tv.addDiagonaleTv("255.00"));
 
 	}
 
@@ -1409,7 +1409,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento della Diagonale con valore nullo ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addDiagonaleTv(tv, null));
+		assertFalse(tv.addDiagonaleTv(null));
 
 	}
 
@@ -1418,8 +1418,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento del numeroHdmi");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addNumberHdmiTv(tv, "1"));
-		assertFalse(tv.addNumberHdmiTv(tv, "1"));
+		assertTrue(tv.addNumberHdmiTv("1"));
+		assertFalse(tv.addNumberHdmiTv("1"));
 	}
 
 	@Test
@@ -1428,7 +1428,7 @@ class TestAcquisizioneTelevisore {
 				+ ConstantGlobal.NUM_MINIMO_HDMI + " ed uaguale ad :" + ConstantGlobal.NUM_HDMI_TV_AVANZATO);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addNumberHdmiTv(tv, "1"));
+		assertTrue(tv.addNumberHdmiTv("1"));
 	}
 
 	@Test
@@ -1436,7 +1436,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero hdmi che deve essere uguale a = 0.5");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberHdmiTv(tv, "0.5"));
+		assertFalse(tv.addNumberHdmiTv("0.5"));
 	}
 
 	@Test
@@ -1444,7 +1444,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero hdmi con valore = 1a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberHdmiTv(tv, "1a"));
+		assertFalse(tv.addNumberHdmiTv("1a"));
 	}
 
 	@Test
@@ -1452,7 +1452,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero hdmi con valore = -1");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberHdmiTv(tv, "-1"));
+		assertFalse(tv.addNumberHdmiTv("-1"));
 	}
 
 	@Test
@@ -1460,7 +1460,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero hdmi con valore = +1");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addNumberHdmiTv(tv, "+1"));
+		assertTrue(tv.addNumberHdmiTv("+1"));
 	}
 
 	@Test
@@ -1468,7 +1468,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero hdmi con valore = +1&");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberHdmiTv(tv, "1&"));
+		assertFalse(tv.addNumberHdmiTv("1&"));
 	}
 
 	@Test
@@ -1477,7 +1477,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento del numero hdmi con uno spazio sia all' inizio che alla fine del numero =' 1 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberHdmiTv(tv, " 1 "));
+		assertFalse(tv.addNumberHdmiTv(" 1 "));
 	}
 
 	@Test
@@ -1485,7 +1485,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero hdmi con valore = 1,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberHdmiTv(tv, "1,10"));
+		assertFalse(tv.addNumberHdmiTv("1,10"));
 	}
 
 	@Test
@@ -1494,7 +1494,7 @@ class TestAcquisizioneTelevisore {
 				+ ConstantGlobal.NUM_HDMI_TV_AVANZATO);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberHdmiTv(tv, "2"));
+		assertFalse(tv.addNumberHdmiTv("2"));
 	}
 
 	@Test
@@ -1502,7 +1502,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero hdmi con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberHdmiTv(tv, null));
+		assertFalse(tv.addNumberHdmiTv(null));
 	}
 
 	@Test
@@ -1510,8 +1510,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento del numero hdmi");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addNumberUsbTv(tv, "2"));
-		assertFalse(tv.addNumberUsbTv(tv, "2"));
+		assertTrue(tv.addNumberUsbTv("2"));
+		assertFalse(tv.addNumberUsbTv("2"));
 	}
 
 	@Test
@@ -1520,7 +1520,7 @@ class TestAcquisizioneTelevisore {
 				"Test di'inserimento del numero usb che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_USB);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addNumberUsbTv(tv, "2"));
+		assertTrue(tv.addNumberUsbTv("2"));
 	}
 
 	@Test
@@ -1529,7 +1529,7 @@ class TestAcquisizioneTelevisore {
 				"Test di'inserimento del numero usb che deve essere minore di " + ConstantGlobal.NUM_MINIMO_USB);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "-2"));
+		assertFalse(tv.addNumberUsbTv("-2"));
 	}
 
 	@Test
@@ -1537,7 +1537,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = 2a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "1a"));
+		assertFalse(tv.addNumberUsbTv("1a"));
 	}
 
 	@Test
@@ -1545,7 +1545,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = = -2");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "-2"));
+		assertFalse(tv.addNumberUsbTv("-2"));
 	}
 
 	@Test
@@ -1553,7 +1553,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = +2");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertTrue(tv.addNumberUsbTv(tv, "+2"));
+		assertTrue(tv.addNumberUsbTv("+2"));
 	}
 
 	@Test
@@ -1561,7 +1561,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = +2&");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "+1&"));
+		assertFalse(tv.addNumberUsbTv("+1&"));
 	}
 
 	@Test
@@ -1570,7 +1570,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento del numero usb con uno spazio sia all' inizio che alla fine del numero =' 2 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, " 1 "));
+		assertFalse(tv.addNumberUsbTv(" 1 "));
 	}
 
 	@Test
@@ -1578,7 +1578,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = 2,5 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "2,5"));
+		assertFalse(tv.addNumberUsbTv("2,5"));
 	}
 
 	@Test
@@ -1587,7 +1587,7 @@ class TestAcquisizioneTelevisore {
 				+ ConstantGlobal.NUM_USB_TV_MEDIO);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "3"));
+		assertFalse(tv.addNumberUsbTv("3"));
 	}
 
 	@Test
@@ -1595,7 +1595,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreMedio(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, null));
+		assertFalse(tv.addNumberUsbTv(null));
 	}
 
 	@Test
@@ -1603,8 +1603,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento del numero hdmi");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addNumberUsbTv(tv, "1"));
-		assertFalse(tv.addNumberUsbTv(tv, "1"));
+		assertTrue(tv.addNumberUsbTv("1"));
+		assertFalse(tv.addNumberUsbTv("1"));
 	}
 
 	@Test
@@ -1613,7 +1613,7 @@ class TestAcquisizioneTelevisore {
 				"Test di'inserimento del numero usb che deve essere maggiore di " + ConstantGlobal.NUM_MINIMO_USB);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addNumberUsbTv(tv, "1"));
+		assertTrue(tv.addNumberUsbTv("1"));
 	}
 
 	@Test
@@ -1622,7 +1622,7 @@ class TestAcquisizioneTelevisore {
 				"Test di'inserimento del numero usb che deve essere minore di " + ConstantGlobal.NUM_MINIMO_USB);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "-1"));
+		assertFalse(tv.addNumberUsbTv("-1"));
 	}
 
 	@Test
@@ -1630,7 +1630,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = 1a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "1a"));
+		assertFalse(tv.addNumberUsbTv("1a"));
 	}
 
 	@Test
@@ -1638,7 +1638,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = = -1");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "-1"));
+		assertFalse(tv.addNumberUsbTv("-1"));
 	}
 
 	@Test
@@ -1646,7 +1646,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = +1");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addNumberUsbTv(tv, "+1"));
+		assertTrue(tv.addNumberUsbTv("+1"));
 	}
 
 	@Test
@@ -1654,7 +1654,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = +1&");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "+1&"));
+		assertFalse(tv.addNumberUsbTv("+1&"));
 	}
 
 	@Test
@@ -1663,7 +1663,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento del numero usb con uno spazio sia all' inizio che alla fine del numero =' 1 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, " 1 "));
+		assertFalse(tv.addNumberUsbTv(" 1 "));
 	}
 
 	@Test
@@ -1671,7 +1671,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore = 1,5 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "1,5"));
+		assertFalse(tv.addNumberUsbTv("1,5"));
 	}
 
 	@Test
@@ -1680,7 +1680,7 @@ class TestAcquisizioneTelevisore {
 				+ ConstantGlobal.NUMERO_USB_TV_AVANZATO);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "3"));
+		assertFalse(tv.addNumberUsbTv("3"));
 	}
 
 	@Test
@@ -1688,7 +1688,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, null));
+		assertFalse(tv.addNumberUsbTv(null));
 	}
 
 	@Test
@@ -1696,7 +1696,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del numero usb ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreBase(String.valueOf(serial));
-		assertFalse(tv.addNumberUsbTv(tv, "2"));
+		assertFalse(tv.addNumberUsbTv("2"));
 	}
 
 	@Test
@@ -1704,8 +1704,8 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test doppio inserimento del numero smart tv");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addNumberSmartTv(tv, "1"));
-		assertFalse(tv.addNumberSmartTv(tv, "1"));
+		assertTrue(tv.addNumberSmartTv("1"));
+		assertFalse(tv.addNumberSmartTv("1"));
 	}
 
 	@Test
@@ -1714,7 +1714,7 @@ class TestAcquisizioneTelevisore {
 				+ ConstantGlobal.NUM_MINIMO_SMART_TV);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato("123456789113");
-		assertTrue(tv.addNumberSmartTv(tv, "1"));
+		assertTrue(tv.addNumberSmartTv("1"));
 	}
 
 	@Test
@@ -1722,7 +1722,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del  numero smart tv che deve essere minore di  0.5");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberSmartTv(tv, "0.5"));
+		assertFalse(tv.addNumberSmartTv("0.5"));
 	}
 
 	@Test
@@ -1730,7 +1730,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del  numero smart tv con valore = 1a");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberSmartTv(tv, "1a"));
+		assertFalse(tv.addNumberSmartTv("1a"));
 	}
 
 	@Test
@@ -1738,7 +1738,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del  numero smart tv con valore = -1");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberSmartTv(tv, "-1"));
+		assertFalse(tv.addNumberSmartTv("-1"));
 	}
 
 	@Test
@@ -1746,7 +1746,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del  numero smart tv con valore = +1");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertTrue(tv.addNumberSmartTv(tv, "+1"));
+		assertTrue(tv.addNumberSmartTv("+1"));
 	}
 
 	@Test
@@ -1754,7 +1754,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del  numero smart tv con valore = +1&");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberSmartTv(tv, "+1&"));
+		assertFalse(tv.addNumberSmartTv("+1&"));
 	}
 
 	@Test
@@ -1763,7 +1763,7 @@ class TestAcquisizioneTelevisore {
 				"\"Test di'inserimento del  numero smart tv con uno spazio sia all' inizio che alla fine del numero =' 1 '");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberSmartTv(tv, " 1 "));
+		assertFalse(tv.addNumberSmartTv(" 1 "));
 	}
 
 	@Test
@@ -1771,7 +1771,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del  numero smart tv con valore = 1,10 ");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberSmartTv(tv, "1,10"));
+		assertFalse(tv.addNumberSmartTv("1,10"));
 	}
 
 	@Test
@@ -1780,7 +1780,7 @@ class TestAcquisizioneTelevisore {
 				+ ConstantGlobal.NUM_SMART_TV_AVANZATO);
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberSmartTv(tv, "3"));
+		assertFalse(tv.addNumberSmartTv("3"));
 	}
 
 	@Test
@@ -1788,7 +1788,7 @@ class TestAcquisizioneTelevisore {
 		System.out.println("Test di'inserimento del  numero smart tv con valore nullo");
 		serial = serial.add( BigInteger.valueOf(1));;
 		Televisore tv = new TelevisoreAvanzato(String.valueOf(serial));
-		assertFalse(tv.addNumberSmartTv(tv, null));
+		assertFalse(tv.addNumberSmartTv(null));
 	}
 	
 	

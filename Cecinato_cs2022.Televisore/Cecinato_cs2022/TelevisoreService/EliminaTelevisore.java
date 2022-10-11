@@ -4,21 +4,21 @@ import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 
 public interface EliminaTelevisore {
 
-	public boolean eliminaMarcaTv(Televisore tv)throws TelevisoreException;
+	public boolean eliminaMarcaTv()throws TelevisoreException;
 
-	public boolean eliminaAltezzaTv(Televisore tv) throws TelevisoreException;
-
-	public boolean eliminaLarghezzaTv(Televisore tv) throws TelevisoreException;
-
-	public boolean eliminaNumberHdmiTv(Televisore tv);
-
-	public boolean eliminaNumberUsbTv(Televisore tv);
-
-	public boolean eliminaDiagonaleTv(Televisore tv) throws TelevisoreException;
+	public boolean eliminaAltezzaTv() throws TelevisoreException;
 	
-	public boolean eliminaNumberSmartTv(Televisore tv);
+	public boolean eliminaLarghezzaTv() throws TelevisoreException;
+
+	public boolean eliminaNumberHdmiTv();
+
+	public boolean eliminaNumberUsbTv();
+
+	public boolean eliminaDiagonaleTv() throws TelevisoreException;
 	
-	public boolean eliminaRisoluzioneTv(Televisore tv) throws TelevisoreException; 
+	public boolean eliminaNumberSmartTv();
 	
-	public boolean eliminaTiposchermoTv(Televisore tv) throws TelevisoreException;
+	public boolean eliminaRisoluzioneTv() throws TelevisoreException; 
+	
+	public boolean eliminaTiposchermoTv() throws TelevisoreException;
 }

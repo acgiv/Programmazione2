@@ -1,12 +1,14 @@
 package Cecinato_cs2022.Persona;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.text.ParseException;
 
+import Cecinato_cs2022.Cliente.Cliente;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
+import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
+import Cecinato_cs2022.TelevisoreService.Televisore;
 
 public abstract class AbstractPersona implements Persona {
 
@@ -16,8 +18,7 @@ public abstract class AbstractPersona implements Persona {
 	private ConstantGlobal.GENERE genere;
 	private String dataNascita; // il formato sarà 01/02/2022
 	private String citta;
-	protected final static Set<String> elencoCodiceIdentificativo = new TreeSet<String>();
-	protected final static Set<String> elencoCodiceFiscale = new TreeSet<String>();
+
 
 	public AbstractPersona() {
 
@@ -71,40 +72,6 @@ public abstract class AbstractPersona implements Persona {
 		this.citta = citta;
 	}
 
-	protected final boolean controlloIdentificativo(String codiceIdentificativo) throws PersonaException {
-		boolean result = true;
-		if (codiceIdentificativo.matches(ConstantGlobal.REGEX_CONTROLLO_CODICE_IDENTIFICATIVO)) {
-			Iterator<String> element = elencoCodiceIdentificativo.iterator();
-			while (element.hasNext()) {
-				if (element.next().equals(codiceIdentificativo))
-					result = false;
-			}
-			if (!result) {
-				throw new PersonaException("Il codice Identificativo esiste già");
-			}
-		} else {
-			throw new PersonaException("Il codice Identificativo è errato");
-		}
-		return result;
-	}
-	
-
-	protected final boolean controlloCodiceFiscale(String codiceFiscale) throws PersonaException {
-		boolean result = true;
-		if (codiceFiscale.matches(ConstantGlobal.REGEX_CONTROLLO_CODICE_FISCALE)) {
-			Iterator<String> element = elencoCodiceIdentificativo.iterator();
-			while (element.hasNext()) {
-				if (element.next().equals(codiceFiscale))
-					result = false;
-			}
-			if (!result) {
-				throw new PersonaException("Il codice fiscale esiste già");
-			}
-		} else {
-			throw new PersonaException("Il codice fiscale è errato");
-		}
-		return result;
-	}
 
 	protected final boolean controlloGenere(String genere) {
 		boolean result = false;
@@ -220,9 +187,9 @@ public abstract class AbstractPersona implements Persona {
 	public boolean addGenere(String genere) throws PersonaException {
 		boolean result = false;
 		if (!genere.isEmpty()) {
-			if (controlloGenere(genere)) {
+			if (controlloGenere(genere.toUpperCase())) {
 				if (getGenere() == null) {
-					setGenere(ConstantGlobal.GENERE.valueOf(genere));
+					setGenere(ConstantGlobal.GENERE.valueOf(genere.toUpperCase()));
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -261,7 +228,7 @@ public abstract class AbstractPersona implements Persona {
 		boolean result = false;
 		if (!citta.isEmpty()) {
 			if (citta.matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA)) {
-				if (getCognome() == null) {
+				if (getCitta() == null) {
 					setCitta(citta);
 					result = true;
 				} else {
@@ -397,6 +364,7 @@ public abstract class AbstractPersona implements Persona {
 		boolean result = false;
 		if (getNome() != null) {
 			setNome(null);
+			result = true;
 		} else {
 			throw new PersonaException(
 					"errore, non può essere cancellato il nome della persona perchè è stato ancora inserito");
@@ -499,7 +467,7 @@ public abstract class AbstractPersona implements Persona {
 	
 	public abstract String visualizzaCodiceIdentificativoDipendete() throws PersonaException;
 	
-	public abstract String visualizzaNomeAziendaDipendenteDipendente() throws PersonaException;
+	public abstract String visualizzaNomeAziendaDipendente() throws PersonaException;
 
 	public abstract String visualizzaEmailAziendaleDipendente() throws PersonaException;
 
@@ -509,9 +477,44 @@ public abstract class AbstractPersona implements Persona {
 	
 	public abstract String visualizzaRuoloDipendente() throws PersonaException;
 	
+	public abstract boolean addNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException;
+
+	public abstract boolean  addPuntiFedeltaAccumulati(String puntiFedelta) throws PersonaException ;
+
+	public abstract boolean  addDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException ;
+
+	public abstract boolean  addNumeroCartaFedelta() throws PersonaException ;
+
+	public abstract String VisualizzaNomeCartaFedelta() throws PersonaException ;
 	
+	public abstract String VisualizzaPuntiFedeltaAccumulati() throws PersonaException ;
+
+	public abstract String VisualizzaDataInscrizioneTessera() throws PersonaException;
+
+	public abstract String VisualizzaNumeroCartaFedelta() throws PersonaException ;
 	
+	public abstract String VisualizzaCodiceFiscale() throws PersonaException;
+
+	public abstract boolean eliminaNomeCartaFedelta() throws PersonaException;
+
+	public abstract boolean eliminaPuntiAccumulati() throws PersonaException ;
+
+	public abstract boolean eliminaDataInscrizioneTessera() throws PersonaException;
+
+	public abstract boolean eliminaNumeroCartaFedelta() throws PersonaException ;
+
+	public abstract boolean modificaNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException ;
+
+	public abstract boolean  modificaPuntiFedeltaAccumulati(String puntiFedelta, ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA operazione) throws PersonaException ;
+
+	public abstract boolean  modificaDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException ;
+
+	public abstract boolean modificaNumeroCartaFedelta() throws PersonaException ;
+
+	public abstract boolean modificaCodiceFiscale(String codiceFiscale) throws PersonaException;
 	
+	public abstract boolean  riparaTv(String dataRichiestaRiparazione, String dataPrevistaConsegna, String costoRiparazione,
+			Cliente clienteRiparazione, Televisore tvRiparata, String informazioneRiparazione) throws PersonaException, ParseException, TelevisoreException, DipendenteException ;
 	
 	
 	

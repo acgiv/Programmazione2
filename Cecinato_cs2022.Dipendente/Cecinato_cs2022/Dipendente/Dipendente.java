@@ -1,24 +1,36 @@
-package Cecinato_cs2022.pojoDipendente;
+package Cecinato_cs2022.Dipendente;
 
+import java.text.ParseException;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
+import Cecinato_cs2022.Cliente.Cliente;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal.TIPO_CONTRATTO;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
+import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.Persona.AbstractPersona;
+import Cecinato_cs2022.TelevisoreService.Televisore;
 
 public class Dipendente extends AbstractPersona {
 
 	private int numeroTvVendute;
+	private static int incrementNumeroTv = 0;
 	private String codiceIdentificativo;
 	private String nomeAzienda;
 	private String emailAzienda;
 	private String numeroTelefonoAziendale; // ( Formato: +99 9999999999 )
 	private ConstantGlobal.TIPO_CONTRATTO tipologiaContratto;
 	private String ruolo;
+	protected static Set<String> elencoCodiceIdentificativo = new TreeSet<String>();
+	private Set<Vendita> TvVendute = new TreeSet<Vendita>();
+	private Set<Riparazione> TvRiprarate = new TreeSet<Riparazione>();
 
 	public Dipendente(String codiceIdentificativo) throws PersonaException {
-		if (super.controlloIdentificativo(codiceIdentificativo)) {
+		if (controlloIdentificativo(codiceIdentificativo)) {
 			this.codiceIdentificativo = codiceIdentificativo;
 			elencoCodiceIdentificativo.add(codiceIdentificativo);
 		}
@@ -26,10 +38,6 @@ public class Dipendente extends AbstractPersona {
 
 	public int getNumeroTvVendute() {
 		return numeroTvVendute;
-	}
-
-	public void setNumeroTvVendute(int numeroTvVendute) {
-		this.numeroTvVendute = numeroTvVendute;
 	}
 
 	public String getCodiceIdentificativo() {
@@ -79,11 +87,49 @@ public class Dipendente extends AbstractPersona {
 	public void setTipologiaContratto(ConstantGlobal.TIPO_CONTRATTO tipologiaContratto) {
 		this.tipologiaContratto = tipologiaContratto;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		String stringa = null;
+		stringa = String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_DIPENDENTE, "_")).concat("\n");
+		stringa += String.format("| %110s %104s ", ConstantGlobal.TITOLO_TABELLA_DIPENDENTE, "|\n");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_DIPENDENTE, "_"))
+				.concat("\n");
+		stringa += ConstantGlobal.TABELLA_DIPENDENTE;
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_DIPENDENTE, "_"))
+				.concat("\n");
+		stringa += String.format("| %10s %5s %9s %5s %6s %5s %9s %4s %11s %5s %9s %5s %13s %5s %28s %5s %15s %4s %13s %5s %17s %6s \n", super.VisualizzaNome(), " | ",
+				super.VisualizzaCognome(), " | ", super.VisualizzaEta(), " | ", super.getGenere(), " | ", super.getDataNascita(), " | ", super.VisualizzaCitta(), " | ", getRuolo(), " | ",getEmailAzienda(),
+				" | ",getNumeroTelefonoAziendale()," | ",getNomeAzienda()," | ",getTipologiaContratto()," | ");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_DIPENDENTE, "_")).concat("\n");
+		return stringa;
+	}
 
 	private String calcoloEmailAzienda() {
 		return getNome().concat(getCognome()).concat("@").concat(getNomeAzienda()).concat(".com");
 
 	}
+
+	protected boolean controlloIdentificativo(String codiceIdentificativo) throws PersonaException {
+		boolean result = true;
+		if (codiceIdentificativo.matches(ConstantGlobal.REGEX_CONTROLLO_CODICE_IDENTIFICATIVO)) {
+			Iterator<String> element = elencoCodiceIdentificativo.iterator();
+			while (element.hasNext()) {
+				if (element.next().equals(codiceIdentificativo))
+					result = false;
+			}
+			if (!result) {
+				throw new PersonaException("Il codice Identificativo esiste già");
+			}
+		} else {
+			throw new PersonaException("Il codice Identificativo è errato");
+		}
+		return result;
+	}
+	
+	
 
 
 	private boolean eliminaIdentificativo() throws PersonaException {
@@ -385,7 +431,7 @@ public class Dipendente extends AbstractPersona {
 			result = true;
 		} else {
 			throw new PersonaException(
-					"errore, non può essere cancellata l'email del dipendente perchè non è stato ancora inserita");
+					"errore, non può essere cancellata l'email del dipendente perchè non è stata ancora inserita");
 		}
 
 		return result;
@@ -397,7 +443,7 @@ public class Dipendente extends AbstractPersona {
 	}
 
 	@Override
-	public String visualizzaNomeAziendaDipendenteDipendente() throws PersonaException {
+	public String visualizzaNomeAziendaDipendente() throws PersonaException {
 		return getNomeAzienda();
 	}
 
@@ -421,4 +467,142 @@ public class Dipendente extends AbstractPersona {
 		return getRuolo();
 	}
 
+	@Override
+	public boolean addNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean addPuntiFedeltaAccumulati(String puntiFedelta) throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean addDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean addNumeroCartaFedelta() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public String VisualizzaNomeCartaFedelta() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public String VisualizzaPuntiFedeltaAccumulati() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public String VisualizzaDataInscrizioneTessera() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public String VisualizzaNumeroCartaFedelta() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public String VisualizzaCodiceFiscale() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean eliminaNomeCartaFedelta() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean eliminaPuntiAccumulati() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean eliminaDataInscrizioneTessera() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean eliminaNumeroCartaFedelta() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean modificaNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean modificaPuntiFedeltaAccumulati(String puntiFedelta,
+			ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA operazione) throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean modificaDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean modificaNumeroCartaFedelta() throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	@Override
+	public boolean modificaCodiceFiscale(String codiceFiscale) throws PersonaException {
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
+
+	public boolean vendiTv(Televisore tv, Cliente cliente, String DataVendita, String PrezzoVendita) {
+		boolean result = false;
+		this.numeroTvVendute = ++incrementNumeroTv;
+		TvVendute.add(new Vendita());
+		return result;
+	}
+	
+	
+
+	public boolean riparaTv(String dataRichiestaRiparazione, String dataPrevistaConsegna, String costoRiparazione,
+			Cliente clienteRiparazione, Televisore tvRiparata, String informazioneRiparazione)
+			throws PersonaException, ParseException, TelevisoreException, DipendenteException {
+		boolean result = false;
+		try {
+			Riparazione ripara = new Riparazione(dataRichiestaRiparazione, dataPrevistaConsegna, costoRiparazione,
+					clienteRiparazione, tvRiparata, informazioneRiparazione);
+			if(controlloRiparazione(ripara)) {
+				TvRiprarate.add(ripara);
+				result = true;
+			}
+		} catch (PersonaException e) {
+			System.out.println(e.getMessage());
+		} catch (ParseException e) {
+			System.out.println(e.getMessage());
+		} catch (TelevisoreException e) {
+			System.out.println(e.getMessage());
+		} catch (DipendenteException e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
+	protected boolean controlloRiparazione(Riparazione ripara) throws PersonaException {
+		boolean result = true;
+			Iterator<Riparazione> element = TvRiprarate.iterator();
+			while (element.hasNext()) {
+				if (element.next().equals(ripara))
+					result = false;
+			}
+			if (!result) {
+				throw new PersonaException("questa riparazione è già presente");
+			}	
+		return result;
+	}
+
+	
+	
 }

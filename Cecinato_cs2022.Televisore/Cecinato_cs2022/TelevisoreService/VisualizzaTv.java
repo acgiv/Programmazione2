@@ -11,26 +11,26 @@ public interface VisualizzaTv {
 	 
 	 public  void visualizzaRisoluzioniSchermiTv();
 	 
-	 public MarcheTelevisori visualizzaMarca(Televisore tv);
+	 public MarcheTelevisori visualizzaMarca();
 	 
-	 public double visualizzaAltezza(Televisore tv);
+	 public double visualizzaAltezza();
 	 
-	 public double visualizzaLarghezza(Televisore tv);
+	 public double visualizzaLarghezza();
 	 
-	 public double visualizzaDiagonale(Televisore tv);
+	 public double visualizzaDiagonale();
 	 
-	 public String visualizzaSeriale(Televisore tv);
+	 public String visualizzaSeriale();
 	 
-	 public ConstantGlobal.RISOLUZIONE_TV  visualizzaRisluzione(Televisore tv);
+	 public ConstantGlobal.RISOLUZIONE_TV  visualizzaRisoluzione();
 	 
-	 public ConstantGlobal.TIPOLOGIA_SCHERMO visualizzaTipoSchermo(Televisore tv);
+	 public ConstantGlobal.TIPOLOGIA_SCHERMO visualizzaTipoSchermo();
 	 
-	 public ConstantGlobal.TIPOLOGIA_TV visualizzaTipologiaTv(Televisore tv);
+	 public ConstantGlobal.TIPOLOGIA_TV visualizzaTipologiaTv();
 	 
-	 public int visualizzaNumeroUsb(Televisore tv);
+	 public int visualizzaNumeroUsb();
 	 
-	 public int visualizzaNumeroHdmi(Televisore tv);
+	 public int visualizzaNumeroHdmi();
 	 
-	 public int visualizzaNumeroSmartTv(Televisore tv);
+	 public int visualizzaNumeroSmartTv();
 
 }

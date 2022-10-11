@@ -28,16 +28,15 @@ class TestEliminazioneTv {
 		tvMedio = new TelevisoreMedio(String.valueOf(serial));
 		serial = serial.add(BigInteger.valueOf(1));
 		tvAvanzato = new TelevisoreAvanzato(String.valueOf(serial));
-		System.out.println("Test Aggiunta Marca = lg");
-		tvBase.addTelevisoreBase(tvBase, "lg", "42.04", "60.42", "160.34", "hd", "OLED");
-		tvMedio.addTelevisoreMedio(tvMedio, "lg", "42.04", "60.42", "160.34", "hd", "OLED", "2");
-		tvAvanzato.addTelevisoreAvanzato(tvAvanzato, "lg", "42.04", "60.42", "160.34", "hd", "OLED", "1", "1", "1");
+		tvBase.addTelevisoreBase("lg", "42.04", "60.42", "160.34", "hd", "OLED");
+		tvMedio.addTelevisoreMedio("lg", "42.04", "60.42", "160.34", "hd", "OLED", "2");
+		tvAvanzato.addTelevisoreAvanzato("lg", "42.04", "60.42", "160.34", "hd", "OLED", "1", "1", "1");
 	}
 
 	@Test
 	void testEliminaMarcaTvBase() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della marca di tipo base");
-		assertTrue(tvBase.eliminaMarcaTv(tvBase));
+		assertTrue(tvBase.eliminaMarcaTv());
 		System.out.println(tvBase);
 
 	}
@@ -49,7 +48,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvBase2 = new TelevisoreBase(String.valueOf(serial));
 			System.out.println(tvBase2);
-			assertFalse(tvBase2.eliminaMarcaTv(tvBase2));
+			assertFalse(tvBase2.eliminaMarcaTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -58,7 +57,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaMarcaTvMedio() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della marca tv di tipo medio");
-		assertTrue(tvMedio.eliminaMarcaTv(tvMedio));
+		assertTrue(tvMedio.eliminaMarcaTv());
 		System.out.println(tvMedio);
 
 	}
@@ -70,7 +69,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvMedio2 = new TelevisoreMedio(String.valueOf(serial));
 			System.out.println(tvMedio2);
-			assertFalse(tvMedio2.eliminaMarcaTv(tvMedio2));
+			assertFalse(tvMedio2.eliminaMarcaTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -79,7 +78,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaMarcaTvAvanzato() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della marca tv di tipo avanzato");
-		assertTrue(tvAvanzato.eliminaMarcaTv(tvAvanzato));
+		assertTrue(tvAvanzato.eliminaMarcaTv());
 		System.out.println(tvAvanzato);
 
 	}
@@ -91,7 +90,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvAvanzato2 = new TelevisoreAvanzato(String.valueOf(serial));
 			System.out.println(tvAvanzato2);
-			assertFalse(tvAvanzato2.eliminaMarcaTv(tvAvanzato2));
+			assertFalse(tvAvanzato2.eliminaMarcaTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -100,7 +99,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaAltezzaTvAvanzato() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione dell'altezza tv di tipo avanzato");
-		assertTrue(tvAvanzato.eliminaAltezzaTv(tvAvanzato));
+		assertTrue(tvAvanzato.eliminaAltezzaTv());
 		System.out.println(tvAvanzato);
 
 	}
@@ -112,7 +111,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvAvanzato2 = new TelevisoreAvanzato(String.valueOf(serial));
 			System.out.println(tvAvanzato2);
-			assertFalse(tvAvanzato2.eliminaAltezzaTv(tvAvanzato2));
+			assertFalse(tvAvanzato2.eliminaAltezzaTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -121,7 +120,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaAltezzaTvMedio() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione dell'altezza tv di tipo base");
-		assertTrue(tvMedio.eliminaAltezzaTv(tvMedio));
+		assertTrue(tvMedio.eliminaAltezzaTv());
 		System.out.println(tvMedio);
 
 	}
@@ -133,7 +132,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvMedio2 = new TelevisoreMedio(String.valueOf(serial));
 			System.out.println(tvMedio2);
-			assertFalse(tvMedio2.eliminaAltezzaTv(tvMedio2));
+			assertFalse(tvMedio2.eliminaAltezzaTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -142,7 +141,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaAltezzaTvBase() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione dell'altezza di tipo base");
-		assertTrue(tvBase.eliminaAltezzaTv(tvBase));
+		assertTrue(tvBase.eliminaAltezzaTv());
 		System.out.println(tvBase);
 
 	}
@@ -154,7 +153,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvBase2 = new TelevisoreBase(String.valueOf(serial));
 			System.out.println(tvBase2);
-			assertFalse(tvBase2.eliminaAltezzaTv(tvBase2));
+			assertFalse(tvBase2.eliminaAltezzaTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -163,7 +162,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaLarghezzaTvAvanzato() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della larghezza tv di tipo avanzato");
-		assertTrue(tvAvanzato.eliminaLarghezzaTv(tvAvanzato));
+		assertTrue(tvAvanzato.eliminaLarghezzaTv());
 		System.out.println(tvAvanzato);
 
 	}
@@ -176,7 +175,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvAvanzato2 = new TelevisoreAvanzato(String.valueOf(serial));
 			System.out.println(tvAvanzato2);
-			assertFalse(tvAvanzato2.eliminaLarghezzaTv(tvAvanzato2));
+			assertFalse(tvAvanzato2.eliminaLarghezzaTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -185,7 +184,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaLarghezzaTvMedio() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della Larghezza tv di tipo base");
-		assertTrue(tvMedio.eliminaLarghezzaTv(tvMedio));
+		assertTrue(tvMedio.eliminaLarghezzaTv());
 		System.out.println(tvMedio);
 
 	}
@@ -197,7 +196,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvMedio2 = new TelevisoreMedio(String.valueOf(serial));
 			System.out.println(tvMedio2);
-			assertFalse(tvMedio2.eliminaLarghezzaTv(tvMedio2));
+			assertFalse(tvMedio2.eliminaLarghezzaTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -206,7 +205,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaLarghezzaTvBase() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della Larghezza di tipo base");
-		assertTrue(tvBase.eliminaLarghezzaTv(tvBase));
+		assertTrue(tvBase.eliminaLarghezzaTv());
 		System.out.println(tvBase);
 
 	}
@@ -218,7 +217,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvBase2 = new TelevisoreBase(String.valueOf(serial));
 			System.out.println(tvBase2);
-			assertFalse(tvBase2.eliminaLarghezzaTv(tvBase2));
+			assertFalse(tvBase2.eliminaLarghezzaTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -227,7 +226,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaNumberHdmiTvAvanzato() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione del numero di hdmi della tv di tipo avanzato");
-		assertTrue(tvAvanzato.eliminaNumberHdmiTv(tvAvanzato));
+		assertTrue(tvAvanzato.eliminaNumberHdmiTv());
 		System.out.println(tvAvanzato);
 
 	}
@@ -240,7 +239,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvAvanzato2 = new TelevisoreAvanzato(String.valueOf(serial));
 			System.out.println(tvAvanzato2);
-			assertFalse(tvAvanzato2.eliminaNumberHdmiTv(tvAvanzato2));
+			assertFalse(tvAvanzato2.eliminaNumberHdmiTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -249,7 +248,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaNumberHdmiTMedio()  {
 		System.out.println("Test sull'eliminzazione del numero di hdmi della tv di tipo base");
-		assertFalse(tvMedio.eliminaNumberHdmiTv(tvMedio));
+		assertFalse(tvMedio.eliminaNumberHdmiTv());
 		System.out.println(tvMedio);
 
 	}
@@ -262,7 +261,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvMedio2 = new TelevisoreMedio(String.valueOf(serial));
 			System.out.println(tvMedio2);
-			assertFalse(tvMedio2.eliminaNumberHdmiTv(tvMedio2));
+			assertFalse(tvMedio2.eliminaNumberHdmiTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -271,7 +270,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaNumberHdmiTvBase() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione del numero di hdmi della di tipo base");
-		assertFalse(tvBase.eliminaNumberHdmiTv(tvBase));
+		assertFalse(tvBase.eliminaNumberHdmiTv());
 		System.out.println(tvBase);
 
 	}
@@ -283,7 +282,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvBase2 = new TelevisoreBase(String.valueOf(serial));
 			System.out.println(tvBase2);
-			assertFalse(tvBase2.eliminaNumberHdmiTv(tvBase2));
+			assertFalse(tvBase2.eliminaNumberHdmiTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -292,7 +291,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaNumberUsbTvAvanzato() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione del numero di usb della tv di tipo avanzato");
-		assertTrue(tvAvanzato.eliminaNumberUsbTv(tvAvanzato));
+		assertTrue(tvAvanzato.eliminaNumberUsbTv());
 		System.out.println(tvAvanzato);
 
 	}
@@ -305,7 +304,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvAvanzato2 = new TelevisoreAvanzato(String.valueOf(serial));
 			System.out.println(tvAvanzato2);
-			assertFalse(tvAvanzato2.eliminaNumberUsbTv(tvAvanzato2));
+			assertFalse(tvAvanzato2.eliminaNumberUsbTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -314,7 +313,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaNumberUsbTvMedio()  {
 		System.out.println("Test sull'eliminzazione del numero di usb della tv di tipo base");
-		assertTrue(tvMedio.eliminaNumberUsbTv(tvMedio));
+		assertTrue(tvMedio.eliminaNumberUsbTv());
 		System.out.println(tvMedio);
 
 	}
@@ -327,7 +326,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvMedio2 = new TelevisoreMedio(String.valueOf(serial));
 			System.out.println(tvMedio2);
-			assertFalse(tvMedio2.eliminaNumberUsbTv(tvMedio2));
+			assertFalse(tvMedio2.eliminaNumberUsbTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -336,7 +335,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaNumberUsbTvBase() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione del numero di usb  di tipo base");
-		assertFalse(tvBase.eliminaNumberUsbTv(tvBase));
+		assertFalse(tvBase.eliminaNumberUsbTv());
 		System.out.println(tvBase);
 
 	}
@@ -348,7 +347,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvBase2 = new TelevisoreBase(String.valueOf(serial));
 			System.out.println(tvBase2);
-			assertFalse(tvBase2.eliminaNumberUsbTv(tvBase2));
+			assertFalse(tvBase2.eliminaNumberUsbTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -357,7 +356,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaDiagonaleTvAvanzato() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della diagonale tv di tipo avanzato");
-		assertTrue(tvAvanzato.eliminaDiagonaleTv(tvAvanzato));
+		assertTrue(tvAvanzato.eliminaDiagonaleTv());
 		System.out.println(tvAvanzato);
 
 	}
@@ -370,7 +369,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvAvanzato2 = new TelevisoreAvanzato(String.valueOf(serial));
 			System.out.println(tvAvanzato2);
-			assertFalse(tvAvanzato2.eliminaDiagonaleTv(tvAvanzato2));
+			assertFalse(tvAvanzato2.eliminaDiagonaleTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -379,7 +378,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaDiagonaleTvMedio() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della diagonale tv di tipo base");
-		assertTrue(tvMedio.eliminaDiagonaleTv(tvMedio));
+		assertTrue(tvMedio.eliminaDiagonaleTv());
 		System.out.println(tvMedio);
 
 	}
@@ -391,7 +390,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvMedio2 = new TelevisoreMedio(String.valueOf(serial));
 			System.out.println(tvMedio2);
-			assertFalse(tvMedio2.eliminaDiagonaleTv(tvMedio2));
+			assertFalse(tvMedio2.eliminaDiagonaleTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -400,7 +399,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaDiagonaleTvBase() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della diagonale di tipo base");
-		assertTrue(tvBase.eliminaDiagonaleTv(tvBase));
+		assertTrue(tvBase.eliminaDiagonaleTv());
 		System.out.println(tvBase);
 
 	}
@@ -412,7 +411,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvBase2 = new TelevisoreBase(String.valueOf(serial));
 			System.out.println(tvBase2);
-			assertFalse(tvBase2.eliminaDiagonaleTv(tvBase2));
+			assertFalse(tvBase2.eliminaDiagonaleTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -421,7 +420,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaeliminaNumberSmartTvAvanzato() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione del numero di smart tv della tv di tipo avanzato");
-		assertTrue(tvAvanzato. eliminaNumberSmartTv(tvAvanzato));
+		assertTrue(tvAvanzato.eliminaNumberSmartTv());
 		System.out.println(tvAvanzato);
 
 	}
@@ -434,7 +433,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvAvanzato2 = new TelevisoreAvanzato(String.valueOf(serial));
 			System.out.println(tvAvanzato2);
-			assertFalse(tvAvanzato2. eliminaNumberSmartTv(tvAvanzato2));
+			assertFalse(tvAvanzato2.eliminaNumberSmartTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -443,7 +442,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaeliminaNumberSmartTvMedio()  {
 		System.out.println("Test sull'eliminzazione del numero di smart tv della tv di tipo base");
-		assertFalse(tvMedio. eliminaNumberSmartTv(tvMedio));
+		assertFalse(tvMedio.eliminaNumberSmartTv());
 		System.out.println(tvMedio);
 
 	}
@@ -456,7 +455,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvMedio2 = new TelevisoreMedio(String.valueOf(serial));
 			System.out.println(tvMedio2);
-			assertFalse(tvMedio2. eliminaNumberSmartTv(tvMedio2));
+			assertFalse(tvMedio2.eliminaNumberSmartTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -465,7 +464,7 @@ class TestEliminazioneTv {
 	@Test
 	void testEliminaeliminaNumberSmartTvBase() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione del numero di smart tv  di tipo base");
-		assertFalse(tvBase.eliminaNumberSmartTv(tvBase));
+		assertFalse(tvBase.eliminaNumberSmartTv());
 		System.out.println(tvBase);
 
 	}
@@ -477,7 +476,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvBase2 = new TelevisoreBase(String.valueOf(serial));
 			System.out.println(tvBase2);
-			assertFalse(tvBase2.eliminaNumberSmartTv(tvBase2));
+			assertFalse(tvBase2.eliminaNumberSmartTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -490,7 +489,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvBase2 = new TelevisoreBase(String.valueOf(serial));
 			System.out.println(tvBase2);
-			assertFalse(tvBase2.eliminaRisoluzioneTv(tvBase2));
+			assertFalse(tvBase2.eliminaRisoluzioneTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -499,7 +498,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaRisoluzioneTvMedio() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della risoluzione tv di tipo medio");
-		assertTrue(tvMedio.eliminaRisoluzioneTv(tvMedio));
+		assertTrue(tvMedio.eliminaRisoluzioneTv());
 		System.out.println(tvMedio);
 
 	}
@@ -511,7 +510,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvMedio2 = new TelevisoreMedio(String.valueOf(serial));
 			System.out.println(tvMedio2);
-			assertFalse(tvMedio2.eliminaRisoluzioneTv(tvMedio2));
+			assertFalse(tvMedio2.eliminaRisoluzioneTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -520,7 +519,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaRisoluzioneTvAvanzato() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione della risoluzione tv di tipo avanzato");
-		assertTrue(tvAvanzato.eliminaRisoluzioneTv(tvAvanzato));
+		assertTrue(tvAvanzato.eliminaRisoluzioneTv());
 		System.out.println(tvAvanzato);
 
 	}
@@ -532,7 +531,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvAvanzato2 = new TelevisoreAvanzato(String.valueOf(serial));
 			System.out.println(tvAvanzato2);
-			assertFalse(tvAvanzato2.eliminaRisoluzioneTv(tvAvanzato2));
+			assertFalse(tvAvanzato2.eliminaRisoluzioneTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -546,7 +545,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvBase2 = new TelevisoreBase(String.valueOf(serial));
 			System.out.println(tvBase2);
-			assertFalse(tvBase2.eliminaTiposchermoTv(tvBase2));
+			assertFalse(tvBase2.eliminaTiposchermoTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -555,7 +554,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaTiposchermoTvMedio() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione del tipo di schermo della tv di tipo medio");
-		assertTrue(tvMedio.eliminaTiposchermoTv(tvMedio));
+		assertTrue(tvMedio.eliminaTiposchermoTv());
 		System.out.println(tvMedio);
 
 	}
@@ -567,7 +566,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvMedio2 = new TelevisoreMedio(String.valueOf(serial));
 			System.out.println(tvMedio2);
-			assertFalse(tvMedio2.eliminaTiposchermoTv(tvMedio2));
+			assertFalse(tvMedio2.eliminaTiposchermoTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}
@@ -576,7 +575,7 @@ class TestEliminazioneTv {
 	@Test
 	void testeliminaTiposchermoTvAvanzato() throws TelevisoreException {
 		System.out.println("Test sull'eliminzazione del tipo di schermo della tv di tipo avanzato");
-		assertTrue(tvAvanzato.eliminaTiposchermoTv(tvAvanzato));
+		assertTrue(tvAvanzato.eliminaTiposchermoTv());
 		System.out.println(tvAvanzato);
 
 	}
@@ -588,7 +587,7 @@ class TestEliminazioneTv {
 			serial = serial.add(BigInteger.valueOf(1));
 			Televisore tvAvanzato2 = new TelevisoreAvanzato(String.valueOf(serial));
 			System.out.println(tvAvanzato2);
-			assertFalse(tvAvanzato2.eliminaTiposchermoTv(tvAvanzato2));
+			assertFalse(tvAvanzato2.eliminaTiposchermoTv());
 		} catch (TelevisoreException e) {
 			System.err.println(e.getMessage().concat("\n"));
 		}

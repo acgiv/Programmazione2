@@ -7,7 +7,7 @@ public interface VisualizzaDipendete {
 	
 	public  String visualizzaCodiceIdentificativoDipendete() throws PersonaException;
 	
-	public  String visualizzaNomeAziendaDipendenteDipendente() throws PersonaException;
+	public  String visualizzaNomeAziendaDipendente() throws PersonaException;
 
 	public  String visualizzaEmailAziendaleDipendente() throws PersonaException;
 

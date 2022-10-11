@@ -35,5 +35,7 @@ public class TelevisoreException extends Exception {
 		 return getMessage() + " | " + message + "|\n";
 	}
 	
-	
+	public String ErrorTipologiaTelevisoreException() {
+		return getMessage() + "| La funzionalità che vuole usare non può essere usata per questa Tipologia di Televisore |\n";
+	}
 }
