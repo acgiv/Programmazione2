@@ -2,6 +2,8 @@ package Cecinato_cs2022.Persona;
 
 import java.text.ParseException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import Cecinato_cs2022.Cliente.Cliente;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.DipendenteException.DipendenteException;
@@ -18,7 +20,6 @@ public abstract class AbstractPersona implements Persona {
 	private ConstantGlobal.GENERE genere;
 	private String dataNascita; // il formato sarà 01/02/2022
 	private String citta;
-
 
 	public AbstractPersona() {
 
@@ -71,30 +72,34 @@ public abstract class AbstractPersona implements Persona {
 	public void setCitta(String citta) {
 		this.citta = citta;
 	}
-
+	
+	protected final String upperCaseFirst(String stringa) {
+		 String result = stringa.substring(0,1).toUpperCase();
+	      result += stringa.substring(1, stringa.length()).toLowerCase();
+	      return result;
+	   }
 
 	protected final boolean controlloGenere(String genere) {
 		boolean result = false;
 		for (ConstantGlobal.GENERE item : ConstantGlobal.GENERE.values()) {
-			if (String.valueOf(item).equals(genere)) {
+			if (StringUtils.equals(String.valueOf(item), genere)) {
 				result = true;
 				break;
 			}
 		}
 		return result;
 	}
-	
+
 	protected final boolean controlloTipoContratto(String tipoContratto) {
 		boolean result = false;
 		for (ConstantGlobal.TIPO_CONTRATTO item : ConstantGlobal.TIPO_CONTRATTO.values()) {
-			if (String.valueOf(item).equals(tipoContratto)) {
+			if (StringUtils.equals(String.valueOf(item), tipoContratto)) {
 				result = true;
 				break;
 			}
 		}
 		return result;
 	}
-	
 
 	public String VisualizzaNome() {
 		return getNome();
@@ -131,9 +136,9 @@ public abstract class AbstractPersona implements Persona {
 
 	public boolean addNome(String nome) throws PersonaException {
 		boolean result = false;
-		if (!nome.isEmpty()) {
-			if (nome.matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA)) {
-				if (getNome() == null) {
+			if (StringUtils.isNotBlank(nome) && StringUtils.isAlphaSpace(nome)) {
+				if (StringUtils.isEmpty(getNome()) ) {
+					nome = upperCaseFirst(nome.trim());
 					setNome(nome);
 					result = true;
 				} else {
@@ -143,17 +148,14 @@ public abstract class AbstractPersona implements Persona {
 			} else {
 				throw new PersonaException("Errore nell'inserimento del nome");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
 		return result;
 	}
 
 	public boolean addCognome(String cognome) throws PersonaException {
 		boolean result = false;
-		if (!nome.isEmpty()) {
-			if (nome.matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA)) {
-				if (getCognome() == null) {
+			if (StringUtils.isNotBlank(cognome) && StringUtils.isAlphaSpace(cognome)) {
+				if (StringUtils.isEmpty(getCognome())) {
+					cognome = upperCaseFirst(cognome.trim());
 					setCognome(cognome);
 					result = true;
 				} else {
@@ -163,32 +165,28 @@ public abstract class AbstractPersona implements Persona {
 			} else {
 				throw new PersonaException("Errore nell'inserimento del cognome");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
 		return result;
 	}
 
 	public boolean addEta(int eta) throws PersonaException {
 		boolean result = false;
-		if (getEta() == 0) {
-			if (eta >= ConstantGlobal.ETA_MINIMA_CLIENTE && eta <= ConstantGlobal.ETA_MASSIMA_CLIENTE) {
-				setEta(eta);
-				result = true;
+			if (getEta() == 0) {
+				if (eta >= ConstantGlobal.ETA_MINIMA_CLIENTE && eta <= ConstantGlobal.ETA_MASSIMA_CLIENTE) {
+					setEta(eta);
+					result = true;
+				} else {
+					throw new PersonaException("Errore nell'inserimento dell'età");
+				}
 			} else {
-				throw new PersonaException("Errore nell'inserimento dell'età");
+				throw new PersonaException("Errore non può essere aggiunta l'età della persona perchè è gia presente");
 			}
-		} else {
-			throw new PersonaException("Errore non può essere aggiunta l'età della persona perchè è gia presente");
-		}
 		return result;
 	}
 
 	public boolean addGenere(String genere) throws PersonaException {
 		boolean result = false;
-		if (!genere.isEmpty()) {
-			if (controlloGenere(genere.toUpperCase())) {
-				if (getGenere() == null) {
+			if (StringUtils.isNotBlank(genere) && controlloGenere(genere.toUpperCase()) ) {
+				if (getGenere()==null) {
 					setGenere(ConstantGlobal.GENERE.valueOf(genere.toUpperCase()));
 					result = true;
 				} else {
@@ -198,18 +196,14 @@ public abstract class AbstractPersona implements Persona {
 			} else {
 				throw new PersonaException("Errore nell'inserimento del genere della persona");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
 		return result;
 	}
 
 	public boolean addDataNascita(String dataNascita) throws PersonaException {
 		boolean result = false;
-		if (!dataNascita.isEmpty()) {
-			if (dataNascita.matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
-				if (getDataNascita() == null) {
-					setDataNascita(dataNascita);
+			if (StringUtils.isNotBlank(dataNascita) && dataNascita.trim().matches(ConstantGlobal.REGEX_CONTROLLO_DATA) ) {
+				if (StringUtils.isEmpty(getDataNascita())) {
+					setDataNascita(dataNascita.trim());
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -218,68 +212,55 @@ public abstract class AbstractPersona implements Persona {
 			} else {
 				throw new PersonaException("Errore nell'inserimento della data");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
 		return result;
 	}
 
 	public boolean addCitta(String citta) throws PersonaException {
 		boolean result = false;
-		if (!citta.isEmpty()) {
-			if (citta.matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA)) {
-				if (getCitta() == null) {
-					setCitta(citta);
-					result = true;
-				} else {
-					throw new PersonaException(
-							"errore, non può essere aggiunta la citta della persona perchè è gia presente");
-				}
+		
+		if (StringUtils.isAlphaSpace(citta) && StringUtils.isNotBlank(citta) ) {
+			if (StringUtils.isEmpty(getCitta())) {
+				setCitta(upperCaseFirst(citta.trim()));
+				result = true;
 			} else {
-				throw new PersonaException("Errore nell'inserimento del della città");
+				throw new PersonaException(
+						"errore, non può essere aggiunta la citta della persona perchè è gia presente");
 			}
 		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
+			throw new PersonaException("Errore nell'inserimento del della città");
 		}
 		return result;
 	}
 
 	public boolean modificaNome(String nome) throws PersonaException {
 		boolean result = false;
-		if (!nome.isEmpty()) {
-			if (nome.matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA)) {
-				if (getNome() != null) {
-					setNome(nome);
+			if ( StringUtils.isAlphaSpace(nome) && StringUtils.isNotBlank(nome)) {
+				if (StringUtils.isNotBlank(getNome())) {
+					setNome(upperCaseFirst(nome.trim()));
+					result= true;
 				} else {
 					throw new PersonaException(
 							"errore, non può essere modificato il nome della persona perchè è stato ancora inserito");
 				}
 			} else {
 				throw new PersonaException("Errore nell'inserimento del nome");
-			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
+			} 
 		return result;
 
 	}
 
 	public boolean modificaCognome(String cognome) throws PersonaException {
 		boolean result = false;
-		if (!nome.isEmpty()) {
-			if (nome.matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA)) {
-				if (getCognome() != null) {
-					setCognome(cognome);
-					result = true;
-				} else {
-					throw new PersonaException(
-							"errore, non può essere modificato il cognome della persona perchè  non è stato ancora inserito");
-				}
+		if (StringUtils.isAlphaSpace(cognome) && StringUtils.isNotBlank(cognome)) {
+			if (StringUtils.isNotBlank(getCognome())) {
+				setCognome(upperCaseFirst(cognome.trim()));
+				result = true;
 			} else {
-				throw new PersonaException("Errore nell'inserimento del cognome");
+				throw new PersonaException(
+						"errore, non può essere modificato il cognome della persona perchè  non è stato ancora inserito");
 			}
 		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
+			throw new PersonaException("Errore nell'inserimento del cognome");
 		}
 		return result;
 	}
@@ -302,50 +283,42 @@ public abstract class AbstractPersona implements Persona {
 
 	public boolean modificaGenere(String genere) throws PersonaException {
 		boolean result = false;
-		if (!genere.isEmpty()) {
-			if (controlloGenere(genere)) {
-				if (getGenere() != null) {
-					setGenere(ConstantGlobal.GENERE.valueOf(genere));
-					result = true;
-				} else {
-					throw new PersonaException(
-							"errore, non può essere modificato il genere della persona perchè non è stato ancora inserito");
-				}
+		if (StringUtils.isNotBlank((String)genere) && controlloGenere(genere.trim())) {
+			if ( getGenere() !=  null) {
+				setGenere(ConstantGlobal.GENERE.valueOf(genere.trim()));
+				result = true;
 			} else {
-				throw new PersonaException("Errore nell'inserimento del genere della persona");
+				throw new PersonaException(
+						"errore, non può essere modificato il genere della persona perchè non è stato ancora inserito");
 			}
 		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
+			throw new PersonaException("Errore nell'inserimento del genere della persona");
 		}
 		return result;
 	}
 
 	public boolean modificaDataNascita(String dataNascita) throws PersonaException {
 		boolean result = false;
-		if (!dataNascita.isEmpty()) {
-			if (dataNascita.matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
-				if (getDataNascita() != null) {
-					setDataNascita(dataNascita);
-					result = true;
-				} else {
-					throw new PersonaException(
-							"errore, non può essere modificata la data di nascita della persona perchè non è stata ancora inserita");
-				}
+		if (StringUtils.isNotBlank(dataNascita)  &&  dataNascita.trim().matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
+			if (StringUtils.isNotBlank(getDataNascita())) {
+				setDataNascita(dataNascita.trim());
+				result = true;
 			} else {
-				throw new PersonaException("Errore nell'inserimento della data");
+				throw new PersonaException(
+						"errore, non può essere modificata la data di nascita della persona perchè non è stata ancora inserita");
 			}
 		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
+			throw new PersonaException("Errore nell'inserimento della data");
 		}
 		return result;
 	}
 
 	public boolean modificaCitta(String citta) throws PersonaException {
 		boolean result = false;
-		if (!citta.isEmpty()) {
-			if (citta.matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA)) {
-				if (getCognome() != null) {
-					setCitta(citta);
+		try {
+			if (StringUtils.isAlphaSpace(citta) &&  StringUtils.isNotBlank(citta)) {
+				if (getCitta() != null) {
+					setCitta(upperCaseFirst(citta.trim()));
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -354,15 +327,15 @@ public abstract class AbstractPersona implements Persona {
 			} else {
 				throw new PersonaException("Errore nell'inserimento del della città");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
+		} catch(NullPointerException e){
+			System.err.println("E' stato inserito un valore nullo");
 		}
 		return result;
 	}
 
 	public boolean eliminaNome() throws PersonaException {
 		boolean result = false;
-		if (getNome() != null) {
+		if (StringUtils.isNotBlank(getNome())) {
 			setNome(null);
 			result = true;
 		} else {
@@ -374,7 +347,7 @@ public abstract class AbstractPersona implements Persona {
 
 	public boolean eliminaCognome() throws PersonaException {
 		boolean result = false;
-		if (getCognome() != null) {
+		if (StringUtils.isNotBlank(getCognome())) {
 			setCognome(null);
 			result = true;
 		} else {
@@ -398,7 +371,7 @@ public abstract class AbstractPersona implements Persona {
 
 	public boolean eliminaGenere() throws PersonaException {
 		boolean result = false;
-		if (getGenere() != null) {
+		if (getGenere()!= null) {
 			setGenere(null);
 			result = true;
 		} else {
@@ -410,7 +383,7 @@ public abstract class AbstractPersona implements Persona {
 
 	public boolean eliminaDataNascita() throws PersonaException {
 		boolean result = false;
-		if (getDataNascita() != null) {
+		if (StringUtils.isNotBlank(getDataNascita())) {
 			setDataNascita(null);
 			result = true;
 		} else {
@@ -422,7 +395,7 @@ public abstract class AbstractPersona implements Persona {
 
 	public boolean eliminaCitta() throws PersonaException {
 		boolean result = false;
-		if (getCognome() != null) {
+		if (StringUtils.isNotBlank(getCitta())) {
 			setCitta(null);
 			result = true;
 		} else {
@@ -432,17 +405,17 @@ public abstract class AbstractPersona implements Persona {
 
 		return result;
 	}
-	
+
 	public abstract boolean addNomeAzienda(String nomeAzienda) throws PersonaException;
-	
+
 	public abstract boolean addEmailAziendale() throws PersonaException;
-	
-	public abstract boolean addNumeroTelefonoAziendale( String  numeroTelefonoAziendale) throws PersonaException;
 
-	public abstract boolean addtipologiaContratto( String tipologiaContratto) throws PersonaException;
+	public abstract boolean addNumeroTelefonoAziendale(String numeroTelefonoAziendale) throws PersonaException;
 
-	public abstract boolean addRuolo( String ruolo) throws PersonaException;
-	
+	public abstract boolean addtipologiaContratto(String tipologiaContratto) throws PersonaException;
+
+	public abstract boolean addRuolo(String ruolo) throws PersonaException;
+
 	public abstract boolean modificaNomeAzienda(String nomeAzienda) throws PersonaException;
 
 	public abstract boolean modificaEmailAziendale() throws PersonaException;
@@ -450,11 +423,11 @@ public abstract class AbstractPersona implements Persona {
 	public abstract boolean modificaNumeroTelefonoAziendale(String numeroTelefonoAziendale) throws PersonaException;
 
 	public abstract boolean modificatipologiaContratto(String tipologiaContratto) throws PersonaException;
-	
+
 	public abstract boolean modificaCodiceIdentificativo(String codiceIdentificativo) throws PersonaException;
-	
-	public abstract boolean modificaRuolo( String ruolo) throws PersonaException;
-	
+
+	public abstract boolean modificaRuolo(String ruolo) throws PersonaException;
+
 	public abstract boolean eliminaNomeAzienda() throws PersonaException;
 
 	public abstract boolean eliminaEmailAziendale() throws PersonaException;
@@ -462,11 +435,11 @@ public abstract class AbstractPersona implements Persona {
 	public abstract boolean eliminaNumeroTelefonoAziendale() throws PersonaException;
 
 	public abstract boolean eliminatipologiaContratto() throws PersonaException;
-	
+
 	public abstract boolean eliminaRuolo() throws PersonaException;
-	
+
 	public abstract String visualizzaCodiceIdentificativoDipendete() throws PersonaException;
-	
+
 	public abstract String visualizzaNomeAziendaDipendente() throws PersonaException;
 
 	public abstract String visualizzaEmailAziendaleDipendente() throws PersonaException;
@@ -474,49 +447,48 @@ public abstract class AbstractPersona implements Persona {
 	public abstract String visualizzaNumeroTelefonoAziendaleDipendente() throws PersonaException;
 
 	public abstract ConstantGlobal.TIPO_CONTRATTO visualizzatipologiaContrattoDipendente() throws PersonaException;
-	
+
 	public abstract String visualizzaRuoloDipendente() throws PersonaException;
-	
+
 	public abstract boolean addNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException;
 
-	public abstract boolean  addPuntiFedeltaAccumulati(String puntiFedelta) throws PersonaException ;
+	public abstract boolean addPuntiFedeltaAccumulati(String puntiFedelta) throws PersonaException;
 
-	public abstract boolean  addDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException ;
+	public abstract boolean addDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException;
 
-	public abstract boolean  addNumeroCartaFedelta() throws PersonaException ;
+	public abstract boolean addNumeroCartaFedelta() throws PersonaException;
 
-	public abstract String VisualizzaNomeCartaFedelta() throws PersonaException ;
-	
-	public abstract String VisualizzaPuntiFedeltaAccumulati() throws PersonaException ;
+	public abstract String VisualizzaNomeCartaFedelta() throws PersonaException;
+
+	public abstract String VisualizzaPuntiFedeltaAccumulati() throws PersonaException;
 
 	public abstract String VisualizzaDataInscrizioneTessera() throws PersonaException;
 
-	public abstract String VisualizzaNumeroCartaFedelta() throws PersonaException ;
-	
+	public abstract String VisualizzaNumeroCartaFedelta() throws PersonaException;
+
 	public abstract String VisualizzaCodiceFiscale() throws PersonaException;
 
 	public abstract boolean eliminaNomeCartaFedelta() throws PersonaException;
 
-	public abstract boolean eliminaPuntiAccumulati() throws PersonaException ;
+	public abstract boolean eliminaPuntiAccumulati() throws PersonaException;
 
 	public abstract boolean eliminaDataInscrizioneTessera() throws PersonaException;
 
-	public abstract boolean eliminaNumeroCartaFedelta() throws PersonaException ;
+	public abstract boolean eliminaNumeroCartaFedelta() throws PersonaException;
 
-	public abstract boolean modificaNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException ;
+	public abstract boolean modificaNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException;
 
-	public abstract boolean  modificaPuntiFedeltaAccumulati(String puntiFedelta, ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA operazione) throws PersonaException ;
+	public abstract boolean modificaPuntiFedeltaAccumulati(String puntiFedelta,
+			ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA operazione) throws PersonaException;
 
-	public abstract boolean  modificaDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException ;
+	public abstract boolean modificaDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException;
 
-	public abstract boolean modificaNumeroCartaFedelta() throws PersonaException ;
+	public abstract boolean modificaNumeroCartaFedelta() throws PersonaException;
 
 	public abstract boolean modificaCodiceFiscale(String codiceFiscale) throws PersonaException;
-	
-	public abstract boolean  riparaTv(String dataRichiestaRiparazione, String dataPrevistaConsegna, String costoRiparazione,
-			Cliente clienteRiparazione, Televisore tvRiparata, String informazioneRiparazione) throws PersonaException, ParseException, TelevisoreException, DipendenteException ;
-	
-	
-	
-	
+
+	public abstract boolean riparaTv(String dataRichiestaRiparazione, String dataPrevistaConsegna,
+			String costoRiparazione, Cliente clienteRiparazione, Televisore tvRiparata, String informazioneRiparazione)
+			throws PersonaException, ParseException, TelevisoreException, DipendenteException;
+
 }

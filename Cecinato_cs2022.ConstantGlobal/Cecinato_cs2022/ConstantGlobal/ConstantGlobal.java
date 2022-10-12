@@ -71,7 +71,7 @@ public interface ConstantGlobal {
 			"ALTEZZA", " | ", "LARGHEZZA", " | ", "DIAGONALE", " | ", "RISOLUZIONE", " | ", "TIPO SCHERMO", " | ", "NUMERO USB", " | ", "NUMERO HDMI", " | ", "NUMERO SMART TV", " | ");
 	
 	
-	String  TABELLA_DIPENDENTE  = String.format("| %10s %5s %9s %5s %7s %4s %8s %5s %8s %4s %9s %5s %7s %3s %24s %9s %11s %4s %12s %5s %12s %3s \n", "NOME", " | ", "COGNOME", " | ",
+	String  TABELLA_DIPENDENTE  = String.format("| %10s %5s %9s %5s %7s %4s %8s %5s %8s %4s %9s %5s %16s %5s %24s %9s %14s %4s %12s %5s %12s %3s \n", "NOME", " | ", "COGNOME", " | ",
 			"ETA'", " | ", "GENERE", " | ", "DATA NASCITA", " | ", "CITTA'", " | ", "RUOLO_AZIENDALE", " | ", "EMAIL AZIENDALE", " | ", "NUMERO TELEFONO", " | ", "NOME AZIENDA ", " | ", "TIPOLOGIA CONTRATTO ", " | ");
 	
 	
@@ -85,7 +85,7 @@ public interface ConstantGlobal {
 	int LUNGHEZZA_CONTORNO_TABELLA_DIPENDENTE = TABELLA_DIPENDENTE.length()-4;
 	
 	
-	String REGEX_CONTROLLO_DATA = "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$";
+	String REGEX_CONTROLLO_DATA = "^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\\d\\d$";
 	
 	String REGEX_CONTROLLO_NUMERI_FLOAT = "^[+,-]?(\\d+(\\.\\d*)?)|((\\.\\d+))?$";
 	
@@ -93,7 +93,9 @@ public interface ConstantGlobal {
 	
 	String REGEX_CONTROLLO_CODICE_IDENTIFICATIVO = "^[a-zA-Z0-9]{10}$";
 	
-	String REGEX_CONTROLLO_STRINGA="^[A-Za-z]+$";
+	String REGEX_CONTROLLO_s="^[A-Za-z]+$";
+	
+	String REGEX_CONTROLLO_SPAZI_STRINGA="^[]*[A-Za-z]+[*]$";
 	
 	String REGEX_CONTROLLO_STRINGA_NUMERI="^[A-Za-z0-9]+$";
 	

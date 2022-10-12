@@ -13,5 +13,6 @@
 	<classpathentry kind="src" path="Cecinato_cs2022.Cliente"/>
 	<classpathentry kind="src" path="Cecinato_cs2022.Dipendente"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="D:/Progetti/Java/Programmazione2/706576_Cecinato_cs2022/libreie/commons-lang3-3.12.0/commons-lang3-3.12.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
