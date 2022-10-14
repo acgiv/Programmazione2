@@ -2,11 +2,14 @@ package Cecinato_cs2022.Cliente;
 
 import java.math.BigInteger;
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
+
+import org.apache.commons.lang3.StringUtils;
 
 import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
@@ -16,6 +19,7 @@ import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.Persona.AbstractPersona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
+import ControlliGlobal.ControlliGlobal;
 
 public class Cliente extends AbstractPersona {
 
@@ -76,13 +80,31 @@ public class Cliente extends AbstractPersona {
 	public void setNumeroCartaFedelta(String numeroCartaFedelta) {
 		this.numeroCartaFedelta = numeroCartaFedelta;
 	}
+	
+	@Override
+	public String toString() {
+		String stringa = null;
+		stringa = String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_CLIENTE, "_")).concat("\n");
+		stringa += String.format("| %110s %10s %93s", ConstantGlobal.TITOLO_TABELLA_CLIENTE, getCodiceFiscale(), "|\n");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_CLIENTE, "_"))
+				.concat("\n");
+		stringa += ConstantGlobal.TABELLA_CLIENTE;
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_CLIENTE, "_"))
+				.concat("\n");
+		stringa += String.format("| %18s %5s %10s %5s %9s %5s %6s %5s %9s %4s %11s %5s %9s %5s %20s %6s %17s %10s %13s %5s %12s %11s \n",getCodiceFiscale()," | ", super.VisualizzaNome(), " | ",
+				super.VisualizzaCognome(), " | ", super.VisualizzaEta(), " | ", super.getGenere(), " | ", super.getDataNascita(), " | ", super.VisualizzaCitta(), " | ", getNomeCartaFedelta(), " | ",getDataInscrizioneTessera(),
+				" | ",getNumeroCartaFedelta()," | ",getPuntiFedelta()," | ");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_CLIENTE, "_")).concat("\n");
+		return stringa;
+	}
+
 
 	protected boolean controlloCodiceFiscale(String codiceFiscale) throws PersonaException {
 		boolean result = true;
-		if (codiceFiscale.matches(ConstantGlobal.REGEX_CONTROLLO_CODICE_FISCALE)) {
+		if (StringUtils.isNotBlank(codiceFiscale) && codiceFiscale.matches(ConstantGlobal.REGEX_CONTROLLO_CODICE_FISCALE)) {
 			Iterator<String> element = elencoCodiceFiscale.iterator();
 			while (element.hasNext()) {
-				if (element.next().equals(codiceFiscale))
+				if (StringUtils.equals(element.next(), codiceFiscale))
 					result = false;
 			}
 			if (!result) {
@@ -96,10 +118,11 @@ public class Cliente extends AbstractPersona {
 
 	final boolean controlloNumeroCartafedelta(String numeroCarta) {
 		boolean result = true;
-		if (!NumeroCarteCreate.isEmpty()) {
+		if (StringUtils.isNotBlank(
+				numeroCarta)) {
 			Iterator<String> element = NumeroCarteCreate.iterator();
 			while (element.hasNext()) {
-				if (element.next().equals(numeroCarta))
+				if (StringUtils.equals(element.next(), numeroCarta))
 					result = false;
 			}
 			if (result) {
@@ -111,15 +134,7 @@ public class Cliente extends AbstractPersona {
 		return result;
 	}
 
-	private void stampa() {
-		System.out.print("\n\n\n");
-		Iterator<String> element = elencoCodiceFiscale.iterator();
-		while (element.hasNext()) {
-			System.out.println(element.next());
-		}
-		System.out.print("\n");
-	}
-
+	
 	private String generaNumeroCartafedelta() {
 		Random rn = new Random();
 		boolean result = false;
@@ -141,7 +156,7 @@ public class Cliente extends AbstractPersona {
 		boolean result = true;
 		Iterator<String> element = elencoCodiceFiscale.iterator();
 		while (element.hasNext()) {
-			if (element.next().equals(getCodiceFiscale())) {
+			if (StringUtils.equals(element.next(),getCodiceFiscale())) {
 				element.remove();
 			}
 		}
@@ -150,52 +165,52 @@ public class Cliente extends AbstractPersona {
 
 	@Override
 	public boolean addNomeAzienda(String nomeAzienda) throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean addNumeroTelefonoAziendale(String numeroTelefonoAziendale) throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean addtipologiaContratto(String tipologiaContratto) throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean eliminaNomeAzienda() throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean eliminaNumeroTelefonoAziendale() throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean eliminatipologiaContratto() throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean modificaNomeAzienda(String nomeAzienda) throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean modificaNumeroTelefonoAziendale(String numeroTelefonoAziendale) throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean modificatipologiaContratto(String tipologiaContratto) throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean modificaCodiceIdentificativo(String codiceIdentificativo) throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
@@ -245,26 +260,25 @@ public class Cliente extends AbstractPersona {
 
 	@Override
 	public String visualizzaNumeroTelefonoAziendaleDipendente() throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public TIPO_CONTRATTO visualizzatipologiaContrattoDipendente() throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public String visualizzaRuoloDipendente() throws PersonaException {
-		throw new PersonaException("uesta funzionalità non può essere usata per il Cliente");
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 
 	@Override
 	public boolean addNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException {
 		boolean result = false;
-		if (!nomeCartaFedelta.isEmpty()) {
-			if (nomeCartaFedelta.matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA)) {
-				if (getNomeCartaFedelta() == null) {
-					setNomeCartaFedelta(nomeCartaFedelta);
+			if (StringUtils.isNotBlank(nomeCartaFedelta) && StringUtils.isAlphaSpace(nomeCartaFedelta)) {
+				if (StringUtils.isEmpty(getNomeCartaFedelta())) {
+					setNomeCartaFedelta(ControlliGlobal.upperCaseFirst(nomeCartaFedelta.trim()));
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -273,18 +287,14 @@ public class Cliente extends AbstractPersona {
 			} else {
 				throw new PersonaException("Errore nell'inserimento del nome della carta di fedeltà del cliente ");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
 		return result;
 	}
 
 	@Override
 	public boolean addPuntiFedeltaAccumulati(String puntiFedelta) throws PersonaException {
 		boolean result = false;
-		if (!puntiFedelta.isEmpty()) {
-			if (puntiFedelta.matches(ConstantGlobal.REGEX_CONTROLLO_INTERO)) {
-				if (getPuntiFedelta() == null) {
+			if (StringUtils.isNotBlank(puntiFedelta) &&  puntiFedelta.matches(ConstantGlobal.REGEX_CONTROLLO_INTERO)) {
+				if (StringUtils.isEmpty(getPuntiFedelta())) {
 					if (ConstantGlobal.NUMERO_MASSIMO_PUNTI_AGGIUNTI >= Long.valueOf(puntiFedelta)) {
 						setPuntiFedelta(puntiFedelta);
 						result = true;
@@ -293,7 +303,6 @@ public class Cliente extends AbstractPersona {
 								"errore, non possono essere aggiunti  i punti fedeltà del cliente perchè i punti inseriti superano il valore massimo di: "
 										+ ConstantGlobal.NUMERO_MASSIMO_PUNTI_AGGIUNTI);
 					}
-
 				} else {
 					throw new PersonaException(
 							"errore, non possono essere aggiunti  i punti fedeltà del cliente perchè sono stati già inseriti");
@@ -301,18 +310,14 @@ public class Cliente extends AbstractPersona {
 			} else {
 				throw new PersonaException("Errore nell'inserimento dei punti fedeltà cliente ");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
 		return result;
 	}
 
 	@Override
 	public boolean addDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException {
 		boolean result = false;
-		if (!dataInscrizioneTessera.isEmpty()) {
-			if (dataInscrizioneTessera.matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
-				if (getDataInscrizioneTessera() == null) {
+			if ( StringUtils.isNoneBlank(dataInscrizioneTessera)  && dataInscrizioneTessera.matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
+				if (StringUtils.isEmpty(getDataInscrizioneTessera() )) {
 					setDataInscrizioneTessera(dataInscrizioneTessera);
 					result = true;
 				} else {
@@ -323,9 +328,6 @@ public class Cliente extends AbstractPersona {
 				throw new PersonaException(
 						"Errore nell'inserimento della data di inscrizione della carta di fedeltà del cliente ");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
 		return result;
 	}
 
@@ -367,14 +369,13 @@ public class Cliente extends AbstractPersona {
 
 	@Override
 	public String VisualizzaCodiceFiscale() throws PersonaException {
-		stampa();
 		return getCodiceFiscale();
 	}
 
 	@Override
 	public boolean eliminaNomeCartaFedelta() throws PersonaException {
 		boolean result = false;
-		if (getNomeCartaFedelta() != null) {
+		if (StringUtils.isNotBlank(getNomeCartaFedelta()) ) {
 			setNomeCartaFedelta(null);
 			result = true;
 		} else {
@@ -389,7 +390,7 @@ public class Cliente extends AbstractPersona {
 	@Override
 	public boolean eliminaPuntiAccumulati() throws PersonaException {
 		boolean result = false;
-		if (getPuntiFedelta() != null) {
+		if (StringUtils.isNotBlank(getPuntiFedelta())) {
 			setPuntiFedelta(null);
 			result = true;
 		} else {
@@ -404,7 +405,7 @@ public class Cliente extends AbstractPersona {
 	@Override
 	public boolean eliminaDataInscrizioneTessera() throws PersonaException {
 		boolean result = false;
-		if (getDataInscrizioneTessera() != null) {
+		if (StringUtils.isNotBlank(getDataInscrizioneTessera())) {
 			setDataInscrizioneTessera(null);
 			result = true;
 		} else {
@@ -440,8 +441,8 @@ public class Cliente extends AbstractPersona {
 	@Override
 	public boolean modificaNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException {
 		boolean result = false;
-		if (getNumeroCartaFedelta() == null) {
-			setNumeroCartaFedelta(generaNumeroCartafedelta());
+		if (StringUtils.isNotBlank(getNomeCartaFedelta()) && StringUtils.isAlphaSpace(nomeCartaFedelta)) {
+			setNomeCartaFedelta(ControlliGlobal.upperCaseFirst(nomeCartaFedelta.trim()));
 			result = true;
 		} else {
 			throw new PersonaException(
@@ -454,13 +455,12 @@ public class Cliente extends AbstractPersona {
 	public boolean modificaPuntiFedeltaAccumulati(String puntiFedelta,
 			ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA operazione) throws PersonaException {
 		boolean result = false;
-		if (!puntiFedelta.isEmpty()) {
-			if (puntiFedelta.matches(ConstantGlobal.REGEX_CONTROLLO_INTERO)) {
+			if (StringUtils.isNotBlank(puntiFedelta) && puntiFedelta.trim().matches(ConstantGlobal.REGEX_CONTROLLO_INTERO)) {
 				if (getPuntiFedelta() != null) {
 					switch (operazione) {
 					case AGGIUNGI:
-						if (ConstantGlobal.NUMERO_MASSIMO_PUNTI_AGGIUNTI >= Long.valueOf(puntiFedelta)) {
-							Long somma = Long.valueOf(getPuntiFedelta()) + Long.valueOf(puntiFedelta);
+						if (ConstantGlobal.NUMERO_MASSIMO_PUNTI_AGGIUNTI >= Long.valueOf(puntiFedelta.trim())) {
+							Long somma = Long.valueOf(getPuntiFedelta()) + Long.valueOf(puntiFedelta.trim());
 							setPuntiFedelta(String.valueOf(somma));
 							result = true;
 						} else {
@@ -470,8 +470,8 @@ public class Cliente extends AbstractPersona {
 						}
 						break;
 					case SOSTITUISCI:
-						if (ConstantGlobal.NUMERO_MASSIMO_PUNTI_AGGIUNTI >= Long.valueOf(puntiFedelta)) {
-							setPuntiFedelta(puntiFedelta);
+						if (ConstantGlobal.NUMERO_MASSIMO_PUNTI_AGGIUNTI >= Long.valueOf(puntiFedelta.trim())) {
+							setPuntiFedelta(puntiFedelta.trim());
 							result = true;
 						} else {
 							throw new PersonaException(
@@ -480,13 +480,14 @@ public class Cliente extends AbstractPersona {
 						}
 						break;
 					case SOTTRAI:
-						if (Long.valueOf(getPuntiFedelta()) > Long.valueOf(puntiFedelta)) {
-							Long sottrai = Long.valueOf(getPuntiFedelta()) - Long.valueOf(puntiFedelta);
+						if (Long.valueOf(getPuntiFedelta()) > Long.valueOf(puntiFedelta.trim())) {
+							Long sottrai = Long.valueOf(getPuntiFedelta()) - Long.valueOf(puntiFedelta.trim());
 							setPuntiFedelta(String.valueOf(sottrai));
 							result = true;
 						} else {
 							throw new PersonaException(
 									"errore, non possono essere sottratti  i punti fedeltà del cliente perchè i punti accumulati sono minori rispetto a quelli da sottrarre");
+						
 						}
 						break;
 					}
@@ -497,20 +498,15 @@ public class Cliente extends AbstractPersona {
 			} else {
 				throw new PersonaException("Errore nell'inserimento dei punti fedeltà cliente ");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
 		return result;
 	}
 
 	@Override
 	public boolean modificaDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException {
 		boolean result = false;
-		if (!dataInscrizioneTessera.isEmpty()) {
-			if (dataInscrizioneTessera.matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
-				if (getDataInscrizioneTessera() != null) {
-
-					setDataInscrizioneTessera(dataInscrizioneTessera);
+			if (StringUtils.isNotBlank(dataInscrizioneTessera) && dataInscrizioneTessera.trim().matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
+				if (StringUtils.isNotBlank(getDataInscrizioneTessera())) {
+					setDataInscrizioneTessera(dataInscrizioneTessera.trim());
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -520,18 +516,16 @@ public class Cliente extends AbstractPersona {
 				throw new PersonaException(
 						"Errore nell'inserimento della data di inscrizione della carta di fedeltà del cliente ");
 			}
-		} else {
-			throw new NullPointerException("E' stato inserito un valore nullo");
-		}
 		return result;
 	}
 
 	@Override
 	public boolean modificaNumeroCartaFedelta() throws PersonaException {
 		boolean result = false;
-		if (getNumeroCartaFedelta() != null) {
+		if (StringUtils.isNotBlank(getNumeroCartaFedelta())) {
 			eliminaNumeroCartaFedelta();
 			addNumeroCartaFedelta();
+			result = true;
 		} else {
 			throw new PersonaException(
 					"errore, non può essere modificato il numero della carta di fedeltà del cliente perchè  è non stato ancora inserito");
@@ -542,10 +536,10 @@ public class Cliente extends AbstractPersona {
 	@Override
 	public boolean modificaCodiceFiscale(String codiceFiscale) throws PersonaException {
 		boolean result = false;
-		if (controlloCodiceFiscale(codiceFiscale)) {
+		if (controlloCodiceFiscale(codiceFiscale.trim())) {
 			eliminaCodiceFiscale();
-			setCodiceFiscale(codiceFiscale);
-			elencoCodiceFiscale.add(codiceFiscale);
+			setCodiceFiscale(codiceFiscale.trim());
+			elencoCodiceFiscale.add(codiceFiscale.trim());
 			result = true;
 		}
 		return result;

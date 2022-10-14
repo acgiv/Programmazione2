@@ -13,6 +13,8 @@ import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.Persona.AbstractPersona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
+import ControlliGlobal.ControlliGlobal;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class Dipendente extends AbstractPersona {
@@ -94,13 +96,13 @@ public class Dipendente extends AbstractPersona {
 	public String toString() {
 		String stringa = null;
 		stringa = String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_DIPENDENTE, "_")).concat("\n");
-		stringa += String.format("| %110s %107s ", ConstantGlobal.TITOLO_TABELLA_DIPENDENTE, "|\n");
+		stringa += String.format("| %110s %10s %121s", ConstantGlobal.TITOLO_TABELLA_DIPENDENTE, getCodiceIdentificativo(), "|\n");
 		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_DIPENDENTE, "_"))
 				.concat("\n");
 		stringa += ConstantGlobal.TABELLA_DIPENDENTE;
 		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_DIPENDENTE, "_"))
 				.concat("\n");
-		stringa += String.format("| %10s %5s %9s %5s %6s %5s %9s %4s %11s %5s %9s %5s %16s %5s %28s %5s %15s %4s %13s %5s %17s %6s \n", super.VisualizzaNome(), " | ",
+		stringa += String.format("| %16s %7s %10s %5s %9s %5s %6s %5s %9s %4s %11s %5s %9s %5s %16s %5s %28s %5s %15s %4s %13s %5s %17s %6s \n",getCodiceIdentificativo()," | ", super.VisualizzaNome(), " | ",
 				super.VisualizzaCognome(), " | ", super.VisualizzaEta(), " | ", super.getGenere(), " | ", super.getDataNascita(), " | ", super.VisualizzaCitta(), " | ", getRuolo(), " | ",getEmailAzienda(),
 				" | ",getNumeroTelefonoAziendale()," | ",getNomeAzienda()," | ",getTipologiaContratto()," | ");
 		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_DIPENDENTE, "_")).concat("\n");
@@ -108,8 +110,7 @@ public class Dipendente extends AbstractPersona {
 	}
 
 	private String calcoloEmailAzienda() {
-		return getNome().replace(" ", "").concat(getCognome().replace(" ", "")).concat("@").concat(getNomeAzienda().replace(" ", "")).concat(".com");
-
+		return (getNome().replace(" ", "").concat(getCognome().replace(" ", "")).concat("@").concat(getNomeAzienda().replace(" ", "")).concat(".com")).toLowerCase();
 	}
 
 	protected boolean controlloIdentificativo(String codiceIdentificativo) throws PersonaException {
@@ -146,7 +147,7 @@ public class Dipendente extends AbstractPersona {
 		boolean result = false;
 			if (StringUtils.isNotBlank(nomeAzienda) && StringUtils.isAlphaSpace(nomeAzienda)) {
 				if (StringUtils.isEmpty(getNomeAzienda())) {
-					setNomeAzienda(super.upperCaseFirst(nomeAzienda.trim()));
+					setNomeAzienda(ControlliGlobal.upperCaseFirst(nomeAzienda.trim()));
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -219,7 +220,7 @@ public class Dipendente extends AbstractPersona {
 		boolean result = false;
 			if (StringUtils.isNotBlank(ruolo) && StringUtils.isAlphaSpace(ruolo)) {
 				if (StringUtils.isEmpty(getRuolo())) {
-					setRuolo(super.upperCaseFirst(ruolo.trim()));
+					setRuolo(ControlliGlobal.upperCaseFirst(ruolo.trim()));
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -237,7 +238,7 @@ public class Dipendente extends AbstractPersona {
 		boolean result = false;
 			if (StringUtils.isNotBlank(nomeAzienda) && StringUtils.isAlphaSpace(nomeAzienda)) {
 				if (StringUtils.isNotBlank(getNomeAzienda())) {
-					setNomeAzienda(super.upperCaseFirst(nomeAzienda.trim()));
+					setNomeAzienda(ControlliGlobal.upperCaseFirst(nomeAzienda.trim()));
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -327,7 +328,7 @@ public class Dipendente extends AbstractPersona {
 		boolean result = false;
 			if (StringUtils.isNotBlank(ruolo) && StringUtils.isAlphaSpace(ruolo)) {
 				if (StringUtils.isNotBlank(getRuolo())) {
-					setRuolo(super.upperCaseFirst(ruolo.trim()));
+					setRuolo(ControlliGlobal.upperCaseFirst(ruolo.trim()));
 					result = true;
 				} else {
 					throw new PersonaException(

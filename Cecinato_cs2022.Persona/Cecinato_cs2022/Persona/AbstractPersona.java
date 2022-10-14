@@ -11,6 +11,7 @@ import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
+import ControlliGlobal.ControlliGlobal;
 
 public abstract class AbstractPersona implements Persona {
 
@@ -73,11 +74,6 @@ public abstract class AbstractPersona implements Persona {
 		this.citta = citta;
 	}
 	
-	protected final String upperCaseFirst(String stringa) {
-		 String result = stringa.substring(0,1).toUpperCase();
-	      result += stringa.substring(1, stringa.length()).toLowerCase();
-	      return result;
-	   }
 
 	protected final boolean controlloGenere(String genere) {
 		boolean result = false;
@@ -138,7 +134,7 @@ public abstract class AbstractPersona implements Persona {
 		boolean result = false;
 			if (StringUtils.isNotBlank(nome) && StringUtils.isAlphaSpace(nome)) {
 				if (StringUtils.isEmpty(getNome()) ) {
-					nome = upperCaseFirst(nome.trim());
+					nome = ControlliGlobal.upperCaseFirst(nome.trim());
 					setNome(nome);
 					result = true;
 				} else {
@@ -155,7 +151,7 @@ public abstract class AbstractPersona implements Persona {
 		boolean result = false;
 			if (StringUtils.isNotBlank(cognome) && StringUtils.isAlphaSpace(cognome)) {
 				if (StringUtils.isEmpty(getCognome())) {
-					cognome = upperCaseFirst(cognome.trim());
+					cognome = ControlliGlobal.upperCaseFirst(cognome.trim());
 					setCognome(cognome);
 					result = true;
 				} else {
@@ -220,7 +216,7 @@ public abstract class AbstractPersona implements Persona {
 		
 		if (StringUtils.isAlphaSpace(citta) && StringUtils.isNotBlank(citta) ) {
 			if (StringUtils.isEmpty(getCitta())) {
-				setCitta(upperCaseFirst(citta.trim()));
+				setCitta(ControlliGlobal.upperCaseFirst(citta.trim()));
 				result = true;
 			} else {
 				throw new PersonaException(
@@ -236,7 +232,7 @@ public abstract class AbstractPersona implements Persona {
 		boolean result = false;
 			if ( StringUtils.isAlphaSpace(nome) && StringUtils.isNotBlank(nome)) {
 				if (StringUtils.isNotBlank(getNome())) {
-					setNome(upperCaseFirst(nome.trim()));
+					setNome(ControlliGlobal.upperCaseFirst(nome.trim()));
 					result= true;
 				} else {
 					throw new PersonaException(
@@ -253,7 +249,7 @@ public abstract class AbstractPersona implements Persona {
 		boolean result = false;
 		if (StringUtils.isAlphaSpace(cognome) && StringUtils.isNotBlank(cognome)) {
 			if (StringUtils.isNotBlank(getCognome())) {
-				setCognome(upperCaseFirst(cognome.trim()));
+				setCognome(ControlliGlobal.upperCaseFirst(cognome.trim()));
 				result = true;
 			} else {
 				throw new PersonaException(
@@ -318,7 +314,7 @@ public abstract class AbstractPersona implements Persona {
 		try {
 			if (StringUtils.isAlphaSpace(citta) &&  StringUtils.isNotBlank(citta)) {
 				if (getCitta() != null) {
-					setCitta(upperCaseFirst(citta.trim()));
+					setCitta(ControlliGlobal.upperCaseFirst(citta.trim()));
 					result = true;
 				} else {
 					throw new PersonaException(
