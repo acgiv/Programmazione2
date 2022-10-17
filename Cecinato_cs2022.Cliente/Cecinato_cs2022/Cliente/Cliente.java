@@ -293,10 +293,10 @@ public class Cliente extends AbstractPersona {
 	@Override
 	public boolean addPuntiFedeltaAccumulati(String puntiFedelta) throws PersonaException {
 		boolean result = false;
-			if (StringUtils.isNotBlank(puntiFedelta) &&  puntiFedelta.matches(ConstantGlobal.REGEX_CONTROLLO_INTERO)) {
+			if (StringUtils.isNotBlank(puntiFedelta) &&  puntiFedelta.trim().matches(ConstantGlobal.REGEX_CONTROLLO_INTERO)) {
 				if (StringUtils.isEmpty(getPuntiFedelta())) {
-					if (ConstantGlobal.NUMERO_MASSIMO_PUNTI_AGGIUNTI >= Long.valueOf(puntiFedelta)) {
-						setPuntiFedelta(puntiFedelta);
+					if (ConstantGlobal.NUMERO_MASSIMO_PUNTI_AGGIUNTI >= Long.valueOf(puntiFedelta.trim())) {
+						setPuntiFedelta(puntiFedelta.trim());
 						result = true;
 					} else {
 						throw new PersonaException(
@@ -316,9 +316,9 @@ public class Cliente extends AbstractPersona {
 	@Override
 	public boolean addDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException {
 		boolean result = false;
-			if ( StringUtils.isNoneBlank(dataInscrizioneTessera)  && dataInscrizioneTessera.matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
-				if (StringUtils.isEmpty(getDataInscrizioneTessera() )) {
-					setDataInscrizioneTessera(dataInscrizioneTessera);
+			if ( StringUtils.isNoneBlank(dataInscrizioneTessera)  && dataInscrizioneTessera.trim().matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
+				if (StringUtils.isEmpty(getDataInscrizioneTessera())) {
+					setDataInscrizioneTessera(dataInscrizioneTessera.trim());
 					result = true;
 				} else {
 					throw new PersonaException(

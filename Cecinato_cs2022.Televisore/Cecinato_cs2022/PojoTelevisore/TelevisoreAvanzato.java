@@ -2,6 +2,8 @@ package Cecinato_cs2022.PojoTelevisore;
 
 import java.util.Collections;
 
+import org.apache.commons.lang3.StringUtils;
+
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.EcceptionTelevisore.MaxValueException;
 import Cecinato_cs2022.EcceptionTelevisore.MinValueException;
@@ -75,10 +77,11 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 		Boolean result = false;
 		try {
 			if (!inserthdmi) {
-				if (!numeroHdmi.isEmpty()) {
+				if (StringUtils.isNoneBlank(numeroHdmi)) {
+					numeroHdmi = numeroHdmi.trim();
 					if (controlloParamentriNumericiTv(numeroHdmi)) {
 						if (super.isInteger(numeroHdmi)) {
-							if (Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
+							if (Integer.valueOf(numeroHdmi.trim()) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
 									|| Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_MINIMO_HDMI) {
 								setNumber_hdmi(Integer.valueOf(numeroHdmi));
 								inserthdmi = true;
@@ -98,13 +101,13 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 			}
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_HDMI)));
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_HDMI)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxNumeroHdmi());
 		} catch (MinValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinNumeroHdmi());
+			System.err.println(e.ErrorMinNumeroHdmi());
 		} catch (NullPointerException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println("E' stato inserito un valore nullo");
@@ -118,11 +121,12 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 		Boolean result = false;
 		try {
 			if (!insertSmartTV) {
-				if (!numeroSmartTv.isEmpty()) {
+				if (StringUtils.isNotBlank(numeroSmartTv) ) {
+					numeroSmartTv = numeroSmartTv.trim();
 					if (controlloParamentriNumericiTv(numeroSmartTv)) {
 						if (isInteger(numeroSmartTv)) {
 							if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
-									|| Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_MINIMO_SMART_TV) {
+									|| Integer.valueOf(numeroSmartTv.trim()) == ConstantGlobal.NUM_MINIMO_SMART_TV) {
 								setNumber_smartTv(Integer.valueOf(numeroSmartTv));
 								insertSmartTV = true;
 								result = true;
@@ -168,9 +172,9 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 		Boolean result = false;
 		try {
 			if (inserthdmi) {
-				if (!numeroHdmi.isEmpty()) {
+				if (StringUtils.isNotBlank(numeroHdmi)) {
+					numeroHdmi = numeroHdmi.trim();
 					if (super.controlloParamentriNumericiTv(numeroHdmi)) {
-
 							if (super.isInteger(numeroHdmi)) {
 								if (Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
 										|| Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_MINIMO_HDMI) {
@@ -191,14 +195,14 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 			}
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.out.println(
+			System.err.println(
 					e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_HDMI)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxNumeroHdmi());
 		} catch (MinValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMinNumeroHdmi());
+			System.err.println(e.ErrorMinNumeroHdmi());
 		} catch (NullPointerException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println("E' stato inserito un valore nullo");
@@ -212,7 +216,8 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 		Boolean result = false;
 		try {
 			if (insertSmartTV) {
-				if (!numeroSmartTv.isEmpty()) {
+				if (StringUtils.isNotBlank(numeroSmartTv)) {
+					numeroSmartTv = numeroSmartTv.trim();
 							if (super.isInteger(numeroSmartTv)) {
 								if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
 										|| Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_MINIMO_SMART_TV) {

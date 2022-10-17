@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.apache.commons.lang3.StringUtils;
+
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
@@ -18,27 +20,27 @@ abstract class AbstractTelevisore implements Televisore {
 
 	public void visualizzanomiMarcheTv() {
 		int i = 0;
-		System.out.println("Le marche esistenti di tv sono:");
+		System.err.println("Le marche esistenti di tv sono:");
 		for (MarcheTelevisori item : MarcheTelevisori.values()) {
-			System.out.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
+			System.err.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
 			i += 1;
 		}
 	}
 
 	public void visualizzaTipologieSchermoTv() {
 		int i = 1;
-		System.out.println("Le tipologie di schermo esistenti sono:");
+		System.err.println("Le tipologie di schermo esistenti sono:");
 		for (ConstantGlobal.TIPOLOGIA_SCHERMO item : ConstantGlobal.TIPOLOGIA_SCHERMO.values()) {
-			System.out.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
+			System.err.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
 			i += 1;
 		}
 	}
 
 	public void visualizzaRisoluzioniSchermiTv() {
 		int i = 1;
-		System.out.println("Le risoluzioni degli schermi esistenti sono:");
+		System.err.println("Le risoluzioni degli schermi esistenti sono:");
 		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
-			System.out.println(
+			System.err.println(
 					String.valueOf(i).concat(") ").concat(String.valueOf(item).replace("_", " ")).toLowerCase());
 			i += 1;
 		}
@@ -47,7 +49,7 @@ abstract class AbstractTelevisore implements Televisore {
 	protected boolean controlloMarca(String marca) {
 		boolean result = false;
 		for (MarcheTelevisori item : MarcheTelevisori.values()) {
-			if (String.valueOf(item).equals(marca)) {
+			if (StringUtils.equals(String.valueOf(item),marca)) {
 				result = true;
 				break;
 			}
@@ -58,7 +60,7 @@ abstract class AbstractTelevisore implements Televisore {
 	protected boolean controlloRisoluzione(String risoluzione) {
 		boolean result = false;
 		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
-			if (String.valueOf(item).equals(risoluzione)) {
+			if (StringUtils.equals(String.valueOf(item),risoluzione)) {
 				result = true;
 				break;
 			}
@@ -69,7 +71,7 @@ abstract class AbstractTelevisore implements Televisore {
 	protected boolean controlloTipologiaSchermo(String tipoSchermo) {
 		boolean result = false;
 		for (ConstantGlobal.TIPOLOGIA_SCHERMO item : ConstantGlobal.TIPOLOGIA_SCHERMO.values()) {
-			if (String.valueOf(item).equals(tipoSchermo)) {
+			if (StringUtils.equals(String.valueOf(item),(tipoSchermo))) {
 				result = true;
 				break;
 			}
@@ -79,23 +81,18 @@ abstract class AbstractTelevisore implements Televisore {
 
 	protected boolean controlloSeriale(String seriale) {
 		boolean result = true;
-		if (seriale != null) {
-			if (!elencoSerialeTv.isEmpty() && seriale.matches(ConstantGlobal.REGEX_CONTROLLO_SERIALE_TELEVISORE)) {
+			if (StringUtils.isNoneBlank(seriale) && seriale.trim().matches(ConstantGlobal.REGEX_CONTROLLO_SERIALE_TELEVISORE)) {
 				Iterator<String> element = elencoSerialeTv.iterator();
 				while (element.hasNext()) {
-					if (element.next().equals(seriale))
+					if (StringUtils.equals(element.next(),seriale.trim()))
 						result = false;
 				}
-
 			} else if (elencoSerialeTv.isEmpty()
-					&& seriale.matches(ConstantGlobal.REGEX_CONTROLLO_SERIALE_TELEVISORE)) {
+					&& seriale.trim().matches(ConstantGlobal.REGEX_CONTROLLO_SERIALE_TELEVISORE)) {
 				result = true;
 			} else {
 				result = false;
 			}
-		}else {
-			result = false;
-		}
 		return result;
 	}
 
@@ -109,8 +106,8 @@ abstract class AbstractTelevisore implements Televisore {
 				throw new NumberFormatException();
 			}
 		} catch (NumberFormatException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println("| Non hai inserito dei valori numerici |\n");
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("| Non hai inserito dei valori numerici |\n");
 		}
 		return result;
 	}
@@ -119,8 +116,8 @@ abstract class AbstractTelevisore implements Televisore {
 		try {
 			Integer.parseInt(s);
 		} catch (NumberFormatException e) {
-			System.out.println("| Errore nell'inserimento |\n");
-			System.out.println("| Non hai inserito dei valori interi |\n");
+			System.err.println("| Errore nell'inserimento |\n");
+			System.err.println("| Non hai inserito dei valori interi |\n");
 			return false;
 		} catch (NullPointerException e) {
 			return false;
@@ -133,7 +130,7 @@ abstract class AbstractTelevisore implements Televisore {
 		boolean result = false;
 		Iterator<String> element = elencoSerialeTv.iterator();
 		while (element.hasNext()) {
-			if (element.next().equals(seriale))
+			if (StringUtils.equals(element.next(), seriale.trim()))
 				element.remove();
 		}
 
@@ -142,11 +139,11 @@ abstract class AbstractTelevisore implements Televisore {
 
 	protected boolean controlloCorrettezzaUsb(String numeroUsb) {
 		boolean result = false;
-		if ((Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_USB_TV_MEDIO
+		if ((Integer.valueOf(numeroUsb).equals(ConstantGlobal.NUM_USB_TV_MEDIO)
 				&& visualizzaTipologiaTv().equals(ConstantGlobal.TIPOLOGIA_TV.MEDIO))
-				|| (Integer.valueOf(numeroUsb) == ConstantGlobal.NUMERO_USB_TV_AVANZATO
+				|| (Integer.valueOf(numeroUsb).equals(ConstantGlobal.NUMERO_USB_TV_AVANZATO)
 						&& visualizzaTipologiaTv().equals(ConstantGlobal.TIPOLOGIA_TV.AVANZATO))
-				|| Integer.valueOf(numeroUsb) == ConstantGlobal.NUM_MINIMO_USB) {
+				|| Integer.valueOf(numeroUsb).equals(ConstantGlobal.NUM_MINIMO_USB)) {
 			result = true;
 		}
 		return result;

@@ -57,8 +57,6 @@ class TestAggiungiDipendente {
 			dipendente.eliminaNome();
 		} catch (PersonaException e) {
 			System.err.println(e.getMessage());
-
-		
 		}
 	}
 	
@@ -976,7 +974,7 @@ class TestAggiungiDipendente {
 	
 	@Test
 	void test2addNomeAziendaDipendente() throws PersonaException {
-		System.out.println("Test inserimento nome aziendale  = fincons&");
+		System.out.println("Test inserimento nome azienda  = fincons&");
 		try {
 			assertFalse(dipendente.addNomeAzienda("fincons&"));
 		} catch (PersonaException e) {
@@ -990,7 +988,7 @@ class TestAggiungiDipendente {
 	
 	@Test
 	void test3addNomeAziendaDipendente() throws PersonaException {
-		System.out.println("Test inserimento nome aziendale  = null");
+		System.out.println("Test inserimento nome azienda  = null");
 		try {
 			assertFalse(dipendente.addNomeAzienda(null));
 		} catch (PersonaException e) {
@@ -1003,7 +1001,7 @@ class TestAggiungiDipendente {
 	
 	@Test
 	void test5addNomeAziendaDipendente() throws PersonaException {
-		System.out.println("Test inserimento nome aziendale  = ' finsons '");
+		System.out.println("Test inserimento nome azienda  = ' finsons '");
 		try {
 			assertTrue(dipendente.addNomeAzienda(" fincons "));
 			System.out.println("\n dopo il test");
@@ -1017,7 +1015,7 @@ class TestAggiungiDipendente {
 	
 	@Test
 	void test6addNomeAziendaDipendente() throws PersonaException {
-		System.out.println("Test inserimento nome aziendale  = ' finsons group '");
+		System.out.println("Test inserimento nome azienda  = ' finsons group '");
 		try {
 			assertTrue(dipendente.addNomeAzienda(" fincons group "));
 			System.out.println("\n dopo il test");
@@ -1031,7 +1029,7 @@ class TestAggiungiDipendente {
 	
 	@Test
 	void test7addNomeAziendaDipendente() throws PersonaException {
-		System.out.println("Test inserimento nome aziendale  = GROUP FINSONS");
+		System.out.println("Test inserimento nome azienda  = GROUP FINSONS");
 		try {
 			assertTrue(dipendente.addNomeAzienda("GROUP FINSONS"));
 			System.out.println("\n dopo il test");
@@ -1045,7 +1043,7 @@ class TestAggiungiDipendente {
 	
 	@Test
 	void test8addNomeAziendaDipendente() throws PersonaException {
-		System.out.println("Test inserimento nome aziendale  = ' finsons GROUP'");
+		System.out.println("Test inserimento nome azienda  = ' finsons GROUP'");
 		try {
 			assertTrue(dipendente.addNomeAzienda(" finsons GROUP"));
 			System.out.println("\n dopo il test");

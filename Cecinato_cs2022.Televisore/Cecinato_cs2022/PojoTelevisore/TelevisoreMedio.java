@@ -2,6 +2,8 @@ package Cecinato_cs2022.PojoTelevisore;
 
 import java.util.Collections;
 
+import org.apache.commons.lang3.StringUtils;
+
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.EcceptionTelevisore.MaxValueException;
 import Cecinato_cs2022.EcceptionTelevisore.MinValueException;
@@ -57,7 +59,8 @@ public class TelevisoreMedio extends TelevisoreBase {
 		Boolean result = false;
 		try {
 			if (!insertusb) {
-				if (!numeroUsb.isEmpty()) {
+				if (StringUtils.isNotBlank(numeroUsb)) {
+					numeroUsb = numeroUsb.trim();
 					if (controlloParamentriNumericiTv(numeroUsb)) {
 						if (super.isInteger(numeroUsb)) {
 							if (super.controlloCorrettezzaUsb(numeroUsb)) {
@@ -82,7 +85,7 @@ public class TelevisoreMedio extends TelevisoreBase {
 			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_USB)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxNumeroUsb());
+			System.err.println(e.ErrorMaxNumeroUsb());
 		} catch (MinValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMinNumeroMinUsb());
@@ -105,7 +108,8 @@ public class TelevisoreMedio extends TelevisoreBase {
 		Boolean result = false;
 		try {
 			if (insertusb) {
-				if (!numeroUsb.isEmpty()) {
+				if (StringUtils.isNotBlank(numeroUsb)) {
+					numeroUsb = numeroUsb.trim();
 					if (super.controlloParamentriNumericiTv(numeroUsb)) {
 						if (super.isInteger(numeroUsb)) {
 							if (super.controlloCorrettezzaUsb(numeroUsb)) {
@@ -130,7 +134,7 @@ public class TelevisoreMedio extends TelevisoreBase {
 					e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.NUMERO_USB)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
-			System.out.println(e.ErrorMaxNumeroUsb());
+			System.err.println(e.ErrorMaxNumeroUsb());
 		} catch (MinValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMinNumeroMinUsb());

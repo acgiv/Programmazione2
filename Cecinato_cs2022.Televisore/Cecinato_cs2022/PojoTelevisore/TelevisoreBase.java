@@ -2,6 +2,8 @@ package Cecinato_cs2022.PojoTelevisore;
 
 import java.util.Collections;
 
+import org.apache.commons.lang3.StringUtils;
+
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal.RISOLUZIONE_TV;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal.TIPOLOGIA_SCHERMO;
@@ -121,10 +123,10 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getMarche() == null) {
-				if (marca.isEmpty()) {
+				if (StringUtils.isEmpty(marca)) {
 					throw new NullPointerException();
-				} else if (controlloMarca(marca.toUpperCase())) {
-					setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
+				} else if (controlloMarca(marca.trim().toUpperCase())) {
+					setMarche(MarcheTelevisori.valueOf(marca.trim().toUpperCase()));
 					result = true;
 				} else {
 					throw new TelevisoreException();
@@ -145,8 +147,8 @@ public class TelevisoreBase extends AbstractTelevisore {
 	public boolean addAltezzaTv(String altezza) {
 		Boolean result = false;
 		try {
-			if (getAltezza() == 0) {
-				if (!altezza.isEmpty()) {
+			if (getAltezza() == 0 && StringUtils.isNotBlank(altezza)) {
+					altezza = altezza.trim();
 					if (controlloParamentriNumericiTv(altezza)) {
 						if (Double.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
 								&& Double.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
@@ -158,9 +160,6 @@ public class TelevisoreBase extends AbstractTelevisore {
 							throw new MaxValueException();
 						}
 					}
-				} else {
-					throw new NullPointerException();
-				}
 			} else {
 				throw new TelevisoreException();
 			}
@@ -170,13 +169,10 @@ public class TelevisoreBase extends AbstractTelevisore {
 			System.err.println(e.ErrorMinAltezza());
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
+			System.err.println(e.messErrorAddElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxAltezza());
-		} catch (NullPointerException e) {
-			System.err.println("| Errore nell'inserimento |\n");
-			System.err.println("E' stato inserito un valore nullo");
 		}
 		return result;
 	}
@@ -186,7 +182,8 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getLarghezza() == 0) {
-				if (!larghezza.isEmpty()) {
+				if (StringUtils.isNotBlank(larghezza)) {
+					larghezza = larghezza.trim();
 					if (controlloParamentriNumericiTv(larghezza)) {
 						if (Double.valueOf(larghezza) <= ConstantGlobal.LARGHEZZA_MASSIMA_TV
 								&& Double.valueOf(larghezza) >= ConstantGlobal.LARGHEZZA_MINIMA_TV) {
@@ -264,7 +261,8 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getDiagonale() == 0) {
-				if (!diagonale.isEmpty()) {
+				if (StringUtils.isNotBlank(diagonale)) {
+					diagonale = diagonale.trim();
 					if (controlloParamentriNumericiTv(diagonale)) {
 						if (Double.valueOf(diagonale) <= ConstantGlobal.DIAGONALE_MASSIMA_TV
 								&& Double.valueOf(diagonale) >= ConstantGlobal.DIAGONALE_MINIMA_TV) {
@@ -305,10 +303,10 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getRisoluzione() == null) {
-				if (risoluzione.isEmpty()) {
+				if (StringUtils.isEmpty(risoluzione)) {
 					throw new NullPointerException();
-				} else if (controlloRisoluzione(risoluzione.replace(" ", "_").toUpperCase())) {
-					setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
+				} else if (controlloRisoluzione(risoluzione.trim().replace(" ", "_").toUpperCase())) {
+					setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.trim().replace(" ", "_").toUpperCase()));
 					result = true;
 				} else {
 					throw new TelevisoreException();
@@ -332,10 +330,10 @@ public class TelevisoreBase extends AbstractTelevisore {
 		try {
 
 			if (getTipoSchermo() == null) {
-				if (tipoSchermo.isEmpty()) {
+				if (StringUtils.isEmpty(tipoSchermo)) {
 					throw new NullPointerException();
-				} else if (controlloTipologiaSchermo(tipoSchermo.toUpperCase())) {
-					setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
+				} else if (controlloTipologiaSchermo(tipoSchermo.trim().toUpperCase())) {
+					setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.trim().toUpperCase()));
 					result = true;
 				} else {
 					throw new TelevisoreException();
@@ -391,7 +389,7 @@ public class TelevisoreBase extends AbstractTelevisore {
 	public boolean modificaSeriale(String seriale) {
 		Boolean result = false;
 		try {
-			if (controlloSeriale(seriale)) {
+			if (controlloSeriale(seriale.trim())) {
 				super.eliminaSeriale(getSeriale());
 				this.seriale = seriale;
 				result = true;
@@ -409,10 +407,10 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getMarche() != null) {
-				if (marca.isEmpty()) {
+				if (StringUtils.isEmpty(marca)) {
 					throw new NullPointerException();
-				} else if (super.controlloMarca(marca.toUpperCase())) {
-					setMarche(MarcheTelevisori.valueOf(marca.toUpperCase()));
+				} else if (super.controlloMarca(marca.trim().toUpperCase())) {
+					setMarche(MarcheTelevisori.valueOf(marca.trim().toUpperCase()));
 					result = true;
 				}
 			} else {
@@ -433,7 +431,8 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getAltezza() != 0) {
-				if (!altezza.isEmpty()) {
+				if (StringUtils.isNotBlank(altezza)) {
+					altezza = altezza.trim();
 					if (controlloParamentriNumericiTv(altezza)) {
 						if (Double.valueOf(altezza) <= ConstantGlobal.ALTEZZA_MASSIMA_TV
 								&& Double.valueOf(altezza) >= ConstantGlobal.ALTEZZA_MINIMA_TV) {
@@ -457,7 +456,7 @@ public class TelevisoreBase extends AbstractTelevisore {
 			System.err.println(e.ErrorMinAltezza());
 		} catch (TelevisoreException e) {
 			System.err.println("| Errore nell'inserimento |");
-			System.out.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
+			System.err.println(e.messErrorModificaElement(String.valueOf(ConstantGlobal.TIPOLOGIA_OPERAZIONE.ALTEZZA)));
 		} catch (MaxValueException e) {
 			System.err.println("| Errore nell'inserimento |\n");
 			System.err.println(e.ErrorMaxAltezza());
@@ -474,7 +473,8 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getLarghezza() != 0) {
-				if (!larghezza.isEmpty()) {
+				if (StringUtils.isNotBlank(larghezza)) {
+					larghezza = larghezza.trim();
 					if (controlloParamentriNumericiTv(larghezza)) {
 						if (Double.valueOf(larghezza) <= ConstantGlobal.LARGHEZZA_MASSIMA_TV
 								&& Double.valueOf(larghezza) >= ConstantGlobal.LARGHEZZA_MINIMA_TV) {
@@ -540,7 +540,8 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getDiagonale() != 0) {
-				if (!diagonale.isEmpty()) {
+				if (StringUtils.isNotBlank(diagonale)) {
+					diagonale = diagonale.trim();
 					if (super.controlloParamentriNumericiTv(diagonale)) {
 						if (Double.valueOf(diagonale) <= ConstantGlobal.DIAGONALE_MASSIMA_TV
 								&& Double.valueOf(diagonale) >= ConstantGlobal.DIAGONALE_MINIMA_TV) {
@@ -593,10 +594,10 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getRisoluzione() != null) {
-				if (risoluzione.isEmpty()) {
+				if (StringUtils.isEmpty(risoluzione)) {
 					throw new NullPointerException();
-				} else if (controlloRisoluzione(risoluzione.replace(" ", "_").toUpperCase())) {
-					setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.replace(" ", "_").toUpperCase()));
+				} else if (controlloRisoluzione(risoluzione.trim().replace(" ", "_").toUpperCase())) {
+					setRisoluzione(ConstantGlobal.RISOLUZIONE_TV.valueOf(risoluzione.trim().replace(" ", "_").toUpperCase()));
 					result = true;
 				}
 			} else {
@@ -618,10 +619,10 @@ public class TelevisoreBase extends AbstractTelevisore {
 		Boolean result = false;
 		try {
 			if (getTipoSchermo() != null) {
-				if (tipoSchermo.isEmpty()) {
+				if (StringUtils.isEmpty(tipoSchermo)) {
 					throw new NullPointerException();
-				} else if (controlloTipologiaSchermo(tipoSchermo.toUpperCase())) {
-					setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.toUpperCase()));
+				} else if (controlloTipologiaSchermo(tipoSchermo.trim().toUpperCase())) {
+					setTipoSchermo(ConstantGlobal.TIPOLOGIA_SCHERMO.valueOf(tipoSchermo.trim().toUpperCase()));
 					result = true;
 				}
 
