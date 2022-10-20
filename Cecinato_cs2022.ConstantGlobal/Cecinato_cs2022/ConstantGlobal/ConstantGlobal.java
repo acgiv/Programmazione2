@@ -59,6 +59,8 @@ public interface ConstantGlobal {
 	
 	String TITOLO_TABELLA_TV_AVANZATO ="TELEVISORE AVANZATO";
 	
+	String TITOLO_ELENCO_TV ="TABELLA ELENCO TV";
+	
 	String TITOLO_TABELLA_DIPENDENTE ="DIPENDENTE";
 	
 	String TITOLO_TABELLA_CLIENTE ="CLIENTE";
@@ -79,6 +81,9 @@ public interface ConstantGlobal {
 	String  TABELLA_CLIENTE  = String.format("| %17s %6s %9s %6s %9s %5s %7s %4s %8s %5s %8s %4s %9s %5s %21s %5s %19s %5s %14s %4s %12s %3s \n", "CODICE FISCALE", " | ", "NOME", " | ", "COGNOME", " | ",
 			"ETA'", " | ", "GENERE", " | ", "DATA NASCITA", " | ", "CITTA'", " | ", "NOME CARTA FEDELTA'", " | ", "DATA INSCRIZIONE CARTA", " | ", "NUMERO CARTA", " | ", "PUNTI CARTA FEDELTA'",  " | ");
 	
+	String TABELLA_ELENCO_TV= String.format("| %11s %5s %10s %3s %9s %5s %7s %4s %8s %4s %8s %4s %5s %5s %7s %4s %6s %5s %11s %6s %12s %5s \n", "SERIALE", " | ", "TIPOLOGIA TV", " | ", "MARCA", " | ",
+			"ALTEZZA", " | ", "LARGHEZZA", " | ", "DIAGONALE", " | ", "RISOLUZIONE", " | ", "TIPO SCHERMO", " | ", "NUMERO USB", " | ", "NUMERO HDMI", " | ", "NUMERO SMART TV", " | ");
+	
 	
 	int LUNGHEZZA_CONTORNO_TABELLA_BASE = TABELLA_TV_BASE.length()-4;
 	
@@ -90,6 +95,7 @@ public interface ConstantGlobal {
 	
 	int LUNGHEZZA_CONTORNO_TABELLA_CLIENTE = TABELLA_CLIENTE.length()-4;
 	
+	int LUNGHEZZA_CONTORNO_ELENCO_TV = TABELLA_ELENCO_TV.length()-4;
 	
 	String REGEX_CONTROLLO_DATA = "^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\\d\\d$";
 	
@@ -148,6 +154,8 @@ public interface ConstantGlobal {
 		SOSTITUISCI
 	}
 	
+
+	String PERCORSO_FILE_TELEVISORE = "D:\\Progetti\\Java\\Programmazione2\\706576_Cecinato_cs2022\\file\\televisore.data";
 	
 
 }

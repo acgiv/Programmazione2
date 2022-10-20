@@ -1,5 +1,6 @@
 package Cecinato_cs2022.PojoTelevisore;
 
+import java.io.Serializable;
 import java.util.Collections;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +14,9 @@ import Cecinato_cs2022.EcceptionTelevisore.MaxValueException;
 import Cecinato_cs2022.EcceptionTelevisore.MinValueException;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 
-public class TelevisoreBase extends AbstractTelevisore {
+public class TelevisoreBase extends AbstractTelevisore implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private String seriale;
 	private MarcheTelevisori marche;
 	private double altezza;
@@ -389,7 +392,7 @@ public class TelevisoreBase extends AbstractTelevisore {
 	public boolean modificaSeriale(String seriale) {
 		Boolean result = false;
 		try {
-			if (controlloSeriale(seriale.trim())) {
+			if (StringUtils.isNotBlank(seriale) && controlloSeriale(seriale.trim())) {
 				super.eliminaSeriale(getSeriale());
 				this.seriale = seriale;
 				result = true;

@@ -1,5 +1,6 @@
 package Cecinato_cs2022.PojoTelevisore;
 
+import java.io.Serializable;
 import java.util.Collections;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,8 +12,8 @@ import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 
 
 
-public class TelevisoreAvanzato extends TelevisoreMedio {
-
+public class TelevisoreAvanzato extends TelevisoreMedio implements Serializable { 
+	private static final long serialVersionUID = 1L;
 	private int number_smartTv;
 	private int number_hdmi;
 
@@ -81,8 +82,7 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 					numeroHdmi = numeroHdmi.trim();
 					if (controlloParamentriNumericiTv(numeroHdmi)) {
 						if (super.isInteger(numeroHdmi)) {
-							if (Integer.valueOf(numeroHdmi.trim()) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
-									|| Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_MINIMO_HDMI) {
+							if (Integer.valueOf(numeroHdmi.trim()) == ConstantGlobal.NUM_HDMI_TV_AVANZATO) {
 								setNumber_hdmi(Integer.valueOf(numeroHdmi));
 								inserthdmi = true;
 								result = true;
@@ -125,8 +125,7 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 					numeroSmartTv = numeroSmartTv.trim();
 					if (controlloParamentriNumericiTv(numeroSmartTv)) {
 						if (isInteger(numeroSmartTv)) {
-							if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
-									|| Integer.valueOf(numeroSmartTv.trim()) == ConstantGlobal.NUM_MINIMO_SMART_TV) {
+							if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO) {
 								setNumber_smartTv(Integer.valueOf(numeroSmartTv));
 								insertSmartTV = true;
 								result = true;
@@ -167,6 +166,9 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 		return super.addTelevisoreMedio(marca, altezza, larghezza, diagonale, risoluzione, tipoSchermo, numeroUsb) && addNumberHdmiTv(numeroHdmi) && addNumberSmartTv(numeroSmartTv);
 	}
 	
+	
+
+	
 	@Override
 	public boolean modificaNumberHdmiTv(String numeroHdmi) {
 		Boolean result = false;
@@ -176,8 +178,8 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 					numeroHdmi = numeroHdmi.trim();
 					if (super.controlloParamentriNumericiTv(numeroHdmi)) {
 							if (super.isInteger(numeroHdmi)) {
-								if (Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_HDMI_TV_AVANZATO
-										|| Integer.valueOf(numeroHdmi) == ConstantGlobal.NUM_MINIMO_HDMI) {
+								if (Integer.valueOf(numeroHdmi) <= ConstantGlobal.NUM_HDMI_TV_AVANZATO
+										&& Integer.valueOf(numeroHdmi) >= ConstantGlobal.NUM_MINIMO_HDMI) {
 									setNumber_hdmi(Integer.valueOf(numeroHdmi));
 									result = true;
 								} else if (Integer.valueOf(numeroHdmi) < 0) {
@@ -219,8 +221,8 @@ public class TelevisoreAvanzato extends TelevisoreMedio {
 				if (StringUtils.isNotBlank(numeroSmartTv)) {
 					numeroSmartTv = numeroSmartTv.trim();
 							if (super.isInteger(numeroSmartTv)) {
-								if (Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_SMART_TV_AVANZATO
-										|| Integer.valueOf(numeroSmartTv) == ConstantGlobal.NUM_MINIMO_SMART_TV) {
+								if (Integer.valueOf(numeroSmartTv) <= ConstantGlobal.NUM_SMART_TV_AVANZATO
+										&& Integer.valueOf(numeroSmartTv) >= ConstantGlobal.NUM_MINIMO_SMART_TV) {
 									setNumber_smartTv(Integer.valueOf(numeroSmartTv));
 									result = true;
 								} else if (Integer.valueOf(numeroSmartTv) < 0) {

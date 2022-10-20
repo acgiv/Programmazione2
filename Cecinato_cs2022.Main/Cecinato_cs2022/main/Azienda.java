@@ -1,105 +1,111 @@
 package Cecinato_cs2022.main;
 
 
-
 import java.util.Scanner;
-import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
-import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
-import Cecinato_cs2022.ExceptionPersona.PersonaException;
-import Cecinato_cs2022.PojoTelevisore.*;
+import java.util.Set;
+
+import Cecinato_cs2022.DaoTelevisore.DaoTelevisoreImp;
+
+import Cecinato_cs2022.TelevisoreService.DaoTelevisore;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
 public class Azienda {
-
-	public static void main(String[] args) throws PersonaException, TelevisoreException {
-		
-
+	public static void main(String[] args) {
+		DaoTelevisore file = new DaoTelevisoreImp();
+		Set<Televisore> listaTvFornite = file.readFileAllTelevisore();
+		FornitoreTv tv = null;
 		String scelta;
-		String valoriUtente;
 		try (Scanner s = new Scanner(System.in)) {
-			System.out.println("scegli che tipologia di televisore Vuoi inserire");
-			System.out.println("Seleziona 1 se televisore di tipo Base");
-			System.out.println("Seleziona 2 se Televisore di tipo Medio");
-			System.out.println("Seleziona 3 se Televisore di tipo Avanzato");
-			scelta = s.nextLine();
-			switch (scelta) {
-			case "1":
-				boolean result;
-				System.out.println("Inserisci il seriale dalla televisore.");
-
-				System.out.println("Il seriale è composto da 12 numeri.");
-				valoriUtente = s.nextLine();
-				Televisore tv;
-				try {
-					tv = new TelevisoreBase(valoriUtente);
-					do {
-						System.out.println("Inserisci La marca dalla televisore.");
-						System.out.println("Se vuoi visualizzare le marche dei televisori inserisca 1");
-						if (s.nextLine().equals("1")) {
-							tv.visualizzanomiMarcheTv();
+			do {
+				System.out.println("Seleziona 1 se vuoi entrare nel reparto televisore");
+				System.out.println("Seleziona 2 se vuoi entrare come cliente");
+				System.out.println("Seleziona 3 se vuoi entrare come dipendente");
+				System.out.println("Seleziona 4 se vuoi uscire");
+				scelta = s.next();
+				System.out.flush();
+				switch (scelta) {
+				case "1":
+					tv = new FornitoreTv();
+					System.out.println("Seleziona 1 se vuoi aggiungere un nuovo televisore");
+					System.out.println("Seleziona 2 se vuoi modificare un televisore esistente");
+					System.out.println("Seleziona 3 se vuoi eliminare un televisore");
+					System.out.println("Seleziona 4 se vuoi visualizzare i televisori forniti");
+					System.out.println("Seleziona 5 se vuoi tornare al menù principale");
+					scelta = s.next();
+					System.out.flush();
+					switch (scelta) {
+					case "1":
+						System.out.println("scegli che tipologia di televisore Vuoi inserire");
+						System.out.println("Seleziona 1 se televisore di tipo Base");
+						System.out.println("Seleziona 2 se Televisore di tipo Medio");
+						System.out.println("Seleziona 3 se Televisore di tipo Avanzato");
+						System.out.println("Seleziona 4 se non vuoi fare nessun operazione");
+						scelta = s.next();
+						System.out.flush();
+						switch (scelta) {
+						case "1":
+							listaTvFornite.add(tv.fornisciTvBase());
+							break;
+						case "2":
+							listaTvFornite.add(tv.fornisciTvMedio());
+							break;
+						case "3":
+							listaTvFornite.add(tv.fornisciTvAvanzato());
+							break;
+						case "4":
+							break;
+						default:
+							System.err.println("hai inserito un valore non prensente nell'elenco");
+							break;
 						}
-						System.out.println("Inserisci La marca dalla televisore.");
-						valoriUtente = s.nextLine();
-						result = tv.addMarcaTv(valoriUtente);
-					} while (result == false);
+						break;
+					case "2":
+						tv.modificaTelevisore(listaTvFornite);
+						break;
+					case "3":
+						tv.eliminaTelevisore(listaTvFornite);
+						break;
+					case "4":
+						System.out.println(tv.visualizzaTvFornite(listaTvFornite));
+						break;
+					case "5":
+						break;
+					}
+					break;
+				case "2":
+					System.out.println("Seleziona 1 se vuoi aggiungere un nuovo cliente");
+					System.out.println("Seleziona 2 se vuoi modificare un cliente esistente");
+					System.out.println("Seleziona 3 se vuoi eliminare i dati del cliente");
+					System.out.println("Seleziona 4 se vuoi visualizzare i clienti dell'azienda");
+					System.out.println("Seleziona 5 se vuoi tornare al menù principale");
+					scelta = s.next();
+					System.out.flush();
+					switch (scelta) {
+					case "1":
+						listaTvFornite.add(tv.fornisciTvBase());
+						break;
+					case "2":
+						listaTvFornite.add(tv.fornisciTvMedio());
+						break;
+					case "3":
+						listaTvFornite.add(tv.fornisciTvAvanzato());
+						break;
+					case "4":
+						break;
+					default:
+						System.err.println("hai inserito un valore non prensente nell'elenco");
+						break;
+					}
+					break;
+				case "3":
+					break;
+				case "4":
+					file.savenewALLtv(listaTvFornite);
+					System.exit(1);
+					break;
 
-					do {
-						System.out.println("Inserisci l'altezza dalla televisore.");
-						System.out
-								.println("Attenzione l'altezza minima della tv è:" + ConstantGlobal.ALTEZZA_MINIMA_TV);
-						System.out.println("L'altezza massima è:" + ConstantGlobal.ALTEZZA_MASSIMA_TV);
-						valoriUtente = s.nextLine();
-						result = tv.addAltezzaTv(valoriUtente);
-					} while (result == false);
-					do {
-						System.out.println("Inserisci la larghezza dalla televisore.");
-						System.out.println(
-								"Attenzione la larghezza minima della tv è:" + ConstantGlobal.LARGHEZZA_MINIMA_TV);
-						System.out.println("Attenzione la larghezza massima è:" + ConstantGlobal.LARGHEZZA_MASSIMA_TV);
-						valoriUtente = s.nextLine();
-						result = tv.addLarghezzaTv(valoriUtente);
-					} while (result == false);
-					do {
-						System.out.println("Inserisci la diagonale dalla televisore.");
-						System.out.println(
-								"Attenzione la diagonale minima della tv è:" + ConstantGlobal.DIAGONALE_MINIMA_TV);
-						System.out.println("Attenzione la diagonale massima è:" + ConstantGlobal.DIAGONALE_MASSIMA_TV);
-						valoriUtente = s.nextLine();
-						result = tv.addDiagonaleTv(valoriUtente);
-					} while (result == false);
-					do {
-						System.out.println("Inserisci La risoluzione dalla televisore.");
-						System.out.println("Se vuoi visualizzare le risoluzione delle tv");
-						if (s.nextLine().equals("1")) {
-							tv.visualizzaRisoluzioniSchermiTv();
-							;
-						}
-						System.out.println("Inserisci la risoluzione dalla televisore.");
-						valoriUtente = s.nextLine();
-						result = tv.addRisoluzioneTv(valoriUtente);
-					} while (result == false);
-					do {
-						System.out.println("Inserisci La tipologia di schermo dalla televisore.");
-						System.out.println("Se vuoi visualizzare le tipologie di schermo delle tv");
-						if (s.nextLine().equals("1")) {
-							tv.visualizzaTipologieSchermoTv();
-						}
-						System.out.println("Inserisci la tipologia di schermo dalla televisore.");
-						valoriUtente = s.nextLine();
-						result = tv.addTiposchermoTv(valoriUtente);
-					} while (result == false);
-
-				} catch (TelevisoreException e) {
-					System.err.println(e.getMessage());
 				}
-
-				break;
-			case "2":
-				break;
-			case "3":
-				break;
-			}
+			} while (true);
 		}
-
 	}
 }

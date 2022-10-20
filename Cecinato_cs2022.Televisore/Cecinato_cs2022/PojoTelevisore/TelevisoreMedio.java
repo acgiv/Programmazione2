@@ -1,5 +1,6 @@
 package Cecinato_cs2022.PojoTelevisore;
 
+import java.io.Serializable;
 import java.util.Collections;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,8 +10,9 @@ import Cecinato_cs2022.EcceptionTelevisore.MaxValueException;
 import Cecinato_cs2022.EcceptionTelevisore.MinValueException;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 
-public class TelevisoreMedio extends TelevisoreBase {
+public class TelevisoreMedio extends TelevisoreBase implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private int number_usb;
 
 	public TelevisoreMedio(String seriale) throws TelevisoreException {

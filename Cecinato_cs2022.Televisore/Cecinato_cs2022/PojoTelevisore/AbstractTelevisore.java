@@ -1,5 +1,4 @@
 package Cecinato_cs2022.PojoTelevisore;
-
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -8,39 +7,40 @@ import org.apache.commons.lang3.StringUtils;
 
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.MarcheTelevisori;
+import Cecinato_cs2022.DaoTelevisore.DaoTelevisoreImp;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
-abstract class AbstractTelevisore implements Televisore {
+abstract class AbstractTelevisore extends DaoTelevisoreImp implements Televisore {
 
 	protected boolean inserthdmi = false;
 	protected boolean insertusb = false;
 	protected boolean insertSmartTV = false;
 	protected final static Set<String> elencoSerialeTv = new TreeSet<String>();
-
+	
 	public void visualizzanomiMarcheTv() {
 		int i = 0;
-		System.err.println("Le marche esistenti di tv sono:");
+		System.out.println("Le marche esistenti di tv sono:");
 		for (MarcheTelevisori item : MarcheTelevisori.values()) {
-			System.err.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
+			System.out.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
 			i += 1;
 		}
 	}
 
 	public void visualizzaTipologieSchermoTv() {
 		int i = 1;
-		System.err.println("Le tipologie di schermo esistenti sono:");
+		System.out.println("Le tipologie di schermo esistenti sono:");
 		for (ConstantGlobal.TIPOLOGIA_SCHERMO item : ConstantGlobal.TIPOLOGIA_SCHERMO.values()) {
-			System.err.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
+			System.out.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
 			i += 1;
 		}
 	}
 
 	public void visualizzaRisoluzioniSchermiTv() {
 		int i = 1;
-		System.err.println("Le risoluzioni degli schermi esistenti sono:");
+		System.out.println("Le risoluzioni degli schermi esistenti sono:");
 		for (ConstantGlobal.RISOLUZIONE_TV item : ConstantGlobal.RISOLUZIONE_TV.values()) {
-			System.err.println(
+			System.out.println(
 					String.valueOf(i).concat(") ").concat(String.valueOf(item).replace("_", " ")).toLowerCase());
 			i += 1;
 		}
@@ -139,15 +139,19 @@ abstract class AbstractTelevisore implements Televisore {
 
 	protected boolean controlloCorrettezzaUsb(String numeroUsb) {
 		boolean result = false;
-		if ((Integer.valueOf(numeroUsb).equals(ConstantGlobal.NUM_USB_TV_MEDIO)
+		if (((Integer.valueOf(numeroUsb).equals(ConstantGlobal.NUM_USB_TV_MEDIO)
 				&& visualizzaTipologiaTv().equals(ConstantGlobal.TIPOLOGIA_TV.MEDIO))
 				|| (Integer.valueOf(numeroUsb).equals(ConstantGlobal.NUMERO_USB_TV_AVANZATO)
-						&& visualizzaTipologiaTv().equals(ConstantGlobal.TIPOLOGIA_TV.AVANZATO))
-				|| Integer.valueOf(numeroUsb).equals(ConstantGlobal.NUM_MINIMO_USB)) {
+						&& visualizzaTipologiaTv().equals(ConstantGlobal.TIPOLOGIA_TV.AVANZATO)))
+				 || Integer.valueOf(numeroUsb)==ConstantGlobal.NUM_MINIMO_USB
+			) {
 			result = true;
 		}
 		return result;
 	}
+	
+
+	
 
 	public abstract boolean addMarcaTv(String marca);
 
@@ -235,5 +239,7 @@ abstract class AbstractTelevisore implements Televisore {
 	public abstract int visualizzaNumeroHdmi();
 
 	public abstract int visualizzaNumeroSmartTv();
+	
+
 
 }
