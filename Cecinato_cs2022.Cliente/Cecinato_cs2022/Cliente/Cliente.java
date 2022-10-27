@@ -1,5 +1,6 @@
 package Cecinato_cs2022.Cliente;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.util.Collections;
@@ -10,19 +11,19 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
-
 import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal.TIPO_CONTRATTO;
+import Cecinato_cs2022.ControlliGlobal.ControlliGlobal;
 import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.Persona.AbstractPersona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
-import ControlliGlobal.ControlliGlobal;
 
-public class Cliente extends AbstractPersona {
+public class Cliente extends AbstractPersona implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private String codiceFiscale;
 	private String nomeCartaFedelta;
 	private String puntiFedelta;
@@ -34,12 +35,20 @@ public class Cliente extends AbstractPersona {
 	static private Set<String> NumeroCarteCreate = new HashSet<String>();
 
 	public Cliente(String CodiceFiscale) throws PersonaException {
+		super();
 		if (controlloCodiceFiscale(CodiceFiscale)) {
 			this.codiceFiscale = CodiceFiscale;
 			elencoCodiceFiscale.add(codiceFiscale);
 		}
-
 	}
+
+	
+	
+	public Cliente(String nome, String cognome, int eta, String genere, String dataNascita, String citta) {
+		super(nome, cognome, eta, genere, dataNascita, citta);
+	}
+
+
 
 	public String getCodiceFiscale() {
 		return codiceFiscale;
@@ -162,6 +171,15 @@ public class Cliente extends AbstractPersona {
 		}
 		return result;
 	}
+	
+	public void visualizzaElencoOperazioniPunti() throws PersonaException  {
+		int i = 1;
+		for (ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA item : ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA.values()) {
+			System.out.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
+			i += 1;
+		}
+	}
+	
 
 	@Override
 	public boolean addNomeAzienda(String nomeAzienda) throws PersonaException {
@@ -240,6 +258,10 @@ public class Cliente extends AbstractPersona {
 
 	@Override
 	public boolean modificaRuolo(String ruolo) throws PersonaException {
+		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
+	}
+	@Override
+	public void VisualizzaElencoTipologiaContratto() throws PersonaException {
 		throw new PersonaException("questa funzionalità non può essere usata per il Cliente");
 	}
 

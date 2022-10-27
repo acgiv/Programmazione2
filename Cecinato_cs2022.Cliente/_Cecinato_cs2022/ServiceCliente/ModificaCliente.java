@@ -14,4 +14,6 @@ public interface ModificaCliente {
 	public boolean modificaNumeroCartaFedelta() throws PersonaException;
 
 	public boolean modificaCodiceFiscale(String codiceFiscale) throws PersonaException;
+	
+	
 }

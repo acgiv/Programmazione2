@@ -3,6 +3,8 @@ package _Cecinato_cs2022.ServiceCliente;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 
 public interface VisualizzaCliente {
+	
+	public void visualizzaElencoOperazioniPunti() throws PersonaException;
 
 	public String VisualizzaNomeCartaFedelta() throws PersonaException;
 

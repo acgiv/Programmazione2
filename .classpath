@@ -9,7 +9,7 @@
 	<classpathentry kind="src" path="Cecinato_cs2022.Persona"/>
 	<classpathentry kind="src" path="Cecinato_cs2022.Televisore"/>
 	<classpathentry kind="src" path="Cecinato_cs2022.ConstantGlobal"/>
-	<classpathentry kind="src" path="Cecinato_cs2022.Main"/>
+	<classpathentry kind="src" path="Cecinato_cs2022.Azienda"/>
 	<classpathentry kind="src" path="Cecinato_cs2022.Cliente"/>
 	<classpathentry kind="src" path="Cecinato_cs2022.Dipendente"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>

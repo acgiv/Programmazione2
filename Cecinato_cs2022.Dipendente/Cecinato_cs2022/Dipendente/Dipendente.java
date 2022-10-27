@@ -1,5 +1,6 @@
 package Cecinato_cs2022.Dipendente;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.Iterator;
@@ -8,17 +9,18 @@ import java.util.TreeSet;
 import Cecinato_cs2022.Cliente.Cliente;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal.TIPO_CONTRATTO;
+import Cecinato_cs2022.ControlliGlobal.ControlliGlobal;
 import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.Persona.AbstractPersona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
-import ControlliGlobal.ControlliGlobal;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class Dipendente extends AbstractPersona {
+public class Dipendente extends AbstractPersona implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private int numeroTvVendute;
 	private static int incrementNumeroTv = 0;
 	private String codiceIdentificativo;
@@ -91,7 +93,6 @@ public class Dipendente extends AbstractPersona {
 	}
 	
 	
-
 	@Override
 	public String toString() {
 		String stringa = null;
@@ -113,6 +114,14 @@ public class Dipendente extends AbstractPersona {
 		return (getNome().replace(" ", "").concat(getCognome().replace(" ", "")).concat("@").concat(getNomeAzienda().replace(" ", "")).concat(".com")).toLowerCase();
 	}
 
+	public void VisualizzaElencoTipologiaContratto() throws PersonaException {
+		int i = 1;
+		for (ConstantGlobal.TIPO_CONTRATTO item : ConstantGlobal.TIPO_CONTRATTO.values()) {
+			System.out.println(String.valueOf(i).concat(") ").concat(String.valueOf(item)).toLowerCase());
+			i += 1;
+		}
+	}
+	
 	protected boolean controlloIdentificativo(String codiceIdentificativo) throws PersonaException {
 		boolean result = true;
 		if (StringUtils.isNotBlank(codiceIdentificativo) && codiceIdentificativo.trim().matches(ConstantGlobal.REGEX_CONTROLLO_CODICE_IDENTIFICATIVO)) {
@@ -180,9 +189,9 @@ public class Dipendente extends AbstractPersona {
 	@Override
 	public boolean addtipologiaContratto(String tipologiaContratto) throws PersonaException {
 		boolean result = false;
-			if (StringUtils.isNotBlank(tipologiaContratto) && controlloTipoContratto(tipologiaContratto)) {
+			if (StringUtils.isNotBlank(tipologiaContratto) && controlloTipoContratto(tipologiaContratto.trim().toUpperCase())) {
 				if (getTipologiaContratto() == null ) {
-					setTipologiaContratto(ConstantGlobal.TIPO_CONTRATTO.valueOf(tipologiaContratto.trim()));
+					setTipologiaContratto(ConstantGlobal.TIPO_CONTRATTO.valueOf(tipologiaContratto.trim().toUpperCase()));
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -273,9 +282,9 @@ public class Dipendente extends AbstractPersona {
 	public boolean modificatipologiaContratto(String tipologiaContratto) throws PersonaException {
 		boolean result = false;
 
-			if (StringUtils.isNotBlank(tipologiaContratto) && controlloTipoContratto(tipologiaContratto.trim())) {
+			if (StringUtils.isNotBlank(tipologiaContratto) && controlloTipoContratto(tipologiaContratto.trim().toUpperCase())) {
 				if (getTipologiaContratto()!=null) {
-					setTipologiaContratto(ConstantGlobal.TIPO_CONTRATTO.valueOf(tipologiaContratto.trim()));
+					setTipologiaContratto(ConstantGlobal.TIPO_CONTRATTO.valueOf(tipologiaContratto.trim().toUpperCase()));
 					result = true;
 				} else {
 					throw new PersonaException(
@@ -472,7 +481,10 @@ public class Dipendente extends AbstractPersona {
 	public boolean addNumeroCartaFedelta() throws PersonaException {
 		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
 	}
-
+	@Override
+	public void visualizzaElencoOperazioniPunti() throws PersonaException{
+		throw new PersonaException("Questa funzionalità non può essere usata per il Dipendente");
+	}
 	
 	@Override
 	public String VisualizzaNomeCartaFedelta() throws PersonaException {

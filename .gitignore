@@ -24,4 +24,6 @@ hs_err_pid*
 
 org.eclipse.jdt.core.prefs
 
-/bin/
+bin/
+
+file/

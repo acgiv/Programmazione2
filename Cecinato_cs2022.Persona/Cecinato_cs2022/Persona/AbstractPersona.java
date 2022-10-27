@@ -6,15 +6,15 @@ import org.apache.commons.lang3.StringUtils;
 
 import Cecinato_cs2022.Cliente.Cliente;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
+import Cecinato_cs2022.ControlliGlobal.ControlliGlobal;
 import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
-import ControlliGlobal.ControlliGlobal;
 
 public abstract class AbstractPersona implements Persona {
-
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String cognome;
 	private int eta;
@@ -22,8 +22,43 @@ public abstract class AbstractPersona implements Persona {
 	private String dataNascita; // il formato sarà 01/02/2022
 	private String citta;
 
-	public AbstractPersona() {
 
+	public AbstractPersona() {
+		super();
+	}
+
+	public AbstractPersona(String nome, String cognome, int eta, String genere, String dataNascita, String citta) {
+		super();
+		try {
+			addNome(nome);
+		} catch (PersonaException e) {
+			System.err.println(e.getMessage());
+		}
+		try {
+			addCognome(cognome);
+		} catch (PersonaException e) {
+			System.err.println(e.getMessage());
+		}
+		try {
+			addEta(eta);
+		} catch (PersonaException e) {
+			System.err.println(e.getMessage());
+		}
+		try {
+			addGenere(genere);
+		} catch (PersonaException e) {
+			System.err.println(e.getMessage());
+		}
+		try {
+			addDataNascita(dataNascita);
+		} catch (PersonaException e) {
+			System.err.println(e.getMessage());
+		}
+		try {
+			addCitta(citta);
+		} catch (PersonaException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	public String getNome() {
@@ -453,6 +488,10 @@ public abstract class AbstractPersona implements Persona {
 	public abstract boolean addDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException;
 
 	public abstract boolean addNumeroCartaFedelta() throws PersonaException;
+	
+	public abstract void VisualizzaElencoTipologiaContratto() throws PersonaException;
+	
+	public abstract void visualizzaElencoOperazioniPunti() throws PersonaException;
 
 	public abstract String VisualizzaNomeCartaFedelta() throws PersonaException;
 

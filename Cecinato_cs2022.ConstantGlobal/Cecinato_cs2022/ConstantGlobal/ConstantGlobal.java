@@ -65,6 +65,8 @@ public interface ConstantGlobal {
 	
 	String TITOLO_TABELLA_CLIENTE ="CLIENTE";
 	
+	String TITOLO_TABELLA_LiSTA_CLIENTI ="ELENCO CLIENTI INSCRITTI";
+	
 	String TABELLA_TV_BASE = String.format("| %11s %5s %9s %5s %7s %4s %8s %4s %8s %4s %5s %5s %7s %4s \n", "SERIALE", " | ", "MARCA", " | ",
 			"ALTEZZA", " | ", "LARGHEZZA", " | ", "DIAGONALE", " | ", "RISOLUZIONE", " | ", "TIPO SCHERMO", " | ");
 
@@ -154,8 +156,12 @@ public interface ConstantGlobal {
 		SOSTITUISCI
 	}
 	
-
 	String PERCORSO_FILE_TELEVISORE = "D:\\Progetti\\Java\\Programmazione2\\706576_Cecinato_cs2022\\file\\televisore.data";
+	
+	String PERCORSO_FILE_CLIENTE = "D:\\Progetti\\Java\\Programmazione2\\706576_Cecinato_cs2022\\file\\cliente.data";
+	
+	String PERCORSO_FILE_DIPENDENTE = "D:\\Progetti\\Java\\Programmazione2\\706576_Cecinato_cs2022\\file\\dipendente.data";
+	
 	
 
 }

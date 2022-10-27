@@ -5,6 +5,8 @@ import Cecinato_cs2022.ExceptionPersona.PersonaException;
 
 public interface VisualizzaDipendete {
 	
+	public void VisualizzaElencoTipologiaContratto() throws PersonaException;
+	
 	public  String visualizzaCodiceIdentificativoDipendete() throws PersonaException;
 	
 	public  String visualizzaNomeAziendaDipendente() throws PersonaException;

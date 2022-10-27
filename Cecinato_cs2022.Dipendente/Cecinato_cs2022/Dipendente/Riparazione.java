@@ -1,8 +1,11 @@
 package Cecinato_cs2022.Dipendente;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.apache.commons.lang3.StringUtils;
 
 import Cecinato_cs2022.Cliente.Cliente;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
@@ -11,8 +14,9 @@ import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
-public class Riparazione {
-
+public class Riparazione implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private Date DataRichiestaRiparazione;
 	private Date DataPrevistaConsegna;
 	private String CostoRiparazione;
@@ -105,19 +109,15 @@ public class Riparazione {
 	private boolean controlloData(String data) {
 		boolean result = false;
 		try {
-			if (!data.isEmpty()) {
-				if (data.matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
+				if(StringUtils.isNotBlank(data) && (data.trim()).matches(ConstantGlobal.REGEX_CONTROLLO_DATA)) {
 					result = true;
 				} else {
 					throw new PersonaException();
 				}
-			} else {
-				throw new NullPointerException();
-			}
 		} catch (NullPointerException e) {
 			System.err.println("E' stato inserito un valore nullo");
 		} catch (PersonaException e) {
-			System.err.println("Errore nell'inserimento della data, hai inserito carateri errati");
+			System.err.println("Errore nell'inserimento della data, hai inserito carateri errati o nulli");
 		}
 		return result;
 	}
@@ -141,26 +141,22 @@ public class Riparazione {
 		if (cliente != null) {
 			result = true;
 		} else {
-			throw new PersonaException("il cliente inserito ha un valore null");
+			throw new PersonaException("il cliente inserito è nullo");
 		}
 		return result;
 	}
 
 	private boolean controlloCosto(String costo) throws TelevisoreException {
 		boolean result = false;
-		if (costo != null) {
-			if (costo.matches(ConstantGlobal.REGEX_CONTROLLO_NUMERI_FLOAT) && Double.valueOf(costo) > 0) {
+			if ( StringUtils.isNotBlank(costo) && costo.trim().matches(ConstantGlobal.REGEX_CONTROLLO_NUMERI_FLOAT) && Double.valueOf(costo) > 0) {
 				result = true;
 			}
-		} else {
-			throw new TelevisoreException("la televisore inserita è nulla");
-		}
 		return result;
 	}
 	
 	private boolean controlloDescrizione(String informazioneRiparazione) throws DipendenteException {
 		boolean result = false;
-		if(informazioneRiparazione != null && informazioneRiparazione.matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA_NUMERI)) {
+		if( StringUtils.isNotBlank(informazioneRiparazione) && informazioneRiparazione.trim().matches(ConstantGlobal.REGEX_CONTROLLO_STRINGA_NUMERI)) {
 			result = true;
 		}else {
 			throw new DipendenteException("La discrizione della riparazione è vuota o contiene caratteri speciali");

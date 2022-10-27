@@ -1,4 +1,4 @@
-package ControlliGlobal;
+package Cecinato_cs2022.ControlliGlobal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,10 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import Cecinato_cs2022.Cliente.Cliente;
+import Cecinato_cs2022.Dipendente.Dipendente;
+import Cecinato_cs2022.ExceptionPersona.PersonaException;
+import Cecinato_cs2022.ServicePersona.Persona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
 public class ControlliGlobal {
@@ -36,6 +40,21 @@ public class ControlliGlobal {
 				if (StringUtils.equals(tv.visualizzaSeriale(), seriale)) {
 					result.add(0, true);
 					result.add(1, tv);
+				}
+			}
+		}
+		return result;
+	}
+	
+	public static ArrayList<Object> controlloPersona(String id, Set<Persona> persona) throws PersonaException {
+		ArrayList<Object> result = new ArrayList<Object>();
+		if (StringUtils.isNotBlank(id)) {
+			Iterator<Persona> element = persona.iterator();
+			while (element.hasNext()) {
+					Persona pr = element.next();
+				if ((pr instanceof Cliente && StringUtils.equals(pr.VisualizzaCodiceFiscale(), id)) ||(pr instanceof Dipendente && StringUtils.equals(id, pr.visualizzaCodiceIdentificativoDipendete()))) {
+					result.add(0, true);
+					result.add(1, pr);
 				}
 			}
 		}
