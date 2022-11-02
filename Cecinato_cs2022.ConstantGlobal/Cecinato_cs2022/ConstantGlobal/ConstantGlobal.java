@@ -59,13 +59,17 @@ public interface ConstantGlobal {
 	
 	String TITOLO_TABELLA_TV_AVANZATO ="TELEVISORE AVANZATO";
 	
-	String TITOLO_ELENCO_TV ="TABELLA ELENCO TV";
+	String TITOLO_ELENCO_TV ="TABELLA  TV FORNITE";
 	
 	String TITOLO_TABELLA_DIPENDENTE ="DIPENDENTE";
 	
 	String TITOLO_TABELLA_CLIENTE ="CLIENTE";
 	
-	String TITOLO_TABELLA_LiSTA_CLIENTI ="ELENCO CLIENTI INSCRITTI";
+	String TITOLO_TABELLA_LISTA_CLIENTI ="ELENCO CLIENTI INSCRITTI";
+	
+	String TITOLO_TABELLA_LISTA_TV_RIPARATE ="ELENCO TV RIPATE";
+	
+	String TITOLO_TABELLA_LISTA_TV_VENDUTE ="ELENCO TV VENDUTE";
 	
 	String TABELLA_TV_BASE = String.format("| %11s %5s %9s %5s %7s %4s %8s %4s %8s %4s %5s %5s %7s %4s \n", "SERIALE", " | ", "MARCA", " | ",
 			"ALTEZZA", " | ", "LARGHEZZA", " | ", "DIAGONALE", " | ", "RISOLUZIONE", " | ", "TIPO SCHERMO", " | ");
@@ -83,8 +87,15 @@ public interface ConstantGlobal {
 	String  TABELLA_CLIENTE  = String.format("| %17s %6s %9s %6s %9s %5s %7s %4s %8s %5s %8s %4s %9s %5s %21s %5s %19s %5s %14s %4s %12s %3s \n", "CODICE FISCALE", " | ", "NOME", " | ", "COGNOME", " | ",
 			"ETA'", " | ", "GENERE", " | ", "DATA NASCITA", " | ", "CITTA'", " | ", "NOME CARTA FEDELTA'", " | ", "DATA INSCRIZIONE CARTA", " | ", "NUMERO CARTA", " | ", "PUNTI CARTA FEDELTA'",  " | ");
 	
-	String TABELLA_ELENCO_TV= String.format("| %11s %5s %10s %3s %9s %5s %7s %4s %8s %4s %8s %4s %5s %5s %7s %4s %6s %5s %11s %6s %12s %5s \n", "SERIALE", " | ", "TIPOLOGIA TV", " | ", "MARCA", " | ",
+	String TABELLA_ELENCO_TV= String.format("| %12s %4s %10s %3s %9s %5s %7s %4s %8s %4s %8s %4s %5s %5s %7s %4s %6s %5s %11s %6s %12s %5s \n", "SERIALE", " | ", "TIPOLOGIA TV", " | ", "MARCA", " | ",
 			"ALTEZZA", " | ", "LARGHEZZA", " | ", "DIAGONALE", " | ", "RISOLUZIONE", " | ", "TIPO SCHERMO", " | ", "NUMERO USB", " | ", "NUMERO HDMI", " | ", "NUMERO SMART TV", " | ");
+	
+	String TABELLA_ELENCO_TV_RIPARATE= String.format("| %24s %3s %13s %5s %10s %3s %9s %5s %7s %4s %8s %4s %8s %5s %5s %5s %7s %4s %6s %5s %28s %14s \n","COD IDENTIFICATIVO DIP", " | ", "SERIALE TV", " | ", "TIPOLOGIA TV", " | ", "MARCA", " | ",
+			"NOME CLIENTE ", " | ", "COGNOME CLIENTE", " | ", "CODICE FISCALE", " | ", "DATA RICHIESTA", " | ", "DATA RICONSEGNA", " | ", "COSTO RIPARAZIONE", " | ", "INFO RIPARAZIONE", " | ");
+	
+	
+	String TABELLA_ELENCO_TV_VENDUTE= String.format("|  %12s %5s %24s %5s %12s %5s %15s %5s %10s %6s %15s %4s %17s %5s %16s %5s %14s %5s %15s %5s  \n","ID FATTURA", " | ","COD IDENTIFICATIVO DIP", " | ", "SERIALE TV", " | ", "TIPOLOGIA TV", " | ", "MARCA TV", " | ",
+			"NOME CLIENTE ", " | ", "COGNOME CLIENTE", " | ", "CODICE FISCALE", " | ", "DATA VENDITA", " | ", "COSTO VENDITA", " | ");
 	
 	
 	int LUNGHEZZA_CONTORNO_TABELLA_BASE = TABELLA_TV_BASE.length()-4;
@@ -98,6 +109,10 @@ public interface ConstantGlobal {
 	int LUNGHEZZA_CONTORNO_TABELLA_CLIENTE = TABELLA_CLIENTE.length()-4;
 	
 	int LUNGHEZZA_CONTORNO_ELENCO_TV = TABELLA_ELENCO_TV.length()-4;
+	
+	int LUNGHEZZA_CONTORNO_ELENCO_TV_RIPARATE = TABELLA_ELENCO_TV_RIPARATE.length()-4;
+	
+	int LUNGHEZZA_CONTORNO_ELENCO_TV_VENDUTE = TABELLA_ELENCO_TV_VENDUTE.length()-4;
 	
 	String REGEX_CONTROLLO_DATA = "^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\\d\\d$";
 	
@@ -162,6 +177,8 @@ public interface ConstantGlobal {
 	
 	String PERCORSO_FILE_DIPENDENTE = "D:\\Progetti\\Java\\Programmazione2\\706576_Cecinato_cs2022\\file\\dipendente.data";
 	
+	String PERCORSO_FILE_VENDITA = "D:\\Progetti\\Java\\Programmazione2\\706576_Cecinato_cs2022\\file\\vendita.data";
 	
+	int NUMERO_MASSIMO_TV_VENDUTE = 10;
 
 }

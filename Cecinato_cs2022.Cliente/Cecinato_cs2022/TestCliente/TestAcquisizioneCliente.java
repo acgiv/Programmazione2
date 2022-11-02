@@ -8,7 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Cecinato_cs2022.Cliente.Cliente;
+import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 
@@ -620,12 +622,14 @@ class TestAcquisizioneCliente {
 	
 	@Test
 	void testaddRuoloCliente(){
-		try {
+	
 			System.out.println("Test errore inserimento ruolo aziendale del dipendente");
-			assertFalse(cliente.addRuolo("MANAGER"));
-		} catch (PersonaException e) {
-			System.err.println(e.getMessage());
-		}
+			try {
+				assertFalse(cliente.addRuolo("MANAGER"));
+			} catch (DipendenteException | ClienteException e) {
+				System.err.println(e.getMessage());
+			}
+		
 	}
 	
 	@Test
@@ -633,7 +637,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test errore inserimento dell'email");
 		try {
 			assertFalse(cliente.addEmailAziendale());
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -644,7 +648,7 @@ class TestAcquisizioneCliente {
 		try {
 			System.out.println("Test errore inserimento numero aziendale del dipendente");
 			assertFalse(cliente.addNumeroTelefonoAziendale(" +39 3333333331 "));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -654,7 +658,7 @@ class TestAcquisizioneCliente {
 		try {
 			System.out.println("Test errore inserimento nome azienda del dipendente");
 			assertFalse(cliente.addNomeAzienda("fincons"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -664,7 +668,7 @@ class TestAcquisizioneCliente {
 		try {
 			System.out.println("Test errore inserimento della tipologia di contratto del dipendente");
 			assertFalse(cliente.addtipologiaContratto("manager"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -679,7 +683,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaNomeCartaFedelta();
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			
 		}	
@@ -693,7 +697,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaNomeCartaFedelta();
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		
 		}	
@@ -707,7 +711,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaNomeCartaFedelta();
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			
 		}	
@@ -721,7 +725,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaNomeCartaFedelta();
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -734,7 +738,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaNomeCartaFedelta();
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			
 		}	
@@ -745,7 +749,7 @@ class TestAcquisizioneCliente {
 		try {
 			System.out.println("test aggiunti nome carta fedeltà 'fincons card&'");
 			assertFalse(cliente.addNomeCartaFedelta(" Fincons card&"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -757,7 +761,7 @@ class TestAcquisizioneCliente {
 		try {
 			System.out.println("test aggiunti nome carta fedeltà 'fincons card1'");
 			assertFalse(cliente.addNomeCartaFedelta(" Fincons card1"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -770,11 +774,15 @@ class TestAcquisizioneCliente {
 			cliente.addNomeCartaFedelta("fincons card");
 			System.out.println("test doppio inseimento nome carta fedeltà 'fincons card'");
 			assertFalse(cliente.addNomeCartaFedelta(" Fincons card"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-			cliente.eliminaNomeCartaFedelta();
+			try {
+				cliente.eliminaNomeCartaFedelta();
+			} catch (ClienteException | DipendenteException e1) {
+				System.err.println(e1.getMessage());
+			}
 		}	
 	}
 	
@@ -786,7 +794,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaPuntiAccumulati();
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -800,7 +808,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaPuntiAccumulati();
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -810,7 +818,7 @@ class TestAcquisizioneCliente {
 		try {
 			System.out.println("test aggiungi punti accumulati del cliente = '3000'");
 			assertFalse(cliente.addPuntiFedeltaAccumulati("3000"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -822,7 +830,7 @@ class TestAcquisizioneCliente {
 		try {
 			System.out.println("test aggiungi punti accumulati del cliente = '300%'");
 			assertFalse(cliente.addPuntiFedeltaAccumulati("300%"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -834,7 +842,7 @@ class TestAcquisizioneCliente {
 		try {
 			System.out.println("test aggiungi punti accumulati del cliente = '300a'");
 			assertFalse(cliente.addPuntiFedeltaAccumulati("300a"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -846,7 +854,7 @@ class TestAcquisizioneCliente {
 		try {
 			System.out.println("test aggiungi punti accumulati del cliente = '-1'");
 			assertFalse(cliente.addPuntiFedeltaAccumulati("-1"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -859,11 +867,15 @@ class TestAcquisizioneCliente {
 			cliente.addPuntiFedeltaAccumulati("300");
 			System.out.println("test doppio inserimento aggiungi punti accumulati del cliente = '3'");
 			assertFalse(cliente.addPuntiFedeltaAccumulati("-1"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-			cliente.eliminaPuntiAccumulati();
+			try {
+				cliente.eliminaPuntiAccumulati();
+			} catch (ClienteException | DipendenteException e1) {
+				System.err.println(e1.getMessage());
+			}
 		}	
 	}
 	
@@ -872,7 +884,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= 17-12-2000");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera("17-12-2000"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -884,7 +896,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= 17/12/20+0");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera("17/12/20+0"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -896,7 +908,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= 07/2/2000");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera("07/2/2000"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -911,7 +923,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaDataInscrizioneTessera();
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -921,7 +933,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= null");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera(null));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -933,7 +945,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= ' '");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera(" "));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -948,7 +960,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaDataInscrizioneTessera();
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -958,7 +970,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= 7/05/2022");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera("7/05/2022"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -970,7 +982,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= a7/05/2022");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera("a7/05/2022"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -982,7 +994,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= 07/a5/2022");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera("07/a5/2022"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -994,7 +1006,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= 07/05/1899");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera("07/a5/2022"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -1006,7 +1018,7 @@ class TestAcquisizioneCliente {
 		System.out.println("Test inserimento della data inscrizione tessera= 07/05/3000");
 		try {
 			assertFalse(cliente.addDataInscrizioneTessera("07/a5/2022"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -1020,11 +1032,15 @@ class TestAcquisizioneCliente {
 			assertTrue(cliente.addDataInscrizioneTessera("07/05/1930"));
 			System.out.println(cliente + "\n");
 			assertFalse(cliente.addDataInscrizioneTessera("07/05/1930"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-			cliente.eliminaDataInscrizioneTessera();
+			try {
+				cliente.eliminaDataInscrizioneTessera();
+			} catch (ClienteException | DipendenteException e1) {
+				System.err.println(e1.getMessage());
+			}
 		}
 	}
 	
@@ -1037,7 +1053,7 @@ class TestAcquisizioneCliente {
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
 			cliente.eliminaNumeroCartaFedelta();
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -1048,11 +1064,16 @@ class TestAcquisizioneCliente {
 			System.out.println("test doppio inserimento numero carta fedeltà cliente ");
 			assertTrue(cliente.addNumeroCartaFedelta());
 			assertFalse(cliente.addNumeroCartaFedelta());
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-			cliente.eliminaNumeroCartaFedelta();
+			try {
+				cliente.eliminaNumeroCartaFedelta();
+			} catch (ClienteException | DipendenteException e1) {
+				System.err.println(e1.getMessage());
+
+			}
 		}	
 	}
 }

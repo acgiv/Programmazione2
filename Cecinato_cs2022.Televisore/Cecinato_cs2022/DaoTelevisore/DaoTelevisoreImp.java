@@ -40,21 +40,23 @@ public class DaoTelevisoreImp  implements DaoTelevisore {
 			filein = new FileInputStream(ConstantGlobal.PERCORSO_FILE_TELEVISORE);
 			try (ObjectInputStream input = new ObjectInputStream(filein)) {
 				while (filein.available() > 0) {
-					Televisore televisore = ((Televisore) input.readObject());
-					if(televisore != null) {
-						new TelevisoreBase(televisore.visualizzaSeriale());
-						tv.add(televisore);
+					Object o = input.readObject();
+					if(o != null) {
+						if(o instanceof Televisore) {
+							new TelevisoreBase(((Televisore) o).visualizzaSeriale());
+							tv.add(((Televisore) o));
+						}
 					}
 				}
 			} catch (IOException e) {
-				tv = new HashSet<Televisore>();
+				System.err.println(e.getMessage());
 			} catch (TelevisoreException e) {
 				System.err.println(e.getMessage());
 			}
 		} catch (ClassNotFoundException e) {
 			System.err.println(e.getMessage());
 		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
+			tv = new HashSet<Televisore>();
 		}
 		return tv;
 	}

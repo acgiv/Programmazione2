@@ -12,8 +12,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Cecinato_cs2022.Cliente.Cliente;
+import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 
@@ -39,7 +41,7 @@ class TestModificaCliente {
 			cliente.addNumeroCartaFedelta();
 			cliente.addDataInscrizioneTessera("13/12/2020");
 			cliente.addPuntiFedeltaAccumulati("100");
-		} catch (PersonaException e) {
+		} catch (PersonaException | ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -636,7 +638,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaNomeCartaFedelta("finconscard"));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -648,7 +650,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaNomeCartaFedelta("fincon scard"));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -660,7 +662,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaNomeCartaFedelta(" fincons card "));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -670,7 +672,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica nome carta fedeltà del cliente"+ "fincons card1");
 			assertFalse(cliente.modificaNomeCartaFedelta("fincons card1"));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -682,7 +684,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica nome carta fedeltà del cliente"+ " fincons card( ");
 			assertFalse(cliente.modificaNomeCartaFedelta("fincons card("));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -694,7 +696,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti aggiungendo 20A  punti a quelli che il cliente ha accumulato");
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("20A", OPERAZIONE_PUNTI_FEDELTA.AGGIUNGI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -706,7 +708,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti aggiungendo 20&  punti quelli che il cliente ha accumulato");
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("20&", OPERAZIONE_PUNTI_FEDELTA.AGGIUNGI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -720,7 +722,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaPuntiFedeltaAccumulati(" 20 ", OPERAZIONE_PUNTI_FEDELTA.AGGIUNGI));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 	
 		}	
@@ -733,7 +735,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaPuntiFedeltaAccumulati(" 20 ", OPERAZIONE_PUNTI_FEDELTA.AGGIUNGI));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 
 		}	
@@ -744,7 +746,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti aggiungendo -30 punti a quelli che il cliente ha accumulato");
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("-30", OPERAZIONE_PUNTI_FEDELTA.AGGIUNGI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -756,7 +758,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti aggiungendo i punti con valore superiore al valore massimo consentito di " + ConstantGlobal.NUMERO_MASSIMO_PUNTI_AGGIUNTI);
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("20001", OPERAZIONE_PUNTI_FEDELTA.AGGIUNGI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -769,7 +771,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaPuntiFedeltaAccumulati(" 20 ", OPERAZIONE_PUNTI_FEDELTA.SOTTRAI));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -779,7 +781,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti sottraendo =  20( punti a quelli che il cliente ha accumulato");
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("20(", OPERAZIONE_PUNTI_FEDELTA.SOTTRAI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -793,7 +795,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaPuntiFedeltaAccumulati("20", OPERAZIONE_PUNTI_FEDELTA.SOTTRAI));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -803,7 +805,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti sottraendo = 110 punti a quelli che il cliente ha accumulato");
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("990", OPERAZIONE_PUNTI_FEDELTA.SOTTRAI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -815,7 +817,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti sottraendo = 20& punti a quelli che il cliente ha accumulato");
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("20&", OPERAZIONE_PUNTI_FEDELTA.SOTTRAI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -827,7 +829,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti sostituendo = 20& punti con quelli che il cliente ha accumulato");
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("20&", OPERAZIONE_PUNTI_FEDELTA.SOSTITUISCI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -839,7 +841,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti sostituendo = 20a punti con quelli che il cliente ha accumulato");
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("20a", OPERAZIONE_PUNTI_FEDELTA.SOSTITUISCI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -853,7 +855,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaPuntiFedeltaAccumulati("400", OPERAZIONE_PUNTI_FEDELTA.SOSTITUISCI));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 
 		}	
@@ -864,7 +866,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dei punti sostituendo = ' 2001 ' punti con quelli che il cliente ha accumulato");
 			assertFalse(cliente.modificaPuntiFedeltaAccumulati("2001", OPERAZIONE_PUNTI_FEDELTA.SOSTITUISCI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -878,7 +880,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaNumeroCartaFedelta());
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 			
 		}	
@@ -891,7 +893,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaDataInscrizioneTessera("05/11/2014"));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());	
 		}	
 	}
@@ -901,7 +903,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dataInscrizioneTessera fedeltà = "+"5/11/2014");
 			assertFalse(cliente.modificaDataInscrizioneTessera("5/11/2014"));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());	
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -913,7 +915,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dataInscrizioneTessera fedeltà = "+" 05/1/2014 ");
 			assertFalse(cliente.modificaDataInscrizioneTessera(" 05/1/2014 "));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());	
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -925,7 +927,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dataInscrizioneTessera fedeltà = "+"a5/01/2014");
 			assertFalse(cliente.modificaDataInscrizioneTessera("a5/01/2014"));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());	
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -937,7 +939,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dataInscrizioneTessera fedeltà = "+"05/a1/2014");
 			assertFalse(cliente.modificaDataInscrizioneTessera("05/a1/2014"));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());	
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -949,7 +951,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dataInscrizioneTessera fedeltà = "+"05/01/201a");
 			assertFalse(cliente.modificaDataInscrizioneTessera("05/01/201a"));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());	
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -961,7 +963,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dataInscrizioneTessera fedeltà = "+"05/01/18 0");
 			assertFalse(cliente.modificaDataInscrizioneTessera("05/01/18 0"));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());	
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -975,7 +977,7 @@ class TestModificaCliente {
 			assertTrue(cliente.modificaDataInscrizioneTessera(" 24/10/1983 "));
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());	
 		}	
 	}
@@ -985,7 +987,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test modifica dataInscrizioneTessera fedeltà = "+" 24-10-1983 ");
 			assertFalse(cliente.modificaDataInscrizioneTessera("24-10-1983"));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());	
 			System.out.println("\n dopo il test");
 			System.out.println(cliente + "\n");
@@ -997,7 +999,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test errore modifica il numero aziendale del dipendente ");
 			assertEquals(cliente.modificaNumeroTelefonoAziendale("+49 1234567812"), null);
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -1007,7 +1009,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test errore modifica l'email aziendale del dipendente ");
 			assertEquals(cliente.modificaEmailAziendale(), null);
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -1017,7 +1019,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test errore modifica il nome dell'azienda del dipendente ");
 			assertEquals(cliente.modificaNomeAzienda("Fincons Group"), null);
-		} catch (PersonaException e) {
+		} catch( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -1027,7 +1029,7 @@ class TestModificaCliente {
 		try {
 			System.out.println("test errore modifica il ruolo del dipendente ");
 			assertEquals(cliente.modificaRuolo("menager"), null);
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 

@@ -12,6 +12,7 @@ import java.util.Set;
 
 import Cecinato_cs2022.Cliente.Cliente;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 import _Cecinato_cs2022.ServiceCliente.DaoCliente;
@@ -42,20 +43,19 @@ public class DaoClienteImp  implements DaoCliente{
 			filein = new FileInputStream(ConstantGlobal.PERCORSO_FILE_CLIENTE);
 			try (ObjectInputStream input = new ObjectInputStream(filein)) {
 				while (filein.available() > 0) {
-					Persona cl = ((Persona) input.readObject());
-					if(cl != null) {
-						new Cliente(cl.VisualizzaCodiceFiscale());
-						cliente.add(cl);
+					Object o = input.readObject();
+					if(o != null) {
+						if(o instanceof Persona ) {
+							Persona cl = ((Persona)  o );
+							new Cliente(cl.VisualizzaCodiceFiscale());
+							cliente.add(cl);
+						}
 					}
 				}
-			} catch (IOException e) {
-				System.err.println(e.getMessage());
-				cliente = new HashSet<Persona>();
-			} catch (PersonaException e) {
+				
+			} catch (PersonaException | DipendenteException |ClassNotFoundException  | IOException e) {
 				System.err.println(e.getMessage());
 			}
-		} catch (ClassNotFoundException e) {
-			System.err.println(e.getMessage());
 		} catch (FileNotFoundException e) {
 			System.err.println(e.getMessage());
 		}

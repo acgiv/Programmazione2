@@ -1,19 +1,26 @@
 package Cecinato_cs2022.Azienda;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
+import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ControlliGlobal.ControlliGlobal;
+import Cecinato_cs2022.Dipendente.Riparazione;
+import Cecinato_cs2022.Dipendente.Vendita;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.PojoTelevisore.TelevisoreAvanzato;
 import Cecinato_cs2022.PojoTelevisore.TelevisoreBase;
 import Cecinato_cs2022.PojoTelevisore.TelevisoreMedio;
+import Cecinato_cs2022.ServicePersona.Persona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
 public class FornitoreTv {
@@ -712,82 +719,166 @@ public class FornitoreTv {
 		if (!result.isEmpty()) {
 			if (result.get(0).equals(true)) {
 				Televisore televisore = (Televisore) result.get(1);
-				do{
-				System.out.println("Inserisci 1 se vuoi eliminare la marca della tv");
-				System.out.println("Inserisci 2 se vuoi eliminare l' altezza della tv");
-				System.out.println("Inserisci 3 se vuoi eliminare la larghezza della tv");
-				System.out.println("Inserisci 4 se vuoi eliminare la diagonale della tv");
-				System.out.println("Inserisci 5 se vuoi eliminare la risolzione dello shermo della tv");
-				System.out.println("Inserisci 6 se vuoi eliminare la tipologia dello schermo della tv");
-				System.out.println("Inserisci 7 se vuoi eliminare il numero degli ingressi usb della tv");
-				System.out.println("Inserisci 8 se vuoi eliminare il numero degli ingressi hdmi della tv");
-				System.out.println("Inserisci 9 se vuoi eliminare il numero degli smart tv della tv");
-				valoriUtente = s.nextLine();
-				switch (valoriUtente) {
-				case "1":
-					try {
-						televisore.eliminaMarcaTv();
-					} catch (TelevisoreException e) {
-						System.err.println(e.getMessage());
+				do {
+					System.out.println("Inserisci 1 se vuoi eliminare la marca della tv");
+					System.out.println("Inserisci 2 se vuoi eliminare l' altezza della tv");
+					System.out.println("Inserisci 3 se vuoi eliminare la larghezza della tv");
+					System.out.println("Inserisci 4 se vuoi eliminare la diagonale della tv");
+					System.out.println("Inserisci 5 se vuoi eliminare la risolzione dello shermo della tv");
+					System.out.println("Inserisci 6 se vuoi eliminare la tipologia dello schermo della tv");
+					System.out.println("Inserisci 7 se vuoi eliminare il numero degli ingressi usb della tv");
+					System.out.println("Inserisci 8 se vuoi eliminare il numero degli ingressi hdmi della tv");
+					System.out.println("Inserisci 9 se vuoi eliminare il numero degli smart tv della tv");
+					valoriUtente = s.nextLine();
+					switch (valoriUtente) {
+					case "1":
+						try {
+							televisore.eliminaMarcaTv();
+						} catch (TelevisoreException e) {
+							System.err.println(e.getMessage());
+						}
+						break;
+					case "2":
+						try {
+							televisore.eliminaAltezzaTv();
+						} catch (TelevisoreException e) {
+							System.err.println(e.getMessage());
+						}
+						break;
+					case "3":
+						try {
+							televisore.eliminaLarghezzaTv();
+						} catch (TelevisoreException e) {
+							System.err.println(e.getMessage());
+						}
+						break;
+					case "4":
+						try {
+							televisore.eliminaDiagonaleTv();
+						} catch (TelevisoreException e) {
+							System.err.println(e.getMessage());
+						}
+						break;
+					case "5":
+						if (s.nextLine().equals("1")) {
+							televisore.visualizzaRisoluzioniSchermiTv();
+							;
+						}
+						try {
+							televisore.eliminaRisoluzioneTv();
+						} catch (TelevisoreException e) {
+							System.err.println(e.getMessage());
+						}
+						break;
+					case "6":
+						try {
+							televisore.eliminaTiposchermoTv();
+						} catch (TelevisoreException e) {
+							System.err.println(e.getMessage());
+						}
+						break;
+					case "7":
+						televisore.eliminaNumberUsbTv();
+						break;
+					case "8":
+						televisore.eliminaNumberSmartTv();
+						break;
+					case "9":
+						televisore.eliminaNumberSmartTv();
+						break;
 					}
-					break;
-				case "2":
-					try {
-						televisore.eliminaAltezzaTv();
-					} catch (TelevisoreException e) {
-						System.err.println(e.getMessage());
-					}
-					break;
-				case "3":
-					try {
-						televisore.eliminaLarghezzaTv();
-					} catch (TelevisoreException e) {
-						System.err.println(e.getMessage());
-					}
-					break;
-				case "4":
-					try {
-						televisore.eliminaDiagonaleTv();
-					} catch (TelevisoreException e) {
-						System.err.println(e.getMessage());
-					}
-					break;
-				case "5":
-					if (s.nextLine().equals("1")) {
-						televisore.visualizzaRisoluzioniSchermiTv();
-						;
-					}
-					try {
-						televisore.eliminaRisoluzioneTv();
-					} catch (TelevisoreException e) {
-						System.err.println(e.getMessage());
-					}
-					break;
-				case "6":
-					try {
-						televisore.eliminaTiposchermoTv();
-					} catch (TelevisoreException e) {
-						System.err.println(e.getMessage());
-					}
-					break;
-				case "7":
-					televisore.eliminaNumberUsbTv();
-					break;
-				case "8":
-					televisore.eliminaNumberSmartTv();
-					break;
-				case "9":
-					televisore.eliminaNumberSmartTv();
-					break;
-				}
-				System.out.println("Inserisci 1 se vuoi eliminare altre informazioni su questa tv");
-				valoriUtente = s.nextLine();
-			} while (StringUtils.equals(valoriUtente, "1"));
-				
-			}		
+					System.out.println("Inserisci 1 se vuoi eliminare altre informazioni su questa tv");
+					valoriUtente = s.nextLine();
+				} while (StringUtils.equals(valoriUtente, "1"));
+
+			}
 		} else {
 			System.err.println("| Errore nell'inserimento |");
 			System.err.print("hai inserito un seriale sbagliato");
 		}
+	}
+
+	public String visualizzaAllTvRiparate(Set<Persona> elencoDipendenti) {
+		String stringa = null;
+		Set<Riparazione> tvAllRiparate = new HashSet<Riparazione>();
+		stringa = String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_")).concat("\n");
+		stringa += String.format("| %105s %81s", ConstantGlobal.TITOLO_TABELLA_LISTA_TV_RIPARATE, "|\n");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_")).concat("\n");
+		stringa += ConstantGlobal.TABELLA_ELENCO_TV;
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_")).concat("\n");
+		if (!elencoDipendenti.isEmpty()) {
+			elencoDipendenti.stream().forEach(s -> {
+				try {
+					tvAllRiparate.addAll(s.visualizzaElencoTvRiparate());
+				} catch (ClienteException e) {
+					System.err.println(e.getMessage());
+				}
+			});
+			Iterator<Riparazione> element = tvAllRiparate.iterator();
+			while (element.hasNext()) {
+				Riparazione r = element.next();
+				Televisore tv = r.getTvRiparata();
+				stringa += String.format("| %13s %2s %12s %3s %10s %4s %6s %5s %7s %6s %8s %5s %9s %7s %7s %9s",
+						tv.visualizzaSeriale(), " | ", tv.visualizzaTipologiaTv(), " | ", tv.visualizzaMarca(), " | ",
+						tv.visualizzaAltezza(), " | ", tv.visualizzaLarghezza(), " | ", tv.visualizzaDiagonale(), " | ",
+						tv.visualizzaRisoluzione(), " | ", tv.visualizzaTipoSchermo(), " | ");
+				if (tv.visualizzaTipologiaTv() == ConstantGlobal.TIPOLOGIA_TV.BASE) {
+					stringa += String.format(" %6s %9s %7s %10s %10s %10s\n", " ", " | ", " ", " | ", " ", " | ");
+				} else if (tv.visualizzaTipologiaTv() == ConstantGlobal.TIPOLOGIA_TV.MEDIO) {
+					stringa += String.format(" %6s %9s %7s %10s %10s %10s\n", tv.visualizzaNumeroUsb(), " | ", " ",
+							" | ", " ", " | ");
+				} else {
+					stringa += String.format(" %6s %9s %7s %10s %10s %10s\n", tv.visualizzaNumeroUsb(), " | ",
+							tv.visualizzaNumeroHdmi(), " | ", tv.visualizzaNumeroSmartTv(), " | ");
+				}
+				stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_"))
+						.concat("\n");
+			}
+			
+		}
+
+		return stringa;
+	}
+	
+	public String visualizzaAllTvVendute(Set<Persona> elencoDipendenti) {
+		String stringa = null;
+		Set<Vendita> tvAllRiparate = new HashSet<Vendita>();
+		stringa = String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_")).concat("\n");
+		stringa += String.format("| %162s %89s", ConstantGlobal.TITOLO_TABELLA_LISTA_TV_RIPARATE, "|\n");
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_")).concat("\n");
+		stringa += ConstantGlobal.TABELLA_ELENCO_TV;
+		stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_")).concat("\n");
+		if (!elencoDipendenti.isEmpty()) {
+			elencoDipendenti.stream().forEach(s -> {
+				try {
+					tvAllRiparate.addAll(s.visualizzaElencoTvVendute());
+				} catch (ClienteException e) {
+					System.err.println(e.getMessage());
+				}
+			});
+			Iterator<Vendita> element = tvAllRiparate.iterator();
+			while (element.hasNext()) {
+				Vendita r = element.next();
+				Televisore tv = r.getTv();
+				stringa += String.format("| %13s %2s %12s %3s %10s %4s %6s %5s %7s %6s %8s %5s %9s %7s %7s %9s",
+						tv.visualizzaSeriale(), " | ", tv.visualizzaTipologiaTv(), " | ", tv.visualizzaMarca(), " | ",
+						tv.visualizzaAltezza(), " | ", tv.visualizzaLarghezza(), " | ", tv.visualizzaDiagonale(), " | ",
+						tv.visualizzaRisoluzione(), " | ", tv.visualizzaTipoSchermo(), " | ");
+				if (tv.visualizzaTipologiaTv() == ConstantGlobal.TIPOLOGIA_TV.BASE) {
+					stringa += String.format(" %6s %9s %7s %10s %10s %10s\n", " ", " | ", " ", " | ", " ", " | ");
+				} else if (tv.visualizzaTipologiaTv() == ConstantGlobal.TIPOLOGIA_TV.MEDIO) {
+					stringa += String.format(" %6s %9s %7s %10s %10s %10s\n", tv.visualizzaNumeroUsb(), " | ", " ",
+							" | ", " ", " | ");
+				} else {
+					stringa += String.format(" %6s %9s %7s %10s %10s %10s\n", tv.visualizzaNumeroUsb(), " | ",
+							tv.visualizzaNumeroHdmi(), " | ", tv.visualizzaNumeroSmartTv(), " | ");
+				}
+				stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_"))
+						.concat("\n");
+			}
+			
+		}
+
+		return stringa;
 	}
 }

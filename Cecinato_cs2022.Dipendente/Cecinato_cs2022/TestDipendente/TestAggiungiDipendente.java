@@ -7,8 +7,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.Dipendente.Dipendente;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 
@@ -22,6 +24,8 @@ class TestAggiungiDipendente {
 		try {
 			dipendente = new Dipendente("123456789a");
 		} catch (PersonaException e) {
+			System.err.println(e.getMessage());
+		} catch (DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -144,7 +148,7 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test2addCognomeDipendente() throws PersonaException {
+	void test2addCognomeDipendente() {
 		System.out.println("Test inserimento del cognome = Ros si");
 		try {
 			assertTrue(dipendente.addCognome("Ros si"));
@@ -668,7 +672,7 @@ class TestAggiungiDipendente {
 		System.out.println("Test inserimento del ruolo = menager1");
 		try {
 			assertFalse(dipendente.addRuolo("menager1"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -681,7 +685,7 @@ class TestAggiungiDipendente {
 		System.out.println("Test inserimento del ruolo = menager&");
 		try {
 			assertFalse(dipendente.addRuolo("menageri&"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -697,7 +701,7 @@ class TestAggiungiDipendente {
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			dipendente.eliminaRuolo();
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -711,7 +715,7 @@ class TestAggiungiDipendente {
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			dipendente.eliminaRuolo();
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 
 		}
@@ -723,7 +727,7 @@ class TestAggiungiDipendente {
 		System.out.println("Test inserimento del ruolo = null");
 		try {
 			assertFalse(dipendente.addRuolo(null));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 		System.out.println("\n dopo il test");
@@ -732,11 +736,11 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test6addRuoloDipendente() {
+	void test6addRuoloDipendente() throws PersonaException {
 		System.out.println("Test inserimento del ruolo = ' '");
 		try {
 			assertFalse(dipendente.addRuolo(" "));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -745,13 +749,13 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test7addRuoloDipendente() throws PersonaException {
+	void test7addRuoloDipendente() throws PersonaException, DipendenteException, ClienteException {
 		System.out.println("Test doppio inserimento del ruolo = 'MANAGER'");
 		try {
 			assertTrue(dipendente.addRuolo("MANAGER"));
 			System.out.println(dipendente + "\n");
 			assertFalse(dipendente.addRuolo("MANAGER"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -761,7 +765,7 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test1addemailDipendente() throws PersonaException {
+	void test1addemailDipendente()throws PersonaException, DipendenteException, ClienteException {
 		System.out.println("Test doppio inserimento dell'email");
 		dipendente.addCognome("rossi");
 		dipendente.addNome("mario");
@@ -770,7 +774,7 @@ class TestAggiungiDipendente {
 			assertTrue(dipendente.addEmailAziendale());
 			System.out.println(dipendente + "\n");
 			assertFalse(dipendente.addEmailAziendale());
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -784,7 +788,7 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test2addemailDipendente() throws PersonaException {
+	void test2addemailDipendente()throws PersonaException, DipendenteException, ClienteException {
 		System.out.println("Test inserimento dell'email");
 		dipendente.addCognome("rossi");
 		dipendente.addNome("mario");
@@ -804,14 +808,14 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test3addemailDipendente() throws PersonaException {
+	void test3addemailDipendente()throws PersonaException, DipendenteException, ClienteException {
 		System.out.println("Test inserimento dell'email con cognome nullo");
 		dipendente.addNome("mario");
 		dipendente.addNomeAzienda("fincons group");
 		try {
 			assertFalse(dipendente.addEmailAziendale());
 
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -823,14 +827,14 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test4addemailDipendente() throws PersonaException {
+	void test4addemailDipendente()throws PersonaException, DipendenteException, ClienteException {
 		System.out.println("Test inserimento dell'email con nomw nullo");
 		dipendente.addCognome("rossi");
 		dipendente.addNomeAzienda("fincons group");
 		try {
 			assertFalse(dipendente.addEmailAziendale());
 
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -849,7 +853,7 @@ class TestAggiungiDipendente {
 		try {
 			assertFalse(dipendente.addEmailAziendale());
 
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -861,12 +865,12 @@ class TestAggiungiDipendente {
 
 	
 	@Test
-	void test1addNumeroTelefonicoDipendente() throws PersonaException {
+	void test1addNumeroTelefonicoDipendente() {
 		System.out.println("Test inserimento del numero telefonico = +39 333333333a");
 		try {
 			assertFalse(dipendente.addNumeroTelefonoAziendale("+39 333333333a3"));
 
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -876,12 +880,12 @@ class TestAggiungiDipendente {
 
 	
 	@Test
-	void test2addNumeroTelefonicoDipendente() throws PersonaException {
+	void test2addNumeroTelefonicoDipendente() {
 		System.out.println("Test inserimento del numero telefonico = +39 333333333&");
 		try {
 			assertFalse(dipendente.addNumeroTelefonoAziendale("+39 333333333&3"));
 
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -891,12 +895,12 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test3addNumeroTelefonicoDipendente() throws PersonaException {
+	void test3addNumeroTelefonicoDipendente() {
 		System.out.println("Test inserimento del numero telefonico = +39 33333333312");
 		try {
 			assertFalse(dipendente.addNumeroTelefonoAziendale("+39 33333333312"));
 
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -905,12 +909,12 @@ class TestAggiungiDipendente {
 	}
 	
 	@Test
-	void test4addNumeroTelefonicoDipendente() throws PersonaException {
+	void test4addNumeroTelefonicoDipendente() {
 		System.out.println("Test inserimento del numero telefonico = +393333333331");
 		try {
 			assertFalse(dipendente.addNumeroTelefonoAziendale("+393333333331"));
 
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -920,25 +924,25 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test5addNumeroTelefonicoDipendente() throws PersonaException {
+	void test5addNumeroTelefonicoDipendente() {
 		System.out.println("Test inserimento del numero telefonico = ' +39 3333333331 '");
 		try {
 			assertTrue(dipendente.addNumeroTelefonoAziendale(" +39 3333333331 "));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			dipendente.eliminaNumeroTelefonoAziendale();
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
 	
 	
 	@Test
-	void test6addNumeroTelefonicoDipendente() throws PersonaException {
+	void test6addNumeroTelefonicoDipendente() {
 		System.out.println("Test inserimento del numero telefonico = ' 39 3333333331 '");
 		try {
 			assertFalse(dipendente.addNumeroTelefonoAziendale("39 3333333331"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -947,11 +951,11 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test7addNumeroTelefonicoDipendente() throws PersonaException {
+	void test7addNumeroTelefonicoDipendente() {
 		System.out.println("Test inserimento del numero telefonico = +47 3333333331'");
 		try {
 			assertFalse(dipendente.addNumeroTelefonoAziendale("+474 3333333331"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -960,11 +964,11 @@ class TestAggiungiDipendente {
 
 	
 	@Test
-	void test1addNomeAziendaDipendente() throws PersonaException {
+	void test1addNomeAziendaDipendente() {
 		System.out.println("Test inserimento nome aziendale  = fincons22");
 		try {
 			assertFalse(dipendente.addNomeAzienda("fincons22"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -973,11 +977,11 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test2addNomeAziendaDipendente() throws PersonaException {
+	void test2addNomeAziendaDipendente()  {
 		System.out.println("Test inserimento nome azienda  = fincons&");
 		try {
 			assertFalse(dipendente.addNomeAzienda("fincons&"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -987,11 +991,11 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test3addNomeAziendaDipendente() throws PersonaException {
+	void test3addNomeAziendaDipendente()  {
 		System.out.println("Test inserimento nome azienda  = null");
 		try {
 			assertFalse(dipendente.addNomeAzienda(null));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -1000,66 +1004,66 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test5addNomeAziendaDipendente() throws PersonaException {
+	void test5addNomeAziendaDipendente() {
 		System.out.println("Test inserimento nome azienda  = ' finsons '");
 		try {
 			assertTrue(dipendente.addNomeAzienda(" fincons "));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			dipendente.eliminaNomeAzienda();
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
 	
 	
 	@Test
-	void test6addNomeAziendaDipendente() throws PersonaException {
+	void test6addNomeAziendaDipendente() throws PersonaException  {
 		System.out.println("Test inserimento nome azienda  = ' finsons group '");
 		try {
 			assertTrue(dipendente.addNomeAzienda(" fincons group "));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			dipendente.eliminaNomeAzienda();
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
 
 	
 	@Test
-	void test7addNomeAziendaDipendente() throws PersonaException {
+	void test7addNomeAziendaDipendente()  {
 		System.out.println("Test inserimento nome azienda  = GROUP FINSONS");
 		try {
 			assertTrue(dipendente.addNomeAzienda("GROUP FINSONS"));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			dipendente.eliminaNomeAzienda();
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
 
 	
 	@Test
-	void test8addNomeAziendaDipendente() throws PersonaException {
+	void test8addNomeAziendaDipendente() {
 		System.out.println("Test inserimento nome azienda  = ' finsons GROUP'");
 		try {
 			assertTrue(dipendente.addNomeAzienda(" finsons GROUP"));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			dipendente.eliminaNomeAzienda();
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
 	
 	@Test
-	void test1addTipoContrattoDipendente() throws PersonaException {
+	void test1addTipoContrattoDipendente() {
 		System.out.println("Test inserimento della tipologia di contratto = STAGE22");
 		try {
 			assertFalse(dipendente.addtipologiaContratto("STAGE22"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -1068,11 +1072,11 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test2addTipoContrattoDipendente() throws PersonaException {
+	void test2addTipoContrattoDipendente() {
 		System.out.println("Test inserimento della tipologia di contratto = STAGE&");
 		try {
 			assertFalse(dipendente.addtipologiaContratto("STAGE&"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -1082,11 +1086,11 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test3addTipoContrattoDipendente() throws PersonaException {
+	void test3addTipoContrattoDipendente() {
 		System.out.println("Test inserimento della tipologia di contratto = null");
 		try {
 			assertFalse(dipendente.addtipologiaContratto(null));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -1095,27 +1099,27 @@ class TestAggiungiDipendente {
 	
 	
 	@Test
-	void test5addTipoContrattoDipendente() throws PersonaException {
+	void test5addTipoContrattoDipendente() {
 		System.out.println("Test inserimento della tipologia di contratto = ' STAGE '");
 		try {
 			assertTrue(dipendente.addtipologiaContratto(" STAGE "));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			dipendente.eliminatipologiaContratto();
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
 	
 	@Test
-	void test6addTipoContrattoDipendente() throws PersonaException {
+	void test6addTipoContrattoDipendente() {
 		System.out.println("Test inserimento della tipologia di contratto = 'STAGE'");
 		try {
 			assertTrue(dipendente.addtipologiaContratto("STAGE"));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			dipendente.eliminatipologiaContratto();
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -1124,7 +1128,7 @@ class TestAggiungiDipendente {
 		try {
 			System.out.println("test errore aggiunti nome carta fedeltà ");
 			assertFalse(dipendente.addNomeCartaFedelta("finconscard"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -1134,7 +1138,7 @@ class TestAggiungiDipendente {
 		try {
 			System.out.println("test errore aggiungi punti accumulati del cliente ");
 			assertFalse(dipendente.addPuntiFedeltaAccumulati("1000"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -1144,7 +1148,7 @@ class TestAggiungiDipendente {
 		try {
 			System.out.println("test errore aggiungi data inscrizione tessera cliente ");
 			assertFalse(dipendente.addDataInscrizioneTessera("11/12/2020"));
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -1154,7 +1158,7 @@ class TestAggiungiDipendente {
 		try {
 			System.out.println("test errore aggiungi numero carta fedeltà cliente ");
 			assertFalse(dipendente.addNumeroCartaFedelta());
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}

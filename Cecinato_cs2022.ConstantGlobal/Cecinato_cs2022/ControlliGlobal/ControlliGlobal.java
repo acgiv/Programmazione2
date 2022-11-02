@@ -9,8 +9,9 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import Cecinato_cs2022.Cliente.Cliente;
+import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.Dipendente.Dipendente;
-import Cecinato_cs2022.ExceptionPersona.PersonaException;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ServicePersona.Persona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
@@ -46,7 +47,7 @@ public class ControlliGlobal {
 		return result;
 	}
 	
-	public static ArrayList<Object> controlloPersona(String id, Set<Persona> persona) throws PersonaException {
+	public static ArrayList<Object> controlloPersona(String id, Set<Persona> persona) throws  DipendenteException, ClienteException {
 		ArrayList<Object> result = new ArrayList<Object>();
 		if (StringUtils.isNotBlank(id)) {
 			Iterator<Persona> element = persona.iterator();

@@ -1,13 +1,18 @@
 package Cecinato_cs2022.Persona;
 
 import java.text.ParseException;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
 import Cecinato_cs2022.Cliente.Cliente;
+import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ControlliGlobal.ControlliGlobal;
+import Cecinato_cs2022.Dipendente.Riparazione;
+import Cecinato_cs2022.Dipendente.Vendita;
 import Cecinato_cs2022.DipendenteException.DipendenteException;
+import Cecinato_cs2022.DipendenteException.RiparazioneException;
 import Cecinato_cs2022.EcceptionTelevisore.TelevisoreException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
@@ -437,93 +442,99 @@ public abstract class AbstractPersona implements Persona {
 		return result;
 	}
 
-	public abstract boolean addNomeAzienda(String nomeAzienda) throws PersonaException;
+	public abstract boolean addNomeAzienda(String nomeAzienda)  throws DipendenteException, ClienteException;
 
-	public abstract boolean addEmailAziendale() throws PersonaException;
+	public abstract boolean addEmailAziendale()  throws DipendenteException, ClienteException;
 
-	public abstract boolean addNumeroTelefonoAziendale(String numeroTelefonoAziendale) throws PersonaException;
+	public abstract boolean addNumeroTelefonoAziendale(String numeroTelefonoAziendale)  throws DipendenteException, ClienteException;
 
-	public abstract boolean addtipologiaContratto(String tipologiaContratto) throws PersonaException;
+	public abstract boolean addtipologiaContratto(String tipologiaContratto)  throws DipendenteException, ClienteException;
 
-	public abstract boolean addRuolo(String ruolo) throws PersonaException;
+	public abstract boolean addRuolo(String ruolo)  throws DipendenteException, ClienteException;
 
-	public abstract boolean modificaNomeAzienda(String nomeAzienda) throws PersonaException;
+	public abstract boolean modificaNomeAzienda(String nomeAzienda) throws DipendenteException, ClienteException;
 
-	public abstract boolean modificaEmailAziendale() throws PersonaException;
+	public abstract boolean modificaEmailAziendale() throws DipendenteException, ClienteException;
 
-	public abstract boolean modificaNumeroTelefonoAziendale(String numeroTelefonoAziendale) throws PersonaException;
+	public abstract boolean modificaNumeroTelefonoAziendale(String numeroTelefonoAziendale) throws DipendenteException, ClienteException;
 
-	public abstract boolean modificatipologiaContratto(String tipologiaContratto) throws PersonaException;
+	public abstract boolean modificatipologiaContratto(String tipologiaContratto) throws DipendenteException, ClienteException;
 
-	public abstract boolean modificaCodiceIdentificativo(String codiceIdentificativo) throws PersonaException;
+	public abstract boolean modificaCodiceIdentificativo(String codiceIdentificativo) throws DipendenteException, ClienteException;
 
-	public abstract boolean modificaRuolo(String ruolo) throws PersonaException;
+	public abstract boolean modificaRuolo(String ruolo) throws DipendenteException, ClienteException;
 
-	public abstract boolean eliminaNomeAzienda() throws PersonaException;
+	public abstract boolean eliminaNomeAzienda() throws DipendenteException, ClienteException;
 
-	public abstract boolean eliminaEmailAziendale() throws PersonaException;
+	public abstract boolean eliminaEmailAziendale()  throws DipendenteException, ClienteException;
 
-	public abstract boolean eliminaNumeroTelefonoAziendale() throws PersonaException;
+	public abstract boolean eliminaNumeroTelefonoAziendale()  throws DipendenteException, ClienteException;
 
-	public abstract boolean eliminatipologiaContratto() throws PersonaException;
+	public abstract boolean eliminatipologiaContratto()  throws DipendenteException, ClienteException;
 
-	public abstract boolean eliminaRuolo() throws PersonaException;
+	public abstract boolean eliminaRuolo()  throws DipendenteException, ClienteException;
 
-	public abstract String visualizzaCodiceIdentificativoDipendete() throws PersonaException;
+	public abstract String visualizzaCodiceIdentificativoDipendete() throws ClienteException;
 
-	public abstract String visualizzaNomeAziendaDipendente() throws PersonaException;
+	public abstract String visualizzaNomeAziendaDipendente() throws ClienteException;
 
-	public abstract String visualizzaEmailAziendaleDipendente() throws PersonaException;
+	public abstract String visualizzaEmailAziendaleDipendente() throws ClienteException;
 
-	public abstract String visualizzaNumeroTelefonoAziendaleDipendente() throws PersonaException;
+	public abstract String visualizzaNumeroTelefonoAziendaleDipendente() throws ClienteException;
 
-	public abstract ConstantGlobal.TIPO_CONTRATTO visualizzatipologiaContrattoDipendente() throws PersonaException;
+	public abstract ConstantGlobal.TIPO_CONTRATTO visualizzatipologiaContrattoDipendente() throws ClienteException;
 
-	public abstract String visualizzaRuoloDipendente() throws PersonaException;
-
-	public abstract boolean addNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException;
-
-	public abstract boolean addPuntiFedeltaAccumulati(String puntiFedelta) throws PersonaException;
-
-	public abstract boolean addDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException;
-
-	public abstract boolean addNumeroCartaFedelta() throws PersonaException;
+	public abstract String visualizzaRuoloDipendente() throws ClienteException;
 	
-	public abstract void VisualizzaElencoTipologiaContratto() throws PersonaException;
+	public abstract Set<Riparazione> visualizzaElencoTvRiparate() throws ClienteException;
 	
-	public abstract void visualizzaElencoOperazioniPunti() throws PersonaException;
+	public abstract Set<Vendita> visualizzaElencoTvVendute() throws ClienteException;
 
-	public abstract String VisualizzaNomeCartaFedelta() throws PersonaException;
+	public abstract boolean addNomeCartaFedelta(String nomeCartaFedelta) throws ClienteException, DipendenteException;
 
-	public abstract String VisualizzaPuntiFedeltaAccumulati() throws PersonaException;
+	public abstract boolean addPuntiFedeltaAccumulati(String puntiFedelta) throws ClienteException, DipendenteException;
 
-	public abstract String VisualizzaDataInscrizioneTessera() throws PersonaException;
+	public abstract boolean addDataInscrizioneTessera(String dataInscrizioneTessera) throws ClienteException, DipendenteException;
 
-	public abstract String VisualizzaNumeroCartaFedelta() throws PersonaException;
+	public abstract boolean addNumeroCartaFedelta() throws ClienteException, DipendenteException;
+	
+	public abstract void VisualizzaElencoTipologiaContratto() throws ClienteException;
+	
+	public abstract void visualizzaElencoOperazioniPunti() throws DipendenteException;
 
-	public abstract String VisualizzaCodiceFiscale() throws PersonaException;
+	public abstract String VisualizzaNomeCartaFedelta() throws DipendenteException;
 
-	public abstract boolean eliminaNomeCartaFedelta() throws PersonaException;
+	public abstract String VisualizzaPuntiFedeltaAccumulati() throws DipendenteException;
 
-	public abstract boolean eliminaPuntiAccumulati() throws PersonaException;
+	public abstract String VisualizzaDataInscrizioneTessera() throws DipendenteException;
 
-	public abstract boolean eliminaDataInscrizioneTessera() throws PersonaException;
+	public abstract String VisualizzaNumeroCartaFedelta() throws DipendenteException;
 
-	public abstract boolean eliminaNumeroCartaFedelta() throws PersonaException;
+	public abstract String VisualizzaCodiceFiscale() throws DipendenteException;
 
-	public abstract boolean modificaNomeCartaFedelta(String nomeCartaFedelta) throws PersonaException;
+	public abstract boolean eliminaNomeCartaFedelta() throws ClienteException, DipendenteException ;
+
+	public abstract boolean eliminaPuntiAccumulati() throws ClienteException, DipendenteException ;
+
+	public abstract boolean eliminaDataInscrizioneTessera()  throws ClienteException, DipendenteException ;
+
+	public abstract boolean eliminaNumeroCartaFedelta()throws ClienteException, DipendenteException ;
+
+	public abstract boolean modificaNomeCartaFedelta(String nomeCartaFedelta) throws ClienteException, DipendenteException;
 
 	public abstract boolean modificaPuntiFedeltaAccumulati(String puntiFedelta,
-			ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA operazione) throws PersonaException;
+			ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA operazione) throws ClienteException, DipendenteException;
 
-	public abstract boolean modificaDataInscrizioneTessera(String dataInscrizioneTessera) throws PersonaException;
+	public abstract boolean modificaDataInscrizioneTessera(String dataInscrizioneTessera) throws ClienteException, DipendenteException;
 
-	public abstract boolean modificaNumeroCartaFedelta() throws PersonaException;
+	public abstract boolean modificaNumeroCartaFedelta() throws ClienteException, DipendenteException;
 
-	public abstract boolean modificaCodiceFiscale(String codiceFiscale) throws PersonaException;
+	public abstract boolean modificaCodiceFiscale(String codiceFiscale) throws ClienteException, DipendenteException;
 
-	public abstract boolean riparaTv(String dataRichiestaRiparazione, String dataPrevistaConsegna,
-			String costoRiparazione, Cliente clienteRiparazione, Televisore tvRiparata, String informazioneRiparazione)
-			throws PersonaException, ParseException, TelevisoreException, DipendenteException;
+	public abstract boolean riparaTv(String dataRichiestaRiparazione, String dataPrevistaConsegna, String costoRiparazione,
+			Cliente clienteRiparazione, Televisore tvRiparata, String informazioneRiparazione)
+			throws  ParseException, RiparazioneException, ClienteException;
 
+	public abstract boolean vendiTv(Televisore tv, Cliente cliente, String PrezzoVendita) throws PersonaException, TelevisoreException  ;
+	
 }

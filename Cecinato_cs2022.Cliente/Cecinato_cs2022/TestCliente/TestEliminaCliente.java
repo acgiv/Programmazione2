@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 
 import Cecinato_cs2022.Cliente.Cliente;
+import Cecinato_cs2022.ClienteException.ClienteException;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 
@@ -34,7 +36,7 @@ class TestEliminaCliente {
 			cliente.addNumeroCartaFedelta();
 			cliente.addDataInscrizioneTessera("13/12/2020");
 			cliente.addPuntiFedeltaAccumulati("230");
-		}catch(PersonaException e) {
+		}catch(PersonaException | ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -176,7 +178,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test il nome della carta di fedeltà del cliente con campo = "+  cliente.VisualizzaNomeCartaFedelta());
 			assertTrue(cliente.eliminaNomeCartaFedelta());
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -186,7 +188,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test elimina il nome della carta di fedeltà del cliente con campo = "+ null);
 			assertFalse(cliente2.eliminaNomeCartaFedelta());		
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -196,7 +198,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test elimina la data di inscrizione della tessera fedeltà del cliente con campo = "+  cliente.VisualizzaDataInscrizioneTessera());
 			assertTrue(cliente.eliminaDataInscrizioneTessera());
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -206,7 +208,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test elimina il nome della carta di fedeltà cliente con campo = "+ null);
 			assertFalse(cliente2.eliminaDataInscrizioneTessera());		
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -216,7 +218,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test elimina il numero della carta di fedeltà cliente con campo = "+  cliente.VisualizzaNumeroCartaFedelta());
 			assertTrue(cliente.eliminaNumeroCartaFedelta());
-		} catch (PersonaException e) {
+		} catch ( DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -226,7 +228,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test elimina il numero della carta di fedeltà cliente con campo = "+ null);
 			assertFalse(cliente2.eliminaNumeroCartaFedelta());		
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -236,7 +238,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test elimina i punti della carta di  fedeltà cliente con campo = "+  cliente.VisualizzaPuntiFedeltaAccumulati());
 			assertTrue(cliente.eliminaPuntiAccumulati());
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -246,7 +248,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test elimina il numero della carta di fedeltà cliente con campo = "+ null);
 			assertFalse(cliente2.eliminaPuntiAccumulati());		
-		} catch (PersonaException e) {
+		} catch ( ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -256,7 +258,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test errore elimina la tipologia di contratto del dipendente ");
 			assertEquals(cliente.eliminatipologiaContratto(), null);
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -266,7 +268,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test errore elimina il numero aziendale del dipendente ");
 			assertEquals(cliente.eliminaNumeroTelefonoAziendale(), null);
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -276,7 +278,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test errore elimina l'email aziendale del dipendente ");
 			assertEquals(cliente.eliminaEmailAziendale(), null);
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -286,7 +288,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test errore elimina il nome dell'azienda del dipendente ");
 			assertEquals(cliente.eliminaNomeAzienda(), null);
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -296,7 +298,7 @@ class TestEliminaCliente {
 		try {
 			System.out.println("test errore elimina il ruolo del dipendente ");
 			assertEquals(cliente.eliminaRuolo(), null);
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}

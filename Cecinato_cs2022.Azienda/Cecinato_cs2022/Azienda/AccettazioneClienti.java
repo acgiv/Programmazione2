@@ -9,8 +9,10 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import Cecinato_cs2022.Cliente.Cliente;
+import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ControlliGlobal.ControlliGlobal;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 
@@ -121,12 +123,16 @@ public class AccettazioneClienti {
 					System.out.println("Inserisci il nome della carta fedeltà del cliente");
 					valoriUtente = s.nextLine();
 					result = cliente.addNomeCartaFedelta(valoriUtente);
-				} catch (PersonaException e) {
+				} catch (ClienteException | DipendenteException e) {
 					System.err.println(e.getMessage());
-					if (StringUtils.isNotBlank(cliente.VisualizzaNomeCartaFedelta())) {
-						result = true;
-					} else {
-						result = false;
+					try {
+						if (StringUtils.isNotBlank(cliente.VisualizzaNomeCartaFedelta())) {
+							result = true;
+						} else {
+							result = false;
+						}
+					} catch (DipendenteException e1) {
+						System.err.println(e1.getMessage());
 					}
 				}
 			} while (result == false);
@@ -134,7 +140,7 @@ public class AccettazioneClienti {
 				try {
 					System.out.println("Inserimento automatico del numero di carta del cliente");
 					result = cliente.addNumeroCartaFedelta();
-				} catch (PersonaException e) {
+				} catch (ClienteException | DipendenteException e) {
 					System.err.println(e.getMessage());
 				}
 			} while (result == false);
@@ -144,12 +150,16 @@ public class AccettazioneClienti {
 					System.out.println("la data di nascita ha questo formato : gg/mm/aaaa");
 					valoriUtente = s.nextLine();
 					result = cliente.addDataInscrizioneTessera(valoriUtente);
-				} catch (PersonaException e) {
+				} catch (ClienteException | DipendenteException e) {
 					System.err.println(e.getMessage());
-					if (StringUtils.isNotBlank(cliente.VisualizzaDataInscrizioneTessera())) {
-						result = true;
-					} else {
-						result = false;
+					try {
+						if (StringUtils.isNotBlank(cliente.VisualizzaDataInscrizioneTessera())) {
+							result = true;
+						} else {
+							result = false;
+						}
+					} catch (DipendenteException e1) {
+						System.err.println(e1.getMessage());
 					}
 				}
 
@@ -162,12 +172,16 @@ public class AccettazioneClienti {
 					System.out.println("Se l'utente è nuovo inserisci 0 punti accumulati");
 					valoriUtente = s.nextLine();
 					result = cliente.addPuntiFedeltaAccumulati(valoriUtente);
-				} catch (PersonaException e) {
+				} catch (ClienteException | DipendenteException e) {
 					System.err.println(e.getMessage());
-					if (StringUtils.isNotBlank(cliente.VisualizzaPuntiFedeltaAccumulati())) {
-						result = true;
-					} else {
-						result = false;
+					try {
+						if (StringUtils.isNotBlank(cliente.VisualizzaPuntiFedeltaAccumulati())) {
+							result = true;
+						} else {
+							result = false;
+						}
+					} catch (DipendenteException e1) {
+						System.err.println(e1.getMessage());
 					}
 				}
 			} while (result == false);
@@ -250,6 +264,7 @@ public class AccettazioneClienti {
 										+ ConstantGlobal.ETA_MASSIMA_CLIENTE);
 								int valoreUtenteint = s.nextInt();
 								result = cliente.addEta(valoreUtenteint);
+								s.nextLine();
 							} catch (InputMismatchException e) {
 								System.err.println("Hai inserito un valore non intero");
 								s.nextLine();
@@ -324,7 +339,7 @@ public class AccettazioneClienti {
 								System.out.println("Inserisci il nome della carta fedeltà del cliente");
 								valoriUtente = s.nextLine();
 								result = cliente.addNomeCartaFedelta(valoriUtente);
-							} catch (PersonaException e) {
+							} catch (ClienteException  e) {
 								System.err.println(e.getMessage());
 								if (StringUtils.isNotBlank(cliente.VisualizzaNomeCartaFedelta())) {
 									result = true;
@@ -339,7 +354,7 @@ public class AccettazioneClienti {
 							try {
 								System.out.println("Inserimento automatico del numero di carta del cliente");
 								result = cliente.addNumeroCartaFedelta();
-							} catch (PersonaException e) {
+							} catch (ClienteException e) {
 								System.err.println(e.getMessage());
 							}
 						} while (result == false);
@@ -352,7 +367,7 @@ public class AccettazioneClienti {
 								System.out.println("la data di nascita ha questo formato : gg/mm/aaaa");
 								valoriUtente = s.nextLine();
 								result = cliente.addDataInscrizioneTessera(valoriUtente);
-							} catch (PersonaException e) {
+							} catch (ClienteException  e) {
 								System.err.println(e.getMessage());
 								if (StringUtils.isNotBlank(cliente.VisualizzaDataInscrizioneTessera())) {
 									result = true;
@@ -371,7 +386,7 @@ public class AccettazioneClienti {
 								System.out.println("Se l'utente è nuovo inserisci 0 punti accumulati");
 								valoriUtente = s.nextLine();
 								result = cliente.addPuntiFedeltaAccumulati(valoriUtente);
-							} catch (PersonaException e) {
+							} catch (ClienteException  e) {
 								System.err.println(e.getMessage());
 								if (StringUtils.isNotBlank(cliente.VisualizzaPuntiFedeltaAccumulati())) {
 									result = true;
@@ -391,9 +406,7 @@ public class AccettazioneClienti {
 			} else {
 				System.err.println("il codice fiscale " + valoriUtente + " non presente");
 			}
-		} catch (
-
-		PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 
@@ -424,7 +437,7 @@ public class AccettazioneClienti {
 					stringa += String
 							.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_CLIENTE, "_"))
 							.concat("\n");
-				} catch (PersonaException e) {
+				} catch ( DipendenteException e) {
 					System.err.println(e.getMessage());
 				}
 			}
@@ -472,7 +485,7 @@ public class AccettazioneClienti {
 								try {
 									persona.modificaCodiceFiscale(valoriUtente);
 									result = true;
-								} catch (PersonaException e) {
+								} catch (ClienteException e) {
 									System.err.println(e.getMessage());
 								}
 							} while (result == false);
@@ -591,7 +604,7 @@ public class AccettazioneClienti {
 										"Inserisci il nome della carta fedeltà del cliente che vuoi modificare");
 								valoriUtente = s.nextLine();
 								result = cliente.modificaNomeCartaFedelta(valoriUtente);
-							} catch (PersonaException e) {
+							} catch (ClienteException e) {
 								System.err.println(e.getMessage());
 								if (StringUtils.isAllEmpty(cliente.VisualizzaNomeCartaFedelta())) {
 									result = true;
@@ -606,7 +619,7 @@ public class AccettazioneClienti {
 							try {
 								System.out.println("modifica automatica del numero di carta del cliente");
 								result = cliente.modificaNumeroCartaFedelta();
-							} catch (PersonaException e) {
+							} catch (ClienteException e) {
 								System.err.println(e.getMessage());
 							}
 						} while (result == false);
@@ -619,7 +632,7 @@ public class AccettazioneClienti {
 								System.out.println("la data di nascita ha questo formato : gg/mm/aaaa");
 								valoriUtente = s.nextLine();
 								result = cliente.modificaDataInscrizioneTessera(valoriUtente);
-							} catch (PersonaException e) {
+							} catch (ClienteException e) {
 								System.err.println(e.getMessage());
 								if (StringUtils.isAllEmpty(cliente.VisualizzaDataInscrizioneTessera())) {
 									result = true;
@@ -669,7 +682,7 @@ public class AccettazioneClienti {
 									System.err.println("Hai inserito un valore non presente nell'elenco");
 									break;
 								}
-							} catch (PersonaException e) {
+							} catch (ClienteException e) {
 								System.err.println(e.getMessage());
 								if (StringUtils.isAllEmpty(cliente.VisualizzaPuntiFedeltaAccumulati())) {
 									result = true;
@@ -689,7 +702,7 @@ public class AccettazioneClienti {
 				System.err.println("| Errore nell'inserimento |");
 				System.err.println("hai inserito un seriale sbagliato \n");
 			}
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -766,7 +779,7 @@ public class AccettazioneClienti {
 					case "7":
 						try {
 							result = cliente.eliminaNomeCartaFedelta();
-						} catch (PersonaException e) {
+						} catch (ClienteException e) {
 							System.err.println(e.getMessage());
 						}
 
@@ -774,7 +787,7 @@ public class AccettazioneClienti {
 					case "8":
 						try {
 							cliente.eliminaNumeroCartaFedelta();
-						} catch (PersonaException e) {
+						} catch (ClienteException e) {
 							System.err.println(e.getMessage());
 						}
 
@@ -782,14 +795,14 @@ public class AccettazioneClienti {
 					case "9":
 						try {
 							cliente.eliminaDataInscrizioneTessera();
-						} catch (PersonaException e) {
+						} catch (ClienteException e) {
 							System.err.println(e.getMessage());
 						}
 						break;
 					case "10":
 						try {
 							cliente.eliminaPuntiAccumulati();
-						} catch (PersonaException e) {
+						} catch (ClienteException e) {
 							System.err.println(e.getMessage());
 						}
 						break;
@@ -803,7 +816,7 @@ public class AccettazioneClienti {
 				System.err.println("| Errore nell'inserimento |");
 				System.err.println("hai inserito un seriale sbagliato \n");
 			}
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 	}

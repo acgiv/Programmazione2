@@ -6,9 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import Cecinato_cs2022.ClienteException.ClienteException;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal;
 import Cecinato_cs2022.ConstantGlobal.ConstantGlobal.OPERAZIONE_PUNTI_FEDELTA;
 import Cecinato_cs2022.Dipendente.Dipendente;
+import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 
@@ -32,6 +35,10 @@ class TestModificaDipendente {
 			dipendente.addtipologiaContratto(String.valueOf(ConstantGlobal.TIPO_CONTRATTO.DETERMINATO));
 			dipendente.addRuolo("dipendente");
 		} catch (PersonaException e) {
+			System.err.println(e.getMessage());
+		} catch (DipendenteException e) {
+			System.err.println(e.getMessage());
+		} catch (ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -626,10 +633,11 @@ class TestModificaDipendente {
 		System.out.println("Test modifica del ruolo = menager1");
 		try {
 			assertFalse(dipendente.modificaRuolo("menager1"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
+
 		}
 	}
 
@@ -638,7 +646,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica del ruolo = menager&");
 		try {
 			assertFalse(dipendente.modificaRuolo("menageri&"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -652,7 +660,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificaRuolo("impegato cassiere"));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -664,7 +672,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificaRuolo(" commesso "));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -674,7 +682,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica del ruolo = null");
 		try {
 			assertFalse(dipendente.modificaRuolo(null));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -687,7 +695,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica del ruolo = ' '");
 		try {
 			assertFalse(dipendente.modificaRuolo(" "));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -695,13 +703,13 @@ class TestModificaDipendente {
 	}
 
 	@Test
-	void test7modificaRuoloDipendente() throws PersonaException {
+	void test7modificaRuoloDipendente() throws DipendenteException, ClienteException {
 		System.out.println("Test modifica del ruolo = 'segretario' senza averlo prima inserito");
 		String val = dipendente.visualizzaRuoloDipendente();
 		try {
 			dipendente.eliminaRuolo();
 			assertFalse(dipendente.modificaRuolo("segretario"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -710,7 +718,7 @@ class TestModificaDipendente {
 	}
 	
 	@Test
-	void test1modificaemailDipendente() throws PersonaException {
+	void test1modificaemailDipendente() throws DipendenteException, ClienteException, PersonaException  {
 		System.out.println("Test modifica dell'email senza averla inserita");
 		String nome = dipendente.VisualizzaNome();
 		String cognome = dipendente.VisualizzaCognome();
@@ -722,8 +730,10 @@ class TestModificaDipendente {
 			assertFalse(dipendente.modificaEmailAziendale());
 		} catch (PersonaException e) {
 			System.err.println(e.getMessage());
+		} catch (DipendenteException e) {
+			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
-			System.out.println(dipendente + "\n");
+			System.out.println(dipendente + "\n");	
 			dipendente.addNome(nome);
 			dipendente.addNomeAzienda(nomeAzienda);
 			dipendente.addCognome(cognome);
@@ -741,7 +751,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificaEmailAziendale());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -756,7 +766,7 @@ class TestModificaDipendente {
 			dipendente.modificaNomeAzienda("fincons group");
 			dipendente.eliminaNome();
 			assertFalse(dipendente.modificaEmailAziendale());
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
 			System.err.println(e.getMessage());
@@ -774,24 +784,25 @@ class TestModificaDipendente {
 			dipendente.modificaNomeAzienda("fincons group");
 			dipendente.eliminaCognome();
 			assertFalse(dipendente.modificaEmailAziendale());
-		} catch (PersonaException e) {
+		} catch (DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-			dipendente.addCognome(var);
-			
+			dipendente.addCognome(var);		
+		} catch (ClienteException e) {
+			System.err.println(e.getMessage());
 		}
 	}
 	
 	
 	@Test
-	void test5modificaemailDipendente() throws PersonaException {
+	void test5modificaemailDipendente() throws  ClienteException, PersonaException, DipendenteException {
 		System.out.println("Test modifica dell'email con nome Azienda nulla");
 		String var = dipendente.visualizzaNomeAziendaDipendente();
 		try {
 			dipendente.eliminaNomeAzienda();
 			assertFalse(dipendente.modificaEmailAziendale());
-		} catch (PersonaException e) {
+		} catch (DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -800,11 +811,11 @@ class TestModificaDipendente {
 	}
 	
 	@Test
-	void test1modificaNumeroTelefonicoDipendente() throws PersonaException {
+	void test1modificaNumeroTelefonicoDipendente() throws  ClienteException {
 		System.out.println("Test modifica del numero telefonico = +39 333333333a");
 		try {
 			assertFalse(dipendente.modificaNumeroTelefonoAziendale("+39 333333333a3"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -818,7 +829,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica del numero telefonico = +39 333333333&");
 		try {
 			assertFalse(dipendente.modificaNumeroTelefonoAziendale("+39 333333333&3"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -832,7 +843,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica del numero telefonico = +39 33333333312");
 		try {
 			assertFalse(dipendente.modificaNumeroTelefonoAziendale("+39 33333333312"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -845,7 +856,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica del numero telefonico = +393333333331");
 		try {
 			assertFalse(dipendente.modificaNumeroTelefonoAziendale("+393333333331"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -861,7 +872,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificaNumeroTelefonoAziendale(" +39 3333333331 "));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -872,7 +883,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica del numero telefonico = ' 39 3333333331 '");
 		try {
 			assertFalse(dipendente.modificaNumeroTelefonoAziendale("39 3333333331"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -885,7 +896,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica del numero telefonico = +47 3333333331'");
 		try {
 			assertFalse(dipendente.modificaNumeroTelefonoAziendale("+474 3333333331"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -897,7 +908,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica nome aziendale  = fincons22");
 		try {
 			assertFalse(dipendente.modificaNomeAzienda("fincons22"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -910,7 +921,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica nome aziendale  = fincons&");
 		try {
 			assertFalse(dipendente.modificaNomeAzienda("fincons&"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -924,7 +935,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica nome aziendale  = null");
 		try {
 			assertFalse(dipendente.modificaNomeAzienda(null));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -939,7 +950,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificaNomeAzienda(" fincons "));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -952,7 +963,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificaNomeAzienda(" cusmai analisi "));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -965,7 +976,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificaNomeAzienda("ATOS"));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -978,7 +989,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificaNomeAzienda(" finsons GROUP"));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -989,7 +1000,7 @@ class TestModificaDipendente {
 		try {
 			System.out.println("test errore modifica nome carta fedeltà ");
 			assertFalse(dipendente.modificaNomeCartaFedelta("finconscard"));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -999,7 +1010,7 @@ class TestModificaDipendente {
 		try {
 			System.out.println("test errore modifica punti accumulati del cliente ");
 			assertFalse(dipendente.modificaPuntiFedeltaAccumulati("1000",OPERAZIONE_PUNTI_FEDELTA.AGGIUNGI));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -1009,7 +1020,7 @@ class TestModificaDipendente {
 		try {
 			System.out.println("test errore modifica data inscrizione tessera cliente ");
 			assertFalse(dipendente.modificaDataInscrizioneTessera("11/12/2020"));
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -1019,7 +1030,7 @@ class TestModificaDipendente {
 		try {
 			System.out.println("test errore modifica numero carta fedeltà cliente ");
 			assertFalse(dipendente.modificaNumeroCartaFedelta());
-		} catch (PersonaException e) {
+		} catch (ClienteException | DipendenteException e) {
 			System.err.println(e.getMessage());
 		}	
 	}
@@ -1029,7 +1040,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica della tipologia di contratto = STAGE22");
 		try {
 			assertFalse(dipendente.modificatipologiaContratto("STAGE22"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -1042,7 +1053,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica della tipologia di contratto = STAGE&");
 		try {
 			assertFalse(dipendente.modificatipologiaContratto("STAGE&"));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -1056,7 +1067,7 @@ class TestModificaDipendente {
 		System.out.println("Test modifica della tipologia di contratto = null");
 		try {
 			assertFalse(dipendente.modificatipologiaContratto(null));
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
@@ -1071,7 +1082,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificatipologiaContratto(" STAGE "));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
@@ -1083,7 +1094,7 @@ class TestModificaDipendente {
 			assertTrue(dipendente.modificatipologiaContratto("STAGE"));
 			System.out.println("\n dopo il test");
 			System.out.println(dipendente + "\n");
-		} catch (PersonaException e) {
+		} catch (DipendenteException | ClienteException e) {
 			System.err.println(e.getMessage());
 		}
 	}
