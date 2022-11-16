@@ -1,4 +1,4 @@
-<h1 align="left">Progetto caso di studio in java.</h1>
+<h1 align="left">Progetto per la vendita e riparazioni di televisori.</h1>
 <h2 align="left">Requisiti dell’applicazione </h2>
 <p>
     Realizzare un’applicazione che permetta ad un’azienda di vendere e riparare delle televisioni (in breve tv). Le
