@@ -16,12 +16,70 @@ import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 
+/**
+ * 
+ * <p>
+ * <b> CLASSE: AccettazioneClienti </b>
+ * <p>
+ * Questa classe consente gestire tutte le funzionalità relaitve ai clienti
+ *
+ * 
+ * 
+ * 
+ * 
+ * @author <i> Alberto Cecinato </i> <br>
+ *         Gruppo 79<br>
+ *         Matricola: 706576 <br>
+ *         Email: <u> cecinatoa@gmail.com </u>
+ * 
+ * @version 1.0 <br>
+ *          Date: 03.11.2022 <br>
+ * 
+ *
+ */
+
 public class AccettazioneClienti {
+
+	/// ********************************************
+	/// ATTRIBUTI
+	/// ********************************************
+
+	/**
+	 * {@link Persona} instanza che indica il dipendete
+	 * 
+	 */
 	private Persona cliente;
+	/**
+	 * {@link Persona} instanza che indica i valori inseriti dall'utente
+	 * 
+	 */
 	private String valoriUtente;
+	/**
+	 * {@link boolean} instanza che indica i risultati dei controlli
+	 * 
+	 */
 	boolean result;
+
+	/**
+	 * {@link Scanner} instanza che consentirà di acquisire i dalti dell'utente
+	 * 
+	 */
 	Scanner s = new Scanner(System.in);
 
+	/**
+	 * 
+	 * <b> METODO: acquisizioneCliente </b>
+	 * <p>
+	 * Questo metodo consente di acquisire un nuovo cliente  le informazioni
+	 * inserite dall'utente relativo al cliente
+	 * 
+	 * 
+	 * 
+	 * @return cliente variabile di tipo Persona contenente il cliente
+	 * 
+	 * 
+	 */
+	
 	public Persona acquisizioneCliente() {
 		try {
 			System.out.println("Inserisci il codice fiscale della persona.");
@@ -193,6 +251,18 @@ public class AccettazioneClienti {
 		return cliente;
 	}
 
+	/**
+	 * 
+	 * <b> METODO:  acquisizioneElementoCliente </b>
+	 * <p>
+	 * Questo metodo consente di acquisire le informazioni mancati di un cliente
+	 * esistente inserite dall'utente
+	 * 
+	 * @param clienti lista contenente i clienti
+	 * 
+	 * 
+	 */
+	
 	public void acquisizioneElementoCliente(Set<Persona> clienti) {
 		System.out.println("Inserisci 1 se vuoi visalizzare i clienti presenti");
 		valoriUtente = s.nextLine();
@@ -339,7 +409,7 @@ public class AccettazioneClienti {
 								System.out.println("Inserisci il nome della carta fedeltà del cliente");
 								valoriUtente = s.nextLine();
 								result = cliente.addNomeCartaFedelta(valoriUtente);
-							} catch (ClienteException  e) {
+							} catch (ClienteException e) {
 								System.err.println(e.getMessage());
 								if (StringUtils.isNotBlank(cliente.VisualizzaNomeCartaFedelta())) {
 									result = true;
@@ -367,11 +437,11 @@ public class AccettazioneClienti {
 								System.out.println("la data di nascita ha questo formato : gg/mm/aaaa");
 								valoriUtente = s.nextLine();
 								result = cliente.addDataInscrizioneTessera(valoriUtente);
-							} catch (ClienteException  e) {
+							} catch (ClienteException e) {
 								System.err.println(e.getMessage());
 								if (StringUtils.isNotBlank(cliente.VisualizzaDataInscrizioneTessera())) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -386,11 +456,11 @@ public class AccettazioneClienti {
 								System.out.println("Se l'utente è nuovo inserisci 0 punti accumulati");
 								valoriUtente = s.nextLine();
 								result = cliente.addPuntiFedeltaAccumulati(valoriUtente);
-							} catch (ClienteException  e) {
+							} catch (ClienteException e) {
 								System.err.println(e.getMessage());
 								if (StringUtils.isNotBlank(cliente.VisualizzaPuntiFedeltaAccumulati())) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -412,6 +482,21 @@ public class AccettazioneClienti {
 
 	}
 
+	/**
+	 * 
+	 * <b> METODO:  visualizzaElencoClienti </b>
+	 * <p>
+	 * Questo metodo consente di far visualizzare le informazioni tutti i clienti
+	 * sotto forma di tabella
+	 * 
+	 * @param clienti lista cotenente i clienti
+	 * 
+	 * @return stringa variabile di tipo stringa contenente le infromazioni di tutti
+	 *         i clienti in formato tabellare
+	 * 
+	 * 
+	 */
+	
 	public String visualizzaElencoClienti(Set<Persona> clienti) {
 		String stringa = null;
 		stringa = String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_CLIENTE, "_"))
@@ -437,13 +522,25 @@ public class AccettazioneClienti {
 					stringa += String
 							.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_TABELLA_CLIENTE, "_"))
 							.concat("\n");
-				} catch ( DipendenteException e) {
+				} catch (DipendenteException e) {
 					System.err.println(e.getMessage());
 				}
 			}
 		}
 		return stringa;
 	}
+	
+	/**
+	 * 
+	 * <b> METODO: modificaCliente </b>
+	 * <p>
+	 * Questo metodo consente di modificare le informazioni di un cliente
+	 * esistente inserite dall'utente
+	 * 
+	 * @param clienti lista contenente i clienti
+	 * 
+	 * 
+	 */
 
 	public void modificaCliente(Set<Persona> clienti) {
 		System.out.println("Inserisci 1 se vuoi visalizzare i clienti presenti");
@@ -501,7 +598,7 @@ public class AccettazioneClienti {
 								System.err.println(e.getMessage());
 								if (StringUtils.isAllEmpty(cliente.VisualizzaNome())) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -517,7 +614,7 @@ public class AccettazioneClienti {
 								System.err.println(e.getMessage());
 								if (StringUtils.isAllEmpty(cliente.VisualizzaCognome())) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -538,9 +635,9 @@ public class AccettazioneClienti {
 								s.nextLine();
 							} catch (PersonaException e) {
 								System.err.println(e.getMessage());
-								if (cliente.VisualizzaEta()==0) {
+								if (cliente.VisualizzaEta() == 0) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -560,9 +657,9 @@ public class AccettazioneClienti {
 								result = cliente.modificaGenere(valoriUtente);
 							} catch (PersonaException e) {
 								System.err.println(e.getMessage());
-								if (cliente.VisualizzaGenere()==null) {
+								if (cliente.VisualizzaGenere() == null) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -591,7 +688,7 @@ public class AccettazioneClienti {
 								System.err.println(e.getMessage());
 								if (StringUtils.isAllEmpty(cliente.VisualizzaCitta())) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -608,7 +705,7 @@ public class AccettazioneClienti {
 								System.err.println(e.getMessage());
 								if (StringUtils.isAllEmpty(cliente.VisualizzaNomeCartaFedelta())) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -636,7 +733,7 @@ public class AccettazioneClienti {
 								System.err.println(e.getMessage());
 								if (StringUtils.isAllEmpty(cliente.VisualizzaDataInscrizioneTessera())) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -686,7 +783,7 @@ public class AccettazioneClienti {
 								System.err.println(e.getMessage());
 								if (StringUtils.isAllEmpty(cliente.VisualizzaPuntiFedeltaAccumulati())) {
 									result = true;
-								}else {
+								} else {
 									result = false;
 								}
 							}
@@ -707,6 +804,18 @@ public class AccettazioneClienti {
 		}
 	}
 
+	/**
+	 * 
+	 * <b> METODO: eliminaElementiCliente </b>
+	 * <p>
+	 * Questo metodo consente di eliminare le informazioni di un cliente
+	 * esistente
+	 * 
+	 * @param clienti lista contenente i clienti
+	 * 
+	 * 
+	 */
+	
 	public void eliminaElementiCliente(Set<Persona> clienti) {
 		System.out.println("Inserisci 1 se vuoi visalizzare i clienti presenti");
 		valoriUtente = s.nextLine();

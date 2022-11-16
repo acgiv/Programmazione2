@@ -20,9 +20,25 @@ import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 
 /**
- * @author cecin
+ * 
+ * <p>
+ * <b> CLASSE: TestModificaCliente </b>
+ * <p>
+ * * <p> Questa classe si occupa del test di tutti i metodi implementati sulla modifica del cliente, così da verificare <br>
+ * se metodi sono stati implementati correttamente o necessitano modifiche. </p>
+ * 
+ * 
+ * @author <i> Alberto Cecinato </i> <br>
+ *         Gruppo 79<br>
+ *         Matricola: 706576 <br>
+ *         Email: <u> cecinatoa@gmail.com </u>
+ * 
+ * @version 1.0 <br>
+ *          Date: 03.11.2022 <br>
+ * 
  *
  */
+
 class TestModificaCliente {
 
 	private static Persona cliente;

@@ -15,6 +15,26 @@ import Cecinato_cs2022.DipendenteException.DipendenteException;
 import Cecinato_cs2022.ExceptionPersona.PersonaException;
 import Cecinato_cs2022.ServicePersona.Persona;
 
+/**
+ * 
+ * <p>
+ * <b> CLASSE: TestEliminaDipendente </b>
+ * <p>
+ * * <p> Questa classe si occupa del test di tutti i metodi implementati sull'eleminazione dei dipendenti, così da verificare <br>
+ * se metodi sono stati implementati correttamente o necessitano modifiche. </p>
+ * 
+ * 
+ * @author <i> Alberto Cecinato </i> <br>
+ *         Gruppo 79<br>
+ *         Matricola: 706576 <br>
+ *         Email: <u> cecinatoa@gmail.com </u>
+ * 
+ * @version 1.0 <br>
+ *          Date: 03.11.2022 <br>
+ * 
+ *
+ */
+
 class TestEliminaDipendente {
 
 	private static Persona dipendente;

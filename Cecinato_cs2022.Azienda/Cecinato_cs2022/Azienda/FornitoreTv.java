@@ -1,6 +1,5 @@
 package Cecinato_cs2022.Azienda;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,12 +22,67 @@ import Cecinato_cs2022.PojoTelevisore.TelevisoreMedio;
 import Cecinato_cs2022.ServicePersona.Persona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
-public class FornitoreTv {
+/**
+ * 
+ * <p>
+ * <b> CLASSE: FornitoreTv </b>
+ * <p>
+ * Questa classe consente gestire tutte le funzionalità relative alle
+ * televisioni
+ * 
+ * 
+ * 
+ * @author <i> Alberto Cecinato </i> <br>
+ *         Gruppo 79<br>
+ *         Matricola: 706576 <br>
+ *         Email: <u> cecinatoa@gmail.com </u>
+ * 
+ * @version 1.0 <br>
+ *          Date: 03.11.2022 <br>
+ * 
+ *
+ */
 
+public class FornitoreTv {
+	/// ********************************************
+	/// ATTRIBUTI
+	/// ********************************************
+
+	/**
+	 * {@link Televisore} instanza che indica il televisore da elaborare
+	 * 
+	 */
 	private Televisore tv;
+	/**
+	 * {@link Persona} instanza che indica i valori inseriti dall'utente
+	 * 
+	 */
 	private String valoriUtente;
+	/**
+	 * {@link boolean} instanza che indica i risultati dei controlli
+	 * 
+	 */
 	boolean result;
+
+	/**
+	 * {@link Scanner} instanza che consentirà di acquisire i dalti dell'utente
+	 * 
+	 */
 	Scanner s = new Scanner(System.in);
+
+	/**
+	 * 
+	 * <b> METODO: fornisciTvBasee </b>
+	 * <p>
+	 * Questo metodo consente di acquisire un nuovo televisore e le informazioni
+	 * inserite dall'utente
+	 * 
+	 * 
+	 * 
+	 * @return tv variabile di tipo Televisore contenente il televisore
+	 * 
+	 * 
+	 */
 
 	public Televisore fornisciTvBase() {
 		try {
@@ -94,6 +148,18 @@ public class FornitoreTv {
 		}
 		return tv;
 	}
+
+	/**
+	 * 
+	 * <b> METODO: addcomponentiTvBase </b>
+	 * <p>
+	 * Questo metodo consente di acquisire le informazioni mancati di un televisore
+	 * esistente inserite dall'utente
+	 * 
+	 * @param listaTvFornite lista contenente i televisori
+	 * 
+	 * 
+	 */
 
 	public void addcomponentiTvBase(Set<Televisore> listaTvFornite) {
 
@@ -184,6 +250,18 @@ public class FornitoreTv {
 		}
 	}
 
+	/**
+	 * 
+	 * <b> METODO: fornisciTvMedio </b>
+	 * <p>
+	 * Questo metodo consente di acquisire un televiosore di tipo medio inserite
+	 * dall'utente
+	 * 
+	 * @return tv Variabile di tipo Televisore contente la tv di tipo medio
+	 * 
+	 * 
+	 */
+
 	public Televisore fornisciTvMedio() {
 		try {
 			System.out.println("Inserisci il seriale dalla televisore.");
@@ -248,10 +326,10 @@ public class FornitoreTv {
 			do {
 				System.out.println(
 						"Inserisci il numero degli usb presenti nella tv. Il numero di usb da inserire è uguale a: "
-								+ ConstantGlobal.NUM_USB_TV_MEDIO);
+								+ ConstantGlobal.NUMERO_USB_TV_MEDIO);
 				valoriUtente = s.nextLine();
 				result = false;
-				if (StringUtils.equals(valoriUtente, String.valueOf(ConstantGlobal.NUM_USB_TV_MEDIO)))
+				if (StringUtils.equals(valoriUtente, String.valueOf(ConstantGlobal.NUMERO_USB_TV_MEDIO)))
 					result = tv.addNumberUsbTv(valoriUtente);
 			} while (result == false);
 		} catch (TelevisoreException e) {
@@ -259,6 +337,18 @@ public class FornitoreTv {
 		}
 		return tv;
 	}
+
+	/**
+	 * 
+	 * <b> METODO: addcomponentiTvMedio </b>
+	 * <p>
+	 * Questo metodo consente di acquisire le informazioni mancati di un televisore
+	 * ti tipo medio esistente inserite dall'utente
+	 * 
+	 * @param listaTvFornite lista contenente i televisori
+	 * 
+	 * 
+	 */
 
 	public void addcomponentiTvMedio(Set<Televisore> listaTvFornite) {
 
@@ -342,9 +432,9 @@ public class FornitoreTv {
 					case "7":
 						System.out.println(
 								"Inserisci il numero degli usb presenti nella tv. Il numero di usb da inserire è uguale a: "
-										+ ConstantGlobal.NUM_USB_TV_MEDIO);
+										+ ConstantGlobal.NUMERO_USB_TV_MEDIO);
 						valoriUtente = s.nextLine();
-						if (StringUtils.equals(valoriUtente, String.valueOf(ConstantGlobal.NUM_USB_TV_MEDIO)))
+						if (StringUtils.equals(valoriUtente, String.valueOf(ConstantGlobal.NUMERO_USB_TV_MEDIO)))
 							tv.addNumberUsbTv(valoriUtente);
 						break;
 					default:
@@ -357,6 +447,17 @@ public class FornitoreTv {
 			}
 		}
 	}
+
+	/**
+	 * 
+	 * <b> METODO: fornisciTvAvanzato </b>
+	 * <p>
+	 * Questo metodo consente di acquisire un nuovo televisore di tipo Avanzato
+	 * 
+	 * @return tv variabile di tipo Televisore contente il televisore di tipo Avanzato
+	 * 
+	 * 
+	 */
 
 	public Televisore fornisciTvAvanzato() {
 		try {
@@ -453,6 +554,18 @@ public class FornitoreTv {
 		return tv;
 	}
 
+	/**
+	 * 
+	 * <b> METODO: addcomponentiTvAvanzato </b>
+	 * <p>
+	 * Questo metodo consente di acquisire le informazioni mancati di un televisore
+	 * di tipologia avanzato esistente inserite dall'utente
+	 * 
+	 * @param listaTvFornite lista contenente i televisori
+	 * 
+	 * 
+	 */
+
 	public void addcomponentiTvAvanzato(Set<Televisore> listaTvFornite) {
 
 		System.out.println("Inserisci 1 se vuoi visalizzare le tv presenti");
@@ -537,9 +650,9 @@ public class FornitoreTv {
 					case "7":
 						System.out.println(
 								"Inserisci il numero degli usb presenti nella tv. Il numero di usb da inserire è uguale a: "
-										+ ConstantGlobal.NUM_USB_TV_MEDIO);
+										+ ConstantGlobal.NUMERO_USB_TV_MEDIO);
 						valoriUtente = s.nextLine();
-						if (StringUtils.equals(valoriUtente, String.valueOf(ConstantGlobal.NUM_USB_TV_MEDIO)))
+						if (StringUtils.equals(valoriUtente, String.valueOf(ConstantGlobal.NUMERO_USB_TV_MEDIO)))
 							tv.addNumberUsbTv(valoriUtente);
 						break;
 					case "8":
@@ -568,6 +681,21 @@ public class FornitoreTv {
 			}
 		}
 	}
+
+	/**
+	 * 
+	 * <b> METODO: visualizzaTvFornite</b>
+	 * <p>
+	 * Questo metodo consente di far visualizzare le informazioni di tutte le tv
+	 * fornite
+	 * 
+	 * @param televisore lista cotenente le tv fornite
+	 * 
+	 * @return stringa variabile di tipo stringa contenente tutte le informazioni
+	 *         delle tv fornite
+	 * 
+	 * 
+	 */
 
 	public String visualizzaTvFornite(Set<Televisore> televisore) {
 		String elenco;
@@ -600,6 +728,18 @@ public class FornitoreTv {
 		}
 		return elenco;
 	}
+
+	/**
+	 * 
+	 * <b> METODO: modificaTelevisore </b>
+	 * <p>
+	 * Questo metodo consente di le informazioni informazioni di un televisore
+	 * esistente inserite dall'utente
+	 * 
+	 * @param tv lista contenente i televisori
+	 * 
+	 * 
+	 */
 
 	public void modificaTelevisore(Set<Televisore> tv) {
 		System.out.println("Inserisci 1 se vuoi visalizzare le tv presenti");
@@ -706,6 +846,18 @@ public class FornitoreTv {
 		}
 	}
 
+	/**
+	 * 
+	 * <b> METODO: eliminaTelevisore </b>
+	 * <p>
+	 * Questo metodo consente di eliminare un televisore esistente scelto
+	 * dall'utente
+	 *  
+	 * @param tv lista contenente i televisori
+	 * 
+	 * 
+	 */
+
 	public void eliminaTelevisore(Set<Televisore> tv) {
 		System.out.println("Inserisci 1 se vuoi visalizzare le tv presenti");
 		valoriUtente = s.nextLine();
@@ -797,6 +949,21 @@ public class FornitoreTv {
 			System.err.print("hai inserito un seriale sbagliato");
 		}
 	}
+	
+	/**
+	 * 
+	 * <b> METODO: visualizzaAllTvRiparate </b>
+	 * <p>
+	 * Questo metodo consente di far visualizzare le informazioni tutte le tv riparate
+	 * sotto forma di tabella
+	 * 
+	 * @param elencoDipendenti lista cotenente i dipendenti
+	 * 
+	 * @return stringa variabile di tipo stringa contenente le infromazioni di tutti
+	 *         di tutti i televisori riparati in formato tabellare
+	 * 
+	 * 
+	 */
 
 	public String visualizzaAllTvRiparate(Set<Persona> elencoDipendenti) {
 		String stringa = null;
@@ -834,12 +1001,27 @@ public class FornitoreTv {
 				stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_"))
 						.concat("\n");
 			}
-			
+
 		}
 
 		return stringa;
 	}
-	
+
+	/**
+	 * 
+	 * <b> METODO: visualizzaAllTvVendute</b>
+	 * <p>
+	 * Questo metodo consente di far visualizzare le informazioni di tutte le tv
+	 * vendute dai dipedenti
+	 * 
+	 * @param elencoDipendenti lista cotenente i dipendenti
+	 * 
+	 * @return stringa variabile di tipo stringa contenente tutte le informazioni
+	 *         delle tv vednute dai dipendenti
+	 * 
+	 * 
+	 */
+
 	public String visualizzaAllTvVendute(Set<Persona> elencoDipendenti) {
 		String stringa = null;
 		Set<Vendita> tvAllRiparate = new HashSet<Vendita>();
@@ -876,7 +1058,7 @@ public class FornitoreTv {
 				stringa += String.join("", Collections.nCopies(ConstantGlobal.LUNGHEZZA_CONTORNO_ELENCO_TV, "_"))
 						.concat("\n");
 			}
-			
+
 		}
 
 		return stringa;

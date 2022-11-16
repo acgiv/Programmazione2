@@ -29,12 +29,74 @@ import Cecinato_cs2022.ServiceDipendente.DaoVendita;
 import Cecinato_cs2022.ServicePersona.Persona;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
+/**
+ * 
+ * <p>
+ * <b> CLASSE: RepartoDipendenti </b>
+ * <p>
+ * Questa classe consente gestire tutte le funzionalità relative ai dipendenti
+ * 
+ * 
+ * 
+ * @author <i> Alberto Cecinato </i> <br>
+ *         Gruppo 79<br>
+ *         Matricola: 706576 <br>
+ *         Email: <u> cecinatoa@gmail.com </u>
+ * 
+ * @version 1.0 <br>
+ *          Date: 03.11.2022 <br>
+ * 
+ *
+ */
+
 public class RepartoDipendenti {
+
+	/// ********************************************
+	/// ATTRIBUTI
+	/// ********************************************
+
+	/**
+	 * {@link Persona} instanza che indica il dipendente
+	 * 
+	 */
+
 	private Persona dipendente;
+	/**
+	 * {@link Persona} instanza che indica i valori inseriti dall'utente
+	 * 
+	 */
 	private String valoriUtente;
+	/**
+	 * {@link boolean} instanza che indica i risultati dei controlli
+	 * 
+	 */
 	boolean result;
+
+	/**
+	 * {@link Scanner} instanza che consentirà di acquisire i dalti dell'utente
+	 * 
+	 */
 	Scanner s = new Scanner(System.in);
+
+	/**
+	 * {@link SimpleDateFormat } instanza consente di formattare la data
+	 * 
+	 */
 	private static SimpleDateFormat sdf = new SimpleDateFormat(ConstantGlobal.FORMATO_DATA);
+
+	/**
+	 * 
+	 * <b> METODO: acquisizioneDipendente </b>
+	 * <p>
+	 * Questo metodo consente di acquisire un nuovo dipendente e le informazioni
+	 * inserite dall'utente relativo al dipedente
+	 * 
+	 * 
+	 * 
+	 * @return dipendente variabile di tipo Persona contenente il dipendente
+	 * 
+	 * 
+	 */
 
 	public Persona acquisizioneDipendente() {
 		try {
@@ -204,13 +266,27 @@ public class RepartoDipendenti {
 			} while (result == false);
 		} catch (ClienteException e) {
 			System.err.println(e.getMessage());
-		} catch (PersonaException e) {
-			System.err.println(e.getMessage());
+
 		} catch (DipendenteException e) {
 			System.err.println(e.getMessage());
 		}
 		return dipendente;
 	}
+
+	/**
+	 * 
+	 * <b> METODO: visualizzaElencoDipendenti </b>
+	 * <p>
+	 * Questo metodo consente di far visualizzare le informazioni tutti i dipendenti
+	 * sotto forma di tabella
+	 * 
+	 * @param dipendenti lista cotenente i dipendenti
+	 * 
+	 * @return stringa variabile di tipo stringa contenente le infromazioni di tutti
+	 *         i dipendenti in formato tabellare
+	 * 
+	 * 
+	 */
 
 	public String visualizzaElencoDipendenti(Set<Persona> dipendenti) {
 		String stringa = null;
@@ -245,6 +321,18 @@ public class RepartoDipendenti {
 		}
 		return stringa;
 	}
+
+	/**
+	 * 
+	 * <b> METODO: acquisizioneDipendente </b>
+	 * <p>
+	 * Questo metodo consente di acquisire le informazioni mancati di un dipendente
+	 * esistente inserite dall'utente
+	 * 
+	 * @param elencoDipendenti lista contenente i dipendenti
+	 * 
+	 * 
+	 */
 
 	public void acquisizioneInformazioniDipendenti(Set<Persona> elencoDipendenti) {
 		if (!elencoDipendenti.isEmpty()) {
@@ -493,6 +581,18 @@ public class RepartoDipendenti {
 		}
 	}
 
+	/**
+	 * 
+	 * <b> METODO: modificaInformazioniDipendenti </b>
+	 * <p>
+	 * Questo metodo consente di modificare le informazioni di un dipendente
+	 * esistente inserite dall'utente
+	 * 
+	 * @param elencoDipendenti lista contenente i dipendenti
+	 * 
+	 * 
+	 */
+
 	public void modificaInformazioniDipendenti(Set<Persona> elencoDipendenti) {
 		System.out.println("Inserisci 1 se vuoi visalizzare i dipendenti presenti");
 		valoriUtente = s.nextLine();
@@ -728,6 +828,18 @@ public class RepartoDipendenti {
 
 	}
 
+	/**
+	 * 
+	 * <b> METODO: eliminaInformazioniDipendenti </b>
+	 * <p>
+	 * Questo metodo consente di eliminare le informazioni di un dipendente
+	 * esistente
+	 * 
+	 * @param elencoDipendenti lista contenente i dipendenti
+	 * 
+	 * 
+	 */
+
 	public void eliminaInformazioniDipendenti(Set<Persona> elencoDipendenti) {
 		System.out.println("Inserisci 1 se vuoi visalizzare i dipendenti presenti");
 		valoriUtente = s.nextLine();
@@ -850,6 +962,21 @@ public class RepartoDipendenti {
 
 	}
 
+	/**
+	 * 
+	 * <b> METODO: riparazioneTv</b>
+	 * <p>
+	 * Questo metodo consente di riparare un televisore. Nel caso uno dei paramentri
+	 * passati sia voto verrà alzata un eccezione
+	 * 
+	 * @param elencoTv         lista contenete i televisori. Da questa lista verrà
+	 *                         scelto il televisore da riparare.
+	 * @param elencoClienti    lista contenete i clienti. Da questa lista verrà
+	 *                         scelto il proprientario del televisore
+	 * @param elencoDipendenti lista contenete i televisori. Da questa lista verrà
+	 *                         scelto il dipendente che effettuerà la riparazione
+	 */
+
 	public void riparazioneTv(Set<Televisore> elencoTv, Set<Persona> elencoClienti, Set<Persona> elencoDipendenti) {
 		ArrayList<Object> resultControllo;
 		ArrayList<Object> valoriInput = new ArrayList<Object>();
@@ -945,6 +1072,21 @@ public class RepartoDipendenti {
 
 	}
 
+	/**
+	 * 
+	 * <b> METODO: visualizzaRiparazioniDipendente </b>
+	 * <p>
+	 * Questo metodo consente di far visualizzare le informazioni di tutte le tv
+	 * riparate di un determinato dipendente
+	 * 
+	 * @param elencoDipendenti lista cotenente i dipendenti
+	 * 
+	 * @return stringa variabile di tipo stringa contenente tutte le informazioni
+	 *         delle tv riparate da un dipendente
+	 * 
+	 * 
+	 */
+
 	public String visualizzaRiparazioniDipendente(Set<Persona> elencoDipendenti) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConstantGlobal.FORMATO_DATA);
 		String stringa = null;
@@ -995,6 +1137,21 @@ public class RepartoDipendenti {
 		return stringa;
 	}
 
+	/**
+	 * 
+	 * <b> METODO: venditaTv</b>
+	 * <p>
+	 * Questo metodo consente di vendere un televisore. Nel caso uno dei paramentri
+	 * passati sia voto verrà alzata un eccezione
+	 * 
+	 * @param elencoTv         lista contenete i televisori. Da questa lista verrà
+	 *                         scelto il televisore da vendere.
+	 * @param elencoClienti    lista contenete i clienti. Da questa lista verrà
+	 *                         scelto l'acquirente del televisore
+	 * @param elencoDipendenti lista contenete i televisori. Da questa lista verrà
+	 *                         scelto il dipendente che effettuerà la vendita
+	 */
+
 	public void venditaTv(Set<Televisore> elencoTv, Set<Persona> elencoClienti, Set<Persona> elencoDipendenti) {
 		ArrayList<Object> resultControllo;
 		ArrayList<Object> valoriInput = new ArrayList<Object>();
@@ -1042,10 +1199,15 @@ public class RepartoDipendenti {
 											System.out.println(
 													"Utilizzare il '.' nel caso si voglia inserire la virgola");
 											valoriInput.add(2, s.nextLine());
-											dipendente.vendiTv((Televisore) valoriInput.get(0),
-													((Cliente) ((Persona) valoriInput.get(1))),
-													String.valueOf(valoriInput.get(2)));
-											elencoTv.remove(((Televisore) valoriInput.get(0)));
+											try {
+												dipendente.vendiTv((Televisore) valoriInput.get(0),
+														((Cliente) ((Persona) valoriInput.get(1))),
+														String.valueOf(valoriInput.get(2)));
+												elencoTv.remove(((Televisore) valoriInput.get(0)));
+											} catch (DipendenteException e) {
+												System.err.println(e.getMessage());
+											}
+
 										}
 
 									}
@@ -1076,6 +1238,21 @@ public class RepartoDipendenti {
 			System.err.println("non può essere venduta nessuna tv essendo che macano i dipendenti nell'azienda");
 		}
 	}
+
+	/**
+	 * 
+	 * <b> METODO: visualizzaAllRiparazioni </b>
+	 * <p>
+	 * Questo metodo consente di far visualizzare le informazioni di tutte le tv
+	 * riparate
+	 * 
+	 * @param elencoDipendenti lista cotenente i dipendenti
+	 * 
+	 * @return stringa variabile di tipo stringa contenente le infromazioni di tutte
+	 *         le informazioni delle tv riparate
+	 * 
+	 * 
+	 */
 
 	public String visualizzaAllRiparazioni(Set<Persona> elencoDipendenti) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConstantGlobal.FORMATO_DATA);
@@ -1123,6 +1300,21 @@ public class RepartoDipendenti {
 		}
 		return stringa;
 	}
+
+	/**
+	 * 
+	 * <b> METODO: visualizzaAllRiparazioniRangeDate </b>
+	 * <p>
+	 * Questo metodo consente di far visualizzare le informazioni di tutte le tv
+	 * riparate in un range di date
+	 * 
+	 * @param elencoDipendenti lista cotenente i dipendenti
+	 * 
+	 * @return stringa variabile di tipo stringa contenente le infromazioni di tutte
+	 *         le informazioni delle tv riparate
+	 * 
+	 * 
+	 */
 
 	public String visualizzaAllRiparazioniRangeDate(Set<Persona> elencoDipendenti) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConstantGlobal.FORMATO_DATA);
@@ -1187,6 +1379,21 @@ public class RepartoDipendenti {
 		return String.join("", stringa);
 	}
 
+	/**
+	 * 
+	 * <b> METODO: visualizzaAllVendite </b>
+	 * <p>
+	 * Questo metodo consente di far visualizzare le informazioni di tutte le tv
+	 * vendute dai dipedenti
+	 * 
+	 * @param elencoDipendenti lista cotenente i dipendenti
+	 * 
+	 * @return stringa variabile di tipo stringa contenente le infromazioni di tutte
+	 *         le tv vendute
+	 * 
+	 * 
+	 */
+
 	public String visualizzaAllVendite(Set<Persona> elencoDipendenti) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConstantGlobal.FORMATO_DATA);
 		String stringa = null;
@@ -1230,6 +1437,18 @@ public class RepartoDipendenti {
 		}
 		return stringa;
 	}
+	
+	/**
+	 * 
+	 * <b> METODO: scriviFileTVendute </b>
+	 * <p>
+	 * Questo metodo consente di scrivere su file tutte le informazioni di tutte le tv
+	 * vendute dai dipendenti ordiante per data vendita
+	 * 
+	 * @param elencoDipendenti lista cotenente i dipendenti
+	 * 
+	 * 
+	 */
 
 	public void scriviFileTVendute(Set<Persona> elencoDipendenti) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(ConstantGlobal.FORMATO_DATA);

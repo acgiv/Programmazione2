@@ -15,7 +15,39 @@ import Cecinato_cs2022.PojoTelevisore.TelevisoreBase;
 import Cecinato_cs2022.TelevisoreService.DaoTelevisore;
 import Cecinato_cs2022.TelevisoreService.Televisore;
 
-public class DaoTelevisoreImp  implements DaoTelevisore {
+/**
+ * 
+ * <p>
+ * <b> CLASSE:DaoTelevisoreImp </b>
+ * <p>
+ * Quest'interfaccia ha lo scopo di implementare tutti i metodi che consento di
+ * salvare e leggere su file i televisori.
+ * 
+ * @author <i> Alberto Cecinato </i> <br>
+ *         Gruppo 79<br>
+ *         Matricola: 706576 <br>
+ *         Email: <u> cecinatoa@gmail.com </u>
+ * 
+ * @version 1.0 <br>
+ *          Date: 03.11.2022 <br>
+ * 
+ */
+
+public class DaoTelevisoreImp implements DaoTelevisore {
+
+	/**
+	 * 
+	 * <b> METODO: savenewALLtv</b>
+	 * <p>
+	 * Questo metodo consente di scrivere sul file tutte le televisioni presenti
+	 * nella lista di nome tv passata come parametro.
+	 * <p>
+	 * Il salvataggio consentirà di iterare l'elenco di televisori e salvare direttamente su file
+	 * gli oggetti di tipo Televisore
+	 * 
+	 * @param tv lista che contiene tutte le televisioni da salvate sul file
+	 * 
+	 */
 
 	public void savenewALLtv(Set<Televisore> tv) {
 		FileOutputStream fileout = null;
@@ -33,17 +65,27 @@ public class DaoTelevisoreImp  implements DaoTelevisore {
 		}
 	}
 
+	/**
+	 * 
+	 * <b> METODO: readFileAllTelevisore</b>
+	 * <p>
+	 * Questo metodo consente di leggere tutti i televisori salvati su file
+	 * 
+	 * 
+	 * @return tv Variabile ti tipo Set  che contiente tutte le tv lette da file
+	 */
+
 	public Set<Televisore> readFileAllTelevisore() {
 		FileInputStream filein = null;
 		Set<Televisore> tv = new HashSet<Televisore>();
 		try {
 			filein = new FileInputStream(ConstantGlobal.PERCORSO_FILE_TELEVISORE);
 			try (ObjectInputStream input = new ObjectInputStream(filein)) {
-				while (filein.available() > 0) {
-					Object o = input.readObject();
-					if(o != null) {
-						if(o instanceof Televisore) {
-							new TelevisoreBase(((Televisore) o).visualizzaSeriale());
+				while (filein.available() > 0) { /// legge il buffer se è diverso da zero
+					Object o = input.readObject(); 
+					if (o != null) {
+						if (o instanceof Televisore) { /// controllo se l'instaza è di tipo Televisore
+							new TelevisoreBase(((Televisore) o).visualizzaSeriale()); /// inizializza la tv per popolare la lista di seriali 
 							tv.add(((Televisore) o));
 						}
 					}
